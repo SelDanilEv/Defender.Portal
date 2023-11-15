@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Defender.Portal.Application.DTOs;
 using Defender.Portal.Application.Models.Session;
 using Defender.Portal.Application.Modules.Authorization.Commands;
 using MediatR;
@@ -30,5 +31,15 @@ public class AuthorizationController : BaseApiController
     {
         return await ProcessApiCallWithoutMappingAsync<CreateAccountCommand, Session>
             (command);
+    }
+
+    [HttpGet("verification")]
+    [ProducesResponseType(typeof(AccountVerificationDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    public async Task<AccountVerificationDto> CheckAccountVerificationAsync()
+    {
+        var isVerified = new Random().Next(-2, 10) < 1;
+
+        return new AccountVerificationDto() { IsVerified = true };
     }
 }

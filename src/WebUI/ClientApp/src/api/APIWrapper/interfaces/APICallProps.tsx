@@ -8,6 +8,7 @@ interface APICallProps {
   showSuccess?: boolean;
   successMesage?: string;
   showError?: boolean;
+  doLock?: boolean;
 }
 
 export default APICallProps;

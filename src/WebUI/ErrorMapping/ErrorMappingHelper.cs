@@ -79,7 +79,5 @@ public class ErrorMappingHelper
             default:
                 return UIErrorCodes.Error_UnhandledError;
         }
-
-        return UIErrorCodes.Error_UnhandledError;
     }
 }

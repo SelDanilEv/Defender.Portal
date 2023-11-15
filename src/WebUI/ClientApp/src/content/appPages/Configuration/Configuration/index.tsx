@@ -26,6 +26,7 @@ const Configuration = (props: any) => {
       options: {
         method: "GET",
       },
+      utils: u,
       onSuccess: async (response) => {
         setConfiguration(await response.json());
       },
@@ -89,6 +90,7 @@ const Configuration = (props: any) => {
       options: {
         method: "GET",
       },
+      utils: u,
       onSuccess: async (response) => {
         setConfiguration(await response.json());
       },

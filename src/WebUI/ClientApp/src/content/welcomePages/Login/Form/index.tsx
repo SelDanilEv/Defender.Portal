@@ -1,6 +1,5 @@
-import { Box, FormControl, TextField } from "@mui/material";
+import { Box, FormControl, Link, TextField } from "@mui/material";
 import { connect } from "react-redux";
-import { styled } from "@mui/material/styles";
 
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import LoadingStateService from "src/services/LoadingStateService";
@@ -10,18 +9,7 @@ import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
 import { useState } from "react";
 
-const sizeOfLoginButtonText = 15;
-
-const LoginButton = styled(LockedButton)(
-  ({ theme }) => `
-   display: 'flex';
-   justifyContent: 'center';
-   alignItems: 'center';
-   font-size: ${theme.typography.pxToRem(sizeOfLoginButtonText)};
-`
-);
-
-const LoginWithPassword = (props: any) => {
+const LoginForm = (props: any) => {
   const [loginRequest, setLoginRequest]: any = useState({
     login: "",
     password: "",
@@ -82,7 +70,12 @@ const LoginWithPassword = (props: any) => {
 
         props.login(loginResponse);
 
-        u.react.navigate("/home");
+        if (loginResponse.isEmailVerified || loginResponse.isPhoneVerified) {
+          u.react.navigate("/home");
+        }
+        else{
+          u.react.navigate("/welcome/verification");
+        }
       },
       onFailure: async (response) => {
         if (response.status == 401) {
@@ -102,7 +95,7 @@ const LoginWithPassword = (props: any) => {
         justifyContent: "center",
         alignItem: "center",
         margin: "5px auto",
-        width: "min(50vw, 300px)",
+        width: "min(60vw, 300px)",
       }}
     >
       <FormControl sx={{ gap: "15px" }} variant="outlined">
@@ -112,15 +105,26 @@ const LoginWithPassword = (props: any) => {
           onChange={UpdateLoginRequest}
           label={u.t("login_page_login_label")}
         />
-        <TextField
-          id="password"
-          type="password"
-          onChange={UpdateLoginRequest}
-          label={u.t("login_page_password_label")}
-        />
-        <LoginButton variant="outlined" onClick={() => login()}>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <TextField
+            id="password"
+            type="password"
+            onChange={UpdateLoginRequest}
+            label={u.t("login_page_password_label")}
+            fullWidth
+          />
+          <Link sx={{ ml: "auto", mr: "4px", fontSize: "0.8em" }}>
+            Forgot password?
+          </Link>
+        </Box>
+
+        <LockedButton
+          sx={{ fontSize: "1em" }}
+          variant="outlined"
+          onClick={() => login()}
+        >
           {u.t("login_page_sign_in")}
-        </LoginButton>
+        </LockedButton>
       </FormControl>
     </Box>
   );
@@ -140,4 +144,4 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginWithPassword);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

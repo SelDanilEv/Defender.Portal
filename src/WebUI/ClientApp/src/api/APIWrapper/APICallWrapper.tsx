@@ -3,7 +3,6 @@ import APICallProps from "./interfaces/APICallProps";
 import store from "src/state/store";
 import LoadingStateService from "src/services/LoadingStateService";
 import SuccessToast from "src/components/Toast/DefaultSuccessToast";
-import useUtils from "src/appUtils";
 
 const APICallWrapper = async ({
   url,
@@ -15,9 +14,10 @@ const APICallWrapper = async ({
   showSuccess = false,
   successMesage = "Success",
   showError = true,
+  doLock = true,
 }: APICallProps) => {
   try {
-    LoadingStateService.StartLoading();
+    if (doLock) LoadingStateService.StartLoading();
 
     if (!options.headers) {
       options.headers = {};
@@ -59,7 +59,7 @@ const APICallWrapper = async ({
     if (utils) utils.e(error.detail);
   } finally {
     await onFinal();
-    LoadingStateService.FinishLoading();
+    if (doLock) LoadingStateService.FinishLoading();
   }
 };
 

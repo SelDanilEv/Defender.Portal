@@ -26,9 +26,10 @@ const SidebarLayout: FC<SidebarLayoutProps> = (props: any) => {
       options: {
         method: "GET",
       },
+      utils: u,
       onFailure: async (response) => {
         if (response.status == 401) {
-          ErrorToast(response.statusText);
+          u.e("Error_TokenExpired");
           props.logout();
           u.react.navigate("/");
         }

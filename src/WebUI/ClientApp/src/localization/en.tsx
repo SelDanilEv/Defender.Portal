@@ -47,13 +47,16 @@ const AddLoginPage = (result) => {
   result.login_page_create = "Create";
   result.login_page_or = "OR";
   result.login_page_create_account = "Create account !";
-  result.login_page_back_to_login_page = "Back to login page";
+  result.login_page_back_to_login_page = "Back";
 
   result.login_page_email_label = "Email";
   result.login_page_login_label = "Login";
   result.login_page_password_label = "Password";
   result.login_page_nickname_label = "Nickname";
   result.login_page_phone_label = "Phone";
+
+  result.login_page_email_verification_description =
+    "To continue please check your email and follow the verification link";
 
   return result;
 };

@@ -3,6 +3,7 @@ const APIEndpoints = {
     login: "login",
     create: "create",
     google: "google",
+    verification: "verification",
   },
   home: {
     healthcheck: "health",

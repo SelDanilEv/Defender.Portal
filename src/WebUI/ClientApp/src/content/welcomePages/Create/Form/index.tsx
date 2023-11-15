@@ -13,7 +13,6 @@ import { styled } from "@mui/material/styles";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import LoadingStateService from "src/services/LoadingStateService";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
-import ErrorToast from "src/components/Toast/DefaultErrorToast";
 import { login } from "src/actions/sessionActions";
 import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
@@ -32,8 +31,8 @@ const LoginButton = styled(LockedButton)(
 `
 );
 
-const LoginWithPassword = (props: any) => {
-  const [loginRequest, setLoginRequest]: any = useState({
+const CreateForm = (props: any) => {
+  const [createRequest, setCreateRequest]: any = useState({
     email: "",
     phoneNumber: "",
     nickname: "",
@@ -51,9 +50,9 @@ const LoginWithPassword = (props: any) => {
   };
 
   const UpdateLoginRequest = (event) => {
-    let requst = loginRequest;
+    let requst = createRequest;
     requst[event.target.id] = event.target.value;
-    setLoginRequest(requst);
+    setCreateRequest(requst);
   };
 
   const u = useUtils();
@@ -65,7 +64,9 @@ const LoginWithPassword = (props: any) => {
   };
 
   const CreateAccount = async () => {
-    if (!(await APIRequestValidator.ValidateCreateUserRequest(u, loginRequest)))
+    if (
+      !(await APIRequestValidator.ValidateCreateUserRequest(u, createRequest))
+    )
       return;
 
     APICallWrapper({
@@ -75,24 +76,25 @@ const LoginWithPassword = (props: any) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(loginRequest),
+        body: JSON.stringify(createRequest),
         cache: "default",
       },
       utils: u,
       onSuccess: async (response) => {
-        const loginResponse = await response.json();
+        const createResponse = await response.json();
 
-        console.log(loginResponse);
-        console.log("onSuccess");
-
-        if (!loginResponse.isAuthenticated) {
+        if (!createResponse.isAuthenticated) {
           u.e("Error_AuthorizationFailed");
           return;
         }
 
-        props.login(loginResponse);
+        props.login(createResponse);
 
-        u.react.navigate("/home");
+        if (createResponse.isEmailVerified || createResponse.isPhoneVerified) {
+          u.react.navigate("/home");
+        } else {
+          u.react.navigate("/welcome/verification");
+        }
       },
       onFailure: async (response) => {
         if (response.status == 401) {
@@ -112,7 +114,7 @@ const LoginWithPassword = (props: any) => {
         justifyContent: "center",
         alignItem: "center",
         margin: "5px auto",
-        width: "min(50vw, 300px)",
+        width: "min(60vw, 300px)",
       }}
     >
       <FormControl sx={{ gap: "15px" }} variant="outlined">
@@ -157,7 +159,11 @@ const LoginWithPassword = (props: any) => {
             label={u.t("login_page_password_label")}
           />
         </FormControl>
-        <LoginButton variant="outlined" onClick={() => Create()}>
+        <LoginButton
+          sx={{ fontSize: "1em" }}
+          variant="outlined"
+          onClick={() => Create()}
+        >
           {u.t("login_page_create")}
         </LoginButton>
       </FormControl>
@@ -179,4 +185,4 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginWithPassword);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateForm);

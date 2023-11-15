@@ -1,7 +1,6 @@
 import { Box, Avatar } from "@mui/material";
 import { connect } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
-import { styled } from "@mui/material/styles";
 
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import LoadingStateService from "src/services/LoadingStateService";
@@ -11,25 +10,7 @@ import { login } from "src/actions/sessionActions";
 import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
 
-const sizeOfLoginButtonText = 15;
-
-const LoginButton = styled(LockedButton)(
-  ({ theme }) => `
-   display: 'flex';
-   justifyContent: 'center';
-   alignItems: 'center';
-   font-size: ${theme.typography.pxToRem(sizeOfLoginButtonText)};
-`
-);
-
-const GLetter = styled(Avatar)(
-  ({ theme }) => `
-   height: ${theme.typography.pxToRem(sizeOfLoginButtonText)};
-   width: ${theme.typography.pxToRem(sizeOfLoginButtonText)};
-`
-);
-
-const Login = (props: any) => {
+const LoginByGoogle = (props: any) => {
   let googleResponseTimeout;
 
   const u = useUtils();
@@ -39,11 +20,9 @@ const Login = (props: any) => {
     onError: (errorResponse) => googleResponse(errorResponse),
   });
 
-  const login = (isGoogle: boolean) => {
+  const login = async () => {
     LoadingStateService.StartLoading();
-    if (isGoogle) {
-      loginGoogle();
-    }
+    await loginGoogle();
     googleResponseTimeout = setTimeout(
       LoadingStateService.FinishLoading,
       10 * 1000
@@ -52,7 +31,8 @@ const Login = (props: any) => {
 
   const googleResponse = async (gResponse: any) => {
     if (!gResponse.access_token) {
-      ErrorToast("Google account details not available");
+      //TODO: add error code
+      u.e("Google account details not available");
       return;
     }
 
@@ -62,7 +42,7 @@ const Login = (props: any) => {
       Token: gResponse.access_token,
     };
 
-    APICallWrapper({
+    await APICallWrapper({
       url: apiUrls.authorization.google,
       options: {
         method: "POST",
@@ -105,19 +85,16 @@ const Login = (props: any) => {
 
   return (
     <Box>
-      <LoginButton variant="outlined" onClick={() => login(true)}>
-        <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
-          {u.t("login_page_sign_in_with")}&nbsp;
-        </Box>
-        <GLetter
+      <LockedButton variant="outlined" onClick={() => login()}>
+        <Avatar
           style={{
-            marginRight: "1px",
+            height: "100%",
+            width: "100%",
           }}
           src="/static/images/logo/google.svg"
           alt=""
         />
-        oogle
-      </LoginButton>
+      </LockedButton>
     </Box>
   );
 };
@@ -136,4 +113,4 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginByGoogle);

@@ -3,9 +3,10 @@ import { Navigate } from "react-router-dom";
 import { RouteObject } from "react-router";
 
 import SidebarLayout from "src/layouts/SidebarLayout";
-import BaseLayout from "src/layouts/BaseLayout";
+import EmptyLayout from "src/layouts/EmptyLayout";
 
 import SuspenseLoader from "src/components/SuspenseLoader";
+import WelcomeLayout from "./layouts/WelcomeLayout";
 
 const Loader = (Component) => (props) =>
   (
@@ -14,17 +15,25 @@ const Loader = (Component) => (props) =>
     </Suspense>
   );
 
-const Login = Loader(lazy(() => import("src/content/index")));
+// Welcome
+
+const Login = Loader(lazy(() => import("src/content/welcomePages/Login")));
+const Create = Loader(lazy(() => import("src/content/welcomePages/Create")));
+const Verification = Loader(
+  lazy(() => import("src/content/welcomePages/Verification"))
+);
 
 // Configuration
 
 const AppConfiguration = Loader(
-  lazy(() => import("src/content/pages/Configuration"))
+  lazy(() => import("src/content/appPages/Configuration"))
 );
 
 // // Profile
 
-const AccountInfo = Loader(lazy(() => import("src/content/pages/AccountInfo")));
+const AccountInfo = Loader(
+  lazy(() => import("src/content/appPages/AccountInfo"))
+);
 
 // // Users
 
@@ -34,26 +43,48 @@ const AccountInfo = Loader(lazy(() => import("src/content/pages/AccountInfo")));
 // Status
 
 const Status404 = Loader(
-  lazy(() => import("src/content/pages/Status/Status404"))
+  lazy(() => import("src/content/basePages/Status/Status404"))
 );
 const Status500 = Loader(
-  lazy(() => import("src/content/pages/Status/Status500"))
+  lazy(() => import("src/content/basePages/Status/Status500"))
 );
 const StatusComingSoon = Loader(
-  lazy(() => import("src/content/pages/Status/ComingSoon"))
+  lazy(() => import("src/content/basePages/Status/ComingSoon"))
 );
 const StatusMaintenance = Loader(
-  lazy(() => import("src/content/pages/Status/Maintenance"))
+  lazy(() => import("src/content/basePages/Status/Maintenance"))
 );
 
 const routes: RouteObject[] = [
   {
     path: "",
-    element: <BaseLayout />,
+    element: <WelcomeLayout />,
     children: [
       {
-        path: "/",
+        path: "",
+        element: <Navigate to="/welcome/login" replace />,
+      },
+      {
+        path: "*",
+        element: <Status404 />,
+      },
+    ],
+  },
+  {
+    path: "welcome",
+    element: <WelcomeLayout />,
+    children: [
+      {
+        path: "login",
         element: <Login />,
+      },
+      {
+        path: "create",
+        element: <Create />,
+      },
+      {
+        path: "verification",
+        element: <Verification />,
       },
       {
         path: "*",
@@ -63,7 +94,7 @@ const routes: RouteObject[] = [
   },
   {
     path: "status",
-    element: <BaseLayout />,
+    element: <EmptyLayout />,
     children: [
       {
         path: "",

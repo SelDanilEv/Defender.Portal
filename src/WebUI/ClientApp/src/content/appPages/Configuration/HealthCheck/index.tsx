@@ -21,6 +21,7 @@ const HealthCheck = (props: any) => {
       options: {
         method: "GET",
       },
+      utils: u,
       onSuccess: async (response) => {
         setHealthCheck(true);
       },

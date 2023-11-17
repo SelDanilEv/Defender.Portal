@@ -1,7 +1,6 @@
 using AutoMapper;
+using Defender.Common.Clients.Identity;
 using Defender.Portal.Application.Models.Session;
-using Defender.Portal.Infrastructure.Clients.Identity.Generated;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Defender.Portal.Infrastructure.Mappings;
 

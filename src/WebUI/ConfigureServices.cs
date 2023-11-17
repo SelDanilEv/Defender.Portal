@@ -2,7 +2,6 @@
 using System.Text.Json.Serialization;
 using Defender.Common.Accessors;
 using Defender.Common.Enums;
-using Defender.Common.Errors;
 using Defender.Common.Exceptions;
 using Defender.Common.Helpers;
 using Defender.Common.Interfaces;

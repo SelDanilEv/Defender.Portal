@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Defender.Common.Clients.Identity;
 using Defender.Common.Wrapper;
-using Defender.Portal.Infrastructure.Clients.Identity.Generated;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Clients.Identity;
@@ -8,10 +8,10 @@ namespace Defender.Portal.Infrastructure.Clients.Identity;
 public class IdentityWrapper : BaseSwaggerWrapper, IIdentityWrapper
 {
     private readonly IMapper _mapper;
-    private readonly IIdentityClient _identityClient;
+    private readonly IIdentityAsServiceClient _identityClient;
 
     public IdentityWrapper(
-        IIdentityClient identityClient,
+        IIdentityAsServiceClient identityClient,
         IMapper mapper)
     {
         _identityClient = identityClient;

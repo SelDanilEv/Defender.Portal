@@ -1,4 +1,4 @@
-﻿using Defender.Portal.Infrastructure.Clients.Identity.Generated;
+﻿using Defender.Common.Clients.Identity;
 
 namespace Defender.Portal.Infrastructure.Clients.Interfaces;
 public interface IIdentityWrapper

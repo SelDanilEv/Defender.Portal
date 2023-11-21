@@ -3,7 +3,7 @@ import DoneTwoToneIcon from "@mui/icons-material/DoneTwoTone";
 import Label from "src/components/Label";
 import useUtils from "src/appUtils";
 
-const SuccessStatus = (props: any) => {
+const SuccessStatusLabel = (props: any) => {
   const u = useUtils();
 
   return (
@@ -14,4 +14,4 @@ const SuccessStatus = (props: any) => {
   );
 };
 
-export default SuccessStatus;
+export default SuccessStatusLabel;

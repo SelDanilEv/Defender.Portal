@@ -41,28 +41,37 @@ const AddPersonalInfoPage = (result) => {
   return result;
 };
 
-const AddLoginPage = (result) => {
-  result.login_page_sign_in_with = "Sign in with";
-  result.login_page_sign_in = "Sign in";
-  result.login_page_create = "Create";
-  result.login_page_or = "OR";
-  result.login_page_create_account = "Create account !";
-  result.login_page_back_to_login_page = "Back";
+const AddWelcomePage = (result) => {
+  result.welcome_page_sign_in_with = "Sign in with";
+  result.welcome_page_sign_in = "Sign in";
+  result.welcome_page_create = "Create";
+  result.welcome_page_or = "OR";
+  result.welcome_page_create_account = "Create account !";
+  result.welcome_page_back_to_login_page = "Back";
 
-  result.login_page_email_label = "Email";
-  result.login_page_login_label = "Login";
-  result.login_page_password_label = "Password";
-  result.login_page_nickname_label = "Nickname";
-  result.login_page_phone_label = "Phone";
+  result.welcome_page_email_label = "Email";
+  result.welcome_page_login_label = "Login";
+  result.welcome_page_password_label = "Password";
+  result.welcome_page_nickname_label = "Nickname";
+  result.welcome_page_phone_label = "Phone";
 
-  result.login_page_email_verification_description =
+  result.welcome_page_email_verification_error_label = "Verification failed";
+  result.welcome_page_email_verification_pending_label =
+    "We're verifying your email ...";
+  result.welcome_page_email_verification_success_label =
+    "Your email has been verified";
+
+  result.welcome_page_email_verification_description =
     "To continue please check your email and follow the verification link";
+  result.welcome_page_resend_verification_email = "Resend verification";
+  result.welcome_page_verification_email_sent =
+    "Verification link sent to your email";
 
   return result;
 };
 
 const AddPages = (result) => {
-  result = AddLoginPage(result);
+  result = AddWelcomePage(result);
 
   result = AddPersonalInfoPage(result);
 
@@ -95,6 +104,7 @@ const AddPureWords = (result) => {
 
 const AddErrors = (result) => {
   result.Error_UnhandledError = "Unhandled error";
+  result.Error_TokenExpired = "Your session expired. Please login again";
 
   result.Error_EmptyLogin = "Empty login";
   result.Error_EmptyEmail = "Empty email";
@@ -113,6 +123,9 @@ const AddErrors = (result) => {
 
   result.Error_NicknameIsTooShort = "Minimum nickname length: 4 characters";
   result.Error_NicknameIsTooLong = "Maximum nickname length: 16 characters";
+
+  result.Error_AccessCodeWasExpired = "Verefication link was expired";
+  result.Error_AccessCodeWasAlreadyUsed = "Access code was already used";
 
   result.Error_UserBlocked = "The user is blocked";
 

@@ -3,7 +3,7 @@ import SyncIcon from "@mui/icons-material/Sync";
 import Label from "src/components/Label";
 import useUtils from "src/appUtils";
 
-const WarningStatus = (props: any) => {
+const WarningStatusLabel = (props: any) => {
   const u = useUtils();
 
   return (
@@ -14,4 +14,4 @@ const WarningStatus = (props: any) => {
   );
 };
 
-export default WarningStatus;
+export default WarningStatusLabel;

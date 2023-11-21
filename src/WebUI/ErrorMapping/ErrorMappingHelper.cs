@@ -45,12 +45,14 @@ public class ErrorMappingHelper
                 return UIErrorCodes.Error_NicknameIsTooShort;
             case ErrorCode.VL_ACC_MaxNicknameLength:
                 return UIErrorCodes.Error_NicknameIsTooLong;
+            case ErrorCode.BR_ACC_AccessCodeWasExpired:
+                return UIErrorCodes.Error_AccessCodeWasExpired;
+            case ErrorCode.BR_ACC_AccessCodeWasAlreadyUsed:
+                return UIErrorCodes.Error_AccessCodeWasExpired;
 
 
             case ErrorCode.BR_ACC_SuperAdminCannotBeBlocked:
             case ErrorCode.BR_ACC_AdminCannotBlockAdmins:
-            case ErrorCode.BR_ACC_AccessCodeWasExpired:
-            case ErrorCode.BR_ACC_AccessCodeWasAlreadyUsed:
             case ErrorCode.BR_ACC_AttemtsAreOver:
             case ErrorCode.BR_ACC_CodeWasNotVerified:
             case ErrorCode.BR_PTL_UserActivityMustHaveUserId:

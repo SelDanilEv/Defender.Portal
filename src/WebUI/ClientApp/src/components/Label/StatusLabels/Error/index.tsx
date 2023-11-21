@@ -3,7 +3,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Label from "src/components/Label";
 import useUtils from "src/appUtils";
 
-const ErrorStatus = (props: any) => {
+const ErrorStatusLabel = (props: any) => {
   const u = useUtils();
 
   return (
@@ -14,4 +14,4 @@ const ErrorStatus = (props: any) => {
   );
 };
 
-export default ErrorStatus;
+export default ErrorStatusLabel;

@@ -22,5 +22,8 @@ public enum UIErrorCodes
     Error_NicknameIsTooShort,
     Error_NicknameIsTooLong,
 
+    Error_AccessCodeWasExpired,
+    Error_AccessCodeWasAlreadyUsed,
+
     Error_UserBlocked,
 }

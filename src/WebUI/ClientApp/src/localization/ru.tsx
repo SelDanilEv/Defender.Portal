@@ -41,25 +41,25 @@ const AddPersonalInfoPage = (result) => {
   return result;
 };
 
-const AddLoginPage = (result) => {
-  result.login_page_sign_in_with = "Войти через";
-  result.login_page_sign_in = "Войти";
-  result.login_page_create = "Создать";
-  result.login_page_or = "Или";
-  result.login_page_create_account = "Создать аккаунт !";
-  result.login_page_back_to_login_page = "Назад";
+const AddWelcomePage = (result) => {
+  result.welcome_page_sign_in_with = "Войти через";
+  result.welcome_page_sign_in = "Войти";
+  result.welcome_page_create = "Создать";
+  result.welcome_page_or = "Или";
+  result.welcome_page_create_account = "Создать аккаунт !";
+  result.welcome_page_back_to_login_page = "Назад";
 
-  result.login_page_email_label = "Имейл";
-  result.login_page_login_label = "Логин";
-  result.login_page_password_label = "Пароль";
-  result.login_page_nickname_label = "Никнейм";
-  result.login_page_phone_label = "Телефон";
+  result.welcome_page_email_label = "Имейл";
+  result.welcome_page_login_label = "Логин";
+  result.welcome_page_password_label = "Пароль";
+  result.welcome_page_nickname_label = "Никнейм";
+  result.welcome_page_phone_label = "Телефон";
 
   return result;
 };
 
 const AddPages = (result) => {
-  result = AddLoginPage(result);
+  result = AddWelcomePage(result);
 
   result = AddPersonalInfoPage(result);
 

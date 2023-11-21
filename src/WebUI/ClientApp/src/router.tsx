@@ -22,6 +22,9 @@ const Create = Loader(lazy(() => import("src/content/welcomePages/Create")));
 const Verification = Loader(
   lazy(() => import("src/content/welcomePages/Verification"))
 );
+const VerifyEmail = Loader(
+  lazy(() => import("src/content/welcomePages/Verification/VerifyEmail"))
+);
 
 // Configuration
 
@@ -85,6 +88,10 @@ const routes: RouteObject[] = [
       {
         path: "verification",
         element: <Verification />,
+      },
+      {
+        path: "verify-email",
+        element: <VerifyEmail />,
       },
       {
         path: "*",

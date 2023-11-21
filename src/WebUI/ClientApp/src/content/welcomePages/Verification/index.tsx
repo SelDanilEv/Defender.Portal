@@ -1,10 +1,13 @@
 import { Box } from "@mui/material";
 import React from "react";
+
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";
-
 import useUtils from "src/appUtils";
+
 import WelcomeMenuButton from "../Components/WelcomeMenuButton";
+import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import SuccessToast from "src/components/Toast/DefaultSuccessToast";
 
 const Verification = (props: any) => {
   const u = useUtils();
@@ -15,7 +18,7 @@ const Verification = (props: any) => {
 
   const checkVerification = () => {
     APICallWrapper({
-      url: `${apiUrls.authorization.verification}`,
+      url: `${apiUrls.verification.check}`,
       options: {
         method: "GET",
         headers: {
@@ -32,9 +35,27 @@ const Verification = (props: any) => {
         clearInterval(task);
         u.react.navigate("/home");
       },
-
       showError: true,
       doLock: false,
+    });
+  };
+
+  const resendVerification = () => {
+    APICallWrapper({
+      url: `${apiUrls.verification.resendEmail}`,
+      options: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "default",
+      },
+      utils: u,
+      onSuccess: async (response) => {
+        SuccessToast(u.t("welcome_page_verification_email_sent"));
+      },
+      showError: true,
+      doLock: true,
     });
   };
 
@@ -49,12 +70,22 @@ const Verification = (props: any) => {
         alignItem: "center",
         margin: "5px auto",
         width: "min(50vw, 300px)",
-        gap: "50px",
+        gap: "40px",
       }}
     >
-      <Box>{u.t("login_page_email_verification_description")}</Box>
+      <Box sx={{ fontSize: "1.2em" }}>
+        {u.t("welcome_page_email_verification_description")}
+      </Box>
+      <LockedButton
+        sx={{ fontSize: "1em" }}
+        variant="outlined"
+        onClick={resendVerification}
+      >
+        {u.t("welcome_page_resend_verification_email")}
+      </LockedButton>
       <WelcomeMenuButton
-        text={u.t("login_page_back_to_login_page")}
+        onClick={() => clearInterval(task)}
+        text={u.t("welcome_page_back_to_login_page")}
         path="/welcome/login"
       />
     </Box>

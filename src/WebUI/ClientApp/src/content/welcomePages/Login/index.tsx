@@ -12,28 +12,23 @@ const Login = (props: any) => {
 
   return (
     <>
-      <Box
-        sx={{
-          ml: { lg: "8%", md: "0", sm: "0" },
-        }}
-      >
+      <Box>
         <Box>
-          {" "}
           <LoginForm />
           <LineWithText
             margin_x="5px"
             height="2px"
-            width_lg="25%"
-            width_md="20%"
+            width_lg="45%"
+            width_md="40%"
             width_xs="70%"
-            text={u.t("login_page_or")}
+            text={u.t("welcome_page_or")}
             gap="10px"
           />
         </Box>
         <Box sx={{ display: "flex", gap: "15px", justifyContent: "center" }}>
           <LoginByGoogle />
           <WelcomeMenuButton
-            text={u.t("login_page_create_account")}
+            text={u.t("welcome_page_create_account")}
             path="/welcome/create"
           />
         </Box>

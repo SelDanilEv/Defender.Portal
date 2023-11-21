@@ -34,7 +34,7 @@ const WelcomeLayout: FC = (props: any) => {
       if (props.session.isEmailVerified || props.session.isEmailVerified) {
         u.react.navigate("/home");
       } else {
-        u.react.navigate("/welcome/verification");
+        // u.react.navigate("/welcome/verification");
       }
     }
   }, []);
@@ -58,7 +58,7 @@ const WelcomeLayout: FC = (props: any) => {
             alignItems="center"
           >
             <Box display="flex" justifyContent="right" alignItems="center">
-              <Logo width="150px" height="150px" />
+              <Logo width="100px" height="100px" />
             </Box>
           </Box>
           <Box display="flex" justifyContent="center" alignItems="center">

@@ -8,7 +8,12 @@ const WelcomeMenuButton = (props: any) => {
     <LockedButton
       variant="contained"
       sx={{ fontSize: "0.8em" }}
-      onClick={() => u.react.navigate(props.path)}
+      onClick={() => {
+        if (props.onClick) {
+          props.onClick();
+        }
+        return u.react.navigate(props.path);
+      }}
     >
       {props.text}
     </LockedButton>

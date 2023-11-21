@@ -2,6 +2,7 @@
 using System.Reflection;
 using Defender.Common.Clients.Identity;
 using Defender.Common.Helpers;
+using Defender.Common.Interfaces;
 using Defender.Portal.Application.Common.Interfaces;
 using Defender.Portal.Application.Common.Interfaces.Repositories;
 using Defender.Portal.Application.Configuration.Options;
@@ -43,6 +44,7 @@ public static class ConfigureServices
     {
         services.AddTransient<IUserActivityService, UserActivityService>();
         services.AddTransient<IAuthorizationService, AuthorizationService>();
+        services.AddTransient<IAccountManagementService, AccountManagementService>();
 
         return services;
     }
@@ -66,6 +68,19 @@ public static class ConfigureServices
                 new AuthenticationHeaderValue(
                     "Bearer",
                     InternalJwtHelper.GenerateInternalJWT(configuration["JwtTokenIssuer"]));
+            }); 
+        
+        services.RegisterIdentityClient(
+            (serviceProvider, client) =>
+            {
+                client.BaseAddress = new Uri(serviceProvider.GetRequiredService<IOptions<IdentityOptions>>().Value.Url);
+
+                var schemaAndToken = serviceProvider.GetRequiredService<IAccountAccessor>().Token?.Split(' ');
+
+                if (schemaAndToken?.Length == 2)
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(schemaAndToken[0], schemaAndToken[1]);
+                }
             });
 
         return services;

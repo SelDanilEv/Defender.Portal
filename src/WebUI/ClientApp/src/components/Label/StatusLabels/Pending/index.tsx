@@ -3,7 +3,7 @@ import SyncIcon from "@mui/icons-material/Sync";
 import Label from "src/components/Label";
 import useUtils from "src/appUtils";
 
-const PendingStatus = (props: any) => {
+const PendingStatusLabel = (props: any) => {
   const u = useUtils();
 
   return (
@@ -14,4 +14,4 @@ const PendingStatus = (props: any) => {
   );
 };
 
-export default PendingStatus;
+export default PendingStatusLabel;

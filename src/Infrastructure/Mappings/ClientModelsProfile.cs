@@ -1,10 +1,10 @@
-using AutoMapper;
 using Defender.Common.Clients.Identity;
+using Defender.Common.Mapping;
 using Defender.Portal.Application.Models.Session;
 
 namespace Defender.Portal.Infrastructure.Mappings;
 
-public class ClientModelsProfile : Profile
+public class ClientModelsProfile : BaseMappingProfile
 {
     public ClientModelsProfile()
     {

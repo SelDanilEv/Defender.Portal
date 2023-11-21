@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
-import PendingStatus from "src/components/Label/StatusLabels/Pending";
+import PendingStatusLabel from "src/components/Label/StatusLabels/Pending";
 import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
 
@@ -37,7 +37,7 @@ const Configuration = (props: any) => {
     if (!configuration) {
       return (
         <Grid item xs={12} sm={12} md={12} textAlign="center">
-          <PendingStatus text={u.t("Pending")} />
+          <PendingStatusLabel text={u.t("Pending")} />
         </Grid>
       );
     }
@@ -47,7 +47,7 @@ const Configuration = (props: any) => {
     if (envVariables.length == 0) {
       return (
         <Grid item xs={12} sm={12} md={12} textAlign="center">
-          <PendingStatus text={u.t("NoData")} />
+          <PendingStatusLabel text={u.t("NoData")} />
         </Grid>
       );
     }

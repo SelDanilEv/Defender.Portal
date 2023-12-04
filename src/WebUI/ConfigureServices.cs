@@ -1,10 +1,10 @@
 ﻿using System.Text;
 using System.Text.Json.Serialization;
-using Defender.Common.Accessors;
 using Defender.Common.Enums;
 using Defender.Common.Exceptions;
+using Defender.Common.Exstension;
 using Defender.Common.Helpers;
-using Defender.Common.Interfaces;
+using Defender.Portal.Application.Configuration.Exstension;
 using FluentValidation.AspNetCore;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -22,7 +22,9 @@ public static class ConfigureServices
         IWebHostEnvironment environment,
         IConfiguration configuration)
     {
-        services.AddSingleton<IAccountAccessor, AccountAccessor>();
+        services.AddCommonServices(configuration);
+
+        services.AddApplicationOptions(configuration);
 
         services.AddHttpContextAccessor();
 
@@ -54,7 +56,7 @@ public static class ConfigureServices
         {
             auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(options =>
+        }).AddJwtBearer(async options =>
         {
             options.RequireHttpsMetadata = false;
             options.SaveToken = true;
@@ -65,8 +67,7 @@ public static class ConfigureServices
                 ValidIssuer = configuration["JwtTokenIssuer"],
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(
-                        SecretsHelper.GetSecret(Secret.JwtSecret)))
+                    Encoding.UTF8.GetBytes(await SecretsHelper.GetSecretAsync(Secret.JwtSecret)))
             };
         });
 

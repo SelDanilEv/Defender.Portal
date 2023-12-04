@@ -1,6 +1,4 @@
 ﻿using System.Reflection;
-using Defender.Common.Exstension;
-using Defender.Portal.Application.Configuration.Exstension;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -17,10 +15,6 @@ public static class ConfigureServices
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-
-        services.AddCommonPipelines();
-
-        services.AddApplicationOptions(configuration);
 
         return services;
     }

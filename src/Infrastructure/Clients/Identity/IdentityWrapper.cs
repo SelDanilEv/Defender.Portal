@@ -1,23 +1,24 @@
 ﻿using AutoMapper;
 using Defender.Common.Clients.Identity;
-using Defender.Common.Wrapper;
+using Defender.Common.Interfaces;
+using Defender.Common.Wrapper.Internal;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Clients.Identity;
 
-public class IdentityWrapper : BaseSwaggerWrapper, IIdentityWrapper
+public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
 {
     private readonly IMapper _mapper;
-    private readonly IIdentityAsServiceClient _identityAsServiceClient;
-    private readonly IIdentityClient _identityClient;
+    private readonly IIdentityServiceClient _identityServiceClient;
 
     public IdentityWrapper(
-        IIdentityAsServiceClient identityAsServiceClient,
-        IIdentityClient identityClient,
-        IMapper mapper)
+        IAuthenticationHeaderAccessor authenticationHeaderAccessor,
+        IIdentityServiceClient identityClient,
+        IMapper mapper) : base(
+            identityClient,
+            authenticationHeaderAccessor)
     {
-        _identityAsServiceClient = identityAsServiceClient;
-        _identityClient = identityClient;
+        _identityServiceClient = identityClient;
         _mapper = mapper;
     }
 
@@ -33,10 +34,10 @@ public class IdentityWrapper : BaseSwaggerWrapper, IIdentityWrapper
                 Password = password,
             };
 
-            var response = await _identityAsServiceClient.CreateAsync(command);
+            var response = await _identityServiceClient.CreateAsync(command);
 
             return response;
-        });
+        }, AuthorizationType.Service);
     }
 
     public async Task<LoginResponse> LoginAccountAsync(string login, string password)
@@ -49,20 +50,20 @@ public class IdentityWrapper : BaseSwaggerWrapper, IIdentityWrapper
                 Password = password,
             };
 
-            var response = await _identityAsServiceClient.LoginAsync(command);
+            var response = await _identityServiceClient.LoginAsync(command);
 
             return response;
-        });
+        }, AuthorizationType.Service);
     }
 
     public async Task<AccountDto> GetAccountDetailsAsUserAsync(Guid accountId)
     {
         return await ExecuteSafelyAsync(async () =>
         {
-            var response = await _identityClient.DetailsAsync(accountId);
+            var response = await _identityServiceClient.DetailsAsync(accountId);
 
             return response;
-        });
+        }, AuthorizationType.User);
     }
 
     public async Task<bool> VerifyAccountEmailAsync(int hash, int code)
@@ -75,10 +76,10 @@ public class IdentityWrapper : BaseSwaggerWrapper, IIdentityWrapper
                 Code = code,
             };
 
-            var response = await _identityClient.EmailAsync(command);
+            var response = await _identityServiceClient.EmailAsync(command);
 
             return response;
-        });
+        }, AuthorizationType.User);
     }
 
     public async Task SendVerificationEmailAsync(Guid accountId)
@@ -90,7 +91,7 @@ public class IdentityWrapper : BaseSwaggerWrapper, IIdentityWrapper
                 UserId = accountId,
             };
 
-            await _identityClient.SendVerificationEmailAsync(command);
-        });
+            await _identityServiceClient.SendVerificationEmailAsync(command);
+        }, AuthorizationType.User);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Defender.Portal.Application.Configuration.Options;
+﻿using Defender.Common.Exstension;
+using Defender.Portal.Application.Configuration.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

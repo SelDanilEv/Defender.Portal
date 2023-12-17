@@ -1,4 +1,4 @@
-﻿using Defender.Common.Pagination;
+﻿using Defender.Common.DB.Pagination;
 using Defender.Portal.Domain.Entities;
 
 namespace Defender.Portal.Application.Common.Interfaces.Repositories;

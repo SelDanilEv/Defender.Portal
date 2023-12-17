@@ -1,4 +1,4 @@
-﻿using Defender.Common.Pagination;
+﻿using Defender.Common.DB.Pagination;
 using Defender.Portal.Domain.Entities;
 using Defender.Portal.Domain.Enums;
 

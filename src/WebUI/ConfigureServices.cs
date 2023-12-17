@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using WebUI.ErrorMapping;
+using ProblemDetailsOptions = Hellang.Middleware.ProblemDetails.ProblemDetailsOptions;
 
 namespace Defender.Portal.WebUI;
 
@@ -117,7 +118,7 @@ public static class ConfigureServices
     private static void ConfigureProblemDetails(
         ProblemDetailsOptions options, IWebHostEnvironment environment)
     {
-        options.IncludeExceptionDetails = (ctx, ex) => environment.IsEnvironment("Development") || environment.IsEnvironment("DockerDev");
+        options.IncludeExceptionDetails = (ctx, ex) => environment.IsLocalOrDevelopment();
 
         options.Map<ServiceException>(exception =>
         {

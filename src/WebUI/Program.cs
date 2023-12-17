@@ -1,3 +1,4 @@
+using Defender.Common.Exstension;
 using Defender.Portal.Application;
 using Defender.Portal.Infrastructure;
 using Defender.Portal.WebUI;
@@ -21,7 +22,7 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("DockerDev"))
+if (builder.Environment.IsLocalOrDevelopment())
 {
     app.UseDeveloperExceptionPage();
 

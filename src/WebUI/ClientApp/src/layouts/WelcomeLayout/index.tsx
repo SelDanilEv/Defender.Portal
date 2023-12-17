@@ -29,12 +29,14 @@ const TypographyH1 = styled(Typography)(
 const WelcomeLayout: FC = (props: any) => {
   const u = useUtils();
 
+  u.log(process.env);
+
   React.useEffect(() => {
     if (props.session.isAuthenticated) {
-      if (props.session.isEmailVerified || props.session.isEmailVerified) {
+      if (props.session.isEmailVerified || props.session.isPhoneVerified) {
         u.react.navigate("/home");
       } else {
-        // u.react.navigate("/welcome/verification");
+        u.react.navigate("/welcome/verification");
       }
     }
   }, []);

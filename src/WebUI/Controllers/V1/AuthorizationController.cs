@@ -22,6 +22,16 @@ public class AuthorizationController : BaseApiController
             (command);
     }
 
+    [HttpPost("google")]
+    [ProducesResponseType(typeof(Session), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    public async Task<Session> LoginWithGoogleTokenAsync(
+        [FromBody] LoginWithGoogleTokenCommand command)
+    {
+        return await ProcessApiCallWithoutMappingAsync<LoginWithGoogleTokenCommand, Session>
+            (command);
+    }
+
     [HttpPost("create")]
     [ProducesResponseType(typeof(Session), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]

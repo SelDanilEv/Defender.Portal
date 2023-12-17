@@ -56,6 +56,21 @@ public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
         }, AuthorizationType.Service);
     }
 
+    public async Task<LoginResponse> LoginAccountByGoogleTokenAsync(string token)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var command = new LoginGoogleCommand()
+            {
+                Token = token
+            };
+
+            var response = await _identityServiceClient.GoogleAsync(command);
+
+            return response;
+        }, AuthorizationType.Service);
+    }
+
     public async Task<AccountDto> GetAccountDetailsAsUserAsync(Guid accountId)
     {
         return await ExecuteSafelyAsync(async () =>

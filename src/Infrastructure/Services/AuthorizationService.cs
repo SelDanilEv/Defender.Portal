@@ -32,6 +32,13 @@ public class AuthorizationService : IAuthorizationService
         return _mapper.Map<Session>(loginResponse);
     }
 
+    public async Task<Session> LoginAccountWithGoogleAsync(string token)
+    {
+        var loginResponse = await _identityWrapper.LoginAccountByGoogleTokenAsync(token);
+
+        return _mapper.Map<Session>(loginResponse);
+    }
+
     public async Task<bool> VerifyEmailAsync(int hash, int code)
     {
         return await _identityWrapper.VerifyAccountEmailAsync(hash, code);

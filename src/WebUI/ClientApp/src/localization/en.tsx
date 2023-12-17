@@ -115,14 +115,14 @@ const AddErrors = (result) => {
   result.Error_InvalidLoginOrPassword = "Invalid login or password";
 
   result.Error_PasswordIsTooShort = "Minimum password length: 4 characters";
-  result.Error_PasswordIsTooLong = "Maximum password length: 16 characters";
+  result.Error_PasswordIsTooLong = "Maximum password length: 64 characters";
 
   result.Error_EmailAddressInUse = "Email is already in use";
   result.Error_PhoneNumberInUse = "Phone number is already in use";
   result.Error_NicknameInUse = "Nickname is already in use";
 
   result.Error_NicknameIsTooShort = "Minimum nickname length: 4 characters";
-  result.Error_NicknameIsTooLong = "Maximum nickname length: 16 characters";
+  result.Error_NicknameIsTooLong = "Maximum nickname length: 128 characters";
 
   result.Error_AccessCodeWasExpired = "Verefication link was expired";
   result.Error_AccessCodeWasAlreadyUsed = "Access code was already used";

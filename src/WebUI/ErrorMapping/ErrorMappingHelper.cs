@@ -50,7 +50,11 @@ public class ErrorMappingHelper
             case ErrorCode.BR_ACC_AccessCodeWasAlreadyUsed:
                 return UIErrorCodes.Error_AccessCodeWasExpired;
 
-
+            case ErrorCode.BR_WHS_NotSupportedCurrencyPair:
+            case ErrorCode.VL_SCM_EmptySecretName:
+            case ErrorCode.VL_SCM_EmptySecretValue:
+            case ErrorCode.ES_WalutomatIssue:
+            case ErrorCode.CM_MappingIssue:
             case ErrorCode.BR_ACC_SuperAdminCannotBeBlocked:
             case ErrorCode.BR_ACC_AdminCannotBlockAdmins:
             case ErrorCode.BR_ACC_AttemtsAreOver:

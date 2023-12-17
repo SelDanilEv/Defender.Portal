@@ -7,7 +7,7 @@
         "ASPNETCORE_ENVIRONMENT": "Local",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       },
-      "applicationUrl": "https://localhost:47053"
+      "applicationUrl": "http://localhost:47053"
     }
   }
 }

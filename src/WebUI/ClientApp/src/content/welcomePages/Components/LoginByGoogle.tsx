@@ -36,6 +36,8 @@ const LoginByGoogle = (props: any) => {
       return;
     }
 
+    u.log(gResponse.access_token);
+
     clearTimeout(googleResponseTimeout);
 
     const requestData = {
@@ -56,26 +58,28 @@ const LoginByGoogle = (props: any) => {
       onSuccess: async (response) => {
         const loginResponse = await response.json();
 
-        if (!loginResponse.authorized) {
-          ErrorToast("Error during authorization");
+        console.log(loginResponse);
+        console.log("onSuccess");
+
+        if (!loginResponse.isAuthenticated) {
+          u.e("Error_AuthorizationFailed");
           return;
         }
 
-        const authState = {
-          token: loginResponse.token,
-          user: loginResponse.userDetails,
-        };
+        props.login(loginResponse);
 
-        props.login(authState);
-
-        u.react.navigate("/home");
-      },
-      onFailure: async (response) => {
-        if (response.status == 401) {
-          props.logout();
-          u.react.navigate("/");
+        if (
+          loginResponse.user.isEmailVerified ||
+          loginResponse.user.isPhoneVerified
+        ) {
+          console.log("/home");
+          u.react.navigate("/home");
+        } else {
+          console.log("/welcome/verification");
+          u.react.navigate("/welcome/verification");
         }
       },
+      showError: true,
       onFinal: async () => {
         // Custom unblock
         LoadingStateService.FinishLoading();

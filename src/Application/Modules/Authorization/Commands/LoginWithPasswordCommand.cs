@@ -1,5 +1,4 @@
 ﻿using Defender.Common.Errors;
-using Defender.Common.Interfaces;
 using Defender.Portal.Application.Common.Interfaces;
 using Defender.Portal.Application.Models.Session;
 using FluentValidation;
@@ -26,15 +25,12 @@ public sealed class LoginWithPasswordCommandValidator : AbstractValidator<LoginW
 
 public sealed class LoginWithPasswordCommandHandler : IRequestHandler<LoginWithPasswordCommand, Session>
 {
-    private readonly IAccountAccessor _accountAccessor;
     private readonly IAuthorizationService _authorizationService;
 
     public LoginWithPasswordCommandHandler(
-        IAccountAccessor accountAccessor,
         IAuthorizationService authorizationService
         )
     {
-        _accountAccessor = accountAccessor;
         _authorizationService = authorizationService;
     }
 

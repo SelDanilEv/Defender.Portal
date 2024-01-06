@@ -1,18 +1,19 @@
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { HelmetProvider } from 'react-helmet-async';
-import { BrowserRouter } from 'react-router-dom';
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { HelmetProvider } from "react-helmet-async";
+import { BrowserRouter } from "react-router-dom";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
-import App from 'src/app/App';
-import { SidebarProvider } from 'src/contexts/SidebarContext';
+import App from "src/app/App";
+import { SidebarProvider } from "src/contexts/SidebarContext";
 import store from "src/state/store";
-import * as serviceWorkerRegistration from 'src/serviceWorkerRegistration';
-import reportWebVitals from 'src/reportWebVitals';
-import config from 'src/config.json';
+import * as serviceWorkerRegistration from "src/serviceWorkerRegistration";
+import reportWebVitals from "src/reportWebVitals";
+import config from "src/config.json";
 
-import 'nprogress/nprogress.css';
+import "nprogress/nprogress.css";
 
+console.log("Client id: " + config.GOOGLE_CLIENT_ID);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -26,9 +27,8 @@ ReactDOM.render(
       </SidebarProvider>
     </HelmetProvider>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

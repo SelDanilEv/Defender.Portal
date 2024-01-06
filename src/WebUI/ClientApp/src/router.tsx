@@ -32,7 +32,7 @@ const AppConfiguration = Loader(
   lazy(() => import("src/content/appPages/Configuration"))
 );
 
-// // Profile
+// Account
 
 const AccountInfo = Loader(
   lazy(() => import("src/content/appPages/AccountInfo"))

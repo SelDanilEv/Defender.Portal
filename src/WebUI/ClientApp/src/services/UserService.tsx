@@ -32,9 +32,7 @@ const UserService = {
     return Role.NoRole;
   },
 
-  RoleToDisplay: (role: string): string => {
-    const u = useUtils();
-
+  RoleToDisplay: (u, role: string): string => {
     let defaultRole = { key: Role.User, value: u.t("role_user") };
     let roleList = [
       { key: Role.SuperAdmin, value: u.t("role_super_admin") },

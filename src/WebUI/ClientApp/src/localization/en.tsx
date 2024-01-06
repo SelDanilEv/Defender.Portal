@@ -29,7 +29,7 @@ const AddConfigurationPage = (result) => {
 };
 
 const AddPersonalInfoPage = (result) => {
-  result.personal_ingo_page_title = "User id";
+  result.personal_ingo_page_title = "User";
   result.personal_ingo_page_account_info = "Account info";
   result.personal_ingo_page_save = "Save";
   result.personal_ingo_page_name_field = "Name";
@@ -112,6 +112,7 @@ const AddErrors = (result) => {
   result.Error_EmptyPassword = "Empty Password";
 
   result.Error_InvalidEmail = "Invalid email";
+  result.Error_InvalidPhoneNumber = "Invalid phone number";
   result.Error_InvalidLoginOrPassword = "Invalid login or password";
 
   result.Error_PasswordIsTooShort = "Minimum password length: 4 characters";

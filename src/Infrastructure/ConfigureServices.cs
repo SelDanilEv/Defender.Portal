@@ -21,20 +21,20 @@ public static class ConfigureServices
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-        services.RegisterServices();
-
-        services.RegisterRepositories();
-
-        services.RegisterApiClients(configuration);
-
-        RegisterClientWrappers(services);
+        services
+            .RegisterServices()
+            .RegisterRepositories()
+            .RegisterApiClients(configuration)
+            .RegisterClientWrappers();
 
         return services;
     }
 
-    private static void RegisterClientWrappers(IServiceCollection services)
+    private static IServiceCollection RegisterClientWrappers(this IServiceCollection services)
     {
         services.AddTransient<IIdentityWrapper, IdentityWrapper>();
+
+        return services;
     }
 
     private static IServiceCollection RegisterServices(this IServiceCollection services)

@@ -9,7 +9,7 @@ import useUtils from "src/appUtils";
 
 import Text from "src/components/Text";
 
-const EditFromAdmin = (props: any) => {
+const EditFromUser = (props: any) => {
   const u = useUtils();
 
   let user = props.user;
@@ -37,9 +37,9 @@ const EditFromAdmin = (props: any) => {
             </Grid>
             <Grid item xs={12} sm={6} md={7}>
               <TextField
-                id="name"
+                id="nickname"
                 sx={{ padding: 0 }}
-                defaultValue={user.name}
+                defaultValue={user.nickname}
                 onChange={UpdateUser}
                 variant="standard"
                 fullWidth
@@ -93,4 +93,4 @@ const EditFromAdmin = (props: any) => {
   );
 };
 
-export default EditFromAdmin;
+export default EditFromUser;

@@ -6,12 +6,12 @@ import {
   Hidden,
   lighten,
   List,
-  ListItem,
+  ListItemButton,
   ListItemText,
   Popover,
   Typography,
 } from "@mui/material";
-import { useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
@@ -64,8 +64,8 @@ const HeaderUserbox = (props: any) => {
   const ref = useRef<any>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
 
-  const user = UserService.GetUserInfoFromSession(props.session);
-  const roleToDisplay = UserService.RoleToDisplay(user.Role);
+  const [user, setUser] = useState<any>();
+  const [roleToDisplay, setRoleToDisplay] = useState<string>();
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -75,6 +75,16 @@ const HeaderUserbox = (props: any) => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    if (props.session.isAuthenticated) {
+      const userFromSession = UserService.GetUserInfoFromSession(props.session);
+
+      console.log(userFromSession);
+      setUser(userFromSession);
+      setRoleToDisplay(UserService.RoleToDisplay(u, userFromSession.Role));
+    }
+  }, []);
+
   const Logout = () => {
     props.logout();
     u.react.navigate("/");
@@ -83,10 +93,10 @@ const HeaderUserbox = (props: any) => {
   return (
     <>
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
-        <Avatar variant="rounded" alt={user.Nickname} src={user.Avatar} />
+        <Avatar variant="rounded" alt={user?.Nickname} src={user?.Avatar} />
         <Hidden mdDown>
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.Nickname}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{user?.Nickname}</UserBoxLabel>
             <UserBoxDescription variant="body2">
               {roleToDisplay}
             </UserBoxDescription>
@@ -110,9 +120,9 @@ const HeaderUserbox = (props: any) => {
         }}
       >
         <MenuUserBox sx={{ minWidth: 210 }} display="flex">
-          <Avatar variant="rounded" alt={user.Nickname} src={user.Avatar} />
+          <Avatar variant="rounded" alt={user?.Nickname} src={user?.Avatar} />
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.Nickname}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{user?.Nickname}</UserBoxLabel>
             <UserBoxDescription variant="body2">
               {roleToDisplay}
             </UserBoxDescription>
@@ -120,20 +130,25 @@ const HeaderUserbox = (props: any) => {
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
         <List sx={{ p: 1 }} component="nav">
-          <ListItem
-            button
+          <ListItemButton
             to="/account/update"
             component={NavLink}
             onClick={handleClose}
           >
-            <AccountBoxTwoToneIcon fontSize="small" />
-            <ListItemText primary={u.t("sidebar_header_menu_profile")} />
-          </ListItem>
+            <AccountBoxTwoToneIcon fontSize="medium" />
+            <ListItemText
+              primaryTypographyProps={{ ml: "10px", fontSize: "1.3em" }}
+              primary={u.t("sidebar_header_menu_profile")}
+            />
+          </ListItemButton>
           <Divider />
-          <ListItem button onClick={() => Logout()}>
+          <ListItemButton onClick={() => Logout()}>
             <LockOpenTwoToneIcon fontSize="medium" />
-            <ListItemText primary={u.t("sidebar_header_menu_logout")} />
-          </ListItem>
+            <ListItemText
+              primaryTypographyProps={{ ml: "10px", fontSize: "1.3em" }}
+              primary={u.t("sidebar_header_menu_logout")}
+            />
+          </ListItemButton>
         </List>
       </Popover>
     </>

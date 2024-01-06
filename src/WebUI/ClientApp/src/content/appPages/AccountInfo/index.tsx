@@ -18,7 +18,7 @@ import { useState } from "react";
 
 import EditFromUser from "./EditFromUser";
 
-// import { UserInfo } from "src/models/Session";
+import { UserInfo } from "src/models/UserInfo";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
@@ -28,7 +28,7 @@ import APICallProps from "src/api/APIWrapper/interfaces/APICallProps";
 const UpdateUserPage = (props: any) => {
   const u = useUtils();
 
-  // const [user, setUser] = useState<UserInfo>({ ...props.currentUser });
+  const [user, setUser] = useState<UserInfo>({ ...props.currentUser });
 
   const [approve, setApprove] = useState<boolean>(false);
 
@@ -57,6 +57,20 @@ const UpdateUserPage = (props: any) => {
     } as APICallProps);
   };
 
+  const GetUserNicknameForHeader = () => {
+    const maxLength = 12;
+    const smallWindowWidth = 600;
+
+    if (
+      user.nickname.length < maxLength ||
+      window.innerWidth > smallWindowWidth
+    ) {
+      return user.nickname;
+    }
+
+    return user.nickname.substring(0, maxLength) + "...";
+  };
+
   return (
     <>
       <Helmet>
@@ -74,7 +88,8 @@ const UpdateUserPage = (props: any) => {
         </Tooltip>
         <Grid container alignContent={"center"}>
           <Typography variant="h3" component="h3">
-            {/* {u.t("personal_ingo_page_title")} <i>{user.id}</i> */}
+            {u.t("personal_ingo_page_title")}{" "}
+            <i>{GetUserNicknameForHeader()}</i>
           </Typography>
         </Grid>
       </Box>
@@ -114,7 +129,7 @@ const UpdateUserPage = (props: any) => {
             </Box>
           </Box>
           <Divider />
-          {/* {<EditFromUser user={user} updateUser={setUser} />} */}
+          {<EditFromUser user={user} updateUser={setUser} />}
         </Card>
       </Grid>
     </>
@@ -131,7 +146,7 @@ const mapDispatchToProps = (dispatch: any) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    currentUser: state.auth.user,
+    currentUser: state.session.user,
   };
 };
 

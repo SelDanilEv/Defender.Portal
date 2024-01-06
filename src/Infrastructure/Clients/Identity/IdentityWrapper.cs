@@ -91,7 +91,7 @@ public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
                 Code = code,
             };
 
-            var response = await _identityServiceClient.EmailAsync(command);
+            var response = await _identityServiceClient.Email2Async(command);
 
             return response;
         }, AuthorizationType.User);
@@ -101,12 +101,13 @@ public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
     {
         await ExecuteSafelyAsync(async () =>
         {
-            var command = new SendEmailVerificationCommand()
+            var command = new SendVerificationCodeCommand()
             {
                 UserId = accountId,
+                Type = AccessCodeType.EmailVerification
             };
 
-            await _identityServiceClient.SendVerificationEmailAsync(command);
-        }, AuthorizationType.User);
+            await _identityServiceClient.EmailAsync(command);
+        }, AuthorizationType.Service);
     }
 }

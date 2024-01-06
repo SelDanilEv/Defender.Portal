@@ -13,77 +13,84 @@ public class ErrorMappingHelper
     {
         var apiErrorCode = ErrorCodeHelper.ToErrorCode(message);
 
-        switch (apiErrorCode)
+        return apiErrorCode switch
         {
-            case ErrorCode.VL_ACC_InvalidEmail:
-                return UIErrorCodes.Error_InvalidEmail;
-            case ErrorCode.BR_ACC_UserIsBlocked:
-                return UIErrorCodes.Error_UserBlocked;
-            case ErrorCode.BR_USM_EmailAddressInUse:
-                return UIErrorCodes.Error_EmailAddressInUse;
-            case ErrorCode.BR_USM_PhoneNumberInUse:
-                return UIErrorCodes.Error_PhoneNumberInUse;
-            case ErrorCode.BR_USM_NicknameInUse:
-                return UIErrorCodes.Error_NicknameInUse;
-            case ErrorCode.VL_USM_EmptyLogin:
-            case ErrorCode.VL_ACC_EmptyLogin:
-                return UIErrorCodes.Error_EmptyLogin;
-            case ErrorCode.VL_ACC_EmptyEmail:
-                return UIErrorCodes.Error_EmptyEmail;
-            case ErrorCode.VL_ACC_EmptyNickname:
-                return UIErrorCodes.Error_EmptyNickname;
-            case ErrorCode.VL_ACC_EmptyPassword:
-                return UIErrorCodes.Error_EmptyPassword;
-            case ErrorCode.VL_ACC_MinPasswordLength:
-                return UIErrorCodes.Error_PasswordIsTooShort;
-            case ErrorCode.VL_ACC_MaxPasswordLength:
-                return UIErrorCodes.Error_PasswordIsTooLong;
-            case ErrorCode.BR_USM_UserWithSuchLoginIsNotExist:
-            case ErrorCode.BR_ACC_InvalidPassword:
-                return UIErrorCodes.Error_InvalidLoginOrPassword;
-            case ErrorCode.VL_ACC_MinNicknameLength:
-                return UIErrorCodes.Error_NicknameIsTooShort;
-            case ErrorCode.VL_ACC_MaxNicknameLength:
-                return UIErrorCodes.Error_NicknameIsTooLong;
-            case ErrorCode.BR_ACC_AccessCodeWasExpired:
-                return UIErrorCodes.Error_AccessCodeWasExpired;
-            case ErrorCode.BR_ACC_AccessCodeWasAlreadyUsed:
-                return UIErrorCodes.Error_AccessCodeWasExpired;
+            ErrorCode.VL_NTF_InvalidEmail or
+            ErrorCode.VL_USM_InvalidEmail or
+            ErrorCode.VL_ACC_InvalidEmail => UIErrorCodes.Error_InvalidEmail,
 
-            case ErrorCode.BR_WHS_NotSupportedCurrencyPair:
-            case ErrorCode.VL_SCM_EmptySecretName:
-            case ErrorCode.VL_SCM_EmptySecretValue:
-            case ErrorCode.ES_WalutomatIssue:
-            case ErrorCode.CM_MappingIssue:
-            case ErrorCode.BR_ACC_SuperAdminCannotBeBlocked:
-            case ErrorCode.BR_ACC_AdminCannotBlockAdmins:
-            case ErrorCode.BR_ACC_AttemtsAreOver:
-            case ErrorCode.BR_ACC_CodeWasNotVerified:
-            case ErrorCode.BR_PTL_UserActivityMustHaveUserId:
-            case ErrorCode.VL_USM_EmptyUserId:
-            case ErrorCode.VL_ACC_EmptyGoogleToken:
-            case ErrorCode.VL_ACC_EmptyUserId:
-            case ErrorCode.VL_ACC_InvalidPhoneNumber:
-            case ErrorCode.VL_NTF_EmptyNotificationId:
-            case ErrorCode.VL_NTF_EmptyRecipient:
-            case ErrorCode.VL_NTF_EmptySubject:
-            case ErrorCode.VL_NTF_EmptyBody:
-            case ErrorCode.VL_NTF_EmptyValidationLink:
-            case ErrorCode.VL_NTF_MinSubjectLength:
-            case ErrorCode.VL_NTF_MaxSubjectLength:
-            case ErrorCode.VL_NTF_MaxBodyLength:
-            case ErrorCode.VL_NTF_InvalidEmail:
-            case ErrorCode.ES_GoogleAPIIssue:
-            case ErrorCode.CM_ForbiddenAccess:
-            case ErrorCode.BR_ACC_AdminCannotChangeAdminPassword:
-            case ErrorCode.BR_ACC_UserCanUpdateOnlyOwnAccount:
-            case ErrorCode.VL_InvalidRequest:
-            case ErrorCode.CM_DatabaseIssue:
-            case ErrorCode.ES_SendinBlueIssue:
-            case ErrorCode.Unknown:
-            case ErrorCode.UnhandledError:
-            default:
-                return UIErrorCodes.Error_UnhandledError;
-        }
+            ErrorCode.BR_ACC_UserIsBlocked => UIErrorCodes.Error_UserBlocked,
+
+            ErrorCode.BR_USM_EmailAddressInUse => UIErrorCodes.Error_EmailAddressInUse,
+
+            ErrorCode.BR_USM_PhoneNumberInUse => UIErrorCodes.Error_PhoneNumberInUse,
+
+            ErrorCode.BR_USM_NicknameInUse => UIErrorCodes.Error_NicknameInUse,
+
+            ErrorCode.VL_USM_EmptyLogin or
+            ErrorCode.VL_ACC_EmptyLogin => UIErrorCodes.Error_EmptyLogin,
+
+            ErrorCode.VL_USM_EmptyEmail or
+            ErrorCode.VL_ACC_EmptyEmail => UIErrorCodes.Error_EmptyEmail,
+
+            ErrorCode.VL_USM_EmptyNickname or
+            ErrorCode.VL_ACC_EmptyNickname => UIErrorCodes.Error_EmptyNickname,
+
+            ErrorCode.VL_ACC_EmptyPassword => UIErrorCodes.Error_EmptyPassword,
+
+            ErrorCode.VL_ACC_MinPasswordLength => UIErrorCodes.Error_PasswordIsTooShort,
+
+            ErrorCode.VL_ACC_MaxPasswordLength => UIErrorCodes.Error_PasswordIsTooLong,
+
+            ErrorCode.BR_USM_UserWithSuchLoginIsNotExist or
+            ErrorCode.BR_ACC_InvalidPassword => UIErrorCodes.Error_InvalidLoginOrPassword,
+
+            ErrorCode.VL_USM_MinNicknameLength or
+            ErrorCode.VL_ACC_MinNicknameLength => UIErrorCodes.Error_NicknameIsTooShort,
+
+            ErrorCode.VL_ACC_MaxNicknameLength or
+            ErrorCode.VL_USM_MaxNicknameLength => UIErrorCodes.Error_NicknameIsTooLong,
+
+            ErrorCode.BR_ACC_AccessCodeWasExpired => UIErrorCodes.Error_AccessCodeWasExpired,
+
+            ErrorCode.BR_ACC_AccessCodeWasAlreadyUsed => UIErrorCodes.Error_AccessCodeWasExpired,
+
+            ErrorCode.VL_USM_InvalidPhoneNumber or
+            ErrorCode.VL_ACC_InvalidPhoneNumber => UIErrorCodes.Error_InvalidPhoneNumber,
+
+            ErrorCode.Unknown or
+            ErrorCode.VL_InvalidRequest or
+            ErrorCode.BR_PTL_UserActivityMustHaveUserId or
+            ErrorCode.VL_USM_EmptyUserId or
+            ErrorCode.ES_GoogleAPIIssue or
+            ErrorCode.ES_SendinBlueIssue or
+            ErrorCode.ES_WalutomatIssue or
+            ErrorCode.VL_ACC_EmptyGoogleToken or
+            ErrorCode.VL_ACC_EmptyUserId or
+            ErrorCode.CM_DatabaseIssue or
+            ErrorCode.CM_MappingIssue or
+            ErrorCode.UnhandledError => UIErrorCodes.Error_UnhandledError,
+
+
+            ErrorCode.BR_ACC_AdminCannotChangeAdminPassword or
+            ErrorCode.BR_ACC_UserCanUpdateOnlyOwnAccount or
+            ErrorCode.BR_ACC_SuperAdminCannotBeBlocked or
+            ErrorCode.BR_ACC_AdminCannotBlockAdmins or
+            ErrorCode.BR_ACC_AttemtsAreOver or
+            ErrorCode.BR_ACC_CodeWasNotVerified or
+            ErrorCode.BR_WHS_NotSupportedCurrencyPair or
+            ErrorCode.VL_NTF_EmptyNotificationId or
+            ErrorCode.VL_NTF_EmptyRecipient or
+            ErrorCode.VL_NTF_EmptySubject or
+            ErrorCode.VL_NTF_EmptyBody or
+            ErrorCode.VL_NTF_MinSubjectLength or
+            ErrorCode.VL_NTF_MaxSubjectLength or
+            ErrorCode.VL_NTF_MaxBodyLength or
+            ErrorCode.VL_SCM_EmptySecretName or
+            ErrorCode.VL_SCM_EmptySecretValue or
+            ErrorCode.CM_ForbiddenAccess or
+
+            _ => UIErrorCodes.Error_UnhandledError
+        };
     }
 }

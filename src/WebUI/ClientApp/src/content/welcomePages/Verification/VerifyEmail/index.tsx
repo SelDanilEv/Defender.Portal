@@ -33,9 +33,6 @@ const Verification = (props: any) => {
       verificationRequest[key] = value;
     });
 
-    console.log("verificationRequest");
-    console.log(verificationRequest);
-
     if (verificationRequest["code"] && verificationRequest["hash"]) {
       await confirmVerification(verificationRequest);
     } else {

@@ -10,6 +10,7 @@ public enum UIErrorCodes
     Error_EmptyPassword,
 
     Error_InvalidEmail,
+    Error_InvalidPhoneNumber,
     Error_InvalidLoginOrPassword,
 
     Error_PasswordIsTooShort,

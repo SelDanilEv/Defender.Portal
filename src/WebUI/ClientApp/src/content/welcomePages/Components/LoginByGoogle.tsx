@@ -5,7 +5,6 @@ import { useGoogleLogin } from "@react-oauth/google";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import LoadingStateService from "src/services/LoadingStateService";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
-import ErrorToast from "src/components/Toast/DefaultErrorToast";
 import { login } from "src/actions/sessionActions";
 import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
@@ -36,8 +35,6 @@ const LoginByGoogle = (props: any) => {
       return;
     }
 
-    u.log(gResponse.access_token);
-
     clearTimeout(googleResponseTimeout);
 
     const requestData = {
@@ -58,9 +55,6 @@ const LoginByGoogle = (props: any) => {
       onSuccess: async (response) => {
         const loginResponse = await response.json();
 
-        console.log(loginResponse);
-        console.log("onSuccess");
-
         if (!loginResponse.isAuthenticated) {
           u.e("Error_AuthorizationFailed");
           return;
@@ -72,10 +66,8 @@ const LoginByGoogle = (props: any) => {
           loginResponse.user.isEmailVerified ||
           loginResponse.user.isPhoneVerified
         ) {
-          console.log("/home");
           u.react.navigate("/home");
         } else {
-          console.log("/welcome/verification");
           u.react.navigate("/welcome/verification");
         }
       },

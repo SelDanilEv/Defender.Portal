@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect } from "react";
+import { FC, ReactNode, useLayoutEffect, useEffect } from "react";
 import { Box, alpha, lighten } from "@mui/material";
 import { connect } from "react-redux";
 import { Outlet } from "react-router-dom";
@@ -8,7 +8,6 @@ import Header from "./Header";
 
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import { logout } from "src/actions/sessionActions";
-import ErrorToast from "src/components/Toast/DefaultErrorToast";
 import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
 
@@ -21,6 +20,11 @@ const SidebarLayout: FC<SidebarLayoutProps> = (props: any) => {
   const theme = u.react.theme;
 
   useEffect(() => {
+    if (!props.session.isAuthenticated) {
+      logout();
+      return;
+    }
+
     APICallWrapper({
       url: apiUrls.home.authcheck,
       options: {
@@ -29,13 +33,17 @@ const SidebarLayout: FC<SidebarLayoutProps> = (props: any) => {
       utils: u,
       onFailure: async (response) => {
         if (response.status == 401) {
-          u.e("Error_TokenExpired");
-          props.logout();
-          u.react.navigate("/");
+          logout();
         }
       },
     });
   }, []);
+
+  const logout = () => {
+    u.e("Error_TokenExpired");
+    props.logout();
+    u.react.navigate("/");
+  };
 
   return (
     <>
@@ -89,6 +97,12 @@ const SidebarLayout: FC<SidebarLayoutProps> = (props: any) => {
   );
 };
 
+const mapStateToProps = (state: any) => {
+  return {
+    session: state.session,
+  };
+};
+
 const mapDispatchToProps = (dispatch: any) => {
   return {
     logout: () => {
@@ -97,4 +111,4 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(SidebarLayout);
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarLayout);

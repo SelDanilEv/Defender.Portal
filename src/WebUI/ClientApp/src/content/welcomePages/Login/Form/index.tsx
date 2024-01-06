@@ -60,9 +60,6 @@ const LoginForm = (props: any) => {
       onSuccess: async (response) => {
         const loginResponse = await response.json();
 
-        console.log(loginResponse);
-        console.log("onSuccess");
-
         if (!loginResponse.isAuthenticated) {
           u.e("Error_AuthorizationFailed");
           return;

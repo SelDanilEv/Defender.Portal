@@ -1,14 +1,15 @@
 ﻿using Defender.Common.DTOs;
+using Defender.Portal.Application.DTOs;
+using Defender.Portal.Application.Modules.Authorization.Commands;
 
 namespace Defender.Portal.Application.Common.Interfaces;
 
 public interface IAccountManagementService
 {
-    /// <summary>
-    /// Get account info
-    /// </summary>
-    /// <param name="userId">User id</param>
-    /// <returns></returns>
-    public Task<AccountDto> GetAccountDetails(Guid userId);
+    public Task<AccountDto> GetAccountDetailsAsync(Guid userId);
+
+    Task<UserDto> UpdateUserInfoAsync(UpdateAccountCommand updateAccountCommand);
+
+    Task UpdateUserSentitiveInfoAsync(UpdateAccountSentitiveInfoCommand command);
 
 }

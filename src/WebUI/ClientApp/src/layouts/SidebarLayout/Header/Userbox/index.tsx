@@ -79,11 +79,10 @@ const HeaderUserbox = (props: any) => {
     if (props.session.isAuthenticated) {
       const userFromSession = UserService.GetUserInfoFromSession(props.session);
 
-      console.log(userFromSession);
       setUser(userFromSession);
       setRoleToDisplay(UserService.RoleToDisplay(u, userFromSession.Role));
     }
-  }, []);
+  }, [props.session]);
 
   const Logout = () => {
     props.logout();
@@ -138,7 +137,7 @@ const HeaderUserbox = (props: any) => {
             <AccountBoxTwoToneIcon fontSize="medium" />
             <ListItemText
               primaryTypographyProps={{ ml: "10px", fontSize: "1.3em" }}
-              primary={u.t("sidebar_header_menu_profile")}
+              primary={u.t("sidebar_header__menu_profile")}
             />
           </ListItemButton>
           <Divider />
@@ -146,7 +145,7 @@ const HeaderUserbox = (props: any) => {
             <LockOpenTwoToneIcon fontSize="medium" />
             <ListItemText
               primaryTypographyProps={{ ml: "10px", fontSize: "1.3em" }}
-              primary={u.t("sidebar_header_menu_logout")}
+              primary={u.t("sidebar_header__menu_logout")}
             />
           </ListItemButton>
         </List>

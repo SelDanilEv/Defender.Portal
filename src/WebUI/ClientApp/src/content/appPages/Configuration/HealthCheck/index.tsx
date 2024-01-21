@@ -50,7 +50,7 @@ const HealthCheck = (props: any) => {
           gutterBottom: true,
           fontSize: theme.typography.pxToRem(15),
         }}
-        primary={u.t("configuration_page_api_status")}
+        primary={u.t("configuration_page__api_status")}
       />
       <Grid item xs={12} sm={8} md={9}>
         {isHealthy()}

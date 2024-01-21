@@ -25,7 +25,7 @@ public class CheckAccountVerificationQueryHandler : IRequestHandler<CheckAccount
 
     public async Task<AccountDto> Handle(CheckAccountVerificationQuery request, CancellationToken cancellationToken)
     {
-        return await _accountManagementService.GetAccountDetails(_accountAccessor.AccountInfo.Id);
+        return await _accountManagementService.GetAccountDetailsAsync(_accountAccessor.AccountInfo.Id);
     }
 
 }

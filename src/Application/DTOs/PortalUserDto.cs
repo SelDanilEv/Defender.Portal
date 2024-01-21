@@ -7,10 +7,5 @@ public class PortalUserDto
     public string? Nickname { get; set; }
     public string? Phone { get; set; }
 
-    public bool IsEmailVerified { get; set; }
-    public bool IsPhoneVerified { get; set; }
-
-    public ICollection<string> Roles { get; set; } = new List<string>();
-
     public DateTime CreatedDate { get; set; }
 }

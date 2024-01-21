@@ -13,8 +13,6 @@ import config from "src/config.json";
 
 import "nprogress/nprogress.css";
 
-console.log("Client id: " + config.GOOGLE_CLIENT_ID);
-
 ReactDOM.render(
   <Provider store={store}>
     <HelmetProvider>

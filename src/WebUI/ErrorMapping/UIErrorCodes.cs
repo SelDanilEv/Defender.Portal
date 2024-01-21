@@ -25,6 +25,7 @@ public enum UIErrorCodes
 
     Error_AccessCodeWasExpired,
     Error_AccessCodeWasAlreadyUsed,
+    Error_InvalidAccessCode,
 
     Error_UserBlocked,
 }

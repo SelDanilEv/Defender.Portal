@@ -97,17 +97,46 @@ public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
         }, AuthorizationType.User);
     }
 
-    public async Task SendVerificationEmailAsync(Guid accountId)
+    public async Task SendVerificationCodeAsync(Guid accountId, AccessCodeType accessCodeType)
     {
         await ExecuteSafelyAsync(async () =>
         {
             var command = new SendVerificationCodeCommand()
             {
                 UserId = accountId,
-                Type = AccessCodeType.EmailVerification
+                Type = accessCodeType
             };
 
             await _identityServiceClient.EmailAsync(command);
         }, AuthorizationType.Service);
+    }
+
+    public async Task<bool> VerifyAccessCodeAsync(int code)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var command = new VerifyCodeCommand()
+            {
+                Code = code,
+            };
+
+            var response = await _identityServiceClient.VerifyAsync(command);
+
+            return response;
+        }, AuthorizationType.User);
+    }
+
+    public async Task ChangeAccountPasswordAsync(Guid accountId, string newPassword)
+    {
+        await ExecuteSafelyAsync(async () =>
+        {
+            var command = new ChangeUserPasswordCommand()
+            {
+                AccountId = accountId,
+                NewPassword = newPassword
+            };
+
+            await _identityServiceClient.ChangeAsync(command);
+        }, AuthorizationType.User);
     }
 }

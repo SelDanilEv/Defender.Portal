@@ -1,5 +1,6 @@
 import stateLoader from "src/state/StateLoader";
 import { Session } from "src/models/Session";
+import { UserInfo } from "src/models/UserInfo";
 
 const sessionReducer = (
   state: Session = {
@@ -44,6 +45,16 @@ const sessionReducer = (
           language: action.payload,
         };
       }
+      break;
+    case "UPDATE_USER_INFO":
+      let updatedUser = action.payload as UserInfo;
+      state = {
+        ...state,
+        user: {
+          ...state.user,
+          nickname: updatedUser.nickname,
+        },
+      };
       break;
     default:
       break;

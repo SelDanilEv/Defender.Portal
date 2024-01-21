@@ -52,7 +52,7 @@ const Verification = (props: any) => {
       },
       utils: u,
       onSuccess: async (response) => {
-        SuccessToast(u.t("welcome_page_verification_email_sent"));
+        SuccessToast(u.t("welcome_page__verification_email_sent"));
       },
       showError: true,
       doLock: true,
@@ -74,18 +74,18 @@ const Verification = (props: any) => {
       }}
     >
       <Box sx={{ fontSize: "1.2em" }}>
-        {u.t("welcome_page_email_verification_description")}
+        {u.t("welcome_page__email_verification_description")}
       </Box>
       <LockedButton
         sx={{ fontSize: "1em" }}
         variant="outlined"
         onClick={resendVerification}
       >
-        {u.t("welcome_page_resend_verification_email")}
+        {u.t("welcome_page__resend_verification_email")}
       </LockedButton>
       <WelcomeMenuButton
         onClick={() => clearInterval(task)}
-        text={u.t("welcome_page_back_to_login_page")}
+        text={u.t("welcome_page__back_to_login_page")}
         path="/welcome/login"
       />
     </Box>

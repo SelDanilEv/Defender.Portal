@@ -24,18 +24,18 @@ public sealed class VerifyAccountEmailCommandValidator : AbstractValidator<Verif
 
 public sealed class VerifyAccountEmailCommandHandler : IRequestHandler<VerifyAccountEmailCommand, bool>
 {
-    private readonly IAuthorizationService _authorizationService;
+    private readonly IAccessCodeService _accessCodeService;
 
     public VerifyAccountEmailCommandHandler(
-        IAuthorizationService authorizationService
+        IAccessCodeService accessCodeService
         )
     {
-        _authorizationService = authorizationService;
+        _accessCodeService = accessCodeService;
     }
 
     public async Task<bool> Handle(VerifyAccountEmailCommand request, CancellationToken cancellationToken)
     {
-        return await _authorizationService.VerifyEmailAsync(
+        return await _accessCodeService.VerifyEmailAsync(
             request.Hash,
             request.Code);
     }

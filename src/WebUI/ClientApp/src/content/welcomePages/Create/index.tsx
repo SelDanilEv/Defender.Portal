@@ -21,14 +21,14 @@ const CreateAccount = (props: any) => {
           width_lg="45%"
           width_md="40%"
           width_xs="70%"
-          text={u.t("welcome_page_or")}
+          text={u.t("welcome_page__or")}
           gap="10px"
         />
       </Box>
       <Box sx={{ display: "flex", gap: "15px", justifyContent: "center" }}>
         <LoginByGoogle />
         <WelcomeMenuButton
-          text={u.t("welcome_page_back_to_login_page")}
+          text={u.t("welcome_page__back_to_login_page")}
           path="/welcome/login"
         />
       </Box>

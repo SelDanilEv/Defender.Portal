@@ -38,9 +38,10 @@ public class UserActivityService : IUserActivityService
 
         if (userId != null)
         {
-            var filterRequest = FindModelRequest<PortalUserActivity>.Init(x => x.UserId, userId);
+            var filterRequest = FindModelRequest<PortalUserActivity>
+                .Init(x => x.UserId, userId);
 
-            settings.AddFilter(filterRequest);
+            settings.SetupFindOptions(filterRequest);
         }
 
         return await _userActivityRepository.GetUserActivitiesAsync(settings);

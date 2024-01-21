@@ -26,19 +26,37 @@ public class VerificationController : BaseApiController
     [HttpPost("verify/email")]
     [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<bool> VerifyAccountEmailAsync(
+    public async Task<bool> VerifyEmailAccountAsync(
         [FromBody] VerifyAccountEmailCommand command)
     {
         return await ProcessApiCallAsync<VerifyAccountEmailCommand, bool>
             (command);
     }
 
+    [HttpPost("send/update-account")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    public async Task SendUpdateAccountCodeAsync()
+    {
+        await ProcessApiCallAsync<SendUpdateAccountAccessCodeCommand>
+            (new SendUpdateAccountAccessCodeCommand());
+    }
+
+    [HttpPost("verify/code")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    public async Task<bool> VerifyAccessCodeAsync([FromBody] VerifyAccessCodeCommand command)
+    {
+        return await ProcessApiCallWithoutMappingAsync<VerifyAccessCodeCommand, bool>
+            (command);
+    }
+
     [HttpPost("resend/email")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task ResendVerificationEmailAsync()
+    public async Task ResendEmailVerificationAsync()
     {
-        await ProcessApiCallAsync<SendVerificationEmailCommand>
-            (new SendVerificationEmailCommand());
+        await ProcessApiCallAsync<SendEmailVerificationCommand>
+            (new SendEmailVerificationCommand());
     }
 }

@@ -71,10 +71,8 @@ const LoginForm = (props: any) => {
           loginResponse.user.isEmailVerified ||
           loginResponse.user.isPhoneVerified
         ) {
-          console.log("/home");
           u.react.navigate("/home");
         } else {
-          console.log("/welcome/verification");
           u.react.navigate("/welcome/verification");
         }
       },
@@ -98,14 +96,14 @@ const LoginForm = (props: any) => {
           id="login"
           type="text"
           onChange={UpdateLoginRequest}
-          label={u.t("welcome_page_login_label")}
+          label={u.t("welcome_page__login_label")}
         />
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <TextField
             id="password"
             type="password"
             onChange={UpdateLoginRequest}
-            label={u.t("welcome_page_password_label")}
+            label={u.t("welcome_page__password_label")}
             fullWidth
           />
           <Link sx={{ ml: "auto", mr: "4px", fontSize: "0.8em" }}>
@@ -118,7 +116,7 @@ const LoginForm = (props: any) => {
           variant="outlined"
           onClick={() => login()}
         >
-          {u.t("welcome_page_sign_in")}
+          {u.t("welcome_page__sign_in")}
         </LockedButton>
       </FormControl>
     </Box>

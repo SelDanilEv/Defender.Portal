@@ -1,6 +1,6 @@
-import useUtils from "src/appUtils";
 import Role from "src/consts/Role";
 import { Session } from "src/models/Session";
+import { UserInfo } from "src/models/UserInfo";
 
 const UserService = {
   GetUserInfoFromSession: (session: Session) => {
@@ -51,6 +51,13 @@ const UserService = {
     }
 
     return defaultRole.value;
+  },
+
+  GetAccountCreatedUTCDate: (userInfo: UserInfo) => {
+    if (!userInfo) return;
+
+    let date = new Date(userInfo.createdDate);
+    return date.toLocaleDateString("en-US", { timeZone: "UTC" });
   },
 };
 

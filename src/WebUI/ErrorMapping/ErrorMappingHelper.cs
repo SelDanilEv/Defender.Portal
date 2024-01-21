@@ -52,11 +52,13 @@ public class ErrorMappingHelper
             ErrorCode.VL_USM_MaxNicknameLength => UIErrorCodes.Error_NicknameIsTooLong,
 
             ErrorCode.BR_ACC_AccessCodeWasExpired => UIErrorCodes.Error_AccessCodeWasExpired,
-
-            ErrorCode.BR_ACC_AccessCodeWasAlreadyUsed => UIErrorCodes.Error_AccessCodeWasExpired,
+            ErrorCode.BR_ACC_AccessCodeWasAlreadyUsed => UIErrorCodes.Error_AccessCodeWasAlreadyUsed,
+            ErrorCode.BR_ACC_InvalidAccessCode => UIErrorCodes.Error_InvalidAccessCode,
 
             ErrorCode.VL_USM_InvalidPhoneNumber or
             ErrorCode.VL_ACC_InvalidPhoneNumber => UIErrorCodes.Error_InvalidPhoneNumber,
+
+            ErrorCode.UnhandledError => UIErrorCodes.Error_UnhandledError,
 
             ErrorCode.Unknown or
             ErrorCode.VL_InvalidRequest or
@@ -69,14 +71,11 @@ public class ErrorMappingHelper
             ErrorCode.VL_ACC_EmptyUserId or
             ErrorCode.CM_DatabaseIssue or
             ErrorCode.CM_MappingIssue or
-            ErrorCode.UnhandledError => UIErrorCodes.Error_UnhandledError,
-
-
+            ErrorCode.VL_USM_AtLeastOneFieldRequired or
             ErrorCode.BR_ACC_AdminCannotChangeAdminPassword or
             ErrorCode.BR_ACC_UserCanUpdateOnlyOwnAccount or
             ErrorCode.BR_ACC_SuperAdminCannotBeBlocked or
             ErrorCode.BR_ACC_AdminCannotBlockAdmins or
-            ErrorCode.BR_ACC_AttemtsAreOver or
             ErrorCode.BR_ACC_CodeWasNotVerified or
             ErrorCode.BR_WHS_NotSupportedCurrencyPair or
             ErrorCode.VL_NTF_EmptyNotificationId or

@@ -5,7 +5,7 @@ namespace Defender.Portal.Application.Models.Session;
 [Serializable]
 public class Session
 {
-    public PortalUserDto User { get; set; } = new PortalUserDto();
+    public PortalAccountDto User { get; set; } = new PortalAccountDto();
     public string? Language { get; set; }
     public bool IsAuthenticated { get; set; }
     public string Token { get; set; }

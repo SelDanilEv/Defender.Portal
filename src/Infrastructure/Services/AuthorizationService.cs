@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Defender.Common.Clients.Identity;
 using Defender.Portal.Application.Common.Interfaces;
 using Defender.Portal.Application.Models.Session;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
@@ -37,15 +38,5 @@ public class AuthorizationService : IAuthorizationService
         var loginResponse = await _identityWrapper.LoginAccountByGoogleTokenAsync(token);
 
         return _mapper.Map<Session>(loginResponse);
-    }
-
-    public async Task<bool> VerifyEmailAsync(int hash, int code)
-    {
-        return await _identityWrapper.VerifyAccountEmailAsync(hash, code);
-    }
-
-    public async Task SendVerificationEmailAsync(Guid accountId)
-    {
-        await _identityWrapper.SendVerificationEmailAsync(accountId);
     }
 }

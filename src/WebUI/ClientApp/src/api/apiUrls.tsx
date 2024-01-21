@@ -4,9 +4,15 @@ const APIEndpoints = {
     create: "create",
     google: "google",
   },
+  account: {
+    updateInfo: "update",
+    updateSentitiveInfo: "update/sentitive",
+  },
   verification: {
     check: "check",
     verifyEmail: "verify/email",
+    sendUpdateAccountCode: "send/update-account",
+    verifyAccessCode: "verify/code",
     resendEmail: "resend/email",
   },
   home: {

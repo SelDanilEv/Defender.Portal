@@ -13,5 +13,8 @@ public class MappingProfile : BaseMappingProfile
             dest => dest.IsVerified,
             opt => opt.MapFrom(
                 src => src.IsPhoneVerified || src.IsEmailVerified));
+
+        CreateMap<UserDto, PortalUserDto>();
+
     }
 }

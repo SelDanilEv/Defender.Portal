@@ -12,7 +12,7 @@ const APICallWrapper = async ({
   onFailure = async (response) => {},
   onFinal = async () => {},
   showSuccess = false,
-  successMesage = "Success",
+  successMesage = undefined,
   showError = true,
   doLock = true,
 }: APICallProps) => {
@@ -38,6 +38,15 @@ const APICallWrapper = async ({
         onSuccess(response);
 
         if (showSuccess) {
+          if (
+            (successMesage === undefined ||
+              successMesage === null ||
+              successMesage == "") &&
+            utils != null
+          ) {
+            successMesage = utils.t("Notification_Success");
+          }
+
           SuccessToast(successMesage);
         }
         return;

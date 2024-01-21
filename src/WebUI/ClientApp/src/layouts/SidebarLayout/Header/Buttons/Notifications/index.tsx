@@ -8,15 +8,14 @@ import {
   ListItem,
   Popover,
   Tooltip,
-  Typography
-} from '@mui/material';
-import { useRef, useState } from 'react';
-import NotificationsActiveTwoToneIcon from '@mui/icons-material/NotificationsActiveTwoTone';
-import { styled } from '@mui/material/styles';
+  Typography,
+} from "@mui/material";
+import { useRef, useState } from "react";
+import NotificationsActiveTwoToneIcon from "@mui/icons-material/NotificationsActiveTwoTone";
+import { styled } from "@mui/material/styles";
 
 import Notification from "./Notification";
-import useUtils from 'src/appUtils';
-
+import useUtils from "src/appUtils";
 
 const NotificationsBadge = styled(Badge)(
   ({ theme }) => `
@@ -58,7 +57,7 @@ function HeaderNotifications() {
 
   const notificationList = [
     { topic: "Test notification", body: "This feature will be soon" },
-  ]
+  ];
 
   return (
     <>
@@ -67,8 +66,8 @@ function HeaderNotifications() {
           <NotificationsBadge
             badgeContent={notificationList.length}
             anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
+              vertical: "top",
+              horizontal: "right",
             }}
           >
             <NotificationsActiveTwoToneIcon />
@@ -80,12 +79,12 @@ function HeaderNotifications() {
         onClose={handleClose}
         open={isOpen}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
+          vertical: "top",
+          horizontal: "right",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
+          vertical: "top",
+          horizontal: "right",
         }}
       >
         <Box
@@ -94,28 +93,27 @@ function HeaderNotifications() {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Typography variant="h5">{u.t("sidebar_header_menu_title_notification")}</Typography>
+          <Typography variant="h5">
+            {u.t("sidebar_header__menu_title_notification")}
+          </Typography>
         </Box>
         <Divider />
         <List sx={{ p: 0 }}>
-          {
-            notificationList.length == 0 && u.t("sidebar_header_menu_no_notifications")
-          }
-          {
-            notificationList.map((element, i) => {
-              return (
-                <ListItem
-                  sx={{ p: 2, minWidth: 300, display: "block" }}
-                  key={i}
-                >
-                  <Box>
-                    {i > 0 && <Divider />}
-                    <Notification topic={element.topic} body={element.body}></Notification>
-                  </Box>
-                </ListItem>
-              )
-            })
-          }
+          {notificationList.length == 0 &&
+            u.t("sidebar_header__menu_no_notifications")}
+          {notificationList.map((element, i) => {
+            return (
+              <ListItem sx={{ p: 2, minWidth: 300, display: "block" }} key={i}>
+                <Box>
+                  {i > 0 && <Divider />}
+                  <Notification
+                    topic={element.topic}
+                    body={element.body}
+                  ></Notification>
+                </Box>
+              </ListItem>
+            );
+          })}
         </List>
       </Popover>
     </>

@@ -55,9 +55,6 @@ const Verification = (props: any) => {
       onSuccess: async (response) => {
         const isVerified = await response.json();
 
-        console.log("isVerified");
-        console.log(isVerified);
-
         if (isVerified) {
           setVerificationStatus(Status.Success);
         } else {
@@ -80,21 +77,21 @@ const Verification = (props: any) => {
       case Status.Error:
         return (
           <ErrorStatusLabel
-            text={u.t("welcome_page_email_verification_error_label")}
+            text={u.t("welcome_page__email_verification_error_label")}
             size="medium"
           ></ErrorStatusLabel>
         );
       case Status.Success:
         return (
           <SuccessStatusLabel
-            text={u.t("welcome_page_email_verification_success_label")}
+            text={u.t("welcome_page__email_verification_success_label")}
             size="medium"
           ></SuccessStatusLabel>
         );
       default:
         return (
           <PendingStatusLabel
-            text={u.t("welcome_page_email_verification_pending_label")}
+            text={u.t("welcome_page__email_verification_pending_label")}
             size="medium"
           ></PendingStatusLabel>
         );
@@ -115,7 +112,7 @@ const Verification = (props: any) => {
     >
       <Box>{GetStatus()}</Box>
       <WelcomeMenuButton
-        text={u.t("welcome_page_back_to_login_page")}
+        text={u.t("welcome_page__back_to_login_page")}
         path="/welcome/login"
       />
     </Box>

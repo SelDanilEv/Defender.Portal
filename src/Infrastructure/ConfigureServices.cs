@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Defender.Common.Clients.Identity;
+using Defender.Common.Clients.UserManagement;
 using Defender.Portal.Application.Common.Interfaces;
 using Defender.Portal.Application.Common.Interfaces.Repositories;
 using Defender.Portal.Application.Configuration.Options;
@@ -33,6 +34,7 @@ public static class ConfigureServices
     private static IServiceCollection RegisterClientWrappers(this IServiceCollection services)
     {
         services.AddTransient<IIdentityWrapper, IdentityWrapper>();
+        services.AddTransient<IUserManagementWrapper, UserManagementWrapper>();
 
         return services;
     }
@@ -42,6 +44,7 @@ public static class ConfigureServices
         services.AddTransient<IUserActivityService, UserActivityService>();
         services.AddTransient<IAuthorizationService, AuthorizationService>();
         services.AddTransient<IAccountManagementService, AccountManagementService>();
+        services.AddTransient<IAccessCodeService, AccessCodeService>();
 
         return services;
     }
@@ -61,6 +64,12 @@ public static class ConfigureServices
             (serviceProvider, client) =>
             {
                 client.BaseAddress = new Uri(serviceProvider.GetRequiredService<IOptions<IdentityOptions>>().Value.Url);
+            });
+
+        services.RegisterUserManagementClient(
+            (serviceProvider, client) =>
+            {
+                client.BaseAddress = new Uri(serviceProvider.GetRequiredService<IOptions<UserManagementOptions>>().Value.Url);
             });
 
         return services;

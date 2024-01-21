@@ -109,7 +109,7 @@ const Configuration = (props: any) => {
               gutterBottom: true,
               fontSize: theme.typography.pxToRem(15),
             }}
-            primary={u.t("configuration_page_configuration")}
+            primary={u.t("configuration_page__configuration")}
           />
         </Grid>
 
@@ -117,7 +117,7 @@ const Configuration = (props: any) => {
           <TextField
             select
             fullWidth
-            label={u.t("configuration_page_configuration_level")}
+            label={u.t("configuration_page__configuration_level")}
             value={configurationLevel}
             onChange={handleChange}
           >

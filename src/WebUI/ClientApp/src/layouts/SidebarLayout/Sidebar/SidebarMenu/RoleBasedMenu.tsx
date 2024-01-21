@@ -143,7 +143,7 @@ const RoleBasedMenu = (props: any) => {
             component="div"
             subheader={
               <ListSubheader component="div" disableSticky>
-                {u.t("sidebar_menu_header_super_admin")}
+                {u.t("sidebar_menu__header_super_admin")}
               </ListSubheader>
             }
           >
@@ -152,7 +152,7 @@ const RoleBasedMenu = (props: any) => {
                 <MenuItem
                   to="/configuration"
                   icon={<AdminPanelSettingsIcon />}
-                  text={u.t("sidebar_menu_page_configuration")}
+                  text={u.t("sidebar_menu__page_configuration")}
                 />
               </List>
             </SubMenuWrapper>
@@ -165,7 +165,7 @@ const RoleBasedMenu = (props: any) => {
             component="div"
             subheader={
               <ListSubheader component="div" disableSticky>
-                {u.t("sidebar_menu_header_admin")}
+                {u.t("sidebar_menu__header_admin")}
               </ListSubheader>
             }
           >
@@ -174,7 +174,7 @@ const RoleBasedMenu = (props: any) => {
                 <MenuItem
                   to="/users"
                   icon={<TableChartTwoToneIcon />}
-                  text={u.t("sidebar_menu_page_users")}
+                  text={u.t("sidebar_menu__page_users")}
                 />
               </List>
             </SubMenuWrapper>
@@ -187,7 +187,7 @@ const RoleBasedMenu = (props: any) => {
             component="div"
             subheader={
               <ListSubheader component="div" disableSticky>
-                {u.t("sidebar_menu_header_home")}
+                {u.t("sidebar_menu__header_home")}
               </ListSubheader>
             }
           >
@@ -196,7 +196,7 @@ const RoleBasedMenu = (props: any) => {
                 <MenuItem
                   to="/home"
                   icon={<HomeIcon />}
-                  text={u.t("sidebar_menu_page_home")}
+                  text={u.t("sidebar_menu__page_home")}
                 />
               </List>
             </SubMenuWrapper>

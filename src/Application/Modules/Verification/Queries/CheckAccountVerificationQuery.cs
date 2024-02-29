@@ -12,20 +12,20 @@ public record CheckAccountVerificationQuery : IRequest<AccountDto>
 public class CheckAccountVerificationQueryHandler : IRequestHandler<CheckAccountVerificationQuery, AccountDto>
 {
     private readonly IAccountManagementService _accountManagementService;
-    private readonly IAccountAccessor _accountAccessor;
+    private readonly ICurrentAccountAccessor _currentAccountAccessor;
 
     public CheckAccountVerificationQueryHandler(
         IAccountManagementService accountManagementService,
-        IAccountAccessor accountAccessor
+        ICurrentAccountAccessor accountAccessor
         )
     {
         _accountManagementService = accountManagementService;
-        _accountAccessor = accountAccessor;
+        _currentAccountAccessor = accountAccessor;
     }
 
     public async Task<AccountDto> Handle(CheckAccountVerificationQuery request, CancellationToken cancellationToken)
     {
-        return await _accountManagementService.GetAccountDetailsAsync(_accountAccessor.AccountInfo.Id);
+        return await _accountManagementService.GetAccountDetailsAsync(_currentAccountAccessor.GetAccountId());
     }
 
 }

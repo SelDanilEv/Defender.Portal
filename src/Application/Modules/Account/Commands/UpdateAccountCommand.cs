@@ -35,15 +35,15 @@ public sealed class UpdateAccountCommandValidator : AbstractValidator<UpdateAcco
 
 public sealed class UpdateAccountCommandHandler : IRequestHandler<UpdateAccountCommand, UserDto>
 {
-    private readonly IAccountAccessor _accountAccessor;
+    private readonly ICurrentAccountAccessor _currentAccountAccessor;
     private readonly IAccountManagementService _accountManagementService;
 
     public UpdateAccountCommandHandler(
-        IAccountAccessor accountAccessor,
+        ICurrentAccountAccessor currentAccountAccessor,
         IAccountManagementService accountManagementService
         )
     {
-        _accountAccessor = accountAccessor;
+        _currentAccountAccessor = currentAccountAccessor;
         _accountManagementService = accountManagementService;
     }
 
@@ -51,7 +51,7 @@ public sealed class UpdateAccountCommandHandler : IRequestHandler<UpdateAccountC
     {
         if (request.UserId == null || request.UserId == Guid.Empty)
         {
-            request.UserId = _accountAccessor.AccountInfo?.Id;
+            request.UserId = _currentAccountAccessor.GetAccountId();
         }
 
         return await _accountManagementService.UpdateUserInfoAsync(request);

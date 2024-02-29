@@ -11,20 +11,20 @@ public record SendEmailVerificationCommand : IRequest<Unit>
 public class SendVerificationEmailCommandHandler : IRequestHandler<SendEmailVerificationCommand, Unit>
 {
     private readonly IAccessCodeService _accessCodeService;
-    private readonly IAccountAccessor _accountAccessor;
+    private readonly ICurrentAccountAccessor _currentAccountAccessor;
 
     public SendVerificationEmailCommandHandler(
         IAccessCodeService accessCodeService,
-        IAccountAccessor accountAccessor
+        ICurrentAccountAccessor accountAccessor
         )
     {
         _accessCodeService = accessCodeService;
-        _accountAccessor = accountAccessor;
+        _currentAccountAccessor = accountAccessor;
     }
 
     public async Task<Unit> Handle(SendEmailVerificationCommand request, CancellationToken cancellationToken)
     {
-        await _accessCodeService.SendEmailVerificationAccessCodeAsync(_accountAccessor?.AccountInfo?.Id);
+        await _accessCodeService.SendEmailVerificationAccessCodeAsync(_currentAccountAccessor.GetAccountId());
 
         return Unit.Value;
     }

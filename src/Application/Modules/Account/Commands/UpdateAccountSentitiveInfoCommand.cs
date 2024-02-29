@@ -29,28 +29,28 @@ public sealed class UpdateAccountSentitiveInfoCommandValidator : AbstractValidat
     }
 }
 
-public sealed class UpdateAccountSentitiveInfoCommandHandler : 
+public sealed class UpdateAccountSentitiveInfoCommandHandler :
     IRequestHandler<UpdateAccountSentitiveInfoCommand, Unit>
 {
-    private readonly IAccountAccessor _accountAccessor;
+    private readonly ICurrentAccountAccessor _currentAccountAccessor;
     private readonly IAccountManagementService _accountManagementService;
 
     public UpdateAccountSentitiveInfoCommandHandler(
-        IAccountAccessor accountAccessor,
+        ICurrentAccountAccessor currentAccountAccessor,
         IAccountManagementService accountManagementService
         )
     {
-        _accountAccessor = accountAccessor;
+        _currentAccountAccessor = currentAccountAccessor;
         _accountManagementService = accountManagementService;
     }
 
     public async Task<Unit> Handle(
-        UpdateAccountSentitiveInfoCommand request, 
+        UpdateAccountSentitiveInfoCommand request,
         CancellationToken cancellationToken)
     {
         if (request.UserId == null || request.UserId == Guid.Empty)
         {
-            request.UserId = _accountAccessor.AccountInfo?.Id;
+            request.UserId = _currentAccountAccessor.GetAccountId();
         }
 
         await _accountManagementService.UpdateUserSentitiveInfoAsync(request);

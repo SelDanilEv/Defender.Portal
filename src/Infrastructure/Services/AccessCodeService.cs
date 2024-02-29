@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Defender.Common.Accessors;
 using Defender.Common.Clients.Identity;
 using Defender.Common.Interfaces;
 using Defender.Portal.Application.Common.Interfaces;
@@ -9,16 +10,16 @@ namespace Defender.Portal.Infrastructure.Services;
 public class AccessCodeService : IAccessCodeService
 {
     private readonly IIdentityWrapper _identityWrapper;
-    private readonly IAccountAccessor _accountAccessor;
+    private readonly ICurrentAccountAccessor _currentAccountAccessor;
     private readonly IMapper _mapper;
 
     public AccessCodeService(
         IIdentityWrapper identityWrapper,
-        IAccountAccessor accountAccessor,
+        ICurrentAccountAccessor currentAccountAccessor,
         IMapper mapper)
     {
         _identityWrapper = identityWrapper;
-        _accountAccessor = accountAccessor;
+        _currentAccountAccessor = currentAccountAccessor;
         _mapper = mapper;
     }
 
@@ -44,7 +45,7 @@ public class AccessCodeService : IAccessCodeService
 
     private async Task SendAccessCodeAsync(Guid? userId, AccessCodeType accessCodeType)
     {
-        var accountId = userId.HasValue ? userId.Value : _accountAccessor.AccountInfo!.Id;
+        var accountId = userId.HasValue ? userId.Value : _currentAccountAccessor.GetAccountId();
 
         await _identityWrapper.SendVerificationCodeAsync(accountId, accessCodeType);
     }

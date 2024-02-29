@@ -11,19 +11,19 @@ namespace Defender.Portal.Infrastructure.Services;
 public class UserActivityService : IUserActivityService
 {
     private readonly IUserActivityRepository _userActivityRepository;
-    private readonly IAccountAccessor _accountAccessor;
+    private readonly ICurrentAccountAccessor _currentAccountAccessor;
 
     public UserActivityService(
         IUserActivityRepository userActivityRepository,
-        IAccountAccessor accountAccessor)
+        ICurrentAccountAccessor currentAccountAccessor)
     {
         _userActivityRepository = userActivityRepository;
-        _accountAccessor = accountAccessor;
+        _currentAccountAccessor = currentAccountAccessor;
     }
 
     public async Task<PortalUserActivity> CreateUserActivity(ActivityCode code, string? message)
     {
-        var currentUserId = _accountAccessor.AccountInfo.Id;
+        var currentUserId = _currentAccountAccessor.GetAccountId();
 
         var userActivity = PortalUserActivity.Create(currentUserId, code, message);
 

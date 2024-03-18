@@ -10,6 +10,7 @@ public static class ServiceOptionsExtensions
     {
         services.Configure<IdentityOptions>(configuration.GetSection(nameof(IdentityOptions)));
         services.Configure<UserManagementOptions>(configuration.GetSection(nameof(UserManagementOptions)));
+        services.Configure<WalletOptions>(configuration.GetSection(nameof(WalletOptions)));
 
         return services;
     }

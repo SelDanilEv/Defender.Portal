@@ -4,6 +4,8 @@ public enum UIErrorCodes
 {
     Error_UnhandledError,
 
+    Error_SessionExpired,
+
     Error_EmptyLogin,
     Error_EmptyEmail,
     Error_EmptyNickname,

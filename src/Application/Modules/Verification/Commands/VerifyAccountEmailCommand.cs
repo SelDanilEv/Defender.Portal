@@ -1,5 +1,5 @@
 ﻿using Defender.Common.Errors;
-using Defender.Portal.Application.Common.Interfaces;
+using Defender.Portal.Application.Common.Interfaces.Services;
 using FluentValidation;
 using MediatR;
 

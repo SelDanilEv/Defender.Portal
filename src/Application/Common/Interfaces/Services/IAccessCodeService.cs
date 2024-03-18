@@ -1,4 +1,4 @@
-﻿namespace Defender.Portal.Application.Common.Interfaces;
+﻿namespace Defender.Portal.Application.Common.Interfaces.Services;
 
 public interface IAccessCodeService
 {

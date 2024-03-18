@@ -1,5 +1,5 @@
 ﻿using Defender.Common.Interfaces;
-using Defender.Portal.Application.Common.Interfaces;
+using Defender.Portal.Application.Common.Interfaces.Services;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Verification.Commands;

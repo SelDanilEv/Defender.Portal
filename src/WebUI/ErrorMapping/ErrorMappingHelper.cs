@@ -58,8 +58,22 @@ public class ErrorMappingHelper
             ErrorCode.VL_USM_InvalidPhoneNumber or
             ErrorCode.VL_ACC_InvalidPhoneNumber => UIErrorCodes.Error_InvalidPhoneNumber,
 
+            ErrorCode.CM_InvalidUserJWT => UIErrorCodes.Error_SessionExpired,
+
             ErrorCode.UnhandledError => UIErrorCodes.Error_UnhandledError,
 
+
+            ErrorCode.BR_WLT_CurrencyAccountAlredyExist or
+            ErrorCode.BR_WLT_CurrencyAccountIsNotExist or
+            ErrorCode.BR_WLT_SenderCurrencyAccountIsNotExist or
+            ErrorCode.BR_WLT_RecipientCurrencyAccountIsNotExist or
+            ErrorCode.BR_WLT_NoAvailableWalletNumbers or
+            ErrorCode.BR_WLT_InvalidTransactionStatus or
+            ErrorCode.BR_WLT_WalletIsNotExist or
+            ErrorCode.BR_WLT_NotEnoughFunds or
+            ErrorCode.VL_WLT_EmptyTransactionId or
+            ErrorCode.VL_WLT_EmptyUserId or
+            ErrorCode.CM_NotFound or
             ErrorCode.Unknown or
             ErrorCode.VL_InvalidRequest or
             ErrorCode.BR_PTL_UserActivityMustHaveUserId or

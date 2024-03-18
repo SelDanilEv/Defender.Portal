@@ -20,6 +20,10 @@ const APIEndpoints = {
     authcheck: "authorization/check",
     configuration: "configuration",
   },
+  wallet: {
+    info: "info",
+    createAccount: "account/create",
+  },
 };
 
 const APIUrls = () => {

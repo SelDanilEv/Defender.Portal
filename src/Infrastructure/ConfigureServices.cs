@@ -1,13 +1,18 @@
 ﻿using System.Reflection;
 using Defender.Common.Clients.Identity;
 using Defender.Common.Clients.UserManagement;
-using Defender.Portal.Application.Common.Interfaces;
+using Defender.Common.Clients.Wallet;
 using Defender.Portal.Application.Common.Interfaces.Repositories;
+using Defender.Portal.Application.Common.Interfaces.Services;
+using Defender.Portal.Application.Common.Interfaces.Services.Wallet;
 using Defender.Portal.Application.Configuration.Options;
 using Defender.Portal.Infrastructure.Clients.Identity;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
+using Defender.Portal.Infrastructure.Clients.UserManagement;
+using Defender.Portal.Infrastructure.Clients.Wallet;
 using Defender.Portal.Infrastructure.Repositories.Sample;
 using Defender.Portal.Infrastructure.Services;
+using Defender.Portal.Infrastructure.Services.Wallet;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -35,6 +40,7 @@ public static class ConfigureServices
     {
         services.AddTransient<IIdentityWrapper, IdentityWrapper>();
         services.AddTransient<IUserManagementWrapper, UserManagementWrapper>();
+        services.AddTransient<IWalletWrapper, WalletWrapper>();
 
         return services;
     }
@@ -45,6 +51,7 @@ public static class ConfigureServices
         services.AddTransient<IAuthorizationService, AuthorizationService>();
         services.AddTransient<IAccountManagementService, AccountManagementService>();
         services.AddTransient<IAccessCodeService, AccessCodeService>();
+        services.AddTransient<IWalletManagementService, WalletManagementService>();
 
         return services;
     }
@@ -70,6 +77,12 @@ public static class ConfigureServices
             (serviceProvider, client) =>
             {
                 client.BaseAddress = new Uri(serviceProvider.GetRequiredService<IOptions<UserManagementOptions>>().Value.Url);
+            });
+
+        services.RegisterWalletClient(
+            (serviceProvider, client) =>
+            {
+                client.BaseAddress = new Uri(serviceProvider.GetRequiredService<IOptions<WalletOptions>>().Value.Url);
             });
 
         return services;

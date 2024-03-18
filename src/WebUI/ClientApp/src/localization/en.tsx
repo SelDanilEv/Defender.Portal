@@ -119,7 +119,7 @@ const AddPureWords = (result) => {
 
 const AddErrors = (result) => {
   result.Error_UnhandledError = "Unhandled error";
-  result.Error_TokenExpired = "Your session expired. Please login again";
+  result.Error_SessionExpired = "Your session expired. Please login again";
 
   result.Error_EmptyLogin = "Empty login";
   result.Error_EmptyEmail = "Empty email";

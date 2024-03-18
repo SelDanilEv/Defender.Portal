@@ -1,8 +1,7 @@
 ﻿using Defender.Common.DTOs;
-using Defender.Portal.Application.DTOs;
 using Defender.Portal.Application.Modules.Authorization.Commands;
 
-namespace Defender.Portal.Application.Common.Interfaces;
+namespace Defender.Portal.Application.Common.Interfaces.Services;
 
 public interface IAccountManagementService
 {

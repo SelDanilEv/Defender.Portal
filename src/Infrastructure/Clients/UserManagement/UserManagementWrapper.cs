@@ -4,7 +4,7 @@ using Defender.Common.Interfaces;
 using Defender.Common.Wrapper.Internal;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
-namespace Defender.Portal.Infrastructure.Clients.Identity;
+namespace Defender.Portal.Infrastructure.Clients.UserManagement;
 
 public class UserManagementWrapper : BaseInternalSwaggerWrapper, IUserManagementWrapper
 {

@@ -2,7 +2,7 @@
 using Defender.Common.Accessors;
 using Defender.Common.Clients.Identity;
 using Defender.Common.Interfaces;
-using Defender.Portal.Application.Common.Interfaces;
+using Defender.Portal.Application.Common.Interfaces.Services;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Services;

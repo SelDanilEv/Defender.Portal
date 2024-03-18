@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Defender.Common.Clients.Identity;
-using Defender.Portal.Application.Common.Interfaces;
+using Defender.Portal.Application.Common.Interfaces.Services;
 using Defender.Portal.Application.Models.Session;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 

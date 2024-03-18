@@ -10,6 +10,9 @@ import { styled } from "@mui/material/styles";
 import config from "src/config.json";
 import useUtils from "src/appUtils";
 import Logo from "src/components/LogoSign";
+import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
+import apiUrls from "src/api/apiUrls";
+import { logout } from "src/actions/sessionActions";
 
 const OverviewWrapper = styled(Box)(
   () => `
@@ -31,15 +34,36 @@ const WelcomeLayout: FC = (props: any) => {
 
   React.useEffect(() => {
     if (props.session.isAuthenticated) {
-      if (props.session.isEmailVerified || props.session.isPhoneVerified) {
-        u.react.navigate("/home");
-      } else {
-        if (window.location.pathname !== "/welcome/verify-email") {
-          u.react.navigate("/welcome/verification");
-        }
-      }
+      APICallWrapper({
+        url: apiUrls.home.authcheck,
+        options: {
+          method: "GET",
+        },
+        utils: u,
+        onSuccess: async (response) => {
+          if (props.session.isEmailVerified || props.session.isPhoneVerified) {
+            u.react.navigate("/home");
+          } else {
+            if (window.location.pathname !== "/welcome/verify-email") {
+              u.react.navigate("/welcome/verification");
+            }
+          }
+        },
+        onFailure: async (response) => {
+          if (response.status == 401) {
+            logout();
+          }
+        },
+        showError: false,
+      });
     }
   }, []);
+
+  const logout = () => {
+    u.e("Error_SessionExpired");
+    props.logout();
+    u.react.navigate("/");
+  };
 
   return (
     <Box
@@ -109,4 +133,12 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(WelcomeLayout);
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    logout: () => {
+      dispatch(logout());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomeLayout);

@@ -38,6 +38,10 @@ const AccountInfo = Loader(
   lazy(() => import("src/content/appPages/AccountInfo"))
 );
 
+// Home
+
+const HomePage = Loader(lazy(() => import("src/content/appPages/HomePage")));
+
 // // Users
 
 // const Users = Loader(lazy(() => import('src/content/pages/Users')));
@@ -133,6 +137,10 @@ const routes: RouteObject[] = [
     path: "home",
     element: <SidebarLayout />,
     children: [
+      {
+        path: "",
+        element: <HomePage />,
+      },
       {
         path: "*",
         element: <Status404 />,

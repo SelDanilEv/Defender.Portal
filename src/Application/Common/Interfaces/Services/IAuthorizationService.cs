@@ -1,6 +1,6 @@
 ﻿using Defender.Portal.Application.Models.Session;
 
-namespace Defender.Portal.Application.Common.Interfaces;
+namespace Defender.Portal.Application.Common.Interfaces.Services;
 
 public interface IAuthorizationService
 {

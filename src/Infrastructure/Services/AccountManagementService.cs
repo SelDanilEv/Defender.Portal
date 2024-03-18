@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Defender.Common.DTOs;
-using Defender.Portal.Application.Common.Interfaces;
+using Defender.Portal.Application.Common.Interfaces.Services;
 using Defender.Portal.Application.Modules.Authorization.Commands;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 

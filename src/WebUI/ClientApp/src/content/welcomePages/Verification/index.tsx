@@ -8,6 +8,8 @@ import useUtils from "src/appUtils";
 import WelcomeMenuButton from "../Components/WelcomeMenuButton";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import SuccessToast from "src/components/Toast/DefaultSuccessToast";
+import { logout } from "src/actions/sessionActions";
+import { connect } from "react-redux";
 
 const Verification = (props: any) => {
   const u = useUtils();
@@ -34,6 +36,11 @@ const Verification = (props: any) => {
         }
         clearInterval(task);
         u.react.navigate("/home");
+      },
+      onFailure: async (response) => {
+        clearInterval(task);
+        props.logout();
+        u.react.navigate("/");
       },
       showError: true,
       doLock: false,
@@ -92,4 +99,12 @@ const Verification = (props: any) => {
   );
 };
 
-export default Verification;
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    logout: () => {
+      dispatch(logout());
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Verification);

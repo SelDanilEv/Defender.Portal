@@ -1,6 +1,6 @@
 ﻿using Defender.Common.Errors;
 using Defender.Common.Interfaces;
-using Defender.Portal.Application.Common.Interfaces;
+using Defender.Portal.Application.Common.Interfaces.Services;
 using Defender.Portal.Application.Models.Session;
 using FluentValidation;
 using MediatR;

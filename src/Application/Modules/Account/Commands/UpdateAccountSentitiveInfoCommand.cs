@@ -1,6 +1,6 @@
 ﻿using Defender.Common.DTOs;
 using Defender.Common.Interfaces;
-using Defender.Portal.Application.Common.Interfaces;
+using Defender.Portal.Application.Common.Interfaces.Services;
 using FluentValidation;
 using MediatR;
 

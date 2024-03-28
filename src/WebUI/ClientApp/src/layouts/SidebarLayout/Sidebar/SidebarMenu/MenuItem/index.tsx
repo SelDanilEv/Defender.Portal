@@ -1,11 +1,7 @@
-import {
-  Button,
-  ListItem
-} from '@mui/material';
-import { useContext } from 'react';
-import { NavLink as RouterLink } from 'react-router-dom';
-import { SidebarContext } from 'src/contexts/SidebarContext';
-
+import { Button, ListItem } from "@mui/material";
+import { useContext } from "react";
+import { NavLink as RouterLink } from "react-router-dom";
+import { SidebarContext } from "src/contexts/SidebarContext";
 
 const MenuItem = (props: any) => {
   const { closeSidebar } = useContext(SidebarContext);
@@ -19,12 +15,13 @@ const MenuItem = (props: any) => {
           onClick={closeSidebar}
           to={props.to}
           startIcon={props.icon}
+          sx={{ fontSize: "1.6em" }}
         >
           {props.text}
         </Button>
       </ListItem>
     </div>
   );
-}
+};
 
 export default MenuItem;

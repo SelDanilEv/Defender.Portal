@@ -2,7 +2,7 @@
 using Defender.Portal.Domain.Entities;
 using Defender.Portal.Domain.Enums;
 
-namespace Defender.Portal.Application.Common.Interfaces.Services;
+namespace Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 
 public interface IUserActivityService
 {

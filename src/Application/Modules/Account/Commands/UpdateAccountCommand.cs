@@ -1,17 +1,19 @@
 ﻿using Defender.Common.DTOs;
 using Defender.Common.Errors;
+using Defender.Common.Exceptions;
 using Defender.Common.Interfaces;
-using Defender.Portal.Application.Common.Interfaces.Services;
+using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using FluentValidation;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Authorization.Commands;
 
-public record UpdateAccountCommand : IRequest<UserDto>
+public record UpdateAccountCommand(
+        Guid? UserId,
+        string? Nickname,
+        string? PhoneNumber) 
+    : IRequest<UserDto>
 {
-    public Guid? UserId { get; set; }
-    public string? Nickname { get; set; }
-    public string? PhoneNumber { get; set; }
 
     public UserDto ToUserInfo()
     {
@@ -33,27 +35,27 @@ public sealed class UpdateAccountCommandValidator : AbstractValidator<UpdateAcco
     }
 }
 
-public sealed class UpdateAccountCommandHandler : IRequestHandler<UpdateAccountCommand, UserDto>
-{
-    private readonly ICurrentAccountAccessor _currentAccountAccessor;
-    private readonly IAccountManagementService _accountManagementService;
-
-    public UpdateAccountCommandHandler(
+public sealed class UpdateAccountCommandHandler(
         ICurrentAccountAccessor currentAccountAccessor,
-        IAccountManagementService accountManagementService
-        )
-    {
-        _currentAccountAccessor = currentAccountAccessor;
-        _accountManagementService = accountManagementService;
-    }
-
+        IAccountManagementService accountManagementService) : IRequestHandler<UpdateAccountCommand, UserDto>
+{
     public async Task<UserDto> Handle(UpdateAccountCommand request, CancellationToken cancellationToken)
     {
+        var userId = request.UserId;
+
         if (request.UserId == null || request.UserId == Guid.Empty)
         {
-            request.UserId = _currentAccountAccessor.GetAccountId();
+            userId = currentAccountAccessor.GetAccountId();
         }
 
-        return await _accountManagementService.UpdateUserInfoAsync(request);
+        if(userId == null || userId == Guid.Empty)
+        {
+            throw new ServiceException(ErrorCode.VL_InvalidRequest);
+        }
+
+        var user = request.ToUserInfo();
+        user.Id = userId.Value;
+
+        return await accountManagementService.UpdateUserInfoAsync(user);
     }
 }

@@ -6,23 +6,20 @@ using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Clients.Identity;
 
-public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
-{
-    private readonly IMapper _mapper;
-    private readonly IIdentityServiceClient _identityServiceClient;
-
-    public IdentityWrapper(
+public class IdentityWrapper(
         IAuthenticationHeaderAccessor authenticationHeaderAccessor,
-        IIdentityServiceClient identityClient,
-        IMapper mapper) : base(
-            identityClient,
-            authenticationHeaderAccessor)
-    {
-        _identityServiceClient = identityClient;
-        _mapper = mapper;
-    }
-
-    public async Task<LoginResponse> CreateAccountAsync(string email, string nickname, string phone, string password)
+        IIdentityServiceClient identityServiceClient,
+        IMapper mapper) 
+    : BaseInternalSwaggerWrapper(
+            identityServiceClient,
+            authenticationHeaderAccessor),
+    IIdentityWrapper
+{
+    public async Task<LoginResponse> CreateAccountAsync(
+        string email, 
+        string nickname,
+        string phone,
+        string password)
     {
         return await ExecuteSafelyAsync(async () =>
         {
@@ -34,7 +31,7 @@ public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
                 Password = password,
             };
 
-            var response = await _identityServiceClient.CreateAsync(command);
+            var response = await identityServiceClient.CreateAsync(command);
 
             return response;
         }, AuthorizationType.Service);
@@ -50,7 +47,7 @@ public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
                 Password = password,
             };
 
-            var response = await _identityServiceClient.LoginAsync(command);
+            var response = await identityServiceClient.LoginAsync(command);
 
             return response;
         }, AuthorizationType.Service);
@@ -65,7 +62,7 @@ public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
                 Token = token
             };
 
-            var response = await _identityServiceClient.GoogleAsync(command);
+            var response = await identityServiceClient.GoogleAsync(command);
 
             return response;
         }, AuthorizationType.Service);
@@ -75,7 +72,7 @@ public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
     {
         return await ExecuteSafelyAsync(async () =>
         {
-            var response = await _identityServiceClient.DetailsAsync(accountId);
+            var response = await identityServiceClient.DetailsAsync(accountId);
 
             return response;
         }, AuthorizationType.User);
@@ -91,7 +88,7 @@ public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
                 Code = code,
             };
 
-            var response = await _identityServiceClient.Email2Async(command);
+            var response = await identityServiceClient.Email2Async(command);
 
             return response;
         }, AuthorizationType.User);
@@ -107,7 +104,7 @@ public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
                 Type = accessCodeType
             };
 
-            await _identityServiceClient.EmailAsync(command);
+            await identityServiceClient.EmailAsync(command);
         }, AuthorizationType.Service);
     }
 
@@ -120,7 +117,7 @@ public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
                 Code = code,
             };
 
-            var response = await _identityServiceClient.VerifyAsync(command);
+            var response = await identityServiceClient.VerifyAsync(command);
 
             return response;
         }, AuthorizationType.User);
@@ -136,7 +133,7 @@ public class IdentityWrapper : BaseInternalSwaggerWrapper, IIdentityWrapper
                 NewPassword = newPassword
             };
 
-            await _identityServiceClient.ChangeAsync(command);
+            await identityServiceClient.ChangeAsync(command);
         }, AuthorizationType.User);
     }
 }

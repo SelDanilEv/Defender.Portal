@@ -1,7 +1,7 @@
 using Defender.Common.Clients.Identity;
 using Defender.Common.Clients.Wallet;
 using Defender.Common.Mapping;
-using Defender.Portal.Application.DTOs.Wallet;
+using Defender.Portal.Application.DTOs.Wallets;
 using Defender.Portal.Application.Models.Session;
 
 namespace Defender.Portal.Infrastructure.Mappings;
@@ -12,11 +12,11 @@ public class ClientModelsProfile : BaseMappingProfile
     {
         CreateMap<LoginResponse, Session>()
             .ForPath(
-                dest => dest.User.Id, 
+                dest => dest.User.Id,
                 opt => opt.MapFrom(
                     src => src.UserInfo.Id))
             .ForPath(
-                dest => dest.User.Email, 
+                dest => dest.User.Email,
                 opt => opt.MapFrom(
                     src => src.UserInfo.Email))
             .ForPath(
@@ -28,11 +28,11 @@ public class ClientModelsProfile : BaseMappingProfile
                 opt => opt.MapFrom(
                     src => src.UserInfo.PhoneNumber))
             .ForPath(
-                dest => dest.User.IsEmailVerified, 
+                dest => dest.User.IsEmailVerified,
                 opt => opt.MapFrom(
                     src => src.AccountInfo.IsEmailVerified))
-            .ForPath(dest => 
-                dest.User.IsPhoneVerified, 
+            .ForPath(dest =>
+                dest.User.IsPhoneVerified,
                 opt => opt.MapFrom(
                     src => src.AccountInfo.IsPhoneVerified))
             .ForMember(
@@ -40,7 +40,7 @@ public class ClientModelsProfile : BaseMappingProfile
                 opt => opt.MapFrom(
                     src => true))
             .ForMember(
-                dest => dest.Token, 
+                dest => dest.Token,
                 opt => opt.MapFrom(
                     src => src.Token))
             .ForPath(
@@ -66,10 +66,17 @@ public class ClientModelsProfile : BaseMappingProfile
                 dest => dest.CurrencyAccounts,
                 opt => opt.MapFrom(
                     src => src.CurrencyAccounts.Select(
-                        x=> new CurrencyAccountDto 
+                        x => new CurrencyAccountDto
                         {
                             Currency = x.Currency.ToString(),
                             Balance = x.Balance
                         })));
+
+        CreateMap<PublicWalletInfoDto, PublicPortalWalletInfoDto>();
+
+        CreateMap<Common.Clients.UserManagement.PublicUserInfoDto,
+            Application.DTOs.Accounts.PublicUserInfoDto>();
+
+        CreateMap<TransactionDto, PortalTransactionDto>();
     }
 }

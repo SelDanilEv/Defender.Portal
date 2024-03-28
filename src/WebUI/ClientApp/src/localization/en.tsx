@@ -1,9 +1,14 @@
 const AddMenu = (result) => {
   result.sidebar_menu__header_home = "Home";
   result.sidebar_menu__page_home = "Home page";
+
+  result.sidebar_menu__header_banking = "Banking";
+  result.sidebar_menu__page_banking = "Banking";
+
   result.sidebar_menu__header_admin = "Admin";
   result.sidebar_menu__page_users = "Users";
   result.sidebar_menu__header_super_admin = "Super Admin";
+
   result.sidebar_menu__page_configuration = "Configuration";
 
   return result;
@@ -29,7 +34,7 @@ const AddConfigurationPage = (result) => {
 };
 
 const AddPersonalInfoPage = (result) => {
-  result.personal_info_page__title = "User";
+  result.personal_info_page__title = "User ID";
   result.personal_info_page__account_info = "Account info";
   result.personal_info_page__name_field = "Name";
   result.personal_info_page__email_field = "Email";
@@ -83,12 +88,43 @@ const AddWelcomePage = (result) => {
   return result;
 };
 
+const AddBankingPage = (result) => {
+  result.banking_page___wallet_title = "Digital wallet";
+  result.banking_page___wallet_button_create_account = "Create account";
+  result.banking_page___wallet_button_open_banking = "Open Banking";
+  result.banking_page___wallet_button_home = "Home";
+  result.banking_page___wallet_button_refund = "Refund";
+
+  result.banking_page___wallet_dialog_title_create_account = "Create account";
+  result.banking_page___wallet_dialog_label_currency = "Currency";
+  result.banking_page___wallet_dialog_button_create = "Create";
+  result.banking_page___wallet_dialog_title_refund = "Refund";
+  result.banking_page___wallet_dialog_refund_info_1 =
+    "At the moment we only support manual refunds.";
+  result.banking_page___wallet_dialog_refund_info_2 =
+    "Please contact me directly at danil.defender.apps@gmail.com.";
+
+  result.banking_page___transfer_title = "Money transfer";
+  result.banking_page___transfer_button_transfer = "Transfer";
+  result.banking_page__transfer_wallet_number_label = "Wallet number";
+  result.banking_page__transfer_owner_name_label = "Owner name";
+  result.banking_page__transfer_amount_label = "Amount";
+
+  result.banking_page__transfer_dialog_title_transfer = "Transfer details";
+  result.banking_page__transfer_dialog_success_message =
+    "Your transaction is being processed. Please wait.";
+
+  return result;
+};
+
 const AddPages = (result) => {
   result = AddWelcomePage(result);
 
   result = AddPersonalInfoPage(result);
 
   result = AddConfigurationPage(result);
+
+  result = AddBankingPage(result);
 
   return result;
 };
@@ -106,6 +142,8 @@ const AddPureWords = (result) => {
 
   // data
   result.NoData = "No data";
+  result.Loading = "Loading";
+  result.Confirm = "Confirm";
 
   // roles
   result.role_admin = "Admin";
@@ -125,10 +163,12 @@ const AddErrors = (result) => {
   result.Error_EmptyEmail = "Empty email";
   result.Error_EmptyNickname = "Empty nickname";
   result.Error_EmptyPassword = "Empty Password";
+  result.Error_EmptyWalletNumber = "Empty wallet number";
 
   result.Error_InvalidEmail = "Invalid email";
   result.Error_InvalidPhoneNumber = "Invalid phone number";
   result.Error_InvalidLoginOrPassword = "Invalid login or password";
+  result.Error_InvalidWalletNumber = "Invalid wallet number";
 
   result.Error_PasswordIsTooShort = "Minimum password length: 4 characters";
   result.Error_PasswordIsTooLong = "Maximum password length: 64 characters";
@@ -145,6 +185,11 @@ const AddErrors = (result) => {
   result.Error_InvalidAccessCode = "Access code is not valid";
 
   result.Error_UserBlocked = "The user is blocked";
+
+  result.Error_WalletIsNotExist = "Wallet not found";
+  result.Error_SenderAndRecipientAreTheSame = "Wallet not found";
+  result.Error_RecipientCurrencyAccountIsNotExist =
+    "The recipient does not have an account in the selected currency.";
 
   result.Error_AuthorizationFailed = "Error during authorization";
 

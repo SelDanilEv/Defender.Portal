@@ -20,9 +20,11 @@ const APIEndpoints = {
     authcheck: "authorization/check",
     configuration: "configuration",
   },
-  wallet: {
-    info: "info",
-    createAccount: "account/create",
+  banking: {
+    walletInfo: "wallet/info",
+    walletPublicInfo: "wallet/info/public",
+    walletCreateAccount: "wallet/account/create",
+    startTransfer: "transaction/start/transfer",
   },
 };
 

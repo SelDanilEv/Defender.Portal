@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Defender.Portal.Application.DTOs;
+using Defender.Portal.Application.DTOs.Accounts;
 using Defender.Portal.Application.Modules.Verification.Commands;
 using Defender.Portal.Application.Modules.Verification.Queries;
 using Defender.Portal.Application.Modules.Wallet.Commands;

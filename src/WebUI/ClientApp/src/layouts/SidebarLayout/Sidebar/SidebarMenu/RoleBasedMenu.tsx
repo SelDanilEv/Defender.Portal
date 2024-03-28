@@ -195,8 +195,29 @@ const RoleBasedMenu = (props: any) => {
               <List component="div">
                 <MenuItem
                   to="/home"
-                  icon={<HomeIcon />}
+                  icon={<HomeIcon style={{ fontSize: "1.5em" }} />}
                   text={u.t("sidebar_menu__page_home")}
+                />
+              </List>
+            </SubMenuWrapper>
+          </List>
+        );
+        result.push(
+          <List
+            key={"banking"}
+            component="div"
+            subheader={
+              <ListSubheader component="div" disableSticky>
+                {u.t("sidebar_menu__header_banking")}
+              </ListSubheader>
+            }
+          >
+            <SubMenuWrapper>
+              <List component="div">
+                <MenuItem
+                  to="/banking"
+                  icon={<HomeIcon style={{ fontSize: "1.5em" }} />}
+                  text={u.t("sidebar_menu__page_banking")}
                 />
               </List>
             </SubMenuWrapper>

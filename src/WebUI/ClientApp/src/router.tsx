@@ -38,6 +38,10 @@ const AccountInfo = Loader(
   lazy(() => import("src/content/appPages/AccountInfo"))
 );
 
+// Banking
+
+const Banking = Loader(lazy(() => import("src/content/appPages/Banking")));
+
 // Home
 
 const HomePage = Loader(lazy(() => import("src/content/appPages/HomePage")));
@@ -65,7 +69,7 @@ const StatusMaintenance = Loader(
 const routes: RouteObject[] = [
   {
     path: "",
-    element: <WelcomeLayout />,
+    element: <EmptyLayout />,
     children: [
       {
         path: "",
@@ -140,6 +144,20 @@ const routes: RouteObject[] = [
       {
         path: "",
         element: <HomePage />,
+      },
+      {
+        path: "*",
+        element: <Status404 />,
+      },
+    ],
+  },
+  {
+    path: "banking",
+    element: <SidebarLayout />,
+    children: [
+      {
+        path: "",
+        element: <Banking />,
       },
       {
         path: "*",

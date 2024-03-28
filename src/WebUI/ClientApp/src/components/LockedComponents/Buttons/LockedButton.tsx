@@ -3,17 +3,18 @@ import { connect } from "react-redux";
 
 import LockedButtonProps from "./LockedButtonProps";
 
-
-const LockedButton = ({ isLoading, dispatch, ...restProps }: LockedButtonProps) => {
-  return <Button disabled={isLoading} {...restProps} />;
+const LockedButton = ({
+  isLoading,
+  dispatch,
+  ...restProps
+}: LockedButtonProps) => {
+  return <Button disabled={isLoading || restProps.disabled} {...restProps} />;
 };
 
 const mapStateToProps = (state: any) => {
   return {
-    isLoading: state.loading.loading
+    isLoading: state.loading.loading,
   };
 };
 
-export default
-  connect(mapStateToProps)
-    (LockedButton);
+export default connect(mapStateToProps)(LockedButton);

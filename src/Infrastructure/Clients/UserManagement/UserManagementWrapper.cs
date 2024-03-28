@@ -6,23 +6,19 @@ using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Clients.UserManagement;
 
-public class UserManagementWrapper : BaseInternalSwaggerWrapper, IUserManagementWrapper
-{
-    private readonly IMapper _mapper;
-    private readonly IUserManagementServiceClient _userManagementServiceClient;
+using PublicUserInfoDto = Application.DTOs.Accounts.PublicUserInfoDto;
 
-    public UserManagementWrapper(
+public class UserManagementWrapper(
         IAuthenticationHeaderAccessor authenticationHeaderAccessor,
         IUserManagementServiceClient userManagementServiceClient,
-        IMapper mapper) : base(
+        IMapper mapper)
+    : BaseInternalSwaggerWrapper(
             userManagementServiceClient,
-            authenticationHeaderAccessor)
-    {
-        _userManagementServiceClient = userManagementServiceClient;
-        _mapper = mapper;
-    }
-
-    public async Task<Common.DTOs.UserDto> UpdateUserInfoAsync(Common.DTOs.UserDto userDto)
+            authenticationHeaderAccessor),
+    IUserManagementWrapper
+{
+    public async Task<Common.DTOs.UserDto> UpdateUserInfoAsync(
+        Common.DTOs.UserDto userDto)
     {
         return await ExecuteSafelyAsync(async () =>
         {
@@ -34,9 +30,22 @@ public class UserManagementWrapper : BaseInternalSwaggerWrapper, IUserManagement
                 PhoneNumber = userDto.PhoneNumber,
             };
 
-            var response = await _userManagementServiceClient.UpdateAsync(command);
+            var response = await userManagementServiceClient
+                .UpdateAsync(command);
 
-            return _mapper.Map<Common.DTOs.UserDto>(response);
+            return mapper.Map<Common.DTOs.UserDto>(response);
+        }, AuthorizationType.User);
+    }
+
+    public async Task<PublicUserInfoDto> GetPublicUserInfoAsync(
+        Guid userId)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var response = await userManagementServiceClient
+                .GetPublicInfoByIdAsync(userId);
+
+            return mapper.Map<PublicUserInfoDto>(response);
         }, AuthorizationType.User);
     }
 }

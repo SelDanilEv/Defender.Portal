@@ -2,8 +2,11 @@
 
 namespace Defender.Portal.Infrastructure.Clients.Interfaces;
 
+using PublicUserInfoDto = Application.DTOs.Accounts.PublicUserInfoDto;
+
 public interface IUserManagementWrapper
 {
-    public Task<UserDto> UpdateUserInfoAsync(UserDto userDto);
+    Task<UserDto> UpdateUserInfoAsync(UserDto userDto);
+    Task<PublicUserInfoDto> GetPublicUserInfoAsync(Guid userId);
 
 }

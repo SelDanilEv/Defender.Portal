@@ -1,6 +1,6 @@
 ﻿using Defender.Common.Clients.Wallet;
 
-namespace Defender.Portal.Application.DTOs.Wallet;
+namespace Defender.Portal.Application.DTOs.Wallets;
 
 public class PortalWalletInfoDto
 {

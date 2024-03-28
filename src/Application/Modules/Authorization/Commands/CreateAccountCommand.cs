@@ -1,18 +1,18 @@
 ﻿using Defender.Common.Errors;
-using Defender.Common.Interfaces;
-using Defender.Portal.Application.Common.Interfaces.Services;
+using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using Defender.Portal.Application.Models.Session;
 using FluentValidation;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Authorization.Commands;
 
-public record CreateAccountCommand : IRequest<Session>
+public record CreateAccountCommand(
+        string? Email, 
+        string? PhoneNumber,
+        string? Nickname,
+        string? Password) 
+    : IRequest<Session>
 {
-    public string Email { get; set; }
-    public string PhoneNumber { get; set; }
-    public string Nickname { get; set; }
-    public string Password { get; set; }
 };
 
 public sealed class CreateAccountCommandValidator : AbstractValidator<CreateAccountCommand>
@@ -28,20 +28,9 @@ public sealed class CreateAccountCommandValidator : AbstractValidator<CreateAcco
     }
 }
 
-public sealed class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, Session>
+public sealed class CreateAccountCommandHandler(IAuthorizationService _authorizationService) 
+    : IRequestHandler<CreateAccountCommand, Session>
 {
-    private readonly IAccountAccessor _accountAccessor;
-    private readonly IAuthorizationService _authorizationService;
-
-    public CreateAccountCommandHandler(
-        IAccountAccessor accountAccessor,
-        IAuthorizationService authorizationService
-        )
-    {
-        _accountAccessor = accountAccessor;
-        _authorizationService = authorizationService;
-    }
-
     public async Task<Session> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
     {
         return await _authorizationService.CreateUserAccountAsync(

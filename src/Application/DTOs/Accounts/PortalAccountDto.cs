@@ -1,4 +1,4 @@
-﻿namespace Defender.Portal.Application.DTOs;
+﻿namespace Defender.Portal.Application.DTOs.Accounts;
 
 public class PortalAccountDto : PortalUserDto
 {

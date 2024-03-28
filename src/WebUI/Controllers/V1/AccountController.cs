@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Defender.Portal.Application.DTOs;
+using Defender.Portal.Application.DTOs.Accounts;
 using Defender.Portal.Application.Modules.Authorization.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

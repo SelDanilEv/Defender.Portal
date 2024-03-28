@@ -1,38 +1,46 @@
 ﻿using AutoMapper;
 using Defender.Common.Clients.Wallet;
-using Defender.Portal.Application.Common.Interfaces.Services.Wallet;
-using Defender.Portal.Application.DTOs.Wallet;
+using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
+using Defender.Portal.Application.Common.Interfaces.Services.Wallets;
+using Defender.Portal.Application.DTOs.Wallets;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Services.Wallet;
 
-public class WalletManagementService : IWalletManagementService
-{
-    private readonly IWalletWrapper _walletWrapper;
-    private readonly IMapper _mapper;
-
-    public WalletManagementService(
+public class WalletManagementService(
         IWalletWrapper walletWrapper,
-        IMapper mapper)
-    {
-        _walletWrapper = walletWrapper;
-        _mapper = mapper;
-    }
-
+        IAccountManagementService accountManagementService,
+        IMapper mapper
+    ) : IWalletManagementService
+{
     public async Task<PortalWalletInfoDto> GetCurrentWalletInfoAsync()
     {
-        var wallet = await _walletWrapper.GetWalletInfoAsync();
+        var wallet = await walletWrapper.GetWalletInfoAsync();
 
-        return _mapper.Map<PortalWalletInfoDto>(wallet);
+        return mapper.Map<PortalWalletInfoDto>(wallet);
     }
 
     public async Task<PortalWalletInfoDto> CreateNewAccountAsync(
         Currency currency,
         bool isDefault = false)
     {
-        var wallet = await _walletWrapper
+        var wallet = await walletWrapper
             .CreateNewAccountAsync(currency, isDefault);
 
-        return _mapper.Map<PortalWalletInfoDto>(wallet);
+        return mapper.Map<PortalWalletInfoDto>(wallet);
+    }
+
+    public async Task<PublicPortalWalletInfoDto> GetPublicWalletInfoAsync(
+        int walletNumber)
+    {
+        var publicWalletInfo = await walletWrapper
+            .GetPublicWalletInfoByNumberAsync(walletNumber);
+
+        var userInfo = await accountManagementService
+            .GetPublicUserInfoAsync(publicWalletInfo.OwnerId);
+
+        publicWalletInfo.OwnerName = userInfo?.Nickname;
+
+        return publicWalletInfo;
     }
 }

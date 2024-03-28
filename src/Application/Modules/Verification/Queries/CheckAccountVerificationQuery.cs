@@ -1,6 +1,6 @@
 ﻿using Defender.Common.DTOs;
 using Defender.Common.Interfaces;
-using Defender.Portal.Application.Common.Interfaces.Services;
+using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Verification.Queries;

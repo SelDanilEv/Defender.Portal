@@ -15,6 +15,10 @@ export function logout() {
       type: "LOGOUT",
       payload: "",
     });
+    dispath({
+      type: "CLEAN_WALLET_INFO",
+      payload: "",
+    });
   };
 }
 

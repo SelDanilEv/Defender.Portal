@@ -17,6 +17,14 @@ const walletReducer = (
         defaultCurrency: action.payload.defaultCurrency,
       };
       break;
+    case "CLEAN_WALLET_INFO":
+      state = {
+        ...state,
+        walletNumber: 0,
+        currencyAccounts: undefined,
+        defaultCurrency: undefined,
+      };
+      break;
     default:
       break;
   }

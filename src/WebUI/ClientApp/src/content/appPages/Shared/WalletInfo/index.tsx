@@ -38,6 +38,7 @@ const WalletAccountsInfo = (props: any) => {
   const u = useUtils();
 
   useEffect(() => {
+    updateWalletInfo();
     const task = setInterval(updateWalletInfo, 10 * 1000);
 
     return () => {

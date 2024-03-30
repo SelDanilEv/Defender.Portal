@@ -71,7 +71,7 @@ const TransfersPanel = (props: any) => {
       <Card>
         <CardHeader
           titleTypographyProps={{ style: { fontSize: "2em" } }}
-          title={u.t("banking_page___transfer_title")}
+          title={u.t("banking_page__transfer_title")}
         />
         <Divider />
         <Grid container spacing={3} p={2}>
@@ -123,7 +123,7 @@ const TransfersPanel = (props: any) => {
               fullWidth
               sx={{ height: { xs: "55px", sm: "100%" } }}
             >
-              {u.t("banking_page___transfer_button_transfer")}
+              {u.t("banking_page__transfer_button_transfer")}
             </Button>
           </Grid>
         </Grid>

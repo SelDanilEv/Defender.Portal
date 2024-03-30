@@ -91,23 +91,24 @@ const AddWelcomePage = (result) => {
 };
 
 const AddBankingPage = (result) => {
-  result.banking_page___wallet_title = "Цифровой кошелек";
-  result.banking_page___wallet_button_create_account = "Создать аккаунт";
-  result.banking_page___wallet_button_open_banking = "Открыть банкинг";
-  result.banking_page___wallet_button_home = "Домой";
-  result.banking_page___wallet_button_refund = "Возврат";
+  result.banking_page__wallet_title = "Цифровой кошелек";
+  result.banking_page__wallet_button_create_account = "Создать аккаунт";
+  result.banking_page__wallet_button_open_banking = "Открыть банкинг";
+  result.banking_page__wallet_button_home = "Домой";
+  result.banking_page__wallet_button_recharge_or_refund = "Пополнение/Возврат";
 
-  result.banking_page___wallet_dialog_title_create_account = "Создать аккаунт";
-  result.banking_page___wallet_dialog_label_currency = "Валюта";
-  result.banking_page___wallet_dialog_button_create = "Создать";
-  result.banking_page___wallet_dialog_title_refund = "Возврат";
-  result.banking_page___wallet_dialog_refund_info_1 =
-    "В настоящее время мы поддерживаем только ручные возвраты.";
-  result.banking_page___wallet_dialog_refund_info_2 =
+  result.banking_page__wallet_dialog_title_create_account = "Создать аккаунт";
+  result.banking_page__wallet_dialog_label_currency = "Валюта";
+  result.banking_page__wallet_dialog_button_create = "Создать";
+  result.banking_page__wallet_dialog_title_recharge_or_refund =
+    "Пополнение/Возврат";
+  result.banking_page__wallet_dialog_recharge_or_refund_info_1 =
+    "В настоящее время мы поддерживаем только ручное пополнение и возврат.";
+  result.banking_page__wallet_dialog_recharge_or_refund_info_2 =
     "Пожалуйста, свяжитесь со мной напрямую по адресу danil.defender.apps@gmail.com.";
 
-  result.banking_page___transfer_title = "Перевод денег";
-  result.banking_page___transfer_button_transfer = "Перевод";
+  result.banking_page__transfer_title = "Перевод денег";
+  result.banking_page__transfer_button_transfer = "Перевод";
   result.banking_page__transfer_wallet_number_label = "Номер кошелька";
   result.banking_page__transfer_owner_name_label = "Имя владельца";
   result.banking_page__transfer_amount_label = "Сумма";

@@ -8,8 +8,8 @@ const RefundDialogBody = (props: any) => {
   return (
     <Box display="flex" alignItems="center">
       <Typography variant="h6" style={{ marginLeft: "0.5em" }}>
-        {u.t("banking_page___wallet_dialog_refund_info_1")}
-        <p>{u.t("banking_page___wallet_dialog_refund_info_2")}</p>
+        {u.t("banking_page__wallet_dialog_recharge_or_refund_info_1")}
+        <p>{u.t("banking_page__wallet_dialog_recharge_or_refund_info_2")}</p>
       </Typography>
     </Box>
   );

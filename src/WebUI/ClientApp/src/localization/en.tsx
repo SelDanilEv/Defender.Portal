@@ -89,23 +89,24 @@ const AddWelcomePage = (result) => {
 };
 
 const AddBankingPage = (result) => {
-  result.banking_page___wallet_title = "Digital wallet";
-  result.banking_page___wallet_button_create_account = "Create account";
-  result.banking_page___wallet_button_open_banking = "Open Banking";
-  result.banking_page___wallet_button_home = "Home";
-  result.banking_page___wallet_button_refund = "Refund";
+  result.banking_page__wallet_title = "Digital wallet";
+  result.banking_page__wallet_button_create_account = "Create account";
+  result.banking_page__wallet_button_open_banking = "Open Banking";
+  result.banking_page__wallet_button_home = "Home";
+  result.banking_page__wallet_button_recharge_or_refund = "Recharge/Refund";
 
-  result.banking_page___wallet_dialog_title_create_account = "Create account";
-  result.banking_page___wallet_dialog_label_currency = "Currency";
-  result.banking_page___wallet_dialog_button_create = "Create";
-  result.banking_page___wallet_dialog_title_refund = "Refund";
-  result.banking_page___wallet_dialog_refund_info_1 =
-    "At the moment we only support manual refunds.";
-  result.banking_page___wallet_dialog_refund_info_2 =
+  result.banking_page__wallet_dialog_title_create_account = "Create account";
+  result.banking_page__wallet_dialog_label_currency = "Currency";
+  result.banking_page__wallet_dialog_button_create = "Create";
+  result.banking_page__wallet_dialog_title_recharge_or_refund =
+    "Recharge/Refund";
+  result.banking_page__wallet_dialog_recharge_or_refund_info_1 =
+    "At the moment we only support manual recharges and refunds.";
+  result.banking_page__wallet_dialog_recharge_or_refund_info_2 =
     "Please contact me directly at danil.defender.apps@gmail.com.";
 
-  result.banking_page___transfer_title = "Money transfer";
-  result.banking_page___transfer_button_transfer = "Transfer";
+  result.banking_page__transfer_title = "Money transfer";
+  result.banking_page__transfer_button_transfer = "Transfer";
   result.banking_page__transfer_wallet_number_label = "Wallet number";
   result.banking_page__transfer_owner_name_label = "Owner name";
   result.banking_page__transfer_amount_label = "Amount";

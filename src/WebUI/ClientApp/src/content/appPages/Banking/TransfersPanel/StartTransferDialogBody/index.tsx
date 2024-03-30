@@ -107,7 +107,9 @@ const StartTransferDialogBody = (props: any) => {
       </Grid>
       <Grid item xs={12} sm={4}>
         {targetWalletInfo
-          ? targetWalletInfo.ownerName
+          ? targetWalletInfo.ownerName.length > 15
+            ? `${targetWalletInfo.ownerName.substring(0, 12)}...`
+            : targetWalletInfo.ownerName
           : `${u.t("Loading")} ...`}
       </Grid>
       <Grid item xs={12} sm={8}>

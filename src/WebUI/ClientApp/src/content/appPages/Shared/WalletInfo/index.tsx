@@ -111,7 +111,7 @@ const WalletAccountsInfo = (props: any) => {
                   </AvatarAddWrapper>
                 </CardContent>
                 <Typography style={{ fontSize: "1.5em" }}>
-                  {u.t("banking_page___wallet_button_create_account")}
+                  {u.t("banking_page__wallet_button_create_account")}
                 </Typography>
               </CardActionArea>
             </CardAddAction>
@@ -136,7 +136,7 @@ const WalletAccountsInfo = (props: any) => {
           sx={{ fontSize: "1.1em" }}
           onClick={() => u.react.navigate("/banking")}
         >
-          {u.t("banking_page___wallet_button_open_banking")}
+          {u.t("banking_page__wallet_button_open_banking")}
         </LockedButton>
       );
     } else {
@@ -148,7 +148,7 @@ const WalletAccountsInfo = (props: any) => {
           sx={{ fontSize: "1.1em" }}
           onClick={() => u.react.navigate("/home")}
         >
-          {u.t("banking_page___wallet_button_home")}
+          {u.t("banking_page__wallet_button_home")}
         </LockedButton>
       );
     }
@@ -160,7 +160,7 @@ const WalletAccountsInfo = (props: any) => {
         <CardHeader
           titleTypographyProps={{ style: { fontSize: "2em" } }}
           title={
-            u.t("banking_page___wallet_title") +
+            u.t("banking_page__wallet_title") +
             " " +
             (wallet.walletNumber ?? "******")
           }
@@ -182,7 +182,7 @@ const WalletAccountsInfo = (props: any) => {
                 sx={{ fontSize: "1.1em" }}
                 onClick={() => setShowRefundAccountDialog(true)}
               >
-                {u.t("banking_page___wallet_button_refund")}
+                {u.t("banking_page__wallet_button_recharge_or_refund")}
               </LockedButton>
             </Box>
           }
@@ -193,7 +193,7 @@ const WalletAccountsInfo = (props: any) => {
         </Grid>
       </Card>
       <CustomDialog
-        title={u.t("banking_page___wallet_dialog_title_create_account")}
+        title={u.t("banking_page__wallet_dialog_title_create_account")}
         open={showCreateAccountDialog}
         onClose={() => setShowCreateAccountDialog(false)}
         children={
@@ -204,7 +204,7 @@ const WalletAccountsInfo = (props: any) => {
         }
       />
       <CustomDialog
-        title={u.t("banking_page___wallet_dialog_title_refund")}
+        title={u.t("banking_page__wallet_dialog_title_recharge_or_refund")}
         open={showRefundAccountDialog}
         onClose={() => setShowRefundAccountDialog(false)}
         children={<RefundDialogBody />}

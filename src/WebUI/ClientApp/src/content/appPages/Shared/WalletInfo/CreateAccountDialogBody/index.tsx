@@ -53,7 +53,7 @@ const CreateAccountDialogBody = (props: any) => {
     <Box>
       <Box display="flex" alignItems="center">
         <Typography variant="h6" style={{ marginRight: "1em" }}>
-          {u.t("banking_page___wallet_dialog_label_currency")}:
+          {u.t("banking_page__wallet_dialog_label_currency")}:
         </Typography>
         <Select
           defaultValue={""}
@@ -78,7 +78,7 @@ const CreateAccountDialogBody = (props: any) => {
           onClick={createNewAccount}
           sx={{ fontSize: "1.2em" }}
         >
-          {u.t("banking_page___wallet_dialog_button_create")}
+          {u.t("banking_page__wallet_dialog_button_create")}
         </LockedButton>
       </Box>
     </Box>

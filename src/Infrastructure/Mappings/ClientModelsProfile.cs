@@ -1,7 +1,8 @@
 using Defender.Common.Clients.Identity;
 using Defender.Common.Clients.Wallet;
+using Defender.Common.DB.Pagination;
 using Defender.Common.Mapping;
-using Defender.Portal.Application.DTOs.Wallets;
+using Defender.Portal.Application.DTOs.Banking;
 using Defender.Portal.Application.Models.Session;
 
 namespace Defender.Portal.Infrastructure.Mappings;
@@ -78,5 +79,6 @@ public class ClientModelsProfile : BaseMappingProfile
             Application.DTOs.Accounts.PublicUserInfoDto>();
 
         CreateMap<TransactionDto, PortalTransactionDto>();
+        CreateMap<TransactionDtoPagedResult, PagedResult<PortalTransactionDto>>();
     }
 }

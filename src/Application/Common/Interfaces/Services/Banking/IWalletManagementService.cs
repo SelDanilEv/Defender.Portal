@@ -1,7 +1,7 @@
 ﻿using Defender.Common.Clients.Wallet;
-using Defender.Portal.Application.DTOs.Wallets;
+using Defender.Portal.Application.DTOs.Banking;
 
-namespace Defender.Portal.Application.Common.Interfaces.Services.Wallets;
+namespace Defender.Portal.Application.Common.Interfaces.Services.Banking;
 
 public interface IWalletManagementService
 {

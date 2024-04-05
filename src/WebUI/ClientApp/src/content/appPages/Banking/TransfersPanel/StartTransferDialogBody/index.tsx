@@ -11,7 +11,7 @@ import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
 import SupportedCurrencies from "src/consts/SupportedCurrencies";
 import { TransferRequest } from "src/models/requests/TransferRequest";
-import { TargetWalletInfo } from "src/models/responses/TransferRequest";
+import { TargetWalletInfo } from "src/models/responses/banking/transactions/TargetWalletInfo";
 
 const StartTransferDialogBody = (props: any) => {
   const u = useUtils();

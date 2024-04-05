@@ -70,8 +70,10 @@ const TransfersPanel = (props: any) => {
     <>
       <Card>
         <CardHeader
-          titleTypographyProps={{ style: { fontSize: "2em" } }}
           title={u.t("banking_page__transfer_title")}
+          titleTypographyProps={{
+            style: { fontSize: u.isMobile ? "1.5em" : "2em" },
+          }}
         />
         <Divider />
         <Grid container spacing={3} p={2}>

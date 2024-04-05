@@ -34,7 +34,7 @@ const AddConfigurationPage = (result) => {
 };
 
 const AddPersonalInfoPage = (result) => {
-  result.personal_info_page__title = "User ID";
+  result.personal_info_page__title = "User";
   result.personal_info_page__account_info = "Account info";
   result.personal_info_page__name_field = "Name";
   result.personal_info_page__email_field = "Email";
@@ -114,6 +114,31 @@ const AddBankingPage = (result) => {
   result.banking_page__transfer_dialog_title_transfer = "Transfer details";
   result.banking_page__transfer_dialog_success_message =
     "Your transaction is being processed. Please wait.";
+
+  result.banking_page__trans_info_table_status_failed = "Failed";
+  result.banking_page__trans_info_table_status_procced = "Procced";
+  result.banking_page__trans_info_table_status_queued = "Queued";
+
+  result.banking_page__trans_info_table_type_recharge = "Recharge";
+  result.banking_page__trans_info_table_type_transfer = "Transfer";
+  result.banking_page__trans_info_table_type_payment = "Payment";
+
+  result.banking_page__trans_info_table_title = "Transaction history";
+  result.banking_page__trans_info_table_date_column = "Date";
+  result.banking_page__trans_info_table_type_column = "Type";
+  result.banking_page__trans_info_table_amount_column = "Amount";
+  result.banking_page__trans_info_table_status_column = "Status";
+  result.banking_page__trans_info_table_actions_column = "Actions";
+  result.banking_page__trans_info_table_rows_per_page_label = "Rows per page:";
+  result.banking_page__trans_info_table_action_info = "Info";
+
+  result.banking_page__trans_info_dialog_title = "Transaction info";
+  result.banking_page__trans_info_dialog_type_label = "Type";
+  result.banking_page__trans_info_dialog_status_label = "Status";
+  result.banking_page__trans_info_dialog_from_label = "Sender";
+  result.banking_page__trans_info_dialog_to_label = "Recipient";
+  result.banking_page__trans_info_dialog_amount_label = "Amount";
+  result.banking_page__trans_info_dialog_date_label = "Date";
 
   return result;
 };

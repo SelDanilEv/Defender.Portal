@@ -34,7 +34,7 @@ const AddConfigurationPage = (result) => {
 };
 
 const AddPersonalInfoPage = (result) => {
-  result.personal_info_page__title = "ID пользователя";
+  result.personal_info_page__title = "Пользователь";
   result.personal_info_page__account_info = "Информация об аккаунте";
   result.personal_info_page__name_field = "Имя";
   result.personal_info_page__email_field = "Электронная почта";
@@ -93,7 +93,7 @@ const AddWelcomePage = (result) => {
 const AddBankingPage = (result) => {
   result.banking_page__wallet_title = "Цифровой кошелек";
   result.banking_page__wallet_button_create_account = "Создать аккаунт";
-  result.banking_page__wallet_button_open_banking = "Открыть банкинг";
+  result.banking_page__wallet_button_open_banking = "Банкинг";
   result.banking_page__wallet_button_home = "Домой";
   result.banking_page__wallet_button_recharge_or_refund = "Пополнение/Возврат";
 
@@ -116,6 +116,32 @@ const AddBankingPage = (result) => {
   result.banking_page__transfer_dialog_title_transfer = "Детали перевода";
   result.banking_page__transfer_dialog_success_message =
     "Ваша транзакция обрабатывается. Пожалуйста, подождите.";
+
+  result.banking_page__trans_info_table_status_failed = "Неудачно";
+  result.banking_page__trans_info_table_status_procced = "Успешно";
+  result.banking_page__trans_info_table_status_queued = "В очереди";
+
+  result.banking_page__trans_info_table_type_recharge = "Пополнение";
+  result.banking_page__trans_info_table_type_transfer = "Перевод";
+  result.banking_page__trans_info_table_type_payment = "Платеж";
+
+  result.banking_page__trans_info_table_title = "История транзакций";
+  result.banking_page__trans_info_table_date_column = "Дата";
+  result.banking_page__trans_info_table_type_column = "Тип";
+  result.banking_page__trans_info_table_amount_column = "Сумма";
+  result.banking_page__trans_info_table_status_column = "Статус";
+  result.banking_page__trans_info_table_actions_column = "Действия";
+  result.banking_page__trans_info_table_rows_per_page_label =
+    "Строк на странице:";
+  result.banking_page__trans_info_table_action_info = "Детали";
+
+  result.banking_page__trans_info_dialog_title = "Информация о транзакции";
+  result.banking_page__trans_info_dialog_type_label = "Тип";
+  result.banking_page__trans_info_dialog_status_label = "Статус";
+  result.banking_page__trans_info_dialog_from_label = "Отправитель";
+  result.banking_page__trans_info_dialog_to_label = "Получатель";
+  result.banking_page__trans_info_dialog_amount_label = "Сумма";
+  result.banking_page__trans_info_dialog_date_label = "Дата";
 
   return result;
 };

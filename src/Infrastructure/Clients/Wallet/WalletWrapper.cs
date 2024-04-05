@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using Defender.Common.Clients.Wallet;
+using Defender.Common.DB.Pagination;
 using Defender.Common.Interfaces;
 using Defender.Common.Wrapper.Internal;
-using Defender.Portal.Application.DTOs.Wallets;
+using Defender.Portal.Application.DTOs.Banking;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Clients.Wallet;
@@ -61,7 +62,7 @@ public class WalletWrapper(
 
     public async Task<PortalTransactionDto> StartTransferTransactionAsync(
         int walletNumber,
-        int amount, 
+        int amount,
         Currency currency)
     {
         return await ExecuteSafelyAsync(async () =>
@@ -77,6 +78,18 @@ public class WalletWrapper(
                 .TransferAsync(command);
 
             return mapper.Map<PortalTransactionDto>(response);
+        }, AuthorizationType.User);
+    }
+
+    public async Task<TransactionDtoPagedResult> 
+        GetTransactionHistoryAsync(PaginationRequest paginationRequest)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var response = await serviceClient
+                .HistoryAsync(null, paginationRequest.Page, paginationRequest.PageSize);
+
+            return response;
         }, AuthorizationType.User);
     }
 }

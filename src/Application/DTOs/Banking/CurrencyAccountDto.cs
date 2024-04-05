@@ -1,4 +1,4 @@
-﻿namespace Defender.Portal.Application.DTOs.Wallets;
+﻿namespace Defender.Portal.Application.DTOs.Banking;
 
 public class CurrencyAccountDto
 {

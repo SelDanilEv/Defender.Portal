@@ -1,6 +1,6 @@
 ﻿using Defender.Common.Clients.Wallet;
 
-namespace Defender.Portal.Application.DTOs.Wallets;
+namespace Defender.Portal.Application.DTOs.Banking;
 
 public class PortalTransactionDto
 {

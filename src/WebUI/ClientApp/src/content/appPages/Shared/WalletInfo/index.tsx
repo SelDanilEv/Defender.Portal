@@ -26,24 +26,21 @@ import {
 import CustomDialog from "src/components/Dialog";
 import CreateAccountDialogBody from "./CreateAccountDialogBody";
 import SupportedCurrencies from "src/consts/SupportedCurrencies";
-import RefundDialogBody from "./PopupDialogBody";
+import RefundDialogBody from "./RechargeOrRefundDialogBody";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 
 import HomeIcon from "@mui/icons-material/Home";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import CachedIcon from "@mui/icons-material/Cached";
 import { updateWalletInfo } from "src/actions/walletActions";
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
+import LockedIconButton from "src/components/LockedComponents/IconButtons/LockedIconButton";
 
 const WalletAccountsInfo = (props: any) => {
   const u = useUtils();
 
   useEffect(() => {
     updateWalletInfo();
-    const task = setInterval(updateWalletInfo, 10 * 1000);
-
-    return () => {
-      clearInterval(task);
-    };
   }, []);
 
   const [wallet, setWallet] = useState<WalletInfo>(props.walletInfo);
@@ -68,8 +65,7 @@ const WalletAccountsInfo = (props: any) => {
         const walletInfo: WalletInfo = await response.json();
         updateUIWalletInfo(walletInfo);
       },
-      showError: true,
-      doLock: false,
+      showError: false,
     });
   };
 
@@ -158,7 +154,9 @@ const WalletAccountsInfo = (props: any) => {
     <>
       <Card>
         <CardHeader
-          titleTypographyProps={{ style: { fontSize: "2em" } }}
+          titleTypographyProps={{
+            style: { fontSize: u.isMobile ? "1.5em" : "2em" },
+          }}
           title={
             u.t("banking_page__wallet_title") +
             " " +
@@ -172,10 +170,23 @@ const WalletAccountsInfo = (props: any) => {
                   xs: "column",
                   sm: "row",
                 },
-                gap: 2,
+                gap: 1,
               }}
             >
-              {renderNavigationButton()}
+              <Box
+                display="flex"
+                sx={{
+                  flexDirection: {
+                    xs: "row",
+                  },
+                  gap: 1,
+                }}
+              >
+                {renderNavigationButton()}
+                <LockedButton variant="outlined" onClick={updateWalletInfo}>
+                  <CachedIcon />
+                </LockedButton>
+              </Box>
               <LockedButton
                 variant="outlined"
                 color="primary"

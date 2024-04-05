@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Defender.Common.Clients.Wallet;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
-using Defender.Portal.Application.Common.Interfaces.Services.Wallets;
-using Defender.Portal.Application.DTOs.Wallets;
+using Defender.Portal.Application.Common.Interfaces.Services.Banking;
+using Defender.Portal.Application.DTOs.Banking;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
-namespace Defender.Portal.Infrastructure.Services.Wallet;
+namespace Defender.Portal.Infrastructure.Services.Banking;
 
 public class WalletManagementService(
         IWalletWrapper walletWrapper,

@@ -25,6 +25,7 @@ const APIEndpoints = {
     walletPublicInfo: "wallet/info/public",
     walletCreateAccount: "wallet/account/create",
     startTransfer: "transaction/start/transfer",
+    transactionHistory: "transaction/history",
   },
 };
 

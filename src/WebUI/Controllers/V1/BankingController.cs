@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
-using Defender.Portal.Application.DTOs.Wallets;
+using Defender.Common.DB.Pagination;
+using Defender.Portal.Application.DTOs.Banking;
 using Defender.Portal.Application.Modules.Transaction.Commands;
+using Defender.Portal.Application.Modules.Transaction.Queries;
 using Defender.Portal.Application.Modules.Wallet.Commands;
 using Defender.Portal.Application.Modules.Wallet.Queries;
 using MediatR;
@@ -46,6 +48,18 @@ public class BankingController(
             CreateCurrencyAccountCommand,
             PortalWalletInfoDto>
             (command);
+    }
+
+    [HttpGet("transaction/history")]
+    [ProducesResponseType(typeof(PagedResult<PortalTransactionDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    public async Task<PagedResult<PortalTransactionDto>> StartTransferTransactionAsync(
+        [FromQuery] GetTransactionHistoryQuery query)
+    {
+        return await ProcessApiCallAsync<
+            GetTransactionHistoryQuery,
+            PagedResult<PortalTransactionDto>>
+            (query);
     }
 
     [HttpPost("transaction/start/transfer")]

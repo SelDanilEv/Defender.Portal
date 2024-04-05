@@ -13,6 +13,7 @@ import Logo from "src/components/LogoSign";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";
 import { logout } from "src/actions/sessionActions";
+import { Session } from "src/models/Session";
 
 const OverviewWrapper = styled(Box)(
   () => `
@@ -30,10 +31,12 @@ const TypographyH1 = styled(Typography)(
 );
 
 const WelcomeLayout: FC = (props: any) => {
+  const session = props.session as Session;
+
   const u = useUtils();
 
   React.useEffect(() => {
-    if (props.session.isAuthenticated) {
+    if (session.isAuthenticated) {
       APICallWrapper({
         url: apiUrls.home.authcheck,
         options: {
@@ -41,7 +44,7 @@ const WelcomeLayout: FC = (props: any) => {
         },
         utils: u,
         onSuccess: async (response) => {
-          if (props.session.isEmailVerified || props.session.isPhoneVerified) {
+          if (session.user.isEmailVerified || session.user.isPhoneVerified) {
             u.react.navigate("/home");
           } else {
             if (window.location.pathname !== "/welcome/verify-email") {
@@ -129,7 +132,7 @@ WelcomeLayout.propTypes = {
 
 const mapStateToProps = (state: any) => {
   return {
-    session: state.session,
+    session: state.session as Session,
   };
 };
 

@@ -1,6 +1,6 @@
 ﻿using Defender.Common.Clients.Wallet;
-using Defender.Portal.Application.Common.Interfaces.Services.Wallets;
-using Defender.Portal.Application.DTOs.Wallets;
+using Defender.Portal.Application.Common.Interfaces.Services.Banking;
+using Defender.Portal.Application.DTOs.Banking;
 using FluentValidation;
 using MediatR;
 

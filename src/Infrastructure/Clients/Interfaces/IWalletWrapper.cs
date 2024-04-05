@@ -1,5 +1,6 @@
 ﻿using Defender.Common.Clients.Wallet;
-using Defender.Portal.Application.DTOs.Wallets;
+using Defender.Common.DB.Pagination;
+using Defender.Portal.Application.DTOs.Banking;
 
 namespace Defender.Portal.Infrastructure.Clients.Interfaces;
 
@@ -15,4 +16,7 @@ public interface IWalletWrapper
         int walletNumber,
         int amount,
         Currency currency);
+
+    Task<TransactionDtoPagedResult>
+        GetTransactionHistoryAsync(PaginationRequest paginationRequest);
 }

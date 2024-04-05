@@ -23,7 +23,7 @@ const LanguageSwitcher = (props: any) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    currentLanguage: state.session.Language,
+    currentLanguage: state.session.language,
   };
 };
 

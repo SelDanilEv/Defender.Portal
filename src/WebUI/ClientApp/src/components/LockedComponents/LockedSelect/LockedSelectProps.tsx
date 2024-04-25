@@ -1,6 +1,8 @@
-import { SelectProps } from "@mui/material";
+import { SelectProps } from "@mui/material/Select";
 
-export default interface LockedSelectProps extends SelectProps {
+type LockedSelectProps = SelectProps & {
   isLoading?: boolean;
   dispatch?: any;
-}
+};
+
+export default LockedSelectProps;

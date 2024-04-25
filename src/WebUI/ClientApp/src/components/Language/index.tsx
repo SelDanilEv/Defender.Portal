@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import LocalizationService from "src/services/LocalizationService";
 import LockedSelect from "src/components/LockedComponents/LockedSelect/LockedSelect";
 import { updateLanguage } from "src/actions/sessionActions";
-import { MenuItem } from "@mui/material";
+import { MenuItem, Select } from "@mui/material";
 import SpaceForSelectOptions from "src/consts/SpaceForSelectOptions";
 
 const LanguageSwitcher = (props: any) => {
@@ -19,6 +19,7 @@ const LanguageSwitcher = (props: any) => {
 
   return (
     <LockedSelect
+      variant="outlined"
       value={currentLanguage}
       onChange={(event) => {
         hangleUpdateLanguage(event.target.value as string);

@@ -133,6 +133,7 @@ const UpdateAccount = (props: UpdateAccountInfoProps) => {
             disabled={!isSuperAdmin}
             name={updateParams.role}
             value={updateRequest.role}
+            variant="outlined"
             onChange={handleUpdate}
           >
             <MenuItem disabled value={Role.Guest}>

@@ -45,13 +45,6 @@ const UserInfoTabs = (props: UserInfoTabsProps) => {
     );
   };
 
-  const a11yProps = (index: number) => {
-    return {
-      id: `simple-tab-${index}`,
-      "aria-controls": `simple-tabpanel-${index}`,
-    };
-  };
-
   const [value, setValue] = useState(0);
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
@@ -63,13 +56,9 @@ const UserInfoTabs = (props: UserInfoTabsProps) => {
       <Card>
         <CardContent>
           <Box display="flex" flexDirection={"row"}>
-            <Box sx={{ maxWidth: "50%" }}>
+            <Box sx={{ maxWidth: "60%", overflow: "hidden" }}>
               <Tabs
-                sx={{ width: "10%" }}
-                disabled={true}
-                variant="scrollable"
-                scrollButtons="auto"
-                // allowScrollButtonsMobile
+                variant="fullWidth"
                 textColor="primary"
                 indicatorColor="primary"
                 value={value}
@@ -78,34 +67,30 @@ const UserInfoTabs = (props: UserInfoTabsProps) => {
                 <Tab
                   disabled={!fullUserInfo || !fullUserInfo.user}
                   label={u.t("admin_users_page__info_user_tab_title")}
-                  {...a11yProps(0)}
                 />
                 <Tab
                   disabled={!fullUserInfo || !fullUserInfo.wallet}
                   label={u.t("admin_users_page__info_wallet_tab_title")}
-                  {...a11yProps(1)}
-                />
-                <Tab
-                  disabled={!fullUserInfo || !fullUserInfo.wallet}
-                  label={u.t("admin_users_page__info_wallet_tab_title")}
-                  {...a11yProps(2)}
-                />
-                <Tab
-                  disabled={!fullUserInfo || !fullUserInfo.wallet}
-                  label={u.t("admin_users_page__info_wallet_tab_title")}
-                  {...a11yProps(3)}
-                />
-                <Tab
-                  disabled={!fullUserInfo || !fullUserInfo.wallet}
-                  label={u.t("admin_users_page__info_wallet_tab_title")}
-                  {...a11yProps(4)}
                 />
               </Tabs>
             </Box>
-            <Box sx={{ minWidth: "20%" }}>
-              {/* <LockedButton
+            <Box
+              sx={{
+                minWidth: "20%",
+                maxWidth: "220px",
+                marginLeft: "auto",
+                display: "flex",
+                flexDirection: "row",
+                gap: u.isMobile ? "10%" : "10px",
+                justifyContent: "flex-end",
+              }}
+            >
+              <LockedButton
                 disabled={!fullUserInfo?.user?.id}
-                // sx={{ mr: "1em" }}
+                sx={{
+                  minWidth: u.isMobile ? "45%" : "60px",
+                  maxWidth: u.isMobile ? "45%" : "100px",
+                }}
                 variant="outlined"
                 onClick={refresh}
               >
@@ -113,11 +98,15 @@ const UserInfoTabs = (props: UserInfoTabsProps) => {
               </LockedButton>
               <LockedButton
                 disabled={!fullUserInfo?.user?.id}
+                sx={{
+                  minWidth: u.isMobile ? "45%" : "60px",
+                  maxWidth: u.isMobile ? "45%" : "100px",
+                }}
                 variant="outlined"
                 onClick={refresh}
               >
                 <CachedIcon />
-              </LockedButton> */}
+              </LockedButton>
             </Box>
           </Box>
           {fullUserInfo && (
@@ -129,21 +118,6 @@ const UserInfoTabs = (props: UserInfoTabsProps) => {
               )}
               {fullUserInfo.wallet && (
                 <TabPanel value={value} index={1}>
-                  <WalletTab walletInfo={fullUserInfo.wallet} />
-                </TabPanel>
-              )}
-              {fullUserInfo.wallet && (
-                <TabPanel value={value} index={2}>
-                  <WalletTab walletInfo={fullUserInfo.wallet} />
-                </TabPanel>
-              )}
-              {fullUserInfo.wallet && (
-                <TabPanel value={value} index={3}>
-                  <WalletTab walletInfo={fullUserInfo.wallet} />
-                </TabPanel>
-              )}
-              {fullUserInfo.wallet && (
-                <TabPanel value={value} index={4}>
                   <WalletTab walletInfo={fullUserInfo.wallet} />
                 </TabPanel>
               )}

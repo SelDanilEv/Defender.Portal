@@ -14,7 +14,7 @@ import useUtils from "src/appUtils";
 import SaveIcon from "@mui/icons-material/Save";
 
 import Text from "src/components/Text";
-import { UserInfo } from "src/models/UserInfo";
+import { UserAccountInfo } from "src/models/UserAccountInfo";
 import { updateUserInfo } from "src/actions/sessionActions";
 import apiUrls from "src/api/apiUrls";
 import UserService from "src/services/UserService";
@@ -24,7 +24,7 @@ const EditUserInfo = (props: any) => {
 
   let sessionUser = props.currentUser;
 
-  const [user, setUser] = useState<UserInfo>({ ...props.currentUser });
+  const [user, setUser] = useState<UserAccountInfo>({ ...props.currentUser });
   const [isSaveActionDisabled, setSaveActionDisabled] = useState<boolean>(true);
 
   useEffect(() => {

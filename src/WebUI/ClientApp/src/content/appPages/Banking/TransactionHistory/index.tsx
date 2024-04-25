@@ -1,5 +1,5 @@
 import { Grid, Container } from "@mui/material";
-import HistoricalTransactions from "./Transactions";
+import HistoricalTransactions from "../../Shared/HistoricalTransactions";
 
 const TransactionHistory = (props: any) => {
   return (

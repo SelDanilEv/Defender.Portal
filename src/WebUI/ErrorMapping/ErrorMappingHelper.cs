@@ -65,6 +65,8 @@ public class ErrorMappingHelper
 
             ErrorCode.CM_InvalidUserJWT => UIErrorCodes.Error_SessionExpired,
 
+            ErrorCode.CM_ForbiddenAccess => UIErrorCodes.Error_ForbiddenAccess,
+
             ErrorCode.UnhandledError => UIErrorCodes.Error_UnhandledError,
 
             ErrorCode.BR_WLT_CurrencyAccountAlredyExist or
@@ -104,7 +106,6 @@ public class ErrorMappingHelper
             ErrorCode.VL_NTF_MaxBodyLength or
             ErrorCode.VL_SCM_EmptySecretName or
             ErrorCode.VL_SCM_EmptySecretValue or
-            ErrorCode.CM_ForbiddenAccess or
 
             _ => UIErrorCodes.Error_UnhandledError
         };

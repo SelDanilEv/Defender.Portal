@@ -1,12 +1,12 @@
 ﻿using Defender.Common.Errors;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
-using Defender.Portal.Application.Models.Session;
+using Defender.Portal.Application.DTOs.Auth;
 using FluentValidation;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Authorization.Commands;
 
-public record LoginWithPasswordCommand(string Login, string Password) : IRequest<Session>
+public record LoginWithPasswordCommand(string Login, string Password) : IRequest<SessionDto>
 {
 };
 
@@ -23,10 +23,10 @@ public sealed class LoginWithPasswordCommandValidator : AbstractValidator<LoginW
 
 public sealed class LoginWithPasswordCommandHandler(
         IAuthorizationService _authorizationService) 
-    : IRequestHandler<LoginWithPasswordCommand, Session>
+    : IRequestHandler<LoginWithPasswordCommand, SessionDto>
 {
 
-    public async Task<Session> Handle(LoginWithPasswordCommand request, CancellationToken cancellationToken)
+    public async Task<SessionDto> Handle(LoginWithPasswordCommand request, CancellationToken cancellationToken)
     {
         return await _authorizationService.LoginAccountWithPasswordAsync(
             request.Login,

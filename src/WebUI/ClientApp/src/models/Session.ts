@@ -1,7 +1,7 @@
-import { UserInfo } from "./UserInfo";
+import { UserAccountInfo } from "./UserAccountInfo";
 
 export interface Session {
-  user: UserInfo;
+  user: UserAccountInfo;
   language: string;
   isAuthenticated:boolean;
   token:string;

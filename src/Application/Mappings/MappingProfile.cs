@@ -15,6 +15,7 @@ public class MappingProfile : BaseMappingProfile
                 src => src.IsPhoneVerified || src.IsEmailVerified));
 
         CreateMap<UserDto, PortalUserDto>();
+        CreateMap<AccountDto, PortalAccountDto>();
 
     }
 }

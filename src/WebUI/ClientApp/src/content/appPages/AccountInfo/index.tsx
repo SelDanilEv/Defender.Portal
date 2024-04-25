@@ -14,7 +14,7 @@ import { Helmet } from "react-helmet-async";
 import EditUserInfo from "./EditUserInfo";
 
 import useUtils from "src/appUtils";
-import EditSentitiveUserInfo from "./EditSentitiveUserInfo";
+import EditSensitiveUserInfo from "./EditSensitiveUserInfo";
 
 const UpdateUserPage = (props: any) => {
   const u = useUtils();
@@ -85,12 +85,12 @@ const UpdateUserPage = (props: any) => {
         >
           <Box>
             <Typography variant="h3">
-              {u.t("personal_info_page__sentitive_account_info")}
+              {u.t("personal_info_page__sensitive_account_info")}
             </Typography>
           </Box>
         </Box>
         <Divider />
-        {<EditSentitiveUserInfo />}
+        {<EditSensitiveUserInfo />}
       </Card>
     </>
   );

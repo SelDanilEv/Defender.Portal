@@ -13,5 +13,4 @@ public interface IAccountManagementService
     Task<UserDto> UpdateUserInfoAsync(UserDto user);
 
     Task UpdateUserSentitiveInfoAsync(UserDto user, string? newPassword = null);
-
 }

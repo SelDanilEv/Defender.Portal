@@ -1,6 +1,6 @@
 import Role from "src/consts/Role";
 import { Session } from "src/models/Session";
-import { UserInfo } from "src/models/UserInfo";
+import { UserAccountInfo } from "src/models/UserAccountInfo";
 
 const UserService = {
   GetUserInfoFromSession: (session: Session) => {
@@ -26,6 +26,10 @@ const UserService = {
 
       if (roles.includes(Role.User)) {
         return Role.User;
+      }
+
+      if (roles.includes(Role.Guest)) {
+        return Role.Guest;
       }
     }
 
@@ -53,7 +57,7 @@ const UserService = {
     return defaultRole.value;
   },
 
-  GetAccountCreatedUTCDate: (userInfo: UserInfo) => {
+  GetAccountCreatedUTCDate: (userInfo: UserAccountInfo) => {
     if (!userInfo) return;
 
     let date = new Date(userInfo.createdDate);

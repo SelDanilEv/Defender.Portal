@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
 using Defender.Common.Clients.Identity;
+using Defender.Common.Helpers;
 using Defender.Common.Interfaces;
 using Defender.Common.Wrapper.Internal;
+using Defender.Portal.Application.DTOs.Auth;
+using Defender.Portal.Application.Enums;
+using Defender.Portal.Application.Models.ApiRequests;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Clients.Identity;
@@ -9,14 +13,14 @@ namespace Defender.Portal.Infrastructure.Clients.Identity;
 public class IdentityWrapper(
         IAuthenticationHeaderAccessor authenticationHeaderAccessor,
         IIdentityServiceClient identityServiceClient,
-        IMapper mapper) 
+        IMapper mapper)
     : BaseInternalSwaggerWrapper(
             identityServiceClient,
             authenticationHeaderAccessor),
     IIdentityWrapper
 {
-    public async Task<LoginResponse> CreateAccountAsync(
-        string email, 
+    public async Task<SessionDto> CreateAccountAsync(
+        string email,
         string nickname,
         string phone,
         string password)
@@ -33,11 +37,11 @@ public class IdentityWrapper(
 
             var response = await identityServiceClient.CreateAsync(command);
 
-            return response;
+            return mapper.Map<SessionDto>(response);
         }, AuthorizationType.Service);
     }
 
-    public async Task<LoginResponse> LoginAccountAsync(string login, string password)
+    public async Task<SessionDto> LoginAccountAsync(string login, string password)
     {
         return await ExecuteSafelyAsync(async () =>
         {
@@ -49,11 +53,26 @@ public class IdentityWrapper(
 
             var response = await identityServiceClient.LoginAsync(command);
 
-            return response;
+            return mapper.Map<SessionDto>(response);
         }, AuthorizationType.Service);
     }
 
-    public async Task<LoginResponse> LoginAccountByGoogleTokenAsync(string token)
+    public async Task<SessionDto> LoginAccountAsAdminAsync(Guid userId)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var command = new LoginAsAdminCommand()
+            {
+                UserId = userId
+            };
+
+            var response = await identityServiceClient.LoginAsAdminAsync(command);
+
+            return mapper.Map<SessionDto>(response);
+        }, AuthorizationType.User);
+    }
+
+    public async Task<SessionDto> LoginAccountByGoogleTokenAsync(string token)
     {
         return await ExecuteSafelyAsync(async () =>
         {
@@ -64,17 +83,17 @@ public class IdentityWrapper(
 
             var response = await identityServiceClient.GoogleAsync(command);
 
-            return response;
+            return mapper.Map<SessionDto>(response);
         }, AuthorizationType.Service);
     }
 
-    public async Task<AccountDto> GetAccountDetailsAsUserAsync(Guid accountId)
+    public async Task<Common.DTOs.AccountDto> GetAccountDetailsAsync(Guid accountId)
     {
         return await ExecuteSafelyAsync(async () =>
         {
             var response = await identityServiceClient.DetailsAsync(accountId);
 
-            return response;
+            return mapper.Map<Common.DTOs.AccountDto>(response);
         }, AuthorizationType.User);
     }
 
@@ -101,7 +120,10 @@ public class IdentityWrapper(
             var command = new SendVerificationCodeCommand()
             {
                 UserId = accountId,
-                Type = accessCodeType
+                Type = MappingHelper.MapEnum<
+                    AccessCodeType,
+                    SendVerificationCodeCommandType>(
+                        accessCodeType)
             };
 
             await identityServiceClient.EmailAsync(command);
@@ -123,7 +145,9 @@ public class IdentityWrapper(
         }, AuthorizationType.User);
     }
 
-    public async Task ChangeAccountPasswordAsync(Guid accountId, string newPassword)
+    public async Task ChangeAccountPasswordAsync(
+        Guid accountId,
+        string newPassword)
     {
         await ExecuteSafelyAsync(async () =>
         {
@@ -134,6 +158,33 @@ public class IdentityWrapper(
             };
 
             await identityServiceClient.ChangeAsync(command);
+        }, AuthorizationType.Service);
+    }
+
+    public async Task<Common.DTOs.AccountDto> UpdateAccountInfoAsync(
+        UpdateAccountInfoRequest updateRequest)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var command = new UpdateAccountCommand()
+            {
+                Id = updateRequest.UserId,
+                IsPhoneVerified = updateRequest.IsPhoneVerified,
+                IsEmailVerified = updateRequest.IsEmailVerified,
+                IsBlocked = updateRequest.IsBlocked,
+            };
+
+            if (updateRequest.Role.HasValue)
+            {
+                command.Role = MappingHelper.MapEnum<
+                    Common.Enums.Role,
+                    UpdateAccountCommandRole>(
+                        updateRequest.Role.Value);
+            }
+
+            var response = await identityServiceClient.UpdateAsync(command);
+
+            return mapper.Map<Common.DTOs.AccountDto>(response);
         }, AuthorizationType.User);
     }
 }

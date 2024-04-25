@@ -44,7 +44,7 @@ const WelcomeLayout: FC = (props: any) => {
         },
         utils: u,
         onSuccess: async (response) => {
-          if (session.user.isEmailVerified || session.user.isPhoneVerified) {
+          if (session.user.isEmailVerified) {
             u.react.navigate("/home");
           } else {
             if (window.location.pathname !== "/welcome/verify-email") {

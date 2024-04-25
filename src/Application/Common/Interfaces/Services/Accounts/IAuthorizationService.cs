@@ -1,10 +1,10 @@
-﻿using Defender.Portal.Application.Models.Session;
+﻿using Defender.Portal.Application.DTOs.Auth;
 
 namespace Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 
 public interface IAuthorizationService
 {
-    public Task<Session> LoginAccountWithPasswordAsync(string login, string password);
-    public Task<Session> LoginAccountWithGoogleAsync(string token);
-    public Task<Session> CreateUserAccountAsync(string email, string nickname, string phone, string password);
+    public Task<SessionDto> LoginAccountWithPasswordAsync(string login, string password);
+    public Task<SessionDto> LoginAccountWithGoogleAsync(string token);
+    public Task<SessionDto> CreateUserAccountAsync(string email, string nickname, string phone, string password);
 }

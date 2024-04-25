@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Defender.Portal.Application.Models.Session;
+using Defender.Portal.Application.DTOs.Auth;
 using Defender.Portal.Application.Modules.Authorization.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,32 +13,32 @@ public class AuthorizationController : BaseApiController
     }
 
     [HttpPost("login")]
-    [ProducesResponseType(typeof(Session), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(SessionDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<Session> LoginWithPasswordAsync(
+    public async Task<SessionDto> LoginWithPasswordAsync(
         [FromBody] LoginWithPasswordCommand command)
     {
-        return await ProcessApiCallWithoutMappingAsync<LoginWithPasswordCommand, Session>
+        return await ProcessApiCallWithoutMappingAsync<LoginWithPasswordCommand, SessionDto>
             (command);
     }
 
     [HttpPost("google")]
-    [ProducesResponseType(typeof(Session), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(SessionDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<Session> LoginWithGoogleTokenAsync(
+    public async Task<SessionDto> LoginWithGoogleTokenAsync(
         [FromBody] LoginWithGoogleTokenCommand command)
     {
-        return await ProcessApiCallWithoutMappingAsync<LoginWithGoogleTokenCommand, Session>
+        return await ProcessApiCallWithoutMappingAsync<LoginWithGoogleTokenCommand, SessionDto>
             (command);
     }
 
     [HttpPost("create")]
-    [ProducesResponseType(typeof(Session), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(SessionDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<Session> CreateUserAsync(
+    public async Task<SessionDto> CreateUserAsync(
         [FromBody] CreateAccountCommand command)
     {
-        return await ProcessApiCallWithoutMappingAsync<CreateAccountCommand, Session>
+        return await ProcessApiCallWithoutMappingAsync<CreateAccountCommand, SessionDto>
             (command);
     }
 }

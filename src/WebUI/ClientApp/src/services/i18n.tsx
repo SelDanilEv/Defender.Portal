@@ -3,8 +3,8 @@ import { initReactI18next } from "react-i18next";
 
 import store from "src/state/store";
 
-import en from "src/localization/en";
-import ru from "src/localization/ru";
+import en from "src/localization/en.json";
+import ru from "src/localization/ru.json";
 
 const resources: any = {
   en: {

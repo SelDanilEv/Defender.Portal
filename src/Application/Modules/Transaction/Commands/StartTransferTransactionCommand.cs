@@ -1,18 +1,16 @@
-﻿using Defender.Common.Clients.Wallet;
-using Defender.Common.Errors;
+﻿using Defender.Common.Errors;
 using Defender.Portal.Application.Common.Interfaces.Services.Banking;
 using Defender.Portal.Application.DTOs.Banking;
+using Defender.Portal.Application.Enums;
 using FluentValidation;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Transaction.Commands;
 
-public record StartTransferTransactionCommand : IRequest<PortalTransactionDto>
-{
-    public int WalletNumber { get; set; }
-    public int Amount { get; set; }
-    public Currency Currency { get; set; }
-};
+public record StartTransferTransactionCommand(
+    int WalletNumber,
+    int Amount,
+    Currency Currency) : IRequest<PortalTransactionDto>;
 
 public sealed class StartTransferTransactionCommandValidator 
     : AbstractValidator<StartTransferTransactionCommand>

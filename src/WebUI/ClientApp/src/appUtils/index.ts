@@ -22,13 +22,12 @@ const useUtils = () => {
         log: (value) => {
             console.log(value)
         },
-        e:(errorCode) => {
+        e:(errorCode: string) => {
             let message = t(errorCode);
             
             if (message == errorCode || !message) {
               message = t("Error_UnhandledError");
             }
-        
             ErrorToast(message);
           },
         isMobile: isMobile

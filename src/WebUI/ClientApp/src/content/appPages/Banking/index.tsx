@@ -1,10 +1,10 @@
+import { Box } from "@mui/material";
 import { connect } from "react-redux";
 
 import useUtils from "src/appUtils";
-import WalletAccountsInfo from "../Shared/WalletInfo";
 import TransfersPanel from "./TransfersPanel";
 import TransactionHistory from "./TransactionHistory";
-import { Box } from "@mui/material";
+import WalletAccountsInfo from "../Shared/WalletAccountsInfo";
 
 const BankingPage = (props: any) => {
   const u = useUtils();

@@ -1,12 +1,12 @@
 ﻿using Defender.Common.Errors;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
-using Defender.Portal.Application.Models.Session;
+using Defender.Portal.Application.DTOs.Auth;
 using FluentValidation;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Authorization.Commands;
 
-public record LoginWithGoogleTokenCommand(string Token) : IRequest<Session>;
+public record LoginWithGoogleTokenCommand(string Token) : IRequest<SessionDto>;
 
 public sealed class LoginWithGoogleTokenCommandValidator : AbstractValidator<LoginWithGoogleTokenCommand>
 {
@@ -19,9 +19,9 @@ public sealed class LoginWithGoogleTokenCommandValidator : AbstractValidator<Log
 
 public sealed class LoginWithGoogleTokenCommandHandler(
         IAuthorizationService _authorizationService) 
-    : IRequestHandler<LoginWithGoogleTokenCommand, Session>
+    : IRequestHandler<LoginWithGoogleTokenCommand, SessionDto>
 {
-    public async Task<Session> Handle(LoginWithGoogleTokenCommand request, CancellationToken cancellationToken)
+    public async Task<SessionDto> Handle(LoginWithGoogleTokenCommand request, CancellationToken cancellationToken)
     {
         return await _authorizationService.LoginAccountWithGoogleAsync(
             request.Token);

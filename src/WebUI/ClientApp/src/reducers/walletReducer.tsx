@@ -2,6 +2,7 @@ import { WalletInfo } from "src/models/WalletInfo";
 
 const walletReducer = (
   state: WalletInfo = {
+    ownerId: undefined,
     walletNumber: 0,
     currencyAccounts: undefined,
     defaultCurrency: "USD",

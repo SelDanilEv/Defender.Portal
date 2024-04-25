@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import useUtils from "src/appUtils";
-import WalletAccountsInfo from "../Shared/WalletInfo";
+import WalletAccountsInfo from "../Shared/WalletAccountsInfo";
 
 const HomePage = (props: any) => {
   const u = useUtils();

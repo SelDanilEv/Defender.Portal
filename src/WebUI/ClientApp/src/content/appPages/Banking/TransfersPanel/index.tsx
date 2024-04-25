@@ -3,7 +3,6 @@ import {
   Divider,
   Card,
   CardHeader,
-  Button,
   TextField,
   Select,
   MenuItem,
@@ -16,24 +15,33 @@ import { CurrencyAccount, WalletInfo } from "src/models/WalletInfo";
 
 import CustomDialog from "src/components/Dialog";
 
-import { TransferRequest } from "src/models/requests/TransferRequest";
+import { TransferRequest } from "src/models/requests/banking/TransferRequest";
 import StartTransferDialogBody from "./StartTransferDialogBody";
+import {
+  CurrencyAmountMaskRegex,
+  WalletNumberMaskRegex,
+  WalletNumberRegex,
+} from "src/consts/Regexes";
+import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import ParamsObjectBuilder from "src/helpers/ParamsObjectBuilder";
 
 const TransfersPanel = (props: any) => {
   const u = useUtils();
 
   const [transferRequest, setTransferRequest] = useState<TransferRequest>({
     currency: "USD",
-    walletNumber: "",
+    walletNumber: 0,
     amount: 0,
   });
+
+  const transferParams = ParamsObjectBuilder.Build(u, transferRequest);
 
   const [showTransferDialog, setShowTransferDialog] = useState<boolean>(false);
   const [isTransferAllowed, setIsTransferAllowed] = useState<boolean>(false);
 
   useEffect(() => {
     setIsTransferAllowed(
-      transferRequest.walletNumber.length === 8 &&
+      WalletNumberRegex.test(transferRequest.walletNumber.toString()) &&
         transferRequest.amount > 0 &&
         transferRequest.amount * 100 <=
           props.wallet.currencyAccounts.find(
@@ -47,14 +55,18 @@ const TransfersPanel = (props: any) => {
 
     setTransferRequest((prevState) => {
       if (
-        name === "amount" &&
+        name === transferParams.amount &&
         value !== "" &&
-        !/^\d*(\.\d{0,2})?$/.test(value)
+        !CurrencyAmountMaskRegex.test(value)
       ) {
         return prevState;
       }
 
-      if (name === "walletNumber" && value.length > 8) {
+      if (
+        name === transferParams.walletNumber &&
+        value !== "" &&
+        !WalletNumberMaskRegex.test(value)
+      ) {
         return prevState;
       }
 
@@ -63,8 +75,8 @@ const TransfersPanel = (props: any) => {
   };
 
   const availableCurrencies = props.wallet.currencyAccounts
-    .filter((account: CurrencyAccount) => account.balance > 0)
-    .map((account: CurrencyAccount) => account.currency);
+    ?.filter((account: CurrencyAccount) => account.balance > 0)
+    ?.map((account: CurrencyAccount) => account.currency);
 
   return (
     <>
@@ -82,7 +94,9 @@ const TransfersPanel = (props: any) => {
               name="walletNumber"
               label={u.t("banking_page__transfer_wallet_number_label")}
               InputProps={{ style: { fontSize: "1.5em" } }}
-              value={transferRequest.walletNumber}
+              value={
+                transferRequest.walletNumber ? transferRequest.walletNumber : ""
+              }
               onChange={UpdateRequest}
               variant="outlined"
               fullWidth
@@ -108,7 +122,7 @@ const TransfersPanel = (props: any) => {
               sx={{ height: "100%" }}
               fullWidth
             >
-              {availableCurrencies.length > 0
+              {availableCurrencies?.length > 0
                 ? availableCurrencies.map((currency) => (
                     <MenuItem key={currency} value={currency}>
                       {currency}
@@ -118,7 +132,7 @@ const TransfersPanel = (props: any) => {
             </Select>
           </Grid>
           <Grid item xs={12} sm={3} md={3}>
-            <Button
+            <LockedButton
               disabled={!isTransferAllowed}
               onClick={() => setShowTransferDialog(true)}
               variant="outlined"
@@ -126,7 +140,7 @@ const TransfersPanel = (props: any) => {
               sx={{ height: { xs: "55px", sm: "100%" } }}
             >
               {u.t("banking_page__transfer_button_transfer")}
-            </Button>
+            </LockedButton>
           </Grid>
         </Grid>
       </Card>

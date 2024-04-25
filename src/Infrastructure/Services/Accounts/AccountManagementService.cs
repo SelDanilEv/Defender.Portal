@@ -15,9 +15,9 @@ public class AccountManagementService(
     public async Task<AccountDto> GetAccountDetailsAsync(Guid userId)
     {
         var account = await identityWrapper
-            .GetAccountDetailsAsUserAsync(userId);
+            .GetAccountDetailsAsync(userId);
 
-        return mapper.Map<AccountDto>(account);
+        return account;
     }
 
 
@@ -54,4 +54,5 @@ public class AccountManagementService(
                 newPassword);
         }
     }
+
 }

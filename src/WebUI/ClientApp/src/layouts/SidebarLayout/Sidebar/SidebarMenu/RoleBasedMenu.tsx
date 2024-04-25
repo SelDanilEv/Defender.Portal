@@ -2,11 +2,13 @@ import { ListSubheader, alpha, Box, List, styled } from "@mui/material";
 import { connect } from "react-redux";
 import TableChartTwoToneIcon from "@mui/icons-material/TableChartTwoTone";
 import HomeIcon from "@mui/icons-material/Home";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 import MenuItem from "./MenuItem";
 import useUtils from "src/appUtils";
 import Role from "src/consts/Role";
+import UserService from "src/services/UserService";
 
 const SubMenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -172,7 +174,7 @@ const RoleBasedMenu = (props: any) => {
             <SubMenuWrapper>
               <List component="div">
                 <MenuItem
-                  to="/users"
+                  to="/admin/users"
                   icon={<TableChartTwoToneIcon />}
                   text={u.t("sidebar_menu__page_users")}
                 />
@@ -216,7 +218,7 @@ const RoleBasedMenu = (props: any) => {
               <List component="div">
                 <MenuItem
                   to="/banking"
-                  icon={<HomeIcon style={{ fontSize: "1.5em" }} />}
+                  icon={<AccountBalanceIcon style={{ fontSize: "1.5em" }} />}
                   text={u.t("sidebar_menu__page_banking")}
                 />
               </List>
@@ -234,7 +236,7 @@ const RoleBasedMenu = (props: any) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    // role: UserService.GetHighestRole(state.auth.user.roles),
+    role: UserService.GetHighestRole(state.session.user.roles),
   };
 };
 

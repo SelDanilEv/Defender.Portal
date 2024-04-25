@@ -1,16 +1,15 @@
-import { Box, Typography, MenuItem, Select, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
 import { useState } from "react";
 import { connect } from "react-redux";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
+import RequestBuilder from "src/api/APIWrapper/RequestBuilder";
 import apiUrls from "src/api/apiUrls";
 
-import Text from "src/components/Text";
 import useUtils from "src/appUtils";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
-import SupportedCurrencies from "src/consts/SupportedCurrencies";
-import { TransferRequest } from "src/models/requests/TransferRequest";
+import { TransferRequest } from "src/models/requests/banking/TransferRequest";
 import { TargetWalletInfo } from "src/models/responses/banking/transactions/TargetWalletInfo";
 
 const StartTransferDialogBody = (props: any) => {
@@ -63,11 +62,8 @@ const StartTransferDialogBody = (props: any) => {
   };
 
   const handleTransfer = () => {
-    const requestBody = {
-      walletNumber: +request.walletNumber,
-      currency: request.currency,
-      amount: +request.amount * 100,
-    };
+    const requestToApi = { ...request };
+    requestToApi.amount = requestToApi.amount * 100;
 
     APICallWrapper({
       url: apiUrls.banking.startTransfer,
@@ -76,7 +72,7 @@ const StartTransferDialogBody = (props: any) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(requestBody),
+        body: RequestBuilder.BuildBody(requestToApi),
       },
       utils: u,
       showSuccess: true,

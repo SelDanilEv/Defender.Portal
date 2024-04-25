@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Defender.Common.Clients.Wallet;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using Defender.Portal.Application.Common.Interfaces.Services.Banking;
 using Defender.Portal.Application.DTOs.Banking;
+using Defender.Portal.Application.Enums;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Services.Banking;
@@ -30,7 +30,7 @@ public class WalletManagementService(
         return mapper.Map<PortalWalletInfoDto>(wallet);
     }
 
-    public async Task<PublicPortalWalletInfoDto> GetPublicWalletInfoAsync(
+    public async Task<PublicPortalWalletInfoDto> GetPublicWalletInfoByNumberAsync(
         int walletNumber)
     {
         var publicWalletInfo = await walletWrapper

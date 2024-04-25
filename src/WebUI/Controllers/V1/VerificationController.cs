@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Defender.Common.Attributes;
+using Defender.Common.Consts;
 using Defender.Portal.Application.DTOs.Accounts;
 using Defender.Portal.Application.Modules.Verification.Commands;
 using Defender.Portal.Application.Modules.Verification.Queries;
@@ -35,6 +37,7 @@ public class VerificationController : BaseApiController
     }
 
     [HttpPost("send/update-account")]
+    [Auth(Roles.User)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task SendUpdateAccountCodeAsync()

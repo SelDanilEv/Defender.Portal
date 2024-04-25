@@ -1,6 +1,6 @@
 import stateLoader from "src/state/StateLoader";
 import { Session } from "src/models/Session";
-import { UserInfo } from "src/models/UserInfo";
+import { UserAccountInfo } from "src/models/UserAccountInfo";
 
 const sessionReducer = (
   state: Session = {
@@ -11,6 +11,7 @@ const sessionReducer = (
       phone: "",
       isEmailVerified: false,
       isPhoneVerified: false,
+      isBlocked: false,
       roles: [],
       createdDate: undefined,
     },
@@ -47,7 +48,7 @@ const sessionReducer = (
       }
       break;
     case "UPDATE_USER_INFO":
-      let updatedUser = action.payload as UserInfo;
+      let updatedUser = action.payload as UserAccountInfo;
       state = {
         ...state,
         user: {

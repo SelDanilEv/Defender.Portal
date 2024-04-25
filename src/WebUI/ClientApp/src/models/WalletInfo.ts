@@ -4,7 +4,8 @@ export interface CurrencyAccount{
 }
 
 export interface WalletInfo {
+  ownerId: string;
   walletNumber: number;
-  currencyAccounts: Set<CurrencyAccount>;
+  currencyAccounts: CurrencyAccount[];
   defaultCurrency: string;
 }

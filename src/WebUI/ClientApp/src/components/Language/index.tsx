@@ -3,21 +3,34 @@ import { connect } from "react-redux";
 import LocalizationService from "src/services/LocalizationService";
 import LockedSelect from "src/components/LockedComponents/LockedSelect/LockedSelect";
 import { updateLanguage } from "src/actions/sessionActions";
+import { MenuItem } from "@mui/material";
+import SpaceForSelectOptions from "src/consts/SpaceForSelectOptions";
 
 const LanguageSwitcher = (props: any) => {
   const languages = LocalizationService.Languages;
 
+  const { currentLanguage: currentLanguage, updateLanguage: updateLanguage } =
+    props;
+
+  const hangleUpdateLanguage = (selectedLanguage: string) => {
+    updateLanguage(selectedLanguage);
+    LocalizationService.UpdateLanguage(selectedLanguage);
+  };
+
   return (
-    <>
-      <LockedSelect
-        options={languages}
-        defaultKey={props.currentLanguage}
-        onSelect={(option) => {
-          props.updateLanguage(option.key);
-          LocalizationService.UpdateLanguage(option.key);
-        }}
-      />
-    </>
+    <LockedSelect
+      value={currentLanguage}
+      onChange={(event) => {
+        hangleUpdateLanguage(event.target.value as string);
+      }}
+    >
+      {languages.map((language) => (
+        <MenuItem key={language.key} value={language.key}>
+          {language.value}
+          {SpaceForSelectOptions}
+        </MenuItem>
+      ))}
+    </LockedSelect>
   );
 };
 

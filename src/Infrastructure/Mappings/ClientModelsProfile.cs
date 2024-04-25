@@ -1,9 +1,10 @@
 using Defender.Common.Clients.Identity;
+using Defender.Common.Clients.UserManagement;
 using Defender.Common.Clients.Wallet;
 using Defender.Common.DB.Pagination;
 using Defender.Common.Mapping;
+using Defender.Portal.Application.DTOs.Auth;
 using Defender.Portal.Application.DTOs.Banking;
-using Defender.Portal.Application.Models.Session;
 
 namespace Defender.Portal.Infrastructure.Mappings;
 
@@ -11,7 +12,7 @@ public class ClientModelsProfile : BaseMappingProfile
 {
     public ClientModelsProfile()
     {
-        CreateMap<LoginResponse, Session>()
+        CreateMap<LoginResponse, SessionDto>()
             .ForPath(
                 dest => dest.User.Id,
                 opt => opt.MapFrom(
@@ -59,6 +60,10 @@ public class ClientModelsProfile : BaseMappingProfile
                 opt => opt.MapFrom(
                     src => src.WalletNumber))
             .ForMember(
+                dest => dest.OwnerId,
+                opt => opt.MapFrom(
+                    src => src.OwnerId))
+            .ForMember(
                 dest => dest.DefaultCurrency,
                 opt => opt.MapFrom(
                     src => src.CurrencyAccounts.FirstOrDefault(
@@ -80,5 +85,6 @@ public class ClientModelsProfile : BaseMappingProfile
 
         CreateMap<TransactionDto, PortalTransactionDto>();
         CreateMap<TransactionDtoPagedResult, PagedResult<PortalTransactionDto>>();
+        CreateMap<UserDtoPagedResult, PagedResult<Common.DTOs.UserDto>>();
     }
 }

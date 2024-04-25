@@ -1,6 +1,6 @@
 import { IconButtonProps } from "@mui/material";
 
 export default interface LockedIconButtonProps extends IconButtonProps {
-  isLoading?: boolean;
+  isLoading?: boolean;  
   dispatch?: any;
 }

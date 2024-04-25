@@ -1,4 +1,4 @@
-﻿using Defender.Common.Clients.Wallet;
+﻿using Defender.Portal.Application.Enums;
 
 namespace Defender.Portal.Application.DTOs.Banking;
 

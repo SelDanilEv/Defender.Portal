@@ -3,7 +3,7 @@ import { PagedResultBase } from "src/models/base/PagedResultBase";
 export enum TransactionStatus {
   Queued = "Queued",
   Failed = "Failed",
-  Procced = "Procced",
+  Proceed = "Proceed",
 }
 
 export enum Currency {

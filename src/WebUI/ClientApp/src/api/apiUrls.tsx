@@ -1,4 +1,15 @@
 const APIEndpoints = {
+  admin: {
+    //User management
+    searchFullUserInfo: "user/search/full-user-info",
+    userList: "user/list",
+    updateUserInfo: "user/update",
+    updateAccountInfo: "user/account/update",
+    updateAccountPassword: "user/account/password/update",
+
+    //Banking
+    startRecharge: "banking/recharge",
+  },
   authorization: {
     login: "login",
     create: "create",
@@ -6,7 +17,7 @@ const APIEndpoints = {
   },
   account: {
     updateInfo: "update",
-    updateSentitiveInfo: "update/sentitive",
+    updateSensitiveInfo: "update/sensitive",
   },
   verification: {
     check: "check",

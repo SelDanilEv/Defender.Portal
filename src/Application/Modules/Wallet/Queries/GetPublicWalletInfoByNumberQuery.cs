@@ -35,7 +35,7 @@ public class GetPublicWalletInfoByNumberQueryHandler(
         GetPublicWalletInfoByNumberQuery request, 
         CancellationToken cancellationToken)
     {
-        return await walletManagementService.GetPublicWalletInfoAsync(
+        return await walletManagementService.GetPublicWalletInfoByNumberAsync(
             request.WalletNumber);
     }
 

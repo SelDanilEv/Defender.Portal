@@ -46,10 +46,11 @@ const Banking = Loader(lazy(() => import("src/content/appPages/Banking")));
 
 const HomePage = Loader(lazy(() => import("src/content/appPages/HomePage")));
 
-// // Users
+// Amin Users
 
-// const Users = Loader(lazy(() => import('src/content/pages/Users')));
-// const UpdateUserPage = Loader(lazy(() => import('src/content/pages/Users/Update')));
+const AdminUsersPage = Loader(
+  lazy(() => import("src/content/appPages/Admin/Users"))
+);
 
 // Status
 
@@ -165,24 +166,20 @@ const routes: RouteObject[] = [
       },
     ],
   },
-  // {
-  //   path: 'users',
-  //   element: <SidebarLayout />,
-  //   children: [
-  //     {
-  //       path: '',
-  //       element: <Users />
-  //     },
-  //     {
-  //       path: 'edit',
-  //       element: <UpdateUserPage />
-  //     },
-  //     {
-  //       path: '*',
-  //       element: <Status404 />
-  //     }
-  //   ]
-  // },
+  {
+    path: "admin",
+    element: <SidebarLayout />,
+    children: [
+      {
+        path: "users",
+        element: <AdminUsersPage />,
+      },
+      {
+        path: "*",
+        element: <Status404 />,
+      },
+    ],
+  },
   {
     path: "configuration",
     element: <SidebarLayout />,

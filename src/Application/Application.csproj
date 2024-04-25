@@ -22,8 +22,8 @@
 
     <ItemGroup>
       <Folder Include="Common\Behaviours\" />
-      <Folder Include="Enums\" />
       <Folder Include="Modules\Account\Queries\" />
+      <Folder Include="Modules\Admin\Banking\Queries\" />
       <Folder Include="Modules\Authorization\Queries\" />
     </ItemGroup>
 

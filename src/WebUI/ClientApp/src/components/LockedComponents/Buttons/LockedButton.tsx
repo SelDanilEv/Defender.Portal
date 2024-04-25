@@ -8,7 +8,8 @@ const LockedButton = ({
   dispatch,
   ...restProps
 }: LockedButtonProps) => {
-  return <Button disabled={isLoading || restProps.disabled} {...restProps} />;
+  const { disabled, ...otherProps } = restProps;
+  return <Button disabled={isLoading || disabled} {...otherProps} />;
 };
 
 const mapStateToProps = (state: any) => {

@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Defender.Common.Attributes;
-using Defender.Common.Models;
+using Defender.Common.Consts;
 using Defender.Common.Enums;
 using Defender.Portal.WebUI.Controllers;
 using Defender.Common.DTOs;

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Defender.Common.Clients.Wallet;
 using Defender.Common.DB.Pagination;
 using Defender.Portal.Application.Common.Interfaces.Services.Banking;
 using Defender.Portal.Application.DTOs.Banking;
+using Defender.Portal.Application.Enums;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Services.Banking;
@@ -24,9 +24,9 @@ public class TransactionService(
     }
 
     public async Task<PagedResult<PortalTransactionDto>> GetTransactionHistoryAsync(
-        PaginationRequest paginationRequest)
+        PaginationRequest paginationRequest, Guid? walletId = null)
     {
-        var apiResult = await walletWrapper.GetTransactionHistoryAsync(paginationRequest);
+        var apiResult = await walletWrapper.GetTransactionHistoryAsync(paginationRequest, walletId);
 
         var transactions = mapper.Map<PagedResult<PortalTransactionDto>>(apiResult);
 

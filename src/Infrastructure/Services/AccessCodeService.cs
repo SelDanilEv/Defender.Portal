@@ -1,36 +1,25 @@
 ﻿using AutoMapper;
-using Defender.Common.Accessors;
-using Defender.Common.Clients.Identity;
 using Defender.Common.Interfaces;
 using Defender.Portal.Application.Common.Interfaces.Services;
+using Defender.Portal.Application.Enums;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Services;
 
-public class AccessCodeService : IAccessCodeService
-{
-    private readonly IIdentityWrapper _identityWrapper;
-    private readonly ICurrentAccountAccessor _currentAccountAccessor;
-    private readonly IMapper _mapper;
-
-    public AccessCodeService(
+public class AccessCodeService(
         IIdentityWrapper identityWrapper,
         ICurrentAccountAccessor currentAccountAccessor,
-        IMapper mapper)
-    {
-        _identityWrapper = identityWrapper;
-        _currentAccountAccessor = currentAccountAccessor;
-        _mapper = mapper;
-    }
+        IMapper mapper) : IAccessCodeService
+{
 
     public async Task<bool> VerifyEmailAsync(int hash, int code)
     {
-        return await _identityWrapper.VerifyAccountEmailAsync(hash, code);
+        return await identityWrapper.VerifyAccountEmailAsync(hash, code);
     }
 
     public async Task<bool> VerifyAccessCodeAsync(int code)
     {
-        return await _identityWrapper.VerifyAccessCodeAsync(code);
+        return await identityWrapper.VerifyAccessCodeAsync(code);
     }
 
     public async Task SendEmailVerificationAccessCodeAsync(Guid? userId)
@@ -43,10 +32,15 @@ public class AccessCodeService : IAccessCodeService
         await SendAccessCodeAsync(userId, AccessCodeType.UpdateAccount);
     }
 
-    private async Task SendAccessCodeAsync(Guid? userId, AccessCodeType accessCodeType)
+    private async Task SendAccessCodeAsync(
+        Guid? userId,
+        AccessCodeType accessCodeType)
     {
-        var accountId = userId.HasValue ? userId.Value : _currentAccountAccessor.GetAccountId();
+        var accountId = userId.HasValue 
+            ? userId.Value 
+            : currentAccountAccessor.GetAccountId();
 
-        await _identityWrapper.SendVerificationCodeAsync(accountId, accessCodeType);
+        await identityWrapper.SendVerificationCodeAsync(
+            accountId, accessCodeType);
     }
 }

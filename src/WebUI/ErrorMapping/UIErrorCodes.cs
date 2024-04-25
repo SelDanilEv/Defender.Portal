@@ -3,6 +3,7 @@
 public enum UIErrorCodes
 {
     Error_UnhandledError,
+    Error_ForbiddenAccess,
 
     Error_SessionExpired,
 

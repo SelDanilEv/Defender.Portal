@@ -1,4 +1,4 @@
-import { UserInfo } from "src/models/UserInfo";
+import { UserAccountInfo } from "src/models/UserAccountInfo";
 
 export function login(payload) {
   return (dispath) => {
@@ -31,7 +31,7 @@ export function updateLanguage(language) {
   };
 }
 
-export function updateUserInfo(updatedUser: UserInfo) {
+export function updateUserInfo(updatedUser: UserAccountInfo) {
   return (dispath) => {
     dispath({
       type: "UPDATE_USER_INFO",

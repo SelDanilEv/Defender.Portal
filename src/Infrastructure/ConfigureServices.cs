@@ -5,6 +5,7 @@ using Defender.Common.Clients.Wallet;
 using Defender.Portal.Application.Common.Interfaces.Repositories;
 using Defender.Portal.Application.Common.Interfaces.Services;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
+using Defender.Portal.Application.Common.Interfaces.Services.Admin;
 using Defender.Portal.Application.Common.Interfaces.Services.Banking;
 using Defender.Portal.Application.Configuration.Options;
 using Defender.Portal.Infrastructure.Clients.Identity;
@@ -14,6 +15,7 @@ using Defender.Portal.Infrastructure.Clients.Wallet;
 using Defender.Portal.Infrastructure.Repositories.Sample;
 using Defender.Portal.Infrastructure.Services;
 using Defender.Portal.Infrastructure.Services.Accounts;
+using Defender.Portal.Infrastructure.Services.Admin;
 using Defender.Portal.Infrastructure.Services.Banking;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -56,6 +58,10 @@ public static class ConfigureServices
 
         services.AddTransient<IWalletManagementService, WalletManagementService>();
         services.AddTransient<ITransactionService, TransactionService>();
+
+        services.AddTransient<IAdminWalletManagementService, AdminWalletManagementService>();
+        services.AddTransient<IAdminTransactionManagementService, AdminTransactionManagementService>();
+        services.AddTransient<IAdminAccountManagementService, AdminAccountManagementService>();
 
         return services;
     }

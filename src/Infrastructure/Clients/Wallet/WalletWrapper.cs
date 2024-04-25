@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
 using Defender.Common.Clients.Wallet;
 using Defender.Common.DB.Pagination;
+using Defender.Common.Helpers;
 using Defender.Common.Interfaces;
 using Defender.Common.Wrapper.Internal;
 using Defender.Portal.Application.DTOs.Banking;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Clients.Wallet;
+
+using Currency = Application.Enums.Currency;
 
 public class WalletWrapper(
     IAuthenticationHeaderAccessor authenticationHeaderAccessor,
@@ -18,19 +21,17 @@ public class WalletWrapper(
         ), IWalletWrapper
 {
 
-    public async Task<WalletDto> GetWalletInfoAsync()
+    public async Task<PortalWalletInfoDto> GetWalletInfoAsync(Guid? userId = null)
     {
         return await ExecuteSafelyAsync(async () =>
         {
-            var command = new GetOrCreateWalletCommand();
+            var response = await serviceClient.GetOrCreateAsync(userId);
 
-            var response = await serviceClient.GetOrCreateAsync(command);
-
-            return response;
+            return mapper.Map<PortalWalletInfoDto>(response);
         }, AuthorizationType.User);
     }
 
-    public async Task<WalletDto> CreateNewAccountAsync(
+    public async Task<PortalWalletInfoDto> CreateNewAccountAsync(
         Currency currency,
         bool isDefault)
     {
@@ -38,13 +39,14 @@ public class WalletWrapper(
         {
             var command = new AddCurrencyAccountCommand()
             {
-                Currency = currency,
+                Currency = MappingHelper.MapEnum
+                    <Currency, AddCurrencyAccountCommandCurrency>(currency),
                 IsDefault = isDefault
             };
 
             var response = await serviceClient.CreateAsync(command);
 
-            return response;
+            return mapper.Map<PortalWalletInfoDto>(response); ;
         }, AuthorizationType.User);
     }
 
@@ -60,6 +62,18 @@ public class WalletWrapper(
         }, AuthorizationType.User);
     }
 
+    public async Task<PortalWalletInfoDto> GetWalletInfoByNumberAsync(
+        int walletNumber)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var response = await serviceClient
+            .InfoByNumber2Async(walletNumber);
+
+            return mapper.Map<PortalWalletInfoDto>(response);
+        }, AuthorizationType.User);
+    }
+
     public async Task<PortalTransactionDto> StartTransferTransactionAsync(
         int walletNumber,
         int amount,
@@ -71,7 +85,8 @@ public class WalletWrapper(
             {
                 ToWalletNumber = walletNumber,
                 Amount = amount,
-                Currency = currency
+                Currency = MappingHelper.MapEnum
+                    <Currency, StartTransferTransactionCommandCurrency>(currency)
             };
 
             var response = await serviceClient
@@ -81,15 +96,41 @@ public class WalletWrapper(
         }, AuthorizationType.User);
     }
 
-    public async Task<TransactionDtoPagedResult> 
-        GetTransactionHistoryAsync(PaginationRequest paginationRequest)
+    public async Task<PortalTransactionDto> StartRechargeTransactionAsync(
+        int walletNumber,
+        int amount,
+        Currency currency)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var command = new StartRechargeTransactionCommand()
+            {
+                TargetWalletNumber = walletNumber,
+                Amount = amount,
+                Currency = MappingHelper.MapEnum
+                    <Currency, StartRechargeTransactionCommandCurrency>(currency)
+            };
+
+            var response = await serviceClient
+                .RechargeAsync(command);
+
+            return mapper.Map<PortalTransactionDto>(response);
+        }, AuthorizationType.User);
+    }
+
+    public async Task<TransactionDtoPagedResult>
+        GetTransactionHistoryAsync(PaginationRequest paginationRequest, Guid? walletId = null)
     {
         return await ExecuteSafelyAsync(async () =>
         {
             var response = await serviceClient
-                .HistoryAsync(null, paginationRequest.Page, paginationRequest.PageSize);
+                .HistoryAsync(
+                    walletId, 
+                    paginationRequest.Page,
+                    paginationRequest.PageSize);
 
             return response;
         }, AuthorizationType.User);
     }
+
 }

@@ -6,7 +6,7 @@ using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using FluentValidation;
 using MediatR;
 
-namespace Defender.Portal.Application.Modules.Authorization.Commands;
+namespace Defender.Portal.Application.Modules.Account.Commands;
 
 public record UpdateAccountSentitiveInfoCommand(
         Guid? UserId,

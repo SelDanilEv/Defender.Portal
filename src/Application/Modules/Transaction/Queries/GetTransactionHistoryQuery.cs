@@ -10,7 +10,7 @@ namespace Defender.Portal.Application.Modules.Transaction.Queries;
 public record GetTransactionHistoryQuery
     : PaginationRequest, IRequest<PagedResult<PortalTransactionDto>>
 {
-    //public int CurrentWalletNumber { get; init; }
+    public Guid? WalletId { get; set; }
 };
 
 public sealed class GetTransactionHistoryQueryValidator
@@ -18,11 +18,6 @@ public sealed class GetTransactionHistoryQueryValidator
 {
     public GetTransactionHistoryQueryValidator()
     {
-        //RuleFor(s => s.CurrentWalletNumber)
-        //          .NotEmpty()
-        //          .NotNull()
-        //          .WithMessage(
-        //    ErrorCodeHelper.GetErrorCode(ErrorCode.VL_WLT_EmptyWalletNumber));
     }
 }
 
@@ -34,7 +29,7 @@ public class GetTransactionHistoryQueryHandler(
         GetTransactionHistoryQuery request,
         CancellationToken cancellationToken)
     {
-        return await transactionService.GetTransactionHistoryAsync(request);
+        return await transactionService.GetTransactionHistoryAsync(request, request.WalletId);
     }
 
 }

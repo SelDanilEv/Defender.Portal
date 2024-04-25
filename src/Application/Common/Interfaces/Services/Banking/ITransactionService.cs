@@ -1,6 +1,7 @@
-﻿using Defender.Common.Clients.Wallet;
-using Defender.Common.DB.Pagination;
+﻿using Defender.Common.DB.Pagination;
 using Defender.Portal.Application.DTOs.Banking;
+using Defender.Portal.Application.Enums;
+
 
 namespace Defender.Portal.Application.Common.Interfaces.Services.Banking;
 
@@ -12,6 +13,6 @@ public interface ITransactionService
         Currency currency);
 
     Task<PagedResult<PortalTransactionDto>> GetTransactionHistoryAsync(
-        PaginationRequest paginationRequest);
+        PaginationRequest paginationRequest, Guid? walletId = null);
 
 }

@@ -130,13 +130,17 @@ public class IdentityWrapper(
         }, AuthorizationType.Service);
     }
 
-    public async Task<bool> VerifyAccessCodeAsync(int code)
+    public async Task<bool> VerifyAccessCodeAsync(int code, AccessCodeType accessCodeType)
     {
         return await ExecuteSafelyAsync(async () =>
         {
             var command = new VerifyCodeCommand()
             {
                 Code = code,
+                Type = MappingHelper.MapEnum<
+                    AccessCodeType,
+                    VerifyCodeCommandType>(
+                        accessCodeType)
             };
 
             var response = await identityServiceClient.VerifyAsync(command);
@@ -146,23 +150,38 @@ public class IdentityWrapper(
     }
 
     public async Task ChangeAccountPasswordAsync(
-        Guid accountId,
-        string newPassword)
+        Guid? accountId,
+        string newPassword,
+        int? code = null)
     {
         await ExecuteSafelyAsync(async () =>
         {
             var command = new ChangeUserPasswordCommand()
             {
                 AccountId = accountId,
-                NewPassword = newPassword
+                NewPassword = newPassword,
+                Code = code
             };
 
             await identityServiceClient.ChangeAsync(command);
-        }, AuthorizationType.Service);
+        }, AuthorizationType.User);
+    }
+
+    public async Task<Guid> SendResetPasswordCodeAsync(string email)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var command = new SendPasswordResetCodeCommand()
+            {
+                Email = email
+            };
+
+            return await identityServiceClient.ResetPasswordAsync(command);
+        }, AuthorizationType.WithoutAuthorization);
     }
 
     public async Task<Common.DTOs.AccountDto> UpdateAccountInfoAsync(
-        UpdateAccountInfoRequest updateRequest)
+        UpdateAccountInfoAsAdminRequest updateRequest)
     {
         return await ExecuteSafelyAsync(async () =>
         {

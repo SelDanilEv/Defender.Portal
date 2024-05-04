@@ -1,2 +1,2 @@
-export type DictionaryType = { [key: string]: string };
+export type DictionaryType<T> = { [key: string]: T };
 

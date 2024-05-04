@@ -1,6 +1,7 @@
 const APIEndpoints = {
   admin: {
     //User management
+    loginAsUser: "user/login",
     searchFullUserInfo: "user/search/full-user-info",
     userList: "user/list",
     updateUserInfo: "user/update",
@@ -18,11 +19,13 @@ const APIEndpoints = {
   account: {
     updateInfo: "update",
     updateSensitiveInfo: "update/sensitive",
+    resetPassword: "reset-password",
   },
   verification: {
     check: "check",
     verifyEmail: "verify/email",
     sendUpdateAccountCode: "send/update-account",
+    sendResetPasswordCode: "send/reset-password",
     verifyAccessCode: "verify/code",
     resendEmail: "resend/email",
   },

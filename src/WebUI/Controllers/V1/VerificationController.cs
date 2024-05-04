@@ -4,7 +4,6 @@ using Defender.Common.Consts;
 using Defender.Portal.Application.DTOs.Accounts;
 using Defender.Portal.Application.Modules.Verification.Commands;
 using Defender.Portal.Application.Modules.Verification.Queries;
-using Defender.Portal.Application.Modules.Wallet.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,13 +45,21 @@ public class VerificationController : BaseApiController
             (new SendUpdateAccountAccessCodeCommand());
     }
 
+    [HttpPost("send/reset-password")]
+    [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    public async Task<Guid> SendResetPasswordCodeAsync(
+        [FromBody] SendPasswordResetCodeCommand command)
+    {
+        return await ProcessApiCallAsync<SendPasswordResetCodeCommand, Guid>(command);
+    }
+
     [HttpPost("verify/code")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<bool> VerifyAccessCodeAsync([FromBody] VerifyAccessCodeCommand command)
     {
-        return await ProcessApiCallWithoutMappingAsync<VerifyAccessCodeCommand, bool>
-            (command);
+        return await ProcessApiCallWithoutMappingAsync<VerifyAccessCodeCommand, bool>(command);
     }
 
     [HttpPost("resend/email")]
@@ -60,7 +67,7 @@ public class VerificationController : BaseApiController
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task ResendEmailVerificationAsync()
     {
-        await ProcessApiCallAsync<SendEmailVerificationCommand>
-            (new SendEmailVerificationCommand());
+        await ProcessApiCallAsync<SendEmailVerificationCodeCommand>
+            (new SendEmailVerificationCodeCommand());
     }
 }

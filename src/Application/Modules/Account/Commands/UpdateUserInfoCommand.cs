@@ -41,6 +41,6 @@ public sealed class UpdateUserInfoCommandHandler(
         var user = request.ToUserInfo();
         user.Id = currentAccountAccessor.GetAccountId();
 
-        return await accountManagementService.UpdateUserInfoAsync(user);
+        return await accountManagementService.UpdateUserInfoAsCurrentUserAsync(user);
     }
 }

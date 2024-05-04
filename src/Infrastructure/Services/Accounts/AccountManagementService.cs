@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Defender.Common.DTOs;
+﻿using Defender.Common.DTOs;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using Defender.Portal.Infrastructure.Clients.Interfaces;
 
@@ -9,8 +8,8 @@ using PublicUserInfoDto = Application.DTOs.Accounts.PublicUserInfoDto;
 
 public class AccountManagementService(
         IIdentityWrapper identityWrapper,
-        IUserManagementWrapper userManagementWrapper,
-        IMapper mapper) : IAccountManagementService
+        IUserManagementWrapper userManagementWrapper) 
+    : IAccountManagementService
 {
     public async Task<AccountDto> GetAccountDetailsAsync(Guid userId)
     {
@@ -20,6 +19,13 @@ public class AccountManagementService(
         return account;
     }
 
+    public async Task<Guid> GetUserIdByEmailAsync(string email)
+    {
+        var userId = await userManagementWrapper
+            .GetUserIdByEmailAsync(email);
+
+        return userId;
+    }
 
     public async Task<PublicUserInfoDto> GetPublicUserInfoAsync(
         Guid userId)
@@ -30,29 +36,40 @@ public class AccountManagementService(
         return publicUserInfo;
     }
 
-    public async Task<UserDto> UpdateUserInfoAsync(UserDto user)
+    public async Task<UserDto> UpdateUserInfoAsCurrentUserAsync(UserDto user)
     {
         var account = await userManagementWrapper
-            .UpdateUserInfoAsync(user);
+            .UpdateUserInfoAsCurrentUserAsync(user);
 
         return account;
     }
 
-    public async Task UpdateUserSentitiveInfoAsync(
-        UserDto user, 
+    public async Task UpdateUserSensitiveInfoAsync(
+        UserDto user,
         string? newPassword = null)
     {
         if (user.Email != null)
         {
-            await userManagementWrapper.UpdateUserInfoAsync(user);
+            await userManagementWrapper.UpdateUserInfoAsServiceAsync(user);
         }
 
         if (newPassword != null)
         {
-            await identityWrapper.ChangeAccountPasswordAsync(
+            await ChangeAccountPasswordAsync(
                 user.Id,
                 newPassword);
         }
+    }
+
+    public async Task ChangeAccountPasswordAsync(
+        Guid? userId,
+        string? newPassword,
+        int? code = null)
+    {
+            await identityWrapper.ChangeAccountPasswordAsync(
+                userId,
+                newPassword,
+                code);
     }
 
 }

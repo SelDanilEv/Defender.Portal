@@ -9,7 +9,7 @@ export const NumberMaskRegex = /^\d+$/;
 
 // Password
 export const PasswordRegex = /^\S{5,32}$/;
-export const PasswordMaskRegex = /^[A-Za-z\d@$!%*?&]{0,32}$/;
+export const PasswordMaskRegex = /^[A-Za-z\d@_$!%*?&]{0,32}$/;
 
 // Currency Amount
 export const CurrencyAmountMaskRegex = /^\d*(\.\d{0,2})?$/;

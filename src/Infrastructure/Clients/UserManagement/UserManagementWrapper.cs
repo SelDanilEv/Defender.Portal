@@ -18,24 +18,16 @@ public class UserManagementWrapper(
             authenticationHeaderAccessor),
     IUserManagementWrapper
 {
-    public async Task<Common.DTOs.UserDto> UpdateUserInfoAsync(
+    public async Task<Common.DTOs.UserDto> UpdateUserInfoAsServiceAsync(
         Common.DTOs.UserDto userDto)
     {
-        return await ExecuteSafelyAsync(async () =>
-        {
-            var command = new UpdateUserCommand()
-            {
-                UserId = userDto.Id,
-                Email = userDto.Email,
-                Nickname = userDto.Nickname,
-                PhoneNumber = userDto.PhoneNumber,
-            };
+        return await UpdateUserInfoAsync(userDto, AuthorizationType.Service);
+    }
 
-            var response = await userManagementServiceClient
-                .UpdateAsync(command);
-
-            return mapper.Map<Common.DTOs.UserDto>(response);
-        }, AuthorizationType.User);
+    public async Task<Common.DTOs.UserDto> UpdateUserInfoAsCurrentUserAsync(
+        Common.DTOs.UserDto userDto)
+    {
+        return await UpdateUserInfoAsync(userDto, AuthorizationType.User);
     }
 
     public async Task<PublicUserInfoDto> GetPublicUserInfoAsync(
@@ -62,6 +54,17 @@ public class UserManagementWrapper(
         }, AuthorizationType.User);
     }
 
+    public async Task<Guid> GetUserIdByEmailAsync(string email)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var response = await userManagementServiceClient
+                .GetIdByEmailAsync(email);
+
+            return response;
+        }, AuthorizationType.User);
+    }
+
     public async Task<Common.DTOs.UserDto> GetUserInfoByEmailAsync(string email)
     {
         return await ExecuteSafelyAsync(async () =>
@@ -83,5 +86,25 @@ public class UserManagementWrapper(
 
             return mapper.Map<PagedResult<Common.DTOs.UserDto>>(response);
         }, AuthorizationType.User);
+    }
+
+    private async Task<Common.DTOs.UserDto> UpdateUserInfoAsync(
+        Common.DTOs.UserDto userDto, AuthorizationType authorizationType)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var command = new UpdateUserCommand()
+            {
+                Id = userDto.Id,
+                Email = userDto.Email,
+                Nickname = userDto.Nickname,
+                PhoneNumber = userDto.PhoneNumber,
+            };
+
+            var response = await userManagementServiceClient
+                .UpdateAsync(command);
+
+            return mapper.Map<Common.DTOs.UserDto>(response);
+        }, authorizationType);
     }
 }

@@ -37,13 +37,8 @@ const APICallWrapper = async ({
       case 200:
         onSuccess(response);
 
-        if (showSuccess) {
-          if (
-            (successMesage === undefined ||
-              successMesage === null ||
-              successMesage == "") &&
-            utils != null
-          ) {
+        if (showSuccess || successMesage) {
+          if (!successMesage && utils != null) {
             successMesage = utils.t("Notification_Success");
           }
 
@@ -52,6 +47,9 @@ const APICallWrapper = async ({
         return;
       case 401:
         onFailure(response);
+        break;
+      case 403:
+        utils?.e("Error_ForbiddenAccess");
         break;
       default:
         onFailure(response);

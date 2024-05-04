@@ -11,9 +11,10 @@ public interface IIdentityWrapper
     Task<SessionDto> LoginAccountByGoogleTokenAsync(string token);
     Task<SessionDto> CreateAccountAsync(string email, string nickname, string phone, string password);
     Task<bool> VerifyAccountEmailAsync(int hash, int code);
-    Task SendVerificationCodeAsync(Guid accountId, AccessCodeType accessCodeType);
     Task<Common.DTOs.AccountDto> GetAccountDetailsAsync(Guid accountId);
-    Task<bool> VerifyAccessCodeAsync(int code);
-    Task ChangeAccountPasswordAsync(Guid accountId, string newPassword);
-    Task<Common.DTOs.AccountDto> UpdateAccountInfoAsync(UpdateAccountInfoRequest request);
+    Task SendVerificationCodeAsync(Guid accountId, AccessCodeType accessCodeType);
+    Task<bool> VerifyAccessCodeAsync(int code, AccessCodeType accessCodeType);
+    Task<Guid> SendResetPasswordCodeAsync(string email);
+    Task ChangeAccountPasswordAsync(Guid? accountId, string newPassword, int? code = null);
+    Task<Common.DTOs.AccountDto> UpdateAccountInfoAsync(UpdateAccountInfoAsAdminRequest request);
 }

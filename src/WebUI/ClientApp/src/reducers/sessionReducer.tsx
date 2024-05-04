@@ -29,6 +29,7 @@ const sessionReducer = (
         token: action.payload.token,
         isAuthenticated: true,
       };
+      console.log("LOGIN", state);
       break;
     case "LOGOUT":
       stateLoader.cleanState();

@@ -1,57 +1,49 @@
-import config from 'src/config.json';
-
+import config from "src/config.json";
 
 const stateName = config.LOCAL_STORAGE_KEY + ":state";
 
 class StateLoader {
+  loadState = () => {
+    try {
+      let serializedState = localStorage.getItem(stateName);
 
-    loadState = () => {
-        try {
-            let serializedState = localStorage.getItem(stateName);
+      if (serializedState === null) {
+        return this.initializeState();
+      }
 
-            if (serializedState === null) {
-                return this.initializeState();
-            }
+      let stateJson = JSON.parse(serializedState);
 
-            let stateJson = JSON.parse(serializedState);
+      stateJson.loading = {
+        callsCounter: 0,
+        loading: false,
+      };
 
-            stateJson.loading = {
-                callsCounter: 0,
-                loading: false
-            }
-
-            return stateJson;
-        }
-        catch (err) {
-            return this.initializeState();
-        }
+      return stateJson;
+    } catch (err) {
+      return this.initializeState();
     }
+  };
 
-    saveState = (state) => {
-        try {
-            let serializedState = JSON.stringify(state);
-            localStorage.setItem(stateName, serializedState);
-        }
-        catch (err) {
-        }
+  saveState = (state) => {
+    try {
+      let serializedState = JSON.stringify(state);
+      localStorage.setItem(stateName, serializedState);
+    } catch (err) {}
+  };
+
+  cleanState = () => {
+    try {
+      localStorage.removeItem(stateName);
+    } catch (err) {
+      console.error("error clean state");
     }
+  };
 
-    cleanState = () => {
-        try {
-            localStorage.removeItem(stateName);
-        }
-        catch (err) {
-            console.error("error clean state")
-        }
-    }
-
-    initializeState = () => {
-        return {
-
-        }
-    };
+  initializeState = () => {
+    return {};
+  };
 }
 
 const stateLoader = new StateLoader();
 
-export default stateLoader
+export default stateLoader;

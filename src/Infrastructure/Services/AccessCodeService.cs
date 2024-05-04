@@ -8,8 +8,7 @@ namespace Defender.Portal.Infrastructure.Services;
 
 public class AccessCodeService(
         IIdentityWrapper identityWrapper,
-        ICurrentAccountAccessor currentAccountAccessor,
-        IMapper mapper) : IAccessCodeService
+        ICurrentAccountAccessor currentAccountAccessor) : IAccessCodeService
 {
 
     public async Task<bool> VerifyEmailAsync(int hash, int code)
@@ -17,9 +16,9 @@ public class AccessCodeService(
         return await identityWrapper.VerifyAccountEmailAsync(hash, code);
     }
 
-    public async Task<bool> VerifyAccessCodeAsync(int code)
+    public async Task<bool> VerifyAccessCodeAsync(int code, AccessCodeType codeType)
     {
-        return await identityWrapper.VerifyAccessCodeAsync(code);
+        return await identityWrapper.VerifyAccessCodeAsync(code, codeType);
     }
 
     public async Task SendEmailVerificationAccessCodeAsync(Guid? userId)
@@ -30,6 +29,11 @@ public class AccessCodeService(
     public async Task SendUserUpdateAccessCodeAsync(Guid? userId)
     {
         await SendAccessCodeAsync(userId, AccessCodeType.UpdateAccount);
+    }
+
+    public async Task<Guid> SendPasswordResetAccessCodeAsync(string email)
+    {
+        return await identityWrapper.SendResetPasswordCodeAsync(email);
     }
 
     private async Task SendAccessCodeAsync(

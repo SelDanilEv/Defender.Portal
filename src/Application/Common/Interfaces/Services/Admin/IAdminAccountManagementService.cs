@@ -12,6 +12,6 @@ public interface IAdminAccountManagementService
     Task<UserDto> GetUserInfoByIdAsync(Guid userId);
     Task<UserDto> GetUserInfoByEmailAsync(string email);
     Task<PagedResult<UserDto>> GetUsersInfoAsync(PaginationRequest paginationRequest);
-    Task<AccountDto> UpdateAccountInfoAsync(UpdateAccountInfoRequest account);
+    Task<AccountDto> UpdateAccountInfoAsync(UpdateAccountInfoAsAdminRequest account);
     Task UpdateAccountPasswordAsync(Guid userId, string newPassword);
 }

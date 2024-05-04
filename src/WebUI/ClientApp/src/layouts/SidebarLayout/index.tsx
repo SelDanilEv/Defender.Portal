@@ -20,7 +20,7 @@ const SidebarLayout: FC<SidebarLayoutProps> = (props: any) => {
   const theme = u.react.theme;
 
   useEffect(() => {
-    if (!props.session.isAuthenticated) {
+    if (!props.session.isAuthenticated || !props.session.user.isEmailVerified) {
       logout();
       return;
     }

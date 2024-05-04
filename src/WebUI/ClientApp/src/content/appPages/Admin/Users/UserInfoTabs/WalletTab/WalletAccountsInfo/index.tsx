@@ -41,12 +41,7 @@ const WalletAccountsInfo = (props: WalletAccountsInfoProps) => {
   const [showRechargeDialog, setShowRechargeDialog] = useState<boolean>(false);
 
   const startRecharge = (currency: string) => {
-    u.log(currency);
-
     setRechargeRequest({ ...rechargeRequest, currency: currency });
-
-    u.log(rechargeRequest);
-
     setShowRechargeDialog(true);
   };
 

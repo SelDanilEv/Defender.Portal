@@ -18,6 +18,9 @@ const Loader = (Component) => (props) =>
 // Welcome
 
 const Login = Loader(lazy(() => import("src/content/welcomePages/Login")));
+const ResetPassword = Loader(
+  lazy(() => import("src/content/welcomePages/ResetPassword"))
+);
 const Create = Loader(lazy(() => import("src/content/welcomePages/Create")));
 const Verification = Loader(
   lazy(() => import("src/content/welcomePages/Verification"))
@@ -89,6 +92,10 @@ const routes: RouteObject[] = [
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "password/reset",
+        element: <ResetPassword />,
       },
       {
         path: "create",

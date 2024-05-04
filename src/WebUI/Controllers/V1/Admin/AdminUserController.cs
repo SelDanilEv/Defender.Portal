@@ -18,6 +18,7 @@ public class AdminUserController(IMediator mediator, IMapper mapper)
     : BaseApiController(mediator, mapper)
 {
 
+    [Auth(Roles.SuperAdmin)]
     [HttpPost("login")]
     [ProducesResponseType(typeof(SessionDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]

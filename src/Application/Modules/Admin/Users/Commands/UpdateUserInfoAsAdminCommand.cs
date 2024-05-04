@@ -51,6 +51,6 @@ public sealed class UpdateUserInfoAsAdminCommandHandler(
     {
         var user = request.ToUserInfo();
 
-        return await accountManagementService.UpdateUserInfoAsync(user);
+        return await accountManagementService.UpdateUserInfoAsCurrentUserAsync(user);
     }
 }

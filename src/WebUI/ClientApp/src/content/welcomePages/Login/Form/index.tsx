@@ -8,6 +8,7 @@ import { login } from "src/actions/sessionActions";
 import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
 import { useState } from "react";
+import { Session } from "src/models/Session";
 
 const LoginForm = (props: any) => {
   const [loginRequest, setLoginRequest]: any = useState({
@@ -58,7 +59,7 @@ const LoginForm = (props: any) => {
       },
       utils: u,
       onSuccess: async (response) => {
-        const loginResponse = await response.json();
+        const loginResponse = (await response.json()) as Session;
 
         if (!loginResponse.isAuthenticated) {
           u.e("Error_AuthorizationFailed");
@@ -67,10 +68,7 @@ const LoginForm = (props: any) => {
 
         props.login(loginResponse);
 
-        if (
-          loginResponse.user.isEmailVerified ||
-          loginResponse.user.isPhoneVerified
-        ) {
+        if (loginResponse.user.isEmailVerified) {
           u.react.navigate("/home");
         } else {
           u.react.navigate("/welcome/verification");
@@ -106,7 +104,10 @@ const LoginForm = (props: any) => {
             label={u.t("welcome_page__password_label")}
             fullWidth
           />
-          <Link sx={{ ml: "auto", mr: "4px", fontSize: "0.8em" }}>
+          <Link
+            href="password/reset"
+            sx={{ ml: "auto", mr: "4px", fontSize: "0.8em" }}
+          >
             Forgot password?
           </Link>
         </Box>

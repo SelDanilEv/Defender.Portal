@@ -9,6 +9,12 @@ import CachedIcon from "@mui/icons-material/Cached";
 import LoginIcon from "@mui/icons-material/Login";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import WalletTab from "./WalletTab";
+import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
+import apiUrls from "src/api/apiUrls";
+import { connect } from "react-redux";
+import { login } from "src/actions/sessionActions";
+import Role from "src/consts/Role";
+import UserService from "src/services/UserService";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -19,12 +25,14 @@ interface TabPanelProps {
 interface UserInfoTabsProps {
   fullUserInfo: FullUserInfoForAdmin;
   refresh: () => void;
+  login: (payload: any) => void;
+  isSuperAdmin: boolean;
 }
 
 const UserInfoTabs = (props: UserInfoTabsProps) => {
   const u = useUtils();
 
-  const { fullUserInfo: fullUserInfo, refresh: refresh } = props;
+  const { fullUserInfo, refresh, isSuperAdmin } = props;
 
   const TabPanel = (props: TabPanelProps) => {
     const { children, value, index, ...other } = props;
@@ -51,6 +59,41 @@ const UserInfoTabs = (props: UserInfoTabsProps) => {
     setValue(newValue);
   };
 
+  const handleLogin = async () => {
+    APICallWrapper({
+      url: apiUrls.admin.loginAsUser,
+      options: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: fullUserInfo.user.id }),
+        cache: "default",
+      },
+      utils: u,
+      onSuccess: async (response) => {
+        const loginResponse = await response.json();
+
+        if (!loginResponse.isAuthenticated) {
+          u.e("Error_AuthorizationFailed");
+          return;
+        }
+
+        props.login(loginResponse);
+
+        if (
+          loginResponse.user.isEmailVerified ||
+          loginResponse.user.isPhoneVerified
+        ) {
+          u.react.navigate("/home");
+        } else {
+          u.react.navigate("/welcome/verification");
+        }
+      },
+      showError: true,
+    });
+  };
+
   return (
     <>
       <Card>
@@ -58,7 +101,7 @@ const UserInfoTabs = (props: UserInfoTabsProps) => {
           <Box display="flex" flexDirection={"row"}>
             <Box sx={{ maxWidth: "60%", overflow: "hidden" }}>
               <Tabs
-                variant="fullWidth"
+                variant="standard"
                 textColor="primary"
                 indicatorColor="primary"
                 value={value}
@@ -85,17 +128,19 @@ const UserInfoTabs = (props: UserInfoTabsProps) => {
                 justifyContent: "flex-end",
               }}
             >
-              <LockedButton
-                disabled={!fullUserInfo?.user?.id}
-                sx={{
-                  minWidth: u.isMobile ? "45%" : "60px",
-                  maxWidth: u.isMobile ? "45%" : "100px",
-                }}
-                variant="outlined"
-                onClick={refresh}
-              >
-                <LoginIcon />
-              </LockedButton>
+              {isSuperAdmin && (
+                <LockedButton
+                  disabled={!fullUserInfo?.user?.id}
+                  sx={{
+                    minWidth: u.isMobile ? "45%" : "60px",
+                    maxWidth: u.isMobile ? "45%" : "100px",
+                  }}
+                  variant="outlined"
+                  onClick={handleLogin}
+                >
+                  <LoginIcon />
+                </LockedButton>
+              )}
               <LockedButton
                 disabled={!fullUserInfo?.user?.id}
                 sx={{
@@ -129,4 +174,19 @@ const UserInfoTabs = (props: UserInfoTabsProps) => {
   );
 };
 
-export default UserInfoTabs;
+const mapStateToProps = (state: any) => {
+  return {
+    isSuperAdmin:
+      UserService.GetHighestRole(state.session.user.roles) === Role.SuperAdmin,
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    login: (payload: any) => {
+      dispatch(login(payload));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserInfoTabs);

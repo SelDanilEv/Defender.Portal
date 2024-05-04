@@ -128,7 +128,8 @@ const UserListTable = (props: UserListTableProps) => {
                 "&:hover": { background: theme.colors.info.lighter },
                 color: theme.palette.info.dark,
               }}
-              onClick={() => {
+              onClick={(event) => {
+                event.stopPropagation();
                 setUserForDetails(userInfo);
                 setShowInfoDialog(true);
               }}

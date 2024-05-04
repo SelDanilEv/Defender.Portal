@@ -4,20 +4,20 @@ using MediatR;
 
 namespace Defender.Portal.Application.Modules.Verification.Commands;
 
-public record SendUpdateAccountAccessCodeCommand : IRequest<Unit>
+public record SendEmailVerificationCodeCommand : IRequest<Unit>
 {
 };
 
-public class SendUpdateAccountAccessCodeCommandHandler(
+public class SendEmailVerificationCodeCommandHandler(
         IAccessCodeService accessCodeService,
         ICurrentAccountAccessor currentAccountAccessor) 
-    : IRequestHandler<SendUpdateAccountAccessCodeCommand, Unit>
+    : IRequestHandler<SendEmailVerificationCodeCommand, Unit>
 {
     public async Task<Unit> Handle(
-        SendUpdateAccountAccessCodeCommand request, 
+        SendEmailVerificationCodeCommand request, 
         CancellationToken cancellationToken)
     {
-        await accessCodeService.SendUserUpdateAccessCodeAsync(
+        await accessCodeService.SendEmailVerificationAccessCodeAsync(
             currentAccountAccessor.GetAccountId());
 
         return Unit.Value;

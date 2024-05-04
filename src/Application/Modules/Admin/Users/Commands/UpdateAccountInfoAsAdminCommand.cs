@@ -14,7 +14,7 @@ public record UpdateAccountInfoAsAdminCommand(
         bool? IsPhoneVerified,
         bool? IsEmailVerified,
         bool? IsBlocked)
-    : UpdateAccountInfoRequest(
+    : UpdateAccountInfoAsAdminRequest(
         UserId, 
         Role, 
         IsPhoneVerified,

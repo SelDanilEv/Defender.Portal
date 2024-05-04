@@ -236,7 +236,7 @@ const RoleBasedMenu = (props: any) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    role: UserService.GetHighestRole(state.session.user.roles),
+    role: UserService.GetHighestRole(state.session?.user?.roles),
   };
 };
 

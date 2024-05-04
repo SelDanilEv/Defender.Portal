@@ -53,7 +53,7 @@ public class AdminAccountManagementService(
     }
 
     public async Task<AccountDto> UpdateAccountInfoAsync(
-        UpdateAccountInfoRequest request)
+        UpdateAccountInfoAsAdminRequest request)
     {
         return await identityWrapper.UpdateAccountInfoAsync(request);
     }

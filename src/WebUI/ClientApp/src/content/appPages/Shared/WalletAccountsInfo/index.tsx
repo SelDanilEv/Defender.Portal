@@ -39,7 +39,35 @@ const WalletAccountsInfo = (props: any) => {
   const u = useUtils();
 
   useEffect(() => {
+    let isMounted = true;
+
+    const updateWalletInfo = () => {
+      APICallWrapper({
+        url: `${apiUrls.banking.walletInfo}`,
+        options: {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          cache: "default",
+        },
+        utils: u,
+        onSuccess: async (response) => {
+          const walletInfo: WalletInfo = await response.json();
+          if (isMounted) {
+            // Check if the component is still mounted
+            updateUIWalletInfo(walletInfo);
+          }
+        },
+        showError: false,
+      });
+    };
+
     updateWalletInfo();
+
+    return () => {
+      isMounted = false; // Set isMounted to false when the component unmounts
+    };
   }, []);
 
   const [wallet, setWallet] = useState<WalletInfo>(props.walletInfo);

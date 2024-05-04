@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FC } from "react";
 import PropTypes from "prop-types";
 import { Outlet } from "react-router-dom";
@@ -35,7 +35,7 @@ const WelcomeLayout: FC = (props: any) => {
 
   const u = useUtils();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (session.isAuthenticated) {
       APICallWrapper({
         url: apiUrls.home.authcheck,

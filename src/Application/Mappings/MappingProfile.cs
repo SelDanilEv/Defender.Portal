@@ -12,7 +12,7 @@ public class MappingProfile : BaseMappingProfile
             .ForMember(
             dest => dest.IsVerified,
             opt => opt.MapFrom(
-                src => src.IsPhoneVerified || src.IsEmailVerified));
+                src => src.IsEmailVerified));
 
         CreateMap<UserDto, PortalUserDto>();
         CreateMap<AccountDto, PortalAccountDto>();

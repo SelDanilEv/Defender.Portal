@@ -2,7 +2,7 @@
 
 namespace Defender.Portal.Application.Models.ApiRequests;
 
-public record UpdateAccountInfoRequest(
+public record UpdateAccountInfoAsAdminRequest(
         Guid UserId,
         Role? Role,
         bool? IsPhoneVerified,

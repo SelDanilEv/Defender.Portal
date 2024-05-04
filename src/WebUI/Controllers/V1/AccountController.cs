@@ -25,14 +25,22 @@ public class AccountController : BaseApiController
             (command);
     }
 
-    [HttpPut("update/sentitive")]
+    [HttpPut("reset-password")]
+    [ProducesResponseType(typeof(PortalUserDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    public async Task ResetPasswordAsync([FromBody] ResetPasswordCommand command)
+    {
+        await ProcessApiCallAsync<ResetPasswordCommand>(command);
+    }
+
+    [HttpPut("update/sensitive")]
     [Auth(Roles.User)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task UpdateAccountSentitiveInfoAsync(
-        [FromBody] UpdateAccountSentitiveInfoCommand command)
+    public async Task UpdateAccountSensitiveInfoAsync(
+        [FromBody] UpdateMyAccountSensitiveInfoCommand command)
     {
-        await ProcessApiCallAsync<UpdateAccountSentitiveInfoCommand>
+        await ProcessApiCallAsync<UpdateMyAccountSensitiveInfoCommand>
             (command);
     }
 }

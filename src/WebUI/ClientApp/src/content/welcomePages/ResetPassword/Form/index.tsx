@@ -212,7 +212,6 @@ const ResetPasswordForm = (props: any) => {
     }
 
     stateMachine.updateState(newState);
-
   }, [sendCodeRequest, resetRequest]);
 
   //end update fields
@@ -220,20 +219,6 @@ const ResetPasswordForm = (props: any) => {
   // API calls
 
   const handleSendResetCode = async () => {
-    setTimeout(() => {
-      try {
-        const saveState = stateMachine.getCurrentState();
-        stateMachine.updateState(stateNames.BackToSendCodeAllowed);
-        stateMachine.updateState(saveState);
-      } catch (error) {
-        console.error("An error occurred:", error);
-      }
-    }, 20000);
-
-    WarningToast(
-      u.t("reset_password_page__notification_activating_back_button")
-    );
-
     APICallWrapper({
       url: apiUrls.verification.sendResetPasswordCode,
       options: {
@@ -247,6 +232,20 @@ const ResetPasswordForm = (props: any) => {
       successMesage: u.t("reset_password_page__send_code_success"),
       showSuccess: true,
       onSuccess: async (response) => {
+        setTimeout(() => {
+          try {
+            const saveState = stateMachine.getCurrentState();
+            stateMachine.updateState(stateNames.BackToSendCodeAllowed);
+            stateMachine.updateState(saveState);
+          } catch (error) {
+            console.error("An error occurred:", error);
+          }
+        }, 20000);
+
+        WarningToast(
+          u.t("reset_password_page__notification_activating_back_button")
+        );
+
         const data = await response.json();
         setResetRequest((prevState) => ({
           ...prevState,
@@ -305,7 +304,7 @@ const ResetPasswordForm = (props: any) => {
 
     stateMachine.updateState(stateNames.SendCodeAllowed);
   };
-  
+
   // end button handlers
 
   return (

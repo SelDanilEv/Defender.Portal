@@ -16,6 +16,7 @@ using Defender.Portal.Infrastructure.Repositories.Sample;
 using Defender.Portal.Infrastructure.Services;
 using Defender.Portal.Infrastructure.Services.Accounts;
 using Defender.Portal.Infrastructure.Services.Admin;
+using Defender.Portal.Infrastructure.Services.Background;
 using Defender.Portal.Infrastructure.Services.Banking;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,6 +46,8 @@ public static class ConfigureServices
         services.AddTransient<IIdentityWrapper, IdentityWrapper>();
         services.AddTransient<IUserManagementWrapper, UserManagementWrapper>();
         services.AddTransient<IWalletWrapper, WalletWrapper>();
+
+        services.AddHostedService<KeepAliveHostedService>();
 
         return services;
     }

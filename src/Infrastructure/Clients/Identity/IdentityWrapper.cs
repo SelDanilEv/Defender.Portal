@@ -19,6 +19,7 @@ public class IdentityWrapper(
             authenticationHeaderAccessor),
     IIdentityWrapper
 {
+
     public async Task<SessionDto> CreateAccountAsync(
         string email,
         string nickname,

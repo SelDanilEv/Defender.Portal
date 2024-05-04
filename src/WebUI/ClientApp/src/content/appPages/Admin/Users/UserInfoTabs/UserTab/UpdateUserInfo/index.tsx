@@ -13,6 +13,7 @@ import {
   UserNicknameRegex,
   PhoneNumberMaskRegex,
   EmailMaskRegex,
+  UserNicknameMaskRegex,
 } from "src/consts/Regexes";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import RequestBuilder from "src/api/APIWrapper/RequestBuilder";
@@ -60,7 +61,7 @@ const UpdateUserInfo = (props: UpdateUserInfoProps) => {
       if (
         name === updateParams.nickname &&
         value !== "" &&
-        !UserNicknameRegex.test(value)
+        !UserNicknameMaskRegex.test(value)
       ) {
         return prevState;
       }

@@ -28,4 +28,6 @@ export const PhoneNumberRegex = /^\+\d{1,3}\d{10,15}$/;
 export const PhoneNumberMaskRegex = /^\+\d{0,3}(\d{0,15})?$/;
 
 // User Nickname
-export const UserNicknameRegex = /^[a-zA-Z0-9_!@#$%^&*-+]{3,32}$/;
+export const UserNicknameRegex = /^[a-zA-Z0-9_!@#$%^&*-+\u0400-\u04FF]{3,32}$/;
+export const UserNicknameMaskRegex =
+  /^[a-zA-Z0-9_!@#$%^&*-+\u0400-\u04FF]{0,32}$/;

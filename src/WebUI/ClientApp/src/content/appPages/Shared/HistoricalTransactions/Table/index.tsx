@@ -16,14 +16,12 @@ import {
   Typography,
   useTheme,
   CardHeader,
-  useMediaQuery,
 } from "@mui/material";
 
 import Label from "src/components/Label";
 import {
   Transaction,
   TransactionStatus,
-  TransactionType,
 } from "src/models/responses/banking/transactions/TransactionHistoryResponse";
 import InfoIcon from "@mui/icons-material/Info";
 import { CurrentPagination } from "src/models/base/CurrentPagination";
@@ -35,6 +33,7 @@ import TransactionInfoDialogBody from "./TransactionInfoDialogBody";
 import CustomDialog from "src/components/Dialog";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import CachedIcon from "@mui/icons-material/Cached";
+import { mapTransactionStatus, mapTransactionType } from "./mapping";
 
 interface HistoricalTransactionsTableProps {
   transactions: Transaction[];
@@ -72,42 +71,22 @@ const HistoricalTransactionsTable = (
   const getStatusLabel = (status: TransactionStatus): JSX.Element => {
     const map = {
       Failed: {
-        text: "banking_page__trans_info_table_status_failed",
         color: "error",
       },
       Proceed: {
-        text: "banking_page__trans_info_table_status_proceed",
         color: "success",
       },
       Queued: {
-        text: "banking_page__trans_info_table_status_queued",
         color: "warning",
       },
     };
-    const { text, color }: any = map[status];
+    const { color }: any = map[status];
 
     return (
       <Label fontSize={"1.2em"} color={color}>
-        {u.t(text)}
+        {mapTransactionStatus(u, status)}
       </Label>
     );
-  };
-
-  const getTransType = (status: TransactionType) => {
-    const map = {
-      Recharge: {
-        text: "banking_page__trans_info_table_type_recharge",
-      },
-      Transfer: {
-        text: "banking_page__trans_info_table_type_transfer",
-      },
-      Payment: {
-        text: "banking_page__trans_info_table_type_payment",
-      },
-    };
-    const { text }: any = map[status];
-
-    return u.t(text);
   };
 
   const handlePageChange = (event: any, newPage: number): void => {
@@ -153,7 +132,7 @@ const HistoricalTransactionsTable = (
                 gutterBottom
                 noWrap
               >
-                {getTransType(transaction.transactionType)}
+                {mapTransactionType(u, transaction.transactionType)}
               </Typography>
             </TableCell>
           )}

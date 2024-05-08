@@ -6,6 +6,7 @@ import useUtils from "src/appUtils";
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
 import DateLocales from "src/consts/DateLocales";
 import { Transaction } from "src/models/responses/banking/transactions/TransactionHistoryResponse";
+import { mapTransactionStatus, mapTransactionType } from "../mapping";
 
 const HorizontalDivider = () => {
   return (
@@ -48,7 +49,7 @@ const TransactionInfoDialogBody = (props: any) => {
             {u.t("banking_page__trans_info_dialog_type_label")}:
           </Grid>
           <Grid item xs={6} sm={7}>
-            {transaction.transactionType}
+            {mapTransactionType(u, transaction.transactionType)}
           </Grid>
         </>
       )}
@@ -59,7 +60,7 @@ const TransactionInfoDialogBody = (props: any) => {
             {u.t("banking_page__trans_info_dialog_status_label")}:
           </Grid>
           <Grid item xs={6} sm={7}>
-            {transaction.transactionStatus}
+            {mapTransactionStatus(u, transaction.transactionStatus)}
           </Grid>
         </>
       )}

@@ -108,7 +108,7 @@ const LoginForm = (props: any) => {
             href="password/reset"
             sx={{ ml: "auto", mr: "4px", fontSize: "0.8em" }}
           >
-            Forgot password?
+            {u.t("welcome_page__reset_password_link")}
           </Link>
         </Box>
 

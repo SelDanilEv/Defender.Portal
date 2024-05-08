@@ -31,6 +31,7 @@
   "welcome_page__email_verification_description": "To continue please check your email and follow the verification link",
   "welcome_page__resend_verification_email": "Resend verification",
   "welcome_page__verification_email_sent": "Verification link sent to your email",
+  "welcome_page__reset_password_link": "Forgot password?",
 
   "_" : "Reset password page",
   "reset_password_page__back_button": "Back to login",

@@ -31,9 +31,9 @@
   "welcome_page__email_verification_description": "Чтобы продолжить, проверьте свою электронную почту и перейдите по ссылке для подтверждения",
   "welcome_page__resend_verification_email": "Отправить письмо для подтверждения снова",
   "welcome_page__verification_email_sent": "Ссылка для подтверждения отправлена на вашу электронную почту",
+  "welcome_page__reset_password_link": "Забыли пароль?",
 
   "_" : "Reset password page",
-
   "reset_password_page__back_button": "Вернуться назад",
   "reset_password_page__notification_activating_back_button": "Кнопка назад станет активной через 20 секунд",
   "reset_password_page__send_code_success": "Код успешно отправлен!",

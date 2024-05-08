@@ -13,7 +13,8 @@ import RequestBuilder from "src/api/APIWrapper/RequestBuilder";
 import { GetHistoricalTransactionsRequest } from "src/models/requests/banking/GetHistoricalTransactionsRequest";
 
 interface HistoricalTransactionsProps {
-  walletId?: string;
+  targetWalletId?: string;
+  targetWalletNumber?: number;
 }
 
 const HistoricalTransactions = (props: HistoricalTransactionsProps) => {
@@ -25,7 +26,7 @@ const HistoricalTransactions = (props: HistoricalTransactionsProps) => {
     useState<GetHistoricalTransactionsRequest>({
       page: 0,
       pageSize: 5,
-      walletId: props.walletId,
+      walletId: props.targetWalletId,
     } as GetHistoricalTransactionsRequest);
 
   const applyPagination = (page: number, limit: number) => {
@@ -78,6 +79,7 @@ const HistoricalTransactions = (props: HistoricalTransactionsProps) => {
         applyPagination={applyPagination}
         pagination={pagination}
         refresh={reloadTransactionHistory}
+        targetWalletNumber={props.targetWalletNumber}
       />
     </Card>
   );

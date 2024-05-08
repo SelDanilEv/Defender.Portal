@@ -42,6 +42,7 @@ interface HistoricalTransactionsTableProps {
   refresh: () => void;
   currentLanguage: string;
   walletNumber: number;
+  targetWalletNumber?: number;
 }
 
 const HistoricalTransactionsTable = (
@@ -99,7 +100,8 @@ const HistoricalTransactionsTable = (
 
   const renderTransactionInfo = (transaction: Transaction): JSX.Element => {
     {
-      const isCredit = transaction.fromWallet === userWalletNumber;
+      const walletNumber = props.targetWalletNumber ?? userWalletNumber;
+      const isCredit = transaction.fromWallet === walletNumber;
       const amount = isCredit
         ? -transaction.amount / 100
         : `+${transaction.amount / 100}`;

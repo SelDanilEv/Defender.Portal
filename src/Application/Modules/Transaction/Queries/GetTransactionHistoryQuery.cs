@@ -1,5 +1,4 @@
 ﻿using Defender.Common.DB.Pagination;
-using Defender.Common.Errors;
 using Defender.Portal.Application.Common.Interfaces.Services.Banking;
 using Defender.Portal.Application.DTOs.Banking;
 using FluentValidation;

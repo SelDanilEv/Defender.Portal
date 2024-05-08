@@ -20,7 +20,10 @@ const WalletTab = (props: WalletTabProps) => {
         <WalletAccountsInfo walletInfo={walletInfo} />
       </Grid>
       <Grid item xs={12}>
-        <HistoricalTransactions walletId={walletInfo.ownerId} />
+        <HistoricalTransactions
+          targetWalletId={walletInfo.ownerId}
+          targetWalletNumber={walletInfo.walletNumber}
+        />
       </Grid>
     </Grid>
   );

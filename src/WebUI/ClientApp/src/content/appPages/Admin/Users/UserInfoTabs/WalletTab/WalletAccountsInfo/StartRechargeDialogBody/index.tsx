@@ -85,7 +85,7 @@ const StartRechargeDialogBody = (props: StartRechargeDialogBodyProps) => {
             "admin_users_page__info_wallet_tab_recharge_dialog_amount_label"
           )}
           InputProps={{ style: { fontSize: "1.5em" } }}
-          value={request.amount}
+          value={request.amount ? request.amount : ""}
           onChange={handleUpdateAmount}
           variant="outlined"
           fullWidth

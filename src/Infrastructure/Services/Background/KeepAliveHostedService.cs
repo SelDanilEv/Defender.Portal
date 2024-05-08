@@ -7,7 +7,7 @@ namespace Defender.Portal.Infrastructure.Services.Background;
 
 public class KeepAliveHostedService(
         IIdentityServiceClient identityServiceClient,
-        IWalletServiceClient bankingServiceClient,
+        IWalletServiceClient walletServiceClient,
         IUserManagementServiceClient userManagementServiceClient)
     : IHostedService, IDisposable
 {
@@ -23,7 +23,7 @@ public class KeepAliveHostedService(
     private void PingServers(object? state)
     {
         identityServiceClient.HealthAsync();
-        bankingServiceClient.HealthAsync();
+        walletServiceClient.HealthAsync();
         userManagementServiceClient.HealthAsync();
     }
 

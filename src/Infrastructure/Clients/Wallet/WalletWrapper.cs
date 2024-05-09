@@ -118,8 +118,9 @@ public class WalletWrapper(
         }, AuthorizationType.User);
     }
 
-    public async Task<TransactionDtoPagedResult>
-        GetTransactionHistoryAsync(PaginationRequest paginationRequest, Guid? walletId = null)
+    public async Task<TransactionDtoPagedResult> GetTransactionHistoryAsync(
+        PaginationRequest paginationRequest, 
+        Guid? walletId = null)
     {
         return await ExecuteSafelyAsync(async () =>
         {

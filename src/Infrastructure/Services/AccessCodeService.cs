@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Defender.Common.Interfaces;
+﻿using Defender.Common.Interfaces;
 using Defender.Portal.Application.Common.Interfaces.Services;
 using Defender.Portal.Application.Enums;
 using Defender.Portal.Infrastructure.Clients.Interfaces;

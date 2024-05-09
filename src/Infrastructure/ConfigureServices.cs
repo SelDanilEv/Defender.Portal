@@ -18,7 +18,6 @@ using Defender.Portal.Infrastructure.Services.Accounts;
 using Defender.Portal.Infrastructure.Services.Admin;
 using Defender.Portal.Infrastructure.Services.Background;
 using Defender.Portal.Infrastructure.Services.Banking;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -27,15 +26,14 @@ namespace Defender.Portal.Infrastructure;
 public static class ConfigureServices
 {
     public static IServiceCollection AddInfrastructureServices(
-        this IServiceCollection services,
-        IConfiguration configuration)
+        this IServiceCollection services)
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         services
             .RegisterServices()
             .RegisterRepositories()
-            .RegisterApiClients(configuration)
+            .RegisterApiClients()
             .RegisterClientWrappers();
 
         return services;
@@ -77,8 +75,7 @@ public static class ConfigureServices
     }
 
     private static IServiceCollection RegisterApiClients(
-        this IServiceCollection services,
-        IConfiguration configuration)
+        this IServiceCollection services)
     {
         services.RegisterIdentityClient(
             (serviceProvider, client) =>

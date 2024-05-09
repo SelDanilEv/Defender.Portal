@@ -343,7 +343,7 @@ const EditSensitiveUserInfo = (props: any) => {
                 InputProps={{ style: { fontSize: "1.1em" } }}
                 disabled={elements[ElementNames.PasswordField].disabled}
                 type="password"
-                placeholder="new password"
+                placeholder={u.t("personal_info_page__password_placeholder")}
                 onChange={UpdateRequest}
                 variant="standard"
                 fullWidth

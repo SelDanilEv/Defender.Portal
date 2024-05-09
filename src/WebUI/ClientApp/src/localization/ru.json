@@ -50,6 +50,7 @@
   "personal_info_page__name_field": "Имя",
   "personal_info_page__email_field": "Электронная почта",
   "personal_info_page__password_field": "Пароль",
+  "personal_info_page__password_placeholder": "Введите новый пароль",
   "personal_info_page__verification_code_field": "Код подтверждения",
   "personal_info_page__created_date_field": "Дата создания",
   "personal_info_page__approve": "Утвердить",

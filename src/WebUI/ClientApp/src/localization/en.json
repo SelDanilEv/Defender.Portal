@@ -50,6 +50,7 @@
   "personal_info_page__name_field": "Name",
   "personal_info_page__email_field": "Email",
   "personal_info_page__password_field": "Password",
+  "personal_info_page__password_placeholder": "Enter new password",
   "personal_info_page__verification_code_field": "Verification code",
   "personal_info_page__created_date_field": "Created date",
   "personal_info_page__approve": "Approve",

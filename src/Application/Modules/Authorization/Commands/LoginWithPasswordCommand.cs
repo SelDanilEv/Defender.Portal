@@ -2,6 +2,7 @@
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using Defender.Portal.Application.DTOs.Auth;
 using FluentValidation;
+using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Authorization.Commands;
@@ -15,14 +16,14 @@ public sealed class LoginWithPasswordCommandValidator : AbstractValidator<LoginW
     public LoginWithPasswordCommandValidator()
     {
         RuleFor(s => s.Login)
-                  .NotEmpty().WithMessage(ErrorCodeHelper.GetErrorCode(ErrorCode.VL_ACC_EmptyLogin));
+            .NotEmpty().WithMessage(ErrorCode.VL_ACC_EmptyLogin);
         RuleFor(s => s.Password)
-                  .NotEmpty().WithMessage(ErrorCodeHelper.GetErrorCode(ErrorCode.VL_ACC_EmptyPassword));
+            .NotEmpty().WithMessage(ErrorCode.VL_ACC_EmptyPassword);
     }
 }
 
 public sealed class LoginWithPasswordCommandHandler(
-        IAuthorizationService _authorizationService) 
+        IAuthorizationService _authorizationService)
     : IRequestHandler<LoginWithPasswordCommand, SessionDto>
 {
 

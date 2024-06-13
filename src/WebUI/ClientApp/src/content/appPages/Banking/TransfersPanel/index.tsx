@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 
 import useUtils from "src/appUtils";
 import { useEffect, useState } from "react";
-import { CurrencyAccount, WalletInfo } from "src/models/WalletInfo";
+import { CurrencyAccount, WalletInfo } from "src/models/banking/WalletInfo";
 
 import CustomDialog from "src/components/Dialog";
 

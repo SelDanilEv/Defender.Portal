@@ -5,35 +5,31 @@ using Microsoft.AspNetCore.Mvc;
 namespace Defender.Portal.WebUI.Controllers;
 
 [Route("api/[controller]")]
-public class BaseApiController : ControllerBase
+public class BaseApiController(IMediator mediator, IMapper mapper) : ControllerBase
 {
-    protected readonly IMediator Mediator;
-    protected readonly IMapper Mapper;
+    protected readonly IMediator _mediator = mediator;
+    protected readonly IMapper _mapper = mapper;
 
-    public BaseApiController(IMediator mediator, IMapper mapper)
+    protected async Task<ActionResult> ProcessApiCallAsync<TRequest, TResult>(TRequest request)
     {
-        Mediator = mediator;
-        Mapper = mapper;
+        var response = await _mediator.Send(request);
+
+        var result = _mapper.Map<TResult>(response);
+
+        return Ok(result);
     }
 
-    protected async Task<TResult> ProcessApiCallAsync<TRequest, TResult>(TRequest request)
+    protected async Task<ActionResult> ProcessApiCallAsync<TRequest>(TRequest request)
     {
-        var response = await Mediator.Send(request);
+        await _mediator.Send(request);
 
-        var result = Mapper.Map<TResult>(response);
-
-        return result;
+        return Ok();
     }
 
-    protected async Task ProcessApiCallAsync<TRequest>(TRequest request)
+    protected async Task<ActionResult> ProcessApiCallWithoutMappingAsync<TRequest, TResult>(TRequest request)
     {
-        await Mediator.Send(request);
-    }
+        var response = await _mediator.Send(request);
 
-    protected async Task<TResult> ProcessApiCallWithoutMappingAsync<TRequest, TResult>(TRequest request)
-    {
-        var response = await Mediator.Send(request);
-
-        return (TResult)response;
+        return Ok(response);
     }
 }

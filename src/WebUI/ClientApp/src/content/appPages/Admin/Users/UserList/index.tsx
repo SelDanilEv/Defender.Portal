@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import useUtils from "src/appUtils";
 import { PaginationRequest } from "src/models/base/PaginationRequest";
 import { CurrentPagination } from "src/models/base/CurrentPagination";
-import RequestBuilder from "src/api/APIWrapper/RequestBuilder";
+import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import UserListResponse from "src/models/responses/admin/users/UserListResponse";
 import { UserOnlyInfo } from "src/models/UserOnlyInfo";
 import { AdminSearchUserRequest } from "src/models/requests/admin/searchUser/AdminSearchUserRequest";
@@ -50,7 +50,7 @@ const UserList = (props: UserListProps) => {
   const reloadUserList = () => {
     const url =
       `${apiUrls.admin.userList}` +
-      `${RequestBuilder.BuildQuery(paginationRequest)}`;
+      `${RequestParamsBuilder.BuildQuery(paginationRequest)}`;
 
     APICallWrapper({
       url: url,

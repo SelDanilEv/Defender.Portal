@@ -4,8 +4,8 @@ using Defender.Common.DB.Pagination;
 using Defender.Common.Helpers;
 using Defender.Common.Interfaces;
 using Defender.Common.Wrapper.Internal;
+using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using Defender.Portal.Application.DTOs.Banking;
-using Defender.Portal.Infrastructure.Clients.Interfaces;
 
 namespace Defender.Portal.Infrastructure.Clients.Wallet;
 
@@ -39,8 +39,7 @@ public class WalletWrapper(
         {
             var command = new AddCurrencyAccountCommand()
             {
-                Currency = MappingHelper.MapEnum
-                    <Currency, AddCurrencyAccountCommandCurrency>(currency),
+                Currency = MappingHelper.MapEnum(currency, AddCurrencyAccountCommandCurrency.Unknown),
                 IsDefault = isDefault
             };
 
@@ -56,7 +55,7 @@ public class WalletWrapper(
         return await ExecuteSafelyAsync(async () =>
         {
             var response = await serviceClient
-            .InfoByNumberAsync(walletNumber);
+                .InfoByNumberAsync(walletNumber);
 
             return mapper.Map<PublicPortalWalletInfoDto>(response);
         }, AuthorizationType.User);
@@ -68,7 +67,7 @@ public class WalletWrapper(
         return await ExecuteSafelyAsync(async () =>
         {
             var response = await serviceClient
-            .InfoByNumber2Async(walletNumber);
+                .InfoByNumber2Async(walletNumber);
 
             return mapper.Map<PortalWalletInfoDto>(response);
         }, AuthorizationType.User);
@@ -83,10 +82,10 @@ public class WalletWrapper(
         {
             var command = new StartTransferTransactionCommand()
             {
-                ToWalletNumber = walletNumber,
+                TargetWalletNumber = walletNumber,
                 Amount = amount,
                 Currency = MappingHelper.MapEnum
-                    <Currency, StartTransferTransactionCommandCurrency>(currency)
+                    (currency, StartTransferTransactionCommandCurrency.Unknown)
             };
 
             var response = await serviceClient
@@ -108,7 +107,7 @@ public class WalletWrapper(
                 TargetWalletNumber = walletNumber,
                 Amount = amount,
                 Currency = MappingHelper.MapEnum
-                    <Currency, StartRechargeTransactionCommandCurrency>(currency)
+                    (currency, StartRechargeTransactionCommandCurrency.Unknown)
             };
 
             var response = await serviceClient
@@ -118,19 +117,19 @@ public class WalletWrapper(
         }, AuthorizationType.User);
     }
 
-    public async Task<TransactionDtoPagedResult> GetTransactionHistoryAsync(
-        PaginationRequest paginationRequest, 
+    public async Task<PagedResult<PortalTransactionDto>> GetTransactionHistoryAsync(
+        PaginationRequest paginationRequest,
         Guid? walletId = null)
     {
         return await ExecuteSafelyAsync(async () =>
         {
             var response = await serviceClient
                 .HistoryAsync(
-                    walletId, 
+                    walletId,
                     paginationRequest.Page,
-                    paginationRequest.PageSize);
+            paginationRequest.PageSize);
 
-            return response;
+            return mapper.Map<PagedResult<PortalTransactionDto>>(response);
         }, AuthorizationType.User);
     }
 

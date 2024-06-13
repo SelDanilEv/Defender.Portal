@@ -1,10 +1,10 @@
-import { useMediaQuery, useTheme } from "@mui/material";
+import { Theme, useMediaQuery, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import ErrorToast from "src/components/Toast/DefaultErrorToast";
+import IUtils from "./interface";
 
-
-const useUtils = () => {
+const useUtils = (): IUtils => {
 
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -21,6 +21,9 @@ const useUtils = () => {
         t: (key: string) => t(key),
         log: (value) => {
             console.log(value)
+        },
+        debug: (value) => {
+            console.debug(value)
         },
         e:(errorCode: string) => {
             let message = t(errorCode);

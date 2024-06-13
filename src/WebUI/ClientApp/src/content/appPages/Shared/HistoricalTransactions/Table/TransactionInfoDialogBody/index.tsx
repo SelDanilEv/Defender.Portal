@@ -5,8 +5,10 @@ import { connect } from "react-redux";
 import useUtils from "src/appUtils";
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
 import DateLocales from "src/consts/DateLocales";
-import { Transaction } from "src/models/responses/banking/transactions/TransactionHistoryResponse";
-import { mapTransactionStatus, mapTransactionType } from "../mapping";
+import mapTransactionPurpose from "src/mappers/banking/mapTransactionPurpose";
+import mapTransactionStatus from "src/mappers/banking/mapTransactionStatus";
+import mapTransactionType from "src/mappers/banking/mapTransactionType";
+import Transaction from "src/models/banking/Transaction";
 
 const HorizontalDivider = () => {
   return (
@@ -26,6 +28,11 @@ const TransactionInfoDialogBody = (props: any) => {
 
   if (!transaction) return <></>;
 
+  const transactionPurpose = mapTransactionPurpose(
+    u,
+    transaction.transactionPurpose
+  );
+
   return (
     <Grid
       container
@@ -40,6 +47,15 @@ const TransactionInfoDialogBody = (props: any) => {
           <Grid item xs={12} sm={12}>
             {transaction.transactionId}
           </Grid>
+        </>
+      )}
+      {transactionPurpose && (
+        <>
+          {HorizontalDivider()}
+          <Grid item xs={12} sm={12}>
+            {transactionPurpose}
+          </Grid>
+          {HorizontalDivider()}
         </>
       )}
       {transaction.transactionType && (
@@ -112,6 +128,16 @@ const TransactionInfoDialogBody = (props: any) => {
                 locale: DateLocales[currentLanguage],
               }
             )}
+          </Grid>
+          {HorizontalDivider()}
+        </>
+      )}
+      {transaction.comment && (
+        <>
+          {HorizontalDivider()}
+          <Grid item xs={12} sm={12}>
+            {u.t("banking_page__trans_info_dialog_comment_label")}:
+            {"  " + transaction.comment}
           </Grid>
           {HorizontalDivider()}
         </>

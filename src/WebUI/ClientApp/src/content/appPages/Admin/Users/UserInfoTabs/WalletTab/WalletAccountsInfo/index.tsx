@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 
 import useUtils from "src/appUtils";
-import { WalletInfo } from "src/models/WalletInfo";
+import { WalletInfo } from "src/models/banking/WalletInfo";
 import { CardCc, CardLogo } from "./styledComponents";
 
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";

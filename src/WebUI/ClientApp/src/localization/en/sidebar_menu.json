@@ -1,0 +1,18 @@
+{ 
+  "header_home": "Home",
+  "page_home": "Home page",
+
+  "header_banking": "Banking",
+  "page_banking": "Banking",
+
+  "header_admin": "Admin",
+  "page_users": "Users",
+
+  "header_super_admin": "Super Admin",
+  "page_configuration": "Configuration",
+
+  "header_games": "Games",
+  "page_lottery": "Lottery",
+
+  "_" : "_"
+}

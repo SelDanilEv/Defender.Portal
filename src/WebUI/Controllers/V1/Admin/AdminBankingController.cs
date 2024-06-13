@@ -16,11 +16,10 @@ public class AdminBankingController(IMediator mediator, IMapper mapper)
     [Auth(Roles.SuperAdmin)]
     [ProducesResponseType(typeof(PortalTransactionDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<PortalTransactionDto> UpdateUserInfoAsAdminAsync(
+    public async Task<ActionResult> UpdateUserInfoAsAdminAsync(
         [FromBody] StartRechargeTransactionCommand command)
     {
-        return await ProcessApiCallAsync<StartRechargeTransactionCommand, PortalTransactionDto>
-            (command);
+        return await ProcessApiCallAsync<StartRechargeTransactionCommand, PortalTransactionDto>(command);
     }
 
 }

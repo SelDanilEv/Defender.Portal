@@ -1,6 +1,7 @@
 ﻿using Defender.Portal.Application.Common.Interfaces.Services.Banking;
 using Defender.Portal.Application.DTOs.Banking;
 using FluentValidation;
+using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Wallet.Queries;
@@ -10,11 +11,11 @@ public record GetWalletInfoQuery : IRequest<PortalWalletInfoDto>
 };
 
 public class GetWalletInfoQueryHandler(
-        IWalletManagementService walletManagementService) : 
+        IWalletManagementService walletManagementService) :
     IRequestHandler<GetWalletInfoQuery, PortalWalletInfoDto>
 {
     public async Task<PortalWalletInfoDto> Handle(
-        GetWalletInfoQuery request, 
+        GetWalletInfoQuery request,
         CancellationToken cancellationToken)
     {
         return await walletManagementService.GetCurrentWalletInfoAsync();

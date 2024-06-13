@@ -62,17 +62,25 @@ public class ErrorMappingHelper
             ErrorCode.BR_WLT_WalletIsNotExist => UIErrorCodes.Error_WalletIsNotExist,
             ErrorCode.BR_WLT_SenderAndRecipientAreTheSame or
             ErrorCode.VL_WLT_InvalidWalletNumber => UIErrorCodes.Error_InvalidWalletNumber,
+            ErrorCode.BR_WLT_SenderCurrencyAccountIsNotExist or
+            ErrorCode.BR_WLT_CurrencyAccountIsNotExist or
+            ErrorCode.BR_WLT_RecipientCurrencyAccountIsNotExist 
+                => UIErrorCodes.Error_WalletAccountNotFound,
 
             ErrorCode.CM_InvalidUserJWT => UIErrorCodes.Error_SessionExpired,
 
             ErrorCode.CM_ForbiddenAccess => UIErrorCodes.Error_ForbiddenAccess,
 
             ErrorCode.UnhandledError => UIErrorCodes.Error_UnhandledError,
+            ErrorCode.BR_ACC or
+            ErrorCode.BR_ACC_CodeTypeMismatch or
+            ErrorCode.BR_USM or
+            ErrorCode.BR_WLT or
+            ErrorCode.VL_USM_EmptyAccessCode or
+            ErrorCode.VL_ACC_EmptyAccessCode or
+            ErrorCode.VL_WLT_TransferAmountMustBePositive or
+            ErrorCode.BR_WLT_CurrencyAccountAlreadyExist or
 
-            ErrorCode.BR_WLT_CurrencyAccountAlredyExist or
-            ErrorCode.BR_WLT_CurrencyAccountIsNotExist or
-            ErrorCode.BR_WLT_SenderCurrencyAccountIsNotExist or
-            ErrorCode.BR_WLT_RecipientCurrencyAccountIsNotExist or
             ErrorCode.BR_WLT_NoAvailableWalletNumbers or
             ErrorCode.BR_WLT_InvalidTransactionStatus or
             ErrorCode.BR_WLT_NotEnoughFunds or

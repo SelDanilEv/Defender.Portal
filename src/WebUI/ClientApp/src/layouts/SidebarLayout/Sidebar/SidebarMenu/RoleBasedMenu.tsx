@@ -4,6 +4,7 @@ import TableChartTwoToneIcon from "@mui/icons-material/TableChartTwoTone";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 
 import MenuItem from "./MenuItem";
 import useUtils from "src/appUtils";
@@ -145,7 +146,7 @@ const RoleBasedMenu = (props: any) => {
             component="div"
             subheader={
               <ListSubheader component="div" disableSticky>
-                {u.t("sidebar_menu__header_super_admin")}
+                {u.t("sidebar_menu:header_super_admin")}
               </ListSubheader>
             }
           >
@@ -154,7 +155,7 @@ const RoleBasedMenu = (props: any) => {
                 <MenuItem
                   to="/configuration"
                   icon={<AdminPanelSettingsIcon />}
-                  text={u.t("sidebar_menu__page_configuration")}
+                  text={u.t("sidebar_menu:page_configuration")}
                 />
               </List>
             </SubMenuWrapper>
@@ -167,7 +168,7 @@ const RoleBasedMenu = (props: any) => {
             component="div"
             subheader={
               <ListSubheader component="div" disableSticky>
-                {u.t("sidebar_menu__header_admin")}
+                {u.t("sidebar_menu:header_admin")}
               </ListSubheader>
             }
           >
@@ -176,7 +177,7 @@ const RoleBasedMenu = (props: any) => {
                 <MenuItem
                   to="/admin/users"
                   icon={<TableChartTwoToneIcon />}
-                  text={u.t("sidebar_menu__page_users")}
+                  text={u.t("sidebar_menu:page_users")}
                 />
               </List>
             </SubMenuWrapper>
@@ -189,7 +190,7 @@ const RoleBasedMenu = (props: any) => {
             component="div"
             subheader={
               <ListSubheader component="div" disableSticky>
-                {u.t("sidebar_menu__header_home")}
+                {u.t("sidebar_menu:header_home")}
               </ListSubheader>
             }
           >
@@ -198,7 +199,7 @@ const RoleBasedMenu = (props: any) => {
                 <MenuItem
                   to="/home"
                   icon={<HomeIcon style={{ fontSize: "1.5em" }} />}
-                  text={u.t("sidebar_menu__page_home")}
+                  text={u.t("sidebar_menu:page_home")}
                 />
               </List>
             </SubMenuWrapper>
@@ -210,7 +211,7 @@ const RoleBasedMenu = (props: any) => {
             component="div"
             subheader={
               <ListSubheader component="div" disableSticky>
-                {u.t("sidebar_menu__header_banking")}
+                {u.t("sidebar_menu:header_banking")}
               </ListSubheader>
             }
           >
@@ -219,7 +220,28 @@ const RoleBasedMenu = (props: any) => {
                 <MenuItem
                   to="/banking"
                   icon={<AccountBalanceIcon style={{ fontSize: "1.5em" }} />}
-                  text={u.t("sidebar_menu__page_banking")}
+                  text={u.t("sidebar_menu:page_banking")}
+                />
+              </List>
+            </SubMenuWrapper>
+          </List>
+        );
+        result.push(
+          <List
+            key={"games.lottery"}
+            component="div"
+            subheader={
+              <ListSubheader component="div" disableSticky>
+                {u.t("sidebar_menu:header_games")}
+              </ListSubheader>
+            }
+          >
+            <SubMenuWrapper>
+              <List component="div">
+                <MenuItem
+                  to="/games/lottery"
+                  icon={<LocalActivityIcon style={{ fontSize: "1.5em" }} />}
+                  text={u.t("sidebar_menu:page_lottery")}
                 />
               </List>
             </SubMenuWrapper>

@@ -22,7 +22,7 @@ public class BankingController(
     [Auth(Roles.User)]
     [ProducesResponseType(typeof(PortalWalletInfoDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<PortalWalletInfoDto> GetWalletInfoAsync(
+    public async Task<ActionResult> GetWalletInfoAsync(
         [FromQuery] GetWalletInfoQuery query)
     {
         return await ProcessApiCallAsync<GetWalletInfoQuery, PortalWalletInfoDto>
@@ -33,7 +33,7 @@ public class BankingController(
     [Auth(Roles.User)]
     [ProducesResponseType(typeof(PublicPortalWalletInfoDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<PublicPortalWalletInfoDto> GetPublicWalletInfoAsync(
+    public async Task<ActionResult> GetPublicWalletInfoAsync(
         [FromQuery] GetPublicWalletInfoByNumberQuery query)
     {
         return await ProcessApiCallAsync<
@@ -46,7 +46,7 @@ public class BankingController(
     [Auth(Roles.User)]
     [ProducesResponseType(typeof(PortalWalletInfoDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<PortalWalletInfoDto> CreateCurrencyAccountAsync(
+    public async Task<ActionResult> CreateCurrencyAccountAsync(
         [FromBody] CreateCurrencyAccountCommand command)
     {
         return await ProcessApiCallAsync<
@@ -59,7 +59,7 @@ public class BankingController(
     [Auth(Roles.User)]
     [ProducesResponseType(typeof(PagedResult<PortalTransactionDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<PagedResult<PortalTransactionDto>> GetTransactionHistoryAsync(
+    public async Task<ActionResult> GetTransactionHistoryAsync(
         [FromQuery] GetTransactionHistoryQuery query)
     {
         return await ProcessApiCallAsync<
@@ -72,7 +72,7 @@ public class BankingController(
     [Auth(Roles.User)]
     [ProducesResponseType(typeof(PortalTransactionDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<PortalTransactionDto> StartTransferTransactionAsync(
+    public async Task<ActionResult> StartTransferTransactionAsync(
         [FromBody] StartTransferTransactionCommand command)
     {
         return await ProcessApiCallAsync<

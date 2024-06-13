@@ -16,7 +16,7 @@ import {
   UserNicknameMaskRegex,
 } from "src/consts/Regexes";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
-import RequestBuilder from "src/api/APIWrapper/RequestBuilder";
+import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import apiUrls from "src/api/apiUrls";
 
 interface UpdateUserInfoProps {
@@ -129,7 +129,7 @@ const UpdateUserInfo = (props: UpdateUserInfoProps) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: RequestBuilder.BuildBody(requestToApi),
+        body: RequestParamsBuilder.BuildBody(requestToApi),
       },
       utils: u,
       showSuccess: true,

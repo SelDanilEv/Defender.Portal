@@ -1,6 +1,7 @@
 ﻿using Defender.Common.Errors;
 using Defender.Portal.Application.Common.Interfaces.Services;
 using FluentValidation;
+using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Verification.Commands;
@@ -11,26 +12,26 @@ public record VerifyAccountEmailCommand : IRequest<bool>
     public int Hash { get; set; }
 };
 
-public sealed class VerifyAccountEmailCommandValidator 
+public sealed class VerifyAccountEmailCommandValidator
     : AbstractValidator<VerifyAccountEmailCommand>
 {
     public VerifyAccountEmailCommandValidator()
     {
         RuleFor(s => s.Code)
-                  .NotEmpty().WithMessage(ErrorCodeHelper.GetErrorCode(
-                      ErrorCode.VL_InvalidRequest));
+            .NotEmpty()
+            .WithMessage(ErrorCode.VL_InvalidRequest);
         RuleFor(s => s.Hash)
-                  .NotEmpty().WithMessage(ErrorCodeHelper.GetErrorCode(
-                      ErrorCode.VL_InvalidRequest));
+            .NotEmpty()
+            .WithMessage(ErrorCode.VL_InvalidRequest);
     }
 }
 
 public sealed class VerifyAccountEmailCommandHandler(
-        IAccessCodeService accessCodeService) 
+        IAccessCodeService accessCodeService)
     : IRequestHandler<VerifyAccountEmailCommand, bool>
 {
     public async Task<bool> Handle(
-        VerifyAccountEmailCommand request, 
+        VerifyAccountEmailCommand request,
         CancellationToken cancellationToken)
     {
         return await accessCodeService.VerifyEmailAsync(

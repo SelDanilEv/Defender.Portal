@@ -8,17 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Defender.Portal.WebUI.Controllers.V1;
 
-public class AccountController : BaseApiController
+public class AccountController(IMediator mediator, IMapper mapper) : BaseApiController(mediator, mapper)
 {
-    public AccountController(IMediator mediator, IMapper mapper) : base(mediator, mapper)
-    {
-    }
-
     [HttpPut("update")]
     [Auth(Roles.User)]
     [ProducesResponseType(typeof(PortalUserDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<PortalUserDto> UpdateUserInfoAsync(
+    public async Task<ActionResult> UpdateUserInfoAsync(
         [FromBody] UpdateUserInfoCommand command)
     {
         return await ProcessApiCallAsync<UpdateUserInfoCommand, PortalUserDto>
@@ -28,19 +24,19 @@ public class AccountController : BaseApiController
     [HttpPut("reset-password")]
     [ProducesResponseType(typeof(PortalUserDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task ResetPasswordAsync([FromBody] ResetPasswordCommand command)
+    public async Task<ActionResult> ResetPasswordAsync([FromBody] ResetPasswordCommand command)
     {
-        await ProcessApiCallAsync<ResetPasswordCommand>(command);
+        return await ProcessApiCallAsync<ResetPasswordCommand>(command);
     }
 
     [HttpPut("update/sensitive")]
     [Auth(Roles.User)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task UpdateAccountSensitiveInfoAsync(
+    public async Task<ActionResult> UpdateAccountSensitiveInfoAsync(
         [FromBody] UpdateMyAccountSensitiveInfoCommand command)
     {
-        await ProcessApiCallAsync<UpdateMyAccountSensitiveInfoCommand>
+        return await ProcessApiCallAsync<UpdateMyAccountSensitiveInfoCommand>
             (command);
     }
 }

@@ -20,7 +20,7 @@ import {
 } from "src/consts/Regexes";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";
-import RequestBuilder from "src/api/APIWrapper/RequestBuilder";
+import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import WarningToast from "src/components/Toast/WarningToast";
 import LockedTextField from "src/components/LockedComponents/TextField/LockedTextField";
 
@@ -226,7 +226,7 @@ const ResetPasswordForm = (props: any) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: RequestBuilder.BuildBody(sendCodeRequest),
+        body: RequestParamsBuilder.BuildBody(sendCodeRequest),
       },
       utils: u,
       successMesage: u.t("reset_password_page__send_code_success"),
@@ -268,7 +268,7 @@ const ResetPasswordForm = (props: any) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: RequestBuilder.BuildBody(resetRequest),
+        body: RequestParamsBuilder.BuildBody(resetRequest),
       },
       utils: u,
       successMesage: u.t("reset_password_page__notification_reset_success"),

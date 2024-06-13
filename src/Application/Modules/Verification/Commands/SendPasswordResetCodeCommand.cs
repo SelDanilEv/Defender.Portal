@@ -1,6 +1,7 @@
 ﻿using Defender.Common.Errors;
 using Defender.Portal.Application.Common.Interfaces.Services;
 using FluentValidation;
+using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Verification.Commands;
@@ -17,19 +18,19 @@ public sealed class SendPasswordResetCodeCommandValidator
     public SendPasswordResetCodeCommandValidator()
     {
         RuleFor(s => s.Email)
-                  .NotEmpty().WithMessage(ErrorCodeHelper.GetErrorCode(
-                      ErrorCode.VL_ACC_EmptyEmail))
-                  .EmailAddress()
-                    .WithMessage(ErrorCodeHelper.GetErrorCode(ErrorCode.VL_ACC_InvalidEmail)); ;
+            .NotEmpty()
+            .WithMessage(ErrorCode.VL_ACC_EmptyEmail)
+            .EmailAddress()
+            .WithMessage(ErrorCode.VL_ACC_InvalidEmail);
     }
 }
 
 public class SendPasswordResetCodeCommandHandler(
-        IAccessCodeService accessCodeService) 
+        IAccessCodeService accessCodeService)
     : IRequestHandler<SendPasswordResetCodeCommand, Guid>
 {
     public async Task<Guid> Handle(
-        SendPasswordResetCodeCommand request, 
+        SendPasswordResetCodeCommand request,
         CancellationToken cancellationToken)
     {
         return await accessCodeService.SendPasswordResetAccessCodeAsync(request.Email);

@@ -2,6 +2,7 @@
 using Defender.Portal.Application.Common.Interfaces.Services.Admin;
 using Defender.Portal.Application.DTOs.Auth;
 using FluentValidation;
+using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Admin.Users.Commands;
@@ -16,8 +17,7 @@ public sealed class LoginUserAsAdminCommandValidator : AbstractValidator<LoginUs
     {
         RuleFor(x => x.UserId)
             .NotNull()
-            .WithMessage(ErrorCodeHelper.GetErrorCode(
-                            ErrorCode.VL_ACC_EmptyUserId));
+            .WithMessage(ErrorCode.VL_ACC_EmptyUserId);
     }
 }
 
@@ -26,7 +26,7 @@ public sealed class LoginUserAsAdminCommandHandler(
     : IRequestHandler<LoginUserAsAdminCommand, SessionDto>
 {
     public async Task<SessionDto> Handle(
-        LoginUserAsAdminCommand request, 
+        LoginUserAsAdminCommand request,
         CancellationToken cancellationToken)
     {
         return await accountManagementService.LoginAccountAsAdminAsync(request.UserId);

@@ -8,7 +8,7 @@ import SearchUserPannel from "./SearchUserPannel";
 import UserInfoTabs from "./UserInfoTabs";
 import UserList from "./UserList";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
-import RequestBuilder from "src/api/APIWrapper/RequestBuilder";
+import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import apiUrls from "src/api/apiUrls";
 import { AdminSearchUserRequest } from "src/models/requests/admin/searchUser/AdminSearchUserRequest";
 
@@ -28,7 +28,7 @@ const AdminUsersPage = (props: any) => {
     APICallWrapper({
       url:
         `${apiUrls.admin.searchFullUserInfo}` +
-        `${RequestBuilder.BuildQuery(request)}`,
+        `${RequestParamsBuilder.BuildQuery(request)}`,
       options: {
         method: "GET",
         headers: {

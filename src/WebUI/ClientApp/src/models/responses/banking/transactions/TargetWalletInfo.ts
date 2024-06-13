@@ -1,4 +1,3 @@
-
 export interface TargetWalletInfo {
   ownerId: string;
   ownerName: string;

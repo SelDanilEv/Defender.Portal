@@ -1,0 +1,31 @@
+{ 
+  "ticket_info_table_action_info": "Информация",
+  "ticket_info_table_title": "Мои билеты",
+  "ticket_info_table_draw_column": "Розыгрыш",
+  "ticket_info_table_ticket_number_column": "Номер билета",
+  "ticket_info_table_amount_column": "Сумма",
+  "ticket_info_table_status_column": "Статус",
+
+  "ticket_info_dialog_title": "Информация о билете",
+  "ticket_info_dialog_draw_id_label": "Розыгрыш",
+  "ticket_info_dialog_ticket_number_label": "Номер билета",
+  "ticket_info_dialog_amount_label": "Сумма",
+  "ticket_info_dialog_payment_trans_id_label": "ID транзакции оплаты",
+  "ticket_info_dialog_prize_trans_id_label": "ID транзакции приза",
+  "ticket_info_dialog_prize_amount_label" : "Приз",
+  "ticket_info_dialog_status_label": "Статус",
+
+  "ticket_info_table_status_pending": "В ожидании",
+  "ticket_info_table_status_won": "Выиграно",
+  "ticket_info_table_status_lost": "Проиграно",
+
+  "latest_tickets_title": "Последние билеты",
+  "latest_tickets_draw_label": "Розыгрыш: ",
+  "latest_tickets_ticket_label": "Билет: ",
+
+  "active_draws_title": "Активные розыгрыши",
+  "active_draws_days_left": "день ",
+  "active_draws_play_from": "Играйте от ",
+
+  "_" : "_"
+}

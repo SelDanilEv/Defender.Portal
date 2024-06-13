@@ -41,6 +41,10 @@ const APIEndpoints = {
     startTransfer: "transaction/start/transfer",
     transactionHistory: "transaction/history",
   },
+  lottery: {
+    getMyTickets: "tickets",
+    getActiveDraws: "draw/active",
+  },
 };
 
 const APIUrls = () => {

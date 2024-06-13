@@ -1,0 +1,31 @@
+{ 
+  "ticket_info_table_action_info": "Info",
+  "ticket_info_table_title": "My tickets",
+  "ticket_info_table_draw_column": "Draw",
+  "ticket_info_table_ticket_number_column": "Ticket number",
+  "ticket_info_table_amount_column": "Amount",
+  "ticket_info_table_status_column": "Status",
+
+  "ticket_info_dialog_title": "Ticket info",
+  "ticket_info_dialog_draw_id_label": "Draw",
+  "ticket_info_dialog_ticket_number_label": "Ticket number",
+  "ticket_info_dialog_amount_label": "Amount",
+  "ticket_info_dialog_payment_trans_id_label": "Payment transaction ID",
+  "ticket_info_dialog_prize_trans_id_label": "Prize transaction ID",
+  "ticket_info_dialog_prize_amount_label" : "Prize",
+  "ticket_info_dialog_status_label": "Status",
+
+  "ticket_info_table_status_pending": "Pending",
+  "ticket_info_table_status_won": "Won",
+  "ticket_info_table_status_lost": "Lost",
+
+  "latest_tickets_title": "Latest tickets",
+  "latest_tickets_draw_label": "Draw: ",
+  "latest_tickets_ticket_label": "Ticket: ",
+
+  "active_draws_title": "Active draws",
+  "active_draws_days_left": "day ",
+  "active_draws_play_from": "Play from ",
+
+  "_" : "_"
+}

@@ -1,10 +1,11 @@
 ﻿using System.Text;
 using System.Text.Json.Serialization;
 using Defender.Common.Enums;
+using Defender.Common.Errors;
 using Defender.Common.Exceptions;
-using Defender.Common.Exstension;
+using Defender.Common.Extension;
 using Defender.Common.Helpers;
-using Defender.Portal.Application.Configuration.Exstension;
+using Defender.Portal.Application.Configuration.Extension;
 using FluentValidation.AspNetCore;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

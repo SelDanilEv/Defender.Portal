@@ -14,7 +14,7 @@ import router from "src/router";
 import "src/custom.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import "src/services/i18n";
+import "src/localization/i18n";
 
 function App() {
   const content = useRoutes(router);

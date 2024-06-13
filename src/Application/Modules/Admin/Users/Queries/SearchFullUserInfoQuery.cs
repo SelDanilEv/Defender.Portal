@@ -4,6 +4,7 @@ using Defender.Portal.Application.Common.Interfaces.Services.Admin;
 using Defender.Portal.Application.DTOs.Accounts;
 using Defender.Portal.Application.DTOs.Admin;
 using FluentValidation;
+using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Admin.Users.Queries;
@@ -24,8 +25,7 @@ public sealed class SearchFullUserInfoQueryValidator
         RuleFor(x => x.UserId)
             .NotNull()
             .When(x => x.Email == null && x.WalletNumber == null)
-            .WithMessage(ErrorCodeHelper.GetErrorCode(
-                ErrorCode.VL_InvalidRequest));
+            .WithMessage(ErrorCode.VL_InvalidRequest);
     }
 }
 

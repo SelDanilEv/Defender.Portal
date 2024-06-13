@@ -3,10 +3,10 @@ using Defender.Common.Clients.Identity;
 using Defender.Common.Helpers;
 using Defender.Common.Interfaces;
 using Defender.Common.Wrapper.Internal;
+using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using Defender.Portal.Application.DTOs.Auth;
 using Defender.Portal.Application.Enums;
-using Defender.Portal.Application.Models.ApiRequests;
-using Defender.Portal.Infrastructure.Clients.Interfaces;
+using Defender.Portal.Application.Models.ApiRequests.Accounts;
 
 namespace Defender.Portal.Infrastructure.Clients.Identity;
 
@@ -121,10 +121,8 @@ public class IdentityWrapper(
             var command = new SendVerificationCodeCommand()
             {
                 UserId = accountId,
-                Type = MappingHelper.MapEnum<
-                    AccessCodeType,
-                    SendVerificationCodeCommandType>(
-                        accessCodeType)
+                Type = MappingHelper.MapEnum
+                    (accessCodeType, SendVerificationCodeCommandType.Default)
             };
 
             await identityServiceClient.EmailAsync(command);
@@ -138,10 +136,8 @@ public class IdentityWrapper(
             var command = new VerifyCodeCommand()
             {
                 Code = code,
-                Type = MappingHelper.MapEnum<
-                    AccessCodeType,
-                    VerifyCodeCommandType>(
-                        accessCodeType)
+                Type = MappingHelper.MapEnum
+                    (accessCodeType, VerifyCodeCommandType.Default)
             };
 
             var response = await identityServiceClient.VerifyAsync(command);
@@ -196,10 +192,8 @@ public class IdentityWrapper(
 
             if (updateRequest.Role.HasValue)
             {
-                command.Role = MappingHelper.MapEnum<
-                    Common.Enums.Role,
-                    UpdateAccountCommandRole>(
-                        updateRequest.Role.Value);
+                command.Role = MappingHelper.MapEnum
+                    (updateRequest.Role.Value, UpdateAccountCommandRole.Guest);
             }
 
             var response = await identityServiceClient.UpdateAsync(command);

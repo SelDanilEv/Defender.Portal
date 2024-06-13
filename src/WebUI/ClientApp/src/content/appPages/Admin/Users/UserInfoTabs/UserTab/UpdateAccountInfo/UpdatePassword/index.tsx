@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import ParamsObjectBuilder from "src/helpers/ParamsObjectBuilder";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
-import RequestBuilder from "src/api/APIWrapper/RequestBuilder";
+import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import apiUrls from "src/api/apiUrls";
 import { AdminUpdatePasswordRequest } from "src/models/requests/admin/updateUser/AdminUpdatePasswordRequest";
 import { PasswordMaskRegex, PasswordRegex } from "src/consts/Regexes";
@@ -64,7 +64,7 @@ const UpdatePassword = (props: UpdatePasswordProps) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: RequestBuilder.BuildBody(updateRequest),
+        body: RequestParamsBuilder.BuildBody(updateRequest),
       },
       utils: u,
       showSuccess: true,

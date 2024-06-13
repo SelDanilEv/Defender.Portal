@@ -5,6 +5,7 @@ using Defender.Common.Interfaces;
 using Defender.Portal.Application.Common.Interfaces.Services;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using FluentValidation;
+using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Account.Commands;
@@ -23,8 +24,7 @@ public sealed class UpdateMyAccountSensitiveInfoCommandValidator : AbstractValid
     {
         RuleFor(x => x)
             .Must(x => !string.IsNullOrEmpty(x.Email) || !string.IsNullOrEmpty(x.NewPassword))
-            .WithMessage(ErrorCodeHelper.GetErrorCode(
-                               ErrorCode.VL_InvalidRequest));
+            .WithMessage(ErrorCode.VL_InvalidRequest);
     }
 }
 
@@ -39,7 +39,7 @@ public sealed class UpdateMyAccountSensitiveInfoCommandHandler(
         CancellationToken cancellationToken)
     {
         var isCodeValid = await accessCodeService.VerifyAccessCodeAsync(
-            request.Code, 
+            request.Code,
             Enums.AccessCodeType.UpdateAccount);
 
         if (!isCodeValid)

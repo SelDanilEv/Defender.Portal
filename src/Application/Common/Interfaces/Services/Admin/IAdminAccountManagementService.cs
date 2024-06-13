@@ -1,7 +1,7 @@
 ﻿using Defender.Common.DB.Pagination;
 using Defender.Common.DTOs;
 using Defender.Portal.Application.DTOs.Auth;
-using Defender.Portal.Application.Models.ApiRequests;
+using Defender.Portal.Application.Models.ApiRequests.Accounts;
 
 namespace Defender.Portal.Application.Common.Interfaces.Services.Admin;
 

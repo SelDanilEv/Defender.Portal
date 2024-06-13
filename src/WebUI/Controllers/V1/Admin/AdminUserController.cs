@@ -22,7 +22,7 @@ public class AdminUserController(IMediator mediator, IMapper mapper)
     [HttpPost("login")]
     [ProducesResponseType(typeof(SessionDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<SessionDto> CreateUserAsync(
+    public async Task<ActionResult> CreateUserAsync(
         [FromBody] LoginUserAsAdminCommand command)
     {
         return await ProcessApiCallWithoutMappingAsync<LoginUserAsAdminCommand, SessionDto>
@@ -33,7 +33,7 @@ public class AdminUserController(IMediator mediator, IMapper mapper)
     [Auth(Roles.Admin)]
     [ProducesResponseType(typeof(FullUserInfoForAdminDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<FullUserInfoForAdminDto> SearchFullUserInfoAsync(
+    public async Task<ActionResult> SearchFullUserInfoAsync(
     [FromQuery] SearchFullUserInfoQuery query)
     {
         return await ProcessApiCallAsync<SearchFullUserInfoQuery, FullUserInfoForAdminDto>
@@ -44,7 +44,7 @@ public class AdminUserController(IMediator mediator, IMapper mapper)
     [Auth(Roles.Admin)]
     [ProducesResponseType(typeof(FullUserInfoForAdminDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<PagedResult<UserDto>> GetUsersInfoAsync(
+    public async Task<ActionResult> GetUsersInfoAsync(
     [FromQuery] GetUsersInfoQuery query)
     {
         return await ProcessApiCallAsync<GetUsersInfoQuery, PagedResult<UserDto>>
@@ -56,7 +56,7 @@ public class AdminUserController(IMediator mediator, IMapper mapper)
     [Auth(Roles.Admin)]
     [ProducesResponseType(typeof(PortalUserDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<PortalUserDto> UpdateUserInfoAsAdminAsync(
+    public async Task<ActionResult> UpdateUserInfoAsAdminAsync(
         [FromBody] UpdateUserInfoAsAdminCommand command)
     {
         return await ProcessApiCallAsync<UpdateUserInfoAsAdminCommand, PortalUserDto>
@@ -68,7 +68,7 @@ public class AdminUserController(IMediator mediator, IMapper mapper)
     [Auth(Roles.Admin)]
     [ProducesResponseType(typeof(PortalAccountDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<PortalAccountDto> UpdateAccountInfoAsAdminAsync(
+    public async Task<ActionResult> UpdateAccountInfoAsAdminAsync(
         [FromBody] UpdateAccountInfoAsAdminCommand command)
     {
         return await ProcessApiCallAsync<UpdateAccountInfoAsAdminCommand, PortalAccountDto>
@@ -80,10 +80,10 @@ public class AdminUserController(IMediator mediator, IMapper mapper)
     [Auth(Roles.Admin)]
     [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task UpdateAccountInfoAsAdminAsync(
+    public async Task<ActionResult> UpdateAccountInfoAsAdminAsync(
         [FromBody] UpdateAccountPasswordAsAdminCommand command)
     {
-        await ProcessApiCallAsync<UpdateAccountPasswordAsAdminCommand>
+        return await ProcessApiCallAsync<UpdateAccountPasswordAsAdminCommand>
             (command);
     }
 

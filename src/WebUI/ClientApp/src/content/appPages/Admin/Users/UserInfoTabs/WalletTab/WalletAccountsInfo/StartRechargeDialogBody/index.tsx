@@ -2,7 +2,7 @@ import { Grid, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
-import RequestBuilder from "src/api/APIWrapper/RequestBuilder";
+import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import apiUrls from "src/api/apiUrls";
 
 import useUtils from "src/appUtils";
@@ -59,7 +59,7 @@ const StartRechargeDialogBody = (props: StartRechargeDialogBodyProps) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: RequestBuilder.BuildBody(requestToApi),
+        body: RequestParamsBuilder.BuildBody(requestToApi),
       },
       utils: u,
       showSuccess: true,

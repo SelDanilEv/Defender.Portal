@@ -19,7 +19,7 @@ public partial class HomeController(
     [ProducesResponseType(typeof(HealthCheckDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<HealthCheckDto> HealthCheckAsync()
+    public async Task<ActionResult> HealthCheckAsync()
     {
         var query = new HealthCheckQuery();
 
@@ -33,7 +33,7 @@ public partial class HomeController(
     [ProducesResponseType(typeof(AuthCheckDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<AuthCheckDto> AuthorizationCheckAsync()
+    public async Task<ActionResult> AuthorizationCheckAsync()
     {
         var query = new AuthCheckQuery();
 
@@ -47,7 +47,7 @@ public partial class HomeController(
     [ProducesResponseType(typeof(Dictionary<string, string>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<Dictionary<string, string>> GetConfigurationAsync(ConfigurationLevel configurationLevel)
+    public async Task<ActionResult> GetConfigurationAsync(ConfigurationLevel configurationLevel)
     {
         var query = new GetConfigurationQuery()
         {

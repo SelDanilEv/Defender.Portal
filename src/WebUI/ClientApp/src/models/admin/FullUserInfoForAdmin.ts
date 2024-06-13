@@ -1,5 +1,5 @@
 import { UserAccountInfo } from "../UserAccountInfo";
-import { WalletInfo } from "../WalletInfo";
+import { WalletInfo } from "../banking/WalletInfo";
 
 export interface FullUserInfoForAdmin {
   user: UserAccountInfo;

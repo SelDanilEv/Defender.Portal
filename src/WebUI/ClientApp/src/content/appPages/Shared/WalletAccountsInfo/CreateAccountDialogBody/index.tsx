@@ -8,7 +8,7 @@ import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import SupportedCurrencies from "src/consts/SupportedCurrencies";
-import { WalletInfo } from "src/models/WalletInfo";
+import { WalletInfo } from "src/models/banking/WalletInfo";
 
 const CreateAccountDialogBody = (props: any) => {
   const u = useUtils();

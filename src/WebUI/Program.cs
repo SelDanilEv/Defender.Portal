@@ -1,4 +1,4 @@
-using Defender.Common.Exstension;
+using Defender.Common.Extension;
 using Defender.Portal.Application;
 using Defender.Portal.Infrastructure;
 using Defender.Portal.WebUI;

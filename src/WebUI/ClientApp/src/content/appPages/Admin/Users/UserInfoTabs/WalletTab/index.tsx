@@ -1,7 +1,7 @@
 import useUtils from "src/appUtils";
 
 import { Grid } from "@mui/material";
-import { WalletInfo } from "src/models/WalletInfo";
+import { WalletInfo } from "src/models/banking/WalletInfo";
 import WalletAccountsInfo from "./WalletAccountsInfo";
 import HistoricalTransactions from "src/content/appPages/Shared/HistoricalTransactions";
 

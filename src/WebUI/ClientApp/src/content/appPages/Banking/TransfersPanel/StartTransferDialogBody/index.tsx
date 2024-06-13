@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { connect } from "react-redux";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
-import RequestBuilder from "src/api/APIWrapper/RequestBuilder";
+import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import apiUrls from "src/api/apiUrls";
 
 import useUtils from "src/appUtils";
@@ -72,7 +72,7 @@ const StartTransferDialogBody = (props: any) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: RequestBuilder.BuildBody(requestToApi),
+        body: RequestParamsBuilder.BuildBody(requestToApi),
       },
       utils: u,
       showSuccess: true,

@@ -7,7 +7,7 @@ import { UserAccountInfo } from "src/models/UserAccountInfo";
 import { AdminUpdateAccountInfoRequest } from "src/models/requests/admin/updateUser/AdminUpdateAccountInfoRequest";
 import ParamsObjectBuilder from "src/helpers/ParamsObjectBuilder";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
-import RequestBuilder from "src/api/APIWrapper/RequestBuilder";
+import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import apiUrls from "src/api/apiUrls";
 import UserService from "src/services/UserService";
 import { connect } from "react-redux";
@@ -55,7 +55,7 @@ const UpdateAccount = (props: UpdateAccountInfoProps) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: RequestBuilder.BuildBody(request),
+        body: RequestParamsBuilder.BuildBody(request),
       },
       utils: u,
       showSuccess: true,

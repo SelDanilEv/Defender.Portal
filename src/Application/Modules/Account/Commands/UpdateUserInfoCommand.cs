@@ -3,6 +3,7 @@ using Defender.Common.Errors;
 using Defender.Common.Interfaces;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using FluentValidation;
+using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Account.Commands;
@@ -28,7 +29,8 @@ public sealed class UpdateUserInfoCommandValidator : AbstractValidator<UpdateUse
     public UpdateUserInfoCommandValidator()
     {
         RuleFor(s => s.Nickname)
-                  .NotEmpty().WithMessage(ErrorCodeHelper.GetErrorCode(ErrorCode.VL_USM_EmptyNickname));
+            .NotEmpty()
+            .WithMessage(ErrorCode.VL_USM_EmptyNickname);
     }
 }
 

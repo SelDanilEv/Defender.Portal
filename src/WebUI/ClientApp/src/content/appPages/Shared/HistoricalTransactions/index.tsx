@@ -1,16 +1,15 @@
 import { Card } from "@mui/material";
 import HistoricalTransactionsTable from "./Table";
-import TransactionHistoryResponse, {
-  Transaction,
-} from "src/models/responses/banking/transactions/TransactionHistoryResponse";
+import TransactionHistoryResponse from "src/models/responses/banking/transactions/TransactionHistoryResponse";
 import { useEffect, useState } from "react";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";
 import { connect } from "react-redux";
 import useUtils from "src/appUtils";
 import { CurrentPagination } from "src/models/base/CurrentPagination";
-import RequestBuilder from "src/api/APIWrapper/RequestBuilder";
+import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import { GetHistoricalTransactionsRequest } from "src/models/requests/banking/GetHistoricalTransactionsRequest";
+import Transaction from "src/models/banking/Transaction";
 
 interface HistoricalTransactionsProps {
   targetWalletId?: string;
@@ -49,7 +48,7 @@ const HistoricalTransactions = (props: HistoricalTransactionsProps) => {
   const reloadTransactionHistory = () => {
     const url =
       `${apiUrls.banking.transactionHistory}` +
-      `${RequestBuilder.BuildQuery(paginationRequest)}`;
+      `${RequestParamsBuilder.BuildQuery(paginationRequest)}`;
 
     APICallWrapper({
       url: url,

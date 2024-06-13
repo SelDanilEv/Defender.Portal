@@ -2,6 +2,7 @@
 using Defender.Common.Errors;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using FluentValidation;
+using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Admin.Users.Commands;
@@ -32,14 +33,12 @@ public sealed class UpdateUserInfoAsAdminCommandValidator : AbstractValidator<Up
     {
         RuleFor(x => x.UserId)
             .NotNull()
-            .WithMessage(ErrorCodeHelper.GetErrorCode(
-                                              ErrorCode.VL_InvalidRequest));
+            .WithMessage(ErrorCode.VL_InvalidRequest);
 
         RuleFor(x => x.Email)
             .NotNull()
             .When(x => x.Nickname == null && x.PhoneNumber == null)
-            .WithMessage(ErrorCodeHelper.GetErrorCode(
-                               ErrorCode.VL_InvalidRequest));
+            .WithMessage(ErrorCode.VL_InvalidRequest);
     }
 }
 

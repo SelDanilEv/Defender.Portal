@@ -14,7 +14,7 @@ import AddTwoToneIcon from "@mui/icons-material/AddTwoTone";
 
 import useUtils from "src/appUtils";
 import { useEffect, useState } from "react";
-import { WalletInfo } from "src/models/WalletInfo";
+import { WalletInfo } from "src/models/banking/WalletInfo";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";
 import {
@@ -34,6 +34,7 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import CachedIcon from "@mui/icons-material/Cached";
 import { updateWalletInfo } from "src/actions/walletActions";
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
+import CheckBoxButton from "src/components/Buttons/CheckBoxButton";
 
 const WalletAccountsInfo = (props: any) => {
   const u = useUtils();

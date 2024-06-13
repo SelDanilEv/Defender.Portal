@@ -18,7 +18,7 @@ public class VerificationController : BaseApiController
     [HttpGet("check")]
     [ProducesResponseType(typeof(AccountVerificationDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<AccountVerificationDto> CheckAccountVerificationAsync(
+    public async Task<ActionResult> CheckAccountVerificationAsync(
         [FromQuery] CheckAccountVerificationQuery query)
     {
         return await ProcessApiCallAsync<CheckAccountVerificationQuery, AccountVerificationDto>
@@ -28,7 +28,7 @@ public class VerificationController : BaseApiController
     [HttpPost("verify/email")]
     [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<bool> VerifyEmailAccountAsync(
+    public async Task<ActionResult> VerifyEmailAccountAsync(
         [FromBody] VerifyAccountEmailCommand command)
     {
         return await ProcessApiCallAsync<VerifyAccountEmailCommand, bool>
@@ -39,16 +39,16 @@ public class VerificationController : BaseApiController
     [Auth(Roles.User)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task SendUpdateAccountCodeAsync()
+    public async Task<ActionResult> SendUpdateAccountCodeAsync()
     {
-        await ProcessApiCallAsync<SendUpdateAccountAccessCodeCommand>
+        return await ProcessApiCallAsync<SendUpdateAccountAccessCodeCommand>
             (new SendUpdateAccountAccessCodeCommand());
     }
 
     [HttpPost("send/reset-password")]
     [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<Guid> SendResetPasswordCodeAsync(
+    public async Task<ActionResult> SendResetPasswordCodeAsync(
         [FromBody] SendPasswordResetCodeCommand command)
     {
         return await ProcessApiCallAsync<SendPasswordResetCodeCommand, Guid>(command);
@@ -57,7 +57,7 @@ public class VerificationController : BaseApiController
     [HttpPost("verify/code")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<bool> VerifyAccessCodeAsync([FromBody] VerifyAccessCodeCommand command)
+    public async Task<ActionResult> VerifyAccessCodeAsync([FromBody] VerifyAccessCodeCommand command)
     {
         return await ProcessApiCallWithoutMappingAsync<VerifyAccessCodeCommand, bool>(command);
     }
@@ -65,9 +65,9 @@ public class VerificationController : BaseApiController
     [HttpPost("resend/email")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task ResendEmailVerificationAsync()
+    public async Task<ActionResult> ResendEmailVerificationAsync()
     {
-        await ProcessApiCallAsync<SendEmailVerificationCodeCommand>
+        return await ProcessApiCallAsync<SendEmailVerificationCodeCommand>
             (new SendEmailVerificationCodeCommand());
     }
 }

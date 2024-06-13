@@ -3,7 +3,7 @@ using Defender.Common.Clients.UserManagement;
 using Defender.Common.DB.Pagination;
 using Defender.Common.Interfaces;
 using Defender.Common.Wrapper.Internal;
-using Defender.Portal.Infrastructure.Clients.Interfaces;
+using Defender.Portal.Application.Common.Interfaces.Wrappers;
 
 namespace Defender.Portal.Infrastructure.Clients.UserManagement;
 

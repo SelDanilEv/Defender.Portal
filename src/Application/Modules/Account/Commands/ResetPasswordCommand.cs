@@ -2,6 +2,7 @@
 using Defender.Common.Interfaces;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using FluentValidation;
+using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Account.Commands;
@@ -20,8 +21,7 @@ public sealed class ResetPasswordCommandValidator : AbstractValidator<ResetPassw
     {
         RuleFor(x => x.NewPassword)
             .NotEmpty()
-            .WithMessage(ErrorCodeHelper.GetErrorCode(
-                               ErrorCode.VL_InvalidRequest));
+            .WithMessage(ErrorCode.VL_InvalidRequest);
     }
 }
 
@@ -34,7 +34,7 @@ public sealed class ResetPasswordCommandHandler(
         ResetPasswordCommand request,
         CancellationToken cancellationToken)
     {
-        var  userId = request.UserId ?? currentAccountAccessor.GetAccountId();
+        var userId = request.UserId ?? currentAccountAccessor.GetAccountId();
 
         await accountManagementService.ChangeAccountPasswordAsync(
             userId,

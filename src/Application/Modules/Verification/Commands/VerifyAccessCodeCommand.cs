@@ -2,6 +2,7 @@
 using Defender.Portal.Application.Common.Interfaces.Services;
 using Defender.Portal.Application.Enums;
 using FluentValidation;
+using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Verification.Commands;
@@ -17,8 +18,8 @@ public sealed class VerifyAccessCodeCommandValidator : AbstractValidator<VerifyA
     public VerifyAccessCodeCommandValidator()
     {
         RuleFor(s => s.Code)
-                  .NotEmpty().WithMessage(ErrorCodeHelper.GetErrorCode(
-                      ErrorCode.VL_USM_EmptyAccessCode));
+            .NotEmpty()
+            .WithMessage(ErrorCode.VL_USM_EmptyAccessCode);
     }
 }
 

@@ -45,6 +45,12 @@ const AccountInfo = Loader(
 
 const Banking = Loader(lazy(() => import("src/content/appPages/Banking")));
 
+// Games
+
+const LotteryHomePage = Loader(
+  lazy(() => import("src/content/appPages/Games/Lottery"))
+);
+
 // Home
 
 const HomePage = Loader(lazy(() => import("src/content/appPages/HomePage")));
@@ -166,6 +172,29 @@ const routes: RouteObject[] = [
       {
         path: "",
         element: <Banking />,
+      },
+      {
+        path: "*",
+        element: <Status404 />,
+      },
+    ],
+  },
+  {
+    path: "games",
+    element: <SidebarLayout />,
+    children: [
+      {
+        path: "lottery",
+        children: [
+          {
+            path: "",
+            element: <LotteryHomePage />,
+          },
+          {
+            path: "*",
+            element: <Status404 />,
+          },
+        ],
       },
       {
         path: "*",

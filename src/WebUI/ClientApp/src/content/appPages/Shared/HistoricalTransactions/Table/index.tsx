@@ -18,11 +18,6 @@ import {
   CardHeader,
 } from "@mui/material";
 
-import Label from "src/components/Label";
-import {
-  Transaction,
-  TransactionStatus,
-} from "src/models/responses/banking/transactions/TransactionHistoryResponse";
 import InfoIcon from "@mui/icons-material/Info";
 import { CurrentPagination } from "src/models/base/CurrentPagination";
 import React from "react";
@@ -33,7 +28,9 @@ import TransactionInfoDialogBody from "./TransactionInfoDialogBody";
 import CustomDialog from "src/components/Dialog";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import CachedIcon from "@mui/icons-material/Cached";
-import { mapTransactionStatus, mapTransactionType } from "./mapping";
+import { mapTransactionStatusLabel } from "src/mappers/banking/mapTransactionStatus";
+import mapTransactionType from "src/mappers/banking/mapTransactionType";
+import Transaction from "src/models/banking/Transaction";
 
 interface HistoricalTransactionsTableProps {
   transactions: Transaction[];
@@ -68,27 +65,6 @@ const HistoricalTransactionsTable = (
   React.useEffect(() => {
     applyPagination(page, limit);
   }, [page, limit]);
-
-  const getStatusLabel = (status: TransactionStatus): JSX.Element => {
-    const map = {
-      Failed: {
-        color: "error",
-      },
-      Proceed: {
-        color: "success",
-      },
-      Queued: {
-        color: "warning",
-      },
-    };
-    const { color }: any = map[status];
-
-    return (
-      <Label fontSize={"1.2em"} color={color}>
-        {mapTransactionStatus(u, status)}
-      </Label>
-    );
-  };
 
   const handlePageChange = (event: any, newPage: number): void => {
     setPage(newPage);
@@ -154,7 +130,7 @@ const HistoricalTransactionsTable = (
             </Typography>
           </TableCell>
           <TableCell align="center">
-            {getStatusLabel(transaction.transactionStatus)}
+            {mapTransactionStatusLabel(u, transaction.transactionStatus)}
           </TableCell>
           <TableCell align="center">
             <Tooltip
@@ -226,7 +202,7 @@ const HistoricalTransactionsTable = (
                 {u.t("banking_page__trans_info_table_status_column")}
               </TableCell>
               <TableCell align="center">
-                {u.t("banking_page__trans_info_table_actions_column")}
+                {u.t("table_actions_column")}
               </TableCell>
             </TableRow>
           </TableHead>

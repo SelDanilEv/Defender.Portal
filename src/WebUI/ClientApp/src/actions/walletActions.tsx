@@ -1,4 +1,4 @@
-import { WalletInfo } from "src/models/WalletInfo";
+import { WalletInfo } from "src/models/banking/WalletInfo";
 
 export function updateWalletInfo(wallet: WalletInfo) {
   return (dispath) => {

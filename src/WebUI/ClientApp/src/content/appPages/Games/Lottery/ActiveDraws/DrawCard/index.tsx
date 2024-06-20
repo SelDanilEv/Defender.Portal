@@ -1,22 +1,34 @@
 import { Card, Box, Typography, Grid } from "@mui/material";
-import { propsToClassKey } from "@mui/styles";
+import { reloadResources } from "i18next";
 import moment from "moment";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import useUtils from "src/appUtils";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
-import { LotteryDraw } from "src/models/games/lottery/LotteryDraw";
+import LotteryDraw, { getDrawName } from "src/models/games/lottery/LotteryDraw";
 
 interface DrawCardProps {
   draw: LotteryDraw;
   currentLanguage: string;
+  reloadActiveDraws: () => void;
 }
 
-const DrawCard: React.FC<DrawCardProps> = ({ draw, currentLanguage }) => {
+const DrawCard: React.FC<DrawCardProps> = ({
+  reloadActiveDraws,
+  draw,
+  currentLanguage,
+}) => {
   const u = useUtils();
 
   const [timeLeft, setTimeLeft] = useState<string>("");
+
+  const [allowedToPlay, setAllowedToPlay] = useState<boolean>(false);
+
+  const getSeconds = (time: string) => {
+    const [hours, minutes, seconds] = time.split(":").map(Number);
+    return hours * 60 * 60 + minutes * 60 + seconds;
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -28,10 +40,37 @@ const DrawCard: React.FC<DrawCardProps> = ({ draw, currentLanguage }) => {
       const hoursMinutesSecondsLeft = moment
         .utc(moment(draw.endDate).diff(moment()))
         .format("HH:mm:ss");
+
+      if (
+        !allowedToPlay &&
+        getSeconds(hoursMinutesSecondsLeft) > getSeconds("00:05:00")
+      ) {
+        setAllowedToPlay(true);
+      }
+
+      if (
+        allowedToPlay &&
+        daysLeft <= 0 &&
+        getSeconds(hoursMinutesSecondsLeft) <= getSeconds("00:05:00")
+      ) {
+        setAllowedToPlay(false);
+
+        return;
+      }
+
+      if (daysLeft <= 0 && hoursMinutesSecondsLeft === "00:00:00") {
+        reloadActiveDraws();
+        return;
+      }
+
       setTimeLeft(timeLeft + hoursMinutesSecondsLeft);
     }, 1000);
     return () => clearInterval(timer);
   }, [draw.endDate]);
+
+  const handleDrawSelection = () => {
+    u.react.navigate("/games/lottery/tickets", { state: { draw } });
+  };
 
   return (
     <Card
@@ -57,20 +96,20 @@ const DrawCard: React.FC<DrawCardProps> = ({ draw, currentLanguage }) => {
         </Card>
         <Box display="flex" flexDirection={"row"} sx={{ gap: 1 }}>
           {draw.allowedCurrencies.map((currency) => (
-            <Card sx={{ px: 1, height: "1.5em" }}>
+            <Card key={currency} sx={{ px: 1, height: "1.5em" }}>
               {CurrencySymbolsMap[currency]}
             </Card>
           ))}
         </Box>
       </Box>
-      <Typography variant="h3">
-        {draw.publicNames[currentLanguage] ||
-          draw.publicNames["en"] ||
-          Object.values(draw.publicNames)[0]}
-      </Typography>
-      <LockedButton variant="outlined">
+      <Typography variant="h3">{getDrawName(draw, currentLanguage)}</Typography>
+      <LockedButton
+        disabled={!allowedToPlay}
+        variant="outlined"
+        onClick={handleDrawSelection}
+      >
         {u.t("lottery:active_draws_play_from")}
-        {draw.maxBetValue / 100}
+        {draw.minBetValue / 100}
       </LockedButton>
     </Card>
   );

@@ -43,7 +43,9 @@ const APIEndpoints = {
   },
   lottery: {
     getMyTickets: "tickets",
+    getAvailableTickets: "tickets/available",
     getActiveDraws: "draw/active",
+    purchaseTickets: "tickets/purchase",
   },
 };
 

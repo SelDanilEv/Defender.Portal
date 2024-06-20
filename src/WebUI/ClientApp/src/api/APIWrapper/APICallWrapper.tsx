@@ -49,7 +49,7 @@ const APICallWrapper = async ({
         onFailure(response);
         break;
       case 403:
-        utils?.e("Error_ForbiddenAccess");
+        utils?.e("error:ForbiddenAccess");
         break;
       default:
         onFailure(response);

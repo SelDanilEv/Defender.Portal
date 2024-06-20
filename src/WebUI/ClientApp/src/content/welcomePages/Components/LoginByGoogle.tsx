@@ -56,7 +56,7 @@ const LoginByGoogle = (props: any) => {
         const loginResponse = await response.json();
 
         if (!loginResponse.isAuthenticated) {
-          u.e("Error_AuthorizationFailed");
+          u.e("AuthorizationFailed");
           return;
         }
 

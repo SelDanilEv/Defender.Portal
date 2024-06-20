@@ -75,7 +75,7 @@ const UserInfoTabs = (props: UserInfoTabsProps) => {
         const loginResponse = await response.json();
 
         if (!loginResponse.isAuthenticated) {
-          u.e("Error_AuthorizationFailed");
+          u.e("AuthorizationFailed");
           return;
         }
 

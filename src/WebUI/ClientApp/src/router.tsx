@@ -51,6 +51,10 @@ const LotteryHomePage = Loader(
   lazy(() => import("src/content/appPages/Games/Lottery"))
 );
 
+const PurchaseLotteryTickets = Loader(
+  lazy(() => import("src/content/appPages/Games/Lottery/PurchaseTickets"))
+);
+
 // Home
 
 const HomePage = Loader(lazy(() => import("src/content/appPages/HomePage")));
@@ -189,6 +193,10 @@ const routes: RouteObject[] = [
           {
             path: "",
             element: <LotteryHomePage />,
+          },
+          {
+            path: "tickets",
+            element: <PurchaseLotteryTickets />,
           },
           {
             path: "*",

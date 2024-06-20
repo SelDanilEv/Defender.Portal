@@ -47,7 +47,7 @@ const StartTransferDialogBody = (props: any) => {
             (currency) => currency === request.currency
           )
         ) {
-          u.e("Error_RecipientCurrencyAccountIsNotExist");
+          u.e("RecipientCurrencyAccountIsNotExist");
           closeDialog();
           return;
         }

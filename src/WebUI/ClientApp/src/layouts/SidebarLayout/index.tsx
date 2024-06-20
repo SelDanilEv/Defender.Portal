@@ -40,7 +40,7 @@ const SidebarLayout: FC<SidebarLayoutProps> = (props: any) => {
   }, []);
 
   const logout = () => {
-    u.e("Error_SessionExpired");
+    u.e("SessionExpired");
     props.logout();
     u.react.navigate("/");
   };

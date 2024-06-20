@@ -32,12 +32,12 @@ const LoginForm = (props: any) => {
 
   const validateRequest = () => {
     if (!loginRequest.login) {
-      u.e("Error_EmptyLogin");
+      u.e("EmptyLogin");
       return false;
     }
 
     if (!loginRequest.password) {
-      u.e("Error_EmptyPassword");
+      u.e("EmptyPassword");
       return false;
     }
 
@@ -62,7 +62,7 @@ const LoginForm = (props: any) => {
         const loginResponse = (await response.json()) as Session;
 
         if (!loginResponse.isAuthenticated) {
-          u.e("Error_AuthorizationFailed");
+          u.e("AuthorizationFailed");
           return;
         }
 

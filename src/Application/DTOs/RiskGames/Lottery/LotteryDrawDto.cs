@@ -13,8 +13,10 @@ public record LotteryDrawDto
     public List<int>? Coefficients { get; set; }
 
     public List<Currency>? AllowedCurrencies { get; set; }
+    public List<int>? AllowedBets { get; set; }
     public int MinBetValue { get; set; }
     public int MaxBetValue { get; set; }
+    public bool IsCustomBetAllowed { get; set; }
 
     public int MinTicketNumber { get; set; }
     public int MaxTicketNumber { get; set; }

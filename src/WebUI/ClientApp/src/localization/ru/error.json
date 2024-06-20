@@ -1,0 +1,39 @@
+{ 
+  "UnhandledError": "Необработанная ошибка",
+  "ForbiddenAccess": "Доступ запрещен",
+  "AuthorizationFailed": "Ошибка при авторизации",
+  "SessionExpired": "Ваша сессия истекла. Пожалуйста, войдите снова",
+  
+  "EmptyLogin": "Пустой логин",
+  "EmptyEmail": "Пустой имейл",
+  "EmptyNickname": "Пустой никнейм",
+  "EmptyPassword": "Пустой пароль",
+  "EmptyWalletNumber": "Пустой номер кошелька",
+
+  "InvalidEmail": "Неверный имейл",
+  "InvalidPhoneNumber": "Неверный номер телефона",
+  "InvalidLoginOrPassword": "Неверный логин или пароль",
+  "InvalidWalletNumber": "Неверный номер кошелька",
+
+  "PasswordIsTooShort": "Минимальная длина пароля: 4 символа",
+  "PasswordIsTooLong": "Максимальная длина пароля: 64 символа",
+
+  "EmailAddressInUse": "Имейл уже используется",
+  "PhoneNumberInUse": "Номер телефона уже используется",
+  "NicknameInUse": "Никнейм уже используется",
+
+  "NicknameIsTooShort": "Минимальная длина никнейма: 4 символа",
+  "NicknameIsTooLong": "Максимальная длина никнейма: 128 символов",
+
+  "AccessCodeWasExpired": "Ссылка для подтверждения истекла",
+  "AccessCodeWasAlreadyUsed": "Код доступа уже использовался",
+  "InvalidAccessCode": "Код доступа недействителен",
+
+  "UserBlocked": "Пользователь заблокирован",
+
+  "WalletIsNotExist": "Кошелек не найден",
+  "SenderAndRecipientAreTheSame": "Кошелек не найден",
+  "RecipientCurrencyAccountIsNotExist": "У получателя нет счета в выбранной валюте.",
+  "NotEnoughFunds": "Недостаточно средств",
+  "CurrencyAccountNotFound": "Валютый счет не найден"
+}

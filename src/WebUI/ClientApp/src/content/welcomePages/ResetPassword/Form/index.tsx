@@ -22,7 +22,7 @@ import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";
 import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import WarningToast from "src/components/Toast/WarningToast";
-import LockedTextField from "src/components/LockedComponents/TextField/LockedTextField";
+import LockedTextField from "src/components/LockedComponents/LockedTextField/LockedTextField";
 
 const ResetPasswordForm = (props: any) => {
   const u = useUtils();

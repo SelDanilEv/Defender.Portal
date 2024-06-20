@@ -69,7 +69,7 @@ public static class ConfigureServices
                 ValidIssuer = configuration["JwtTokenIssuer"],
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(SecretsHelper.GetSecretAsync(Secret.JwtSecret).Result))
+                    Encoding.UTF8.GetBytes(SecretsHelper.GetSecretSync(Secret.JwtSecret, true)))
             };
         });
 
@@ -133,7 +133,7 @@ public static class ConfigureServices
         options.Map<Exception>(exception =>
         {
             var problemDetails = new ProblemDetails();
-            problemDetails.Detail = UIErrorCodes.Error_UnhandledError.ToString();
+            problemDetails.Detail = UIErrorCodes.UnhandledError.ToString();
             problemDetails.Status = StatusCodes.Status500InternalServerError;
             return problemDetails;
         }); ;

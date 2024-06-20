@@ -1,5 +1,7 @@
-export interface CurrencyAccount{
-  currency: string;
+import { Currency } from "../shared/Currency";
+
+export interface CurrencyAccount {
+  currency: Currency;
   balance: number;
 }
 

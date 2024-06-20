@@ -17,61 +17,77 @@ public class ErrorMappingHelper
         {
             ErrorCode.VL_NTF_InvalidEmail or
             ErrorCode.VL_USM_InvalidEmail or
-            ErrorCode.VL_ACC_InvalidEmail => UIErrorCodes.Error_InvalidEmail,
+            ErrorCode.VL_ACC_InvalidEmail => UIErrorCodes.InvalidEmail,
 
-            ErrorCode.BR_ACC_UserIsBlocked => UIErrorCodes.Error_UserBlocked,
+            ErrorCode.BR_ACC_UserIsBlocked => UIErrorCodes.UserBlocked,
 
-            ErrorCode.BR_USM_EmailAddressInUse => UIErrorCodes.Error_EmailAddressInUse,
+            ErrorCode.BR_USM_EmailAddressInUse => UIErrorCodes.EmailAddressInUse,
 
-            ErrorCode.BR_USM_PhoneNumberInUse => UIErrorCodes.Error_PhoneNumberInUse,
+            ErrorCode.BR_USM_PhoneNumberInUse => UIErrorCodes.PhoneNumberInUse,
 
-            ErrorCode.BR_USM_NicknameInUse => UIErrorCodes.Error_NicknameInUse,
+            ErrorCode.BR_USM_NicknameInUse => UIErrorCodes.NicknameInUse,
 
             ErrorCode.VL_USM_EmptyLogin or
-            ErrorCode.VL_ACC_EmptyLogin => UIErrorCodes.Error_EmptyLogin,
+            ErrorCode.VL_ACC_EmptyLogin => UIErrorCodes.EmptyLogin,
 
             ErrorCode.VL_USM_EmptyEmail or
-            ErrorCode.VL_ACC_EmptyEmail => UIErrorCodes.Error_EmptyEmail,
+            ErrorCode.VL_ACC_EmptyEmail => UIErrorCodes.EmptyEmail,
 
             ErrorCode.VL_USM_EmptyNickname or
-            ErrorCode.VL_ACC_EmptyNickname => UIErrorCodes.Error_EmptyNickname,
+            ErrorCode.VL_ACC_EmptyNickname => UIErrorCodes.EmptyNickname,
 
-            ErrorCode.VL_ACC_EmptyPassword => UIErrorCodes.Error_EmptyPassword,
+            ErrorCode.VL_ACC_EmptyPassword => UIErrorCodes.EmptyPassword,
 
-            ErrorCode.VL_ACC_MinPasswordLength => UIErrorCodes.Error_PasswordIsTooShort,
+            ErrorCode.VL_ACC_MinPasswordLength => UIErrorCodes.PasswordIsTooShort,
 
-            ErrorCode.VL_ACC_MaxPasswordLength => UIErrorCodes.Error_PasswordIsTooLong,
+            ErrorCode.VL_ACC_MaxPasswordLength => UIErrorCodes.PasswordIsTooLong,
 
             ErrorCode.BR_USM_UserWithSuchLoginIsNotExist or
-            ErrorCode.BR_ACC_InvalidPassword => UIErrorCodes.Error_InvalidLoginOrPassword,
+            ErrorCode.BR_ACC_InvalidPassword => UIErrorCodes.InvalidLoginOrPassword,
 
             ErrorCode.VL_USM_MinNicknameLength or
-            ErrorCode.VL_ACC_MinNicknameLength => UIErrorCodes.Error_NicknameIsTooShort,
+            ErrorCode.VL_ACC_MinNicknameLength => UIErrorCodes.NicknameIsTooShort,
 
             ErrorCode.VL_ACC_MaxNicknameLength or
-            ErrorCode.VL_USM_MaxNicknameLength => UIErrorCodes.Error_NicknameIsTooLong,
+            ErrorCode.VL_USM_MaxNicknameLength => UIErrorCodes.NicknameIsTooLong,
 
-            ErrorCode.BR_ACC_AccessCodeWasExpired => UIErrorCodes.Error_AccessCodeWasExpired,
-            ErrorCode.BR_ACC_AccessCodeWasAlreadyUsed => UIErrorCodes.Error_AccessCodeWasAlreadyUsed,
-            ErrorCode.BR_ACC_InvalidAccessCode => UIErrorCodes.Error_InvalidAccessCode,
+            ErrorCode.BR_ACC_AccessCodeWasExpired => UIErrorCodes.AccessCodeWasExpired,
+            ErrorCode.BR_ACC_AccessCodeWasAlreadyUsed => UIErrorCodes.AccessCodeWasAlreadyUsed,
+            ErrorCode.BR_ACC_InvalidAccessCode => UIErrorCodes.InvalidAccessCode,
 
             ErrorCode.VL_USM_InvalidPhoneNumber or
-            ErrorCode.VL_ACC_InvalidPhoneNumber => UIErrorCodes.Error_InvalidPhoneNumber,
+            ErrorCode.VL_ACC_InvalidPhoneNumber => UIErrorCodes.InvalidPhoneNumber,
 
-            ErrorCode.VL_WLT_EmptyWalletNumber => UIErrorCodes.Error_EmptyWalletNumber,
-            ErrorCode.BR_WLT_WalletIsNotExist => UIErrorCodes.Error_WalletIsNotExist,
+            ErrorCode.VL_WLT_EmptyWalletNumber => UIErrorCodes.EmptyWalletNumber,
+            ErrorCode.BR_WLT_WalletIsNotExist => UIErrorCodes.WalletIsNotExist,
             ErrorCode.BR_WLT_SenderAndRecipientAreTheSame or
-            ErrorCode.VL_WLT_InvalidWalletNumber => UIErrorCodes.Error_InvalidWalletNumber,
+            ErrorCode.VL_WLT_InvalidWalletNumber => UIErrorCodes.InvalidWalletNumber,
             ErrorCode.BR_WLT_SenderCurrencyAccountIsNotExist or
             ErrorCode.BR_WLT_CurrencyAccountIsNotExist or
-            ErrorCode.BR_WLT_RecipientCurrencyAccountIsNotExist 
-                => UIErrorCodes.Error_WalletAccountNotFound,
+            ErrorCode.BR_WLT_RecipientCurrencyAccountIsNotExist
+                => UIErrorCodes.CurrencyAccountNotFound,
 
-            ErrorCode.CM_InvalidUserJWT => UIErrorCodes.Error_SessionExpired,
+            ErrorCode.CM_InvalidUserJWT => UIErrorCodes.SessionExpired,
 
-            ErrorCode.CM_ForbiddenAccess => UIErrorCodes.Error_ForbiddenAccess,
+            ErrorCode.CM_ForbiddenAccess => UIErrorCodes.ForbiddenAccess,
 
-            ErrorCode.UnhandledError => UIErrorCodes.Error_UnhandledError,
+            ErrorCode.UnhandledError => UIErrorCodes.UnhandledError,
+
+
+            ErrorCode.BR_WLT_TransactionCanNotBeCanceled or
+            ErrorCode.BR_RGS_UnsupportedTransactionType or
+            ErrorCode.BR_RGS_UnsupportedGameType or
+            ErrorCode.BR_RGS_InvalidPaymentRequest or
+            ErrorCode.BR_RGS_InvalidTransactionAmount or
+            ErrorCode.BR_RGS_LotteryIsStillActive or
+            ErrorCode.BR_RGS_LotteryDrawIsNotActive or
+            ErrorCode.BR_RGS_CurrencyIsNotAllowed or
+            ErrorCode.BR_RGS_TryingToPurchaseInvalidTickets or
+            ErrorCode.BR_RGS_ThisBetIsNotAllowed or
+            ErrorCode.VL_RGS_InvalidDrawNumber or
+            ErrorCode.VL_RGS_InvalidTicketNumber or
+            ErrorCode.VL_RGS_InvalidAmount or
+            ErrorCode.VL_RGS_AmountOfTicketsMustBePositive or
             ErrorCode.BR_ACC or
             ErrorCode.BR_ACC_CodeTypeMismatch or
             ErrorCode.BR_USM or
@@ -80,7 +96,6 @@ public class ErrorMappingHelper
             ErrorCode.VL_ACC_EmptyAccessCode or
             ErrorCode.VL_WLT_TransferAmountMustBePositive or
             ErrorCode.BR_WLT_CurrencyAccountAlreadyExist or
-
             ErrorCode.BR_WLT_NoAvailableWalletNumbers or
             ErrorCode.BR_WLT_InvalidTransactionStatus or
             ErrorCode.BR_WLT_NotEnoughFunds or
@@ -115,7 +130,7 @@ public class ErrorMappingHelper
             ErrorCode.VL_SCM_EmptySecretName or
             ErrorCode.VL_SCM_EmptySecretValue or
 
-            _ => UIErrorCodes.Error_UnhandledError
+            _ => UIErrorCodes.UnhandledError
         };
     }
 }

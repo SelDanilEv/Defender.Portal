@@ -8,7 +8,7 @@ import useUtils from "src/appUtils";
 import CachedIcon from "@mui/icons-material/Cached";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import { PaginationRequest } from "src/models/base/PaginationRequest";
-import { LotteryDraw } from "src/models/games/lottery/LotteryDraw";
+import LotteryDraw from "src/models/games/lottery/LotteryDraw";
 import ActiveLotteryDrawsResponse from "src/models/responses/games/lottery/ActiveLotteryDrawsResponse";
 import DrawCard from "./DrawCard";
 
@@ -30,7 +30,15 @@ const ActiveDraws = (props: ActiveDrawsProps) => {
     reloadActiveDraws();
   }, [paginationRequest]);
 
+  let isReloading = false;
   const reloadActiveDraws = () => {
+    if (isReloading) {
+      u.log("Already reloading");
+      return;
+    }
+
+    isReloading = true;
+
     const url =
       `${apiUrls.lottery.getActiveDraws}` +
       `${RequestParamsBuilder.BuildQuery(paginationRequest)}`;
@@ -54,7 +62,7 @@ const ActiveDraws = (props: ActiveDrawsProps) => {
   };
 
   const renderDrawCard = (draw: LotteryDraw, index: number) => {
-    return <DrawCard draw={draw} />;
+    return <DrawCard draw={draw} reloadActiveDraws={reloadActiveDraws} />;
   };
 
   return (
@@ -76,7 +84,7 @@ const ActiveDraws = (props: ActiveDrawsProps) => {
       </Box>
       <Grid container spacing={2} p={1}>
         {draws.map((draw, index) => (
-          <Grid item xs={12} sm={6}>
+          <Grid key={draw.drawNumber || index} item xs={12} sm={6}>
             {renderDrawCard(draw, index)}
           </Grid>
         ))}

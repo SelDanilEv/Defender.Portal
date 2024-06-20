@@ -4,7 +4,6 @@ import {
   Card,
   CardHeader,
   TextField,
-  Select,
   MenuItem,
 } from "@mui/material";
 import { connect } from "react-redux";
@@ -24,6 +23,7 @@ import {
 } from "src/consts/Regexes";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 import ParamsObjectBuilder from "src/helpers/ParamsObjectBuilder";
+import LockedSelect from "src/components/LockedComponents/LockedSelect/LockedSelect";
 
 const TransfersPanel = (props: any) => {
   const u = useUtils();
@@ -115,7 +115,7 @@ const TransfersPanel = (props: any) => {
             />
           </Grid>
           <Grid item xs={4} sm={2} md={2}>
-            <Select
+            <LockedSelect
               name="currency"
               value={transferRequest.currency}
               onChange={UpdateRequest}
@@ -129,7 +129,7 @@ const TransfersPanel = (props: any) => {
                     </MenuItem>
                   ))
                 : null}
-            </Select>
+            </LockedSelect>
           </Grid>
           <Grid item xs={12} sm={3} md={3}>
             <LockedButton

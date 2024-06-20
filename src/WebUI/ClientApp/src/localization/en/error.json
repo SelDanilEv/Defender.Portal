@@ -1,0 +1,39 @@
+{ 
+  "UnhandledError": "Unhandled error",
+  "ForbiddenAccess": "Forbidden access",
+  "AuthorizationFailed": "Error during authorization",
+  "SessionExpired": "Your session has expired. Please login again",
+
+  "EmptyLogin": "Empty login",
+  "EmptyEmail": "Empty email",
+  "EmptyNickname": "Empty nickname",
+  "EmptyPassword": "Empty Password",
+  "EmptyWalletNumber": "Empty wallet number",
+
+  "InvalidEmail": "Invalid email",
+  "InvalidPhoneNumber": "Invalid phone number",
+  "InvalidLoginOrPassword": "Invalid login or password",
+  "InvalidWalletNumber": "Invalid wallet number",
+
+  "PasswordIsTooShort": "Minimum password length: 4 characters",
+  "PasswordIsTooLong": "Maximum password length: 64 characters",
+
+  "EmailAddressInUse": "Email is already in use",
+  "PhoneNumberInUse": "Phone number is already in use",
+  "NicknameInUse": "Nickname is already in use",
+
+  "NicknameIsTooShort": "Minimum nickname length: 4 characters",
+  "NicknameIsTooLong": "Maximum nickname length: 128 characters",
+
+  "AccessCodeWasExpired": "Verification link has expired",
+  "AccessCodeWasAlreadyUsed": "Access code has already been used",
+  "InvalidAccessCode": "Access code is not valid",
+
+  "UserBlocked": "The user is blocked",
+
+  "WalletIsNotExist": "Wallet not found",
+  "SenderAndRecipientAreTheSame": "Wallet not found",
+  "RecipientCurrencyAccountIsNotExist": "The recipient does not have an account in the selected currency.",
+  "NotEnoughFunds": "Not enough funds",
+  "CurrencyAccountNotFound": "Currency account not found"
+}

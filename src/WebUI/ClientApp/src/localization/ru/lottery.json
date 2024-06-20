@@ -27,5 +27,14 @@
   "active_draws_days_left": "день ",
   "active_draws_play_from": "Играйте от ",
 
+  "draw_common_description": "Выиграйте невероятный выигрыш с нашим топовым коэффициентом: ",
+  "draw_available_tickets_title": "Доступные билеты",
+  "draw_available_tickets_random_button": "Случайный",
+  "draw_available_tickets_target_number_label": "Номер",
+  "draw_available_tickets_search_button": "Поиск",
+  "draw_available_tickets_total_bet": "Ваша общая ставка: ",
+  "draw_available_tickets_back_button": "Назад",
+  "draw_available_tickets_proceed_button": "Продолжить",
+
   "_" : "_"
 }

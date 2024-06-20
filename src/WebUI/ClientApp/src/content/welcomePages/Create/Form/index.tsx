@@ -84,7 +84,7 @@ const CreateForm = (props: any) => {
         const createResponse = await response.json();
 
         if (!createResponse.isAuthenticated) {
-          u.e("Error_AuthorizationFailed");
+          u.e("AuthorizationFailed");
           return;
         }
 

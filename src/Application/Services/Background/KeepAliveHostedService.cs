@@ -1,4 +1,5 @@
 ﻿using Defender.Common.Clients.Identity;
+using Defender.Common.Clients.RiskGames;
 using Defender.Common.Clients.UserManagement;
 using Defender.Common.Clients.Wallet;
 using Microsoft.Extensions.Hosting;
@@ -8,7 +9,8 @@ namespace Defender.Portal.Application.Services.Background;
 public class KeepAliveHostedService(
         IIdentityServiceClient identityServiceClient,
         IWalletServiceClient walletServiceClient,
-        IUserManagementServiceClient userManagementServiceClient)
+        IUserManagementServiceClient userManagementServiceClient,
+        IRiskGamesServiceClient riskGamesServiceClient)
     : IHostedService, IDisposable
 {
     private Timer? _timer;
@@ -25,6 +27,7 @@ public class KeepAliveHostedService(
         identityServiceClient.HealthAsync();
         walletServiceClient.HealthAsync();
         userManagementServiceClient.HealthAsync();
+        riskGamesServiceClient.HealthAsync();
     }
 
     public Task StopAsync(CancellationToken cancellationToken)

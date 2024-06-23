@@ -42,8 +42,9 @@ const DrawCard: React.FC<DrawCardProps> = ({
         .format("HH:mm:ss");
 
       if (
-        !allowedToPlay &&
-        getSeconds(hoursMinutesSecondsLeft) > getSeconds("00:05:00")
+        daysLeft > 0 ||
+        (!allowedToPlay &&
+          getSeconds(hoursMinutesSecondsLeft) > getSeconds("00:05:00"))
       ) {
         setAllowedToPlay(true);
       }
@@ -54,13 +55,10 @@ const DrawCard: React.FC<DrawCardProps> = ({
         getSeconds(hoursMinutesSecondsLeft) <= getSeconds("00:05:00")
       ) {
         setAllowedToPlay(false);
-
-        return;
       }
 
       if (daysLeft <= 0 && hoursMinutesSecondsLeft === "00:00:00") {
         reloadActiveDraws();
-        return;
       }
 
       setTimeLeft(timeLeft + hoursMinutesSecondsLeft);

@@ -247,6 +247,27 @@ const RoleBasedMenu = (props: any) => {
             </SubMenuWrapper>
           </List>
         );
+        result.push(
+          <List
+            key={"budget_tracker"}
+            component="div"
+            subheader={
+              <ListSubheader component="div" disableSticky>
+                {u.t("sidebar_menu:header_budget_tracker")}
+              </ListSubheader>
+            }
+          >
+            <SubMenuWrapper>
+              <List component="div">
+                <MenuItem
+                  to="/budget-tracker"
+                  icon={<LocalActivityIcon style={{ fontSize: "1.5em" }} />}
+                  text={u.t("sidebar_menu:page_budget_tracker")}
+                />
+              </List>
+            </SubMenuWrapper>
+          </List>
+        );
         break;
     }
 

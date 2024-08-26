@@ -1,11 +1,5 @@
-import {
-  Box,
-  Typography,
-  Container,
-  Button,
-  styled
-} from '@mui/material';
-import { Helmet } from 'react-helmet-async';
+import { Box, Typography, Container, Button, styled } from "@mui/material";
+import { Helmet } from "react-helmet-async";
 
 const MainContent = styled(Box)(
   ({ theme }) => `
@@ -43,7 +37,7 @@ function Status404() {
             </Typography>
           </Box>
         </Container>
-        <Button href="/" variant="outlined">
+        <Button href="/home" variant="outlined">
           Go to homepage
         </Button>
       </MainContent>

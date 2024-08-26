@@ -229,7 +229,7 @@ const ResetPasswordForm = (props: any) => {
         body: RequestParamsBuilder.BuildBody(sendCodeRequest),
       },
       utils: u,
-      successMesage: u.t("reset_password_page__send_code_success"),
+      successMesage: u.t("welcome:send_code_success"),
       showSuccess: true,
       onSuccess: async (response) => {
         setTimeout(() => {
@@ -242,9 +242,7 @@ const ResetPasswordForm = (props: any) => {
           }
         }, 20000);
 
-        WarningToast(
-          u.t("reset_password_page__notification_activating_back_button")
-        );
+        WarningToast(u.t("welcome:notification_activating_back_button"));
 
         const data = await response.json();
         setResetRequest((prevState) => ({
@@ -271,7 +269,7 @@ const ResetPasswordForm = (props: any) => {
         body: RequestParamsBuilder.BuildBody(resetRequest),
       },
       utils: u,
-      successMesage: u.t("reset_password_page__notification_reset_success"),
+      successMesage: u.t("welcome:notification_reset_success"),
       showSuccess: true,
       onSuccess: async (response) => {
         u.react.navigate("/");
@@ -325,7 +323,7 @@ const ResetPasswordForm = (props: any) => {
           value={sendCodeRequest.email}
           onChange={handleUpdate}
           type="text"
-          label={u.t("reset_password_page__form_email_label")}
+          label={u.t("welcome:form_email_label")}
           fullWidth
         />
         {!elements[ElementNames.PasswordField].hidden && (
@@ -335,7 +333,7 @@ const ResetPasswordForm = (props: any) => {
             value={resetRequest.newPassword}
             type="password"
             onChange={handleUpdate}
-            label={u.t("reset_password_page__form_password_label")}
+            label={u.t("welcome:form_password_label")}
             fullWidth
           />
         )}
@@ -346,7 +344,7 @@ const ResetPasswordForm = (props: any) => {
             type="number"
             disabled={elements[ElementNames.CodeField].disabled}
             onChange={handleUpdate}
-            label={u.t("reset_password_page__form_code_label")}
+            label={u.t("welcome:form_code_label")}
             fullWidth
           />
         )}
@@ -374,7 +372,7 @@ const ResetPasswordForm = (props: any) => {
                 fullWidth
                 onClick={handleBack}
               >
-                {u.t("reset_password_page__form_back_button")}
+                {u.t("welcome:form_back_button")}
               </LockedButton>
             )}
           </Box>
@@ -394,7 +392,7 @@ const ResetPasswordForm = (props: any) => {
               fullWidth
               onClick={handleContinue}
             >
-              {u.t("reset_password_page__form_continue_button")}
+              {u.t("welcome:form_continue_button")}
             </LockedButton>
           </Box>
         </Box>

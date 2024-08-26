@@ -1,0 +1,33 @@
+{
+  "name_of_app": "Defender Portal",
+  "welcome_to": "Welcome to",
+
+  "sign_in_with": "Sign in with",
+  "sign_in": "Sign in",
+  "create": "Create",
+  "or": "OR",
+  "create_account": "Create account !",
+  "back_to_login_page": "Back",
+  "email_label": "Email",
+  "login_label": "Login",
+  "password_label": "Password",
+  "nickname_label": "Nickname",
+  "phone_label": "Phone",
+  "email_verification_error_label": "Verification failed",
+  "email_verification_pending_label": "We're verifying your email ...",
+  "email_verification_success_label": "Your email has been verified",
+  "email_verification_description": "To continue please check your email and follow the verification link",
+  "resend_verification_email": "Resend verification",
+  "verification_email_sent": "Verification link sent to your email",
+  "reset_password_link": "Forgot password?",
+
+  "back_button": "Back to login",
+  "notification_activating_back_button": "Back button becomes active after 20 seconds",
+  "send_code_success": "Code sent successfully!",
+  "notification_reset_success": "Password reset successful!",
+  "form_email_label": "Email",
+  "form_password_label": "New Password",
+  "form_code_label": "Verification Code",
+  "form_back_button": "Back",
+  "form_continue_button": "Continue"
+}

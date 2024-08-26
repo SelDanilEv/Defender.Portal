@@ -55,6 +55,12 @@ const PurchaseLotteryTickets = Loader(
   lazy(() => import("src/content/appPages/Games/Lottery/PurchaseTickets"))
 );
 
+// Budget Tracker
+
+const BudgetTrackerHomePage = Loader(
+  lazy(() => import("src/content/appPages/BudgetTracker"))
+);
+
 // Home
 
 const HomePage = Loader(lazy(() => import("src/content/appPages/HomePage")));
@@ -176,6 +182,20 @@ const routes: RouteObject[] = [
       {
         path: "",
         element: <Banking />,
+      },
+      {
+        path: "*",
+        element: <Status404 />,
+      },
+    ],
+  },
+  {
+    path: "budget-tracker",
+    element: <SidebarLayout />,
+    children: [
+      {
+        path: "",
+        element: <BudgetTrackerHomePage />,
       },
       {
         path: "*",

@@ -7,9 +7,9 @@ import { Box, Card, Container, Typography } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { styled } from "@mui/material/styles";
 
-import config from "src/config.json";
 import useUtils from "src/appUtils";
 import Logo from "src/components/LogoSign";
+import LanguageSwither from "src/components/LanguageSwitcher";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";
 import { logout } from "src/actions/sessionActions";
@@ -77,7 +77,7 @@ const WelcomeLayout: FC = (props: any) => {
     >
       <OverviewWrapper>
         <Helmet>
-          <title>Defender Portal</title>
+          <title>{u.t("welcome:name_of_app")}</title>
         </Helmet>
         <Container maxWidth="lg">
           <Box
@@ -85,11 +85,22 @@ const WelcomeLayout: FC = (props: any) => {
             justifyContent="center"
             pt={5}
             alignItems="center"
+            flexDirection="row"
           >
-            <Box display="flex" justifyContent="right" alignItems="center">
+            <Box display="flex" justifyContent="center" alignItems="center">
               <Logo width="100px" height="100px" />
             </Box>
+            <Box
+              position="absolute"
+              right={u.isMobile ? 45 : "30%"}
+              display="flex"
+              justifyContent="flex-end"
+              alignItems="center"
+            >
+              <LanguageSwither />
+            </Box>
           </Box>
+
           <Box display="flex" justifyContent="center" alignItems="center">
             <Card
               sx={{
@@ -110,9 +121,9 @@ const WelcomeLayout: FC = (props: any) => {
                   }}
                 >
                   <Box display="flex" flexDirection="column" gap="5px">
-                    Welcome to
+                    {u.t("welcome:welcome_to")}
                     <TypographyH1 sx={{ mb: 2 }} variant="h1">
-                      {config.NAME_OF_APP}
+                      {u.t("welcome:name_of_app")}
                     </TypographyH1>
                     <Outlet />
                   </Box>

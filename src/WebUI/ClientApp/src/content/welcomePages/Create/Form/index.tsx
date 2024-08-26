@@ -122,24 +122,24 @@ const CreateForm = (props: any) => {
           id="email"
           type="email"
           onChange={UpdateLoginRequest}
-          label={u.t("welcome_page__email_label")}
+          label={u.t("welcome:email_label")}
         />
         <TextField
           id="nickname"
           type="text"
           onChange={UpdateLoginRequest}
-          label={u.t("welcome_page__nickname_label")}
+          label={u.t("welcome:nickname_label")}
         />
         <TextField
           id="phoneNumber"
           type="tel"
           placeholder="+(48)726101290"
           onChange={UpdateLoginRequest}
-          label={u.t("welcome_page__phone_label")}
+          label={u.t("welcome:phone_label")}
         />
         <FormControl variant="outlined">
           <InputLabel htmlFor="password">
-            {u.t("welcome_page__password_label")}
+            {u.t("welcome:password_label")}
           </InputLabel>
           <OutlinedInput
             id="password"
@@ -156,7 +156,7 @@ const CreateForm = (props: any) => {
                 </IconButton>
               </InputAdornment>
             }
-            label={u.t("welcome_page__password_label")}
+            label={u.t("welcome:password_label")}
           />
         </FormControl>
         <LoginButton
@@ -164,7 +164,7 @@ const CreateForm = (props: any) => {
           variant="outlined"
           onClick={() => Create()}
         >
-          {u.t("welcome_page__create")}
+          {u.t("welcome:create")}
         </LoginButton>
       </FormControl>
     </Box>

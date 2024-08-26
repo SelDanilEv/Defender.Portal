@@ -1,0 +1,33 @@
+{
+  "name_of_app": "Defender Portal",
+  "welcome_to": "Добро пожаловать на",
+
+  "sign_in_with": "Войти с помощью",
+  "sign_in": "Войти",
+  "create": "Создать",
+  "or": "ИЛИ",
+  "create_account": "Создать аккаунт!",
+  "back_to_login_page": "Назад",
+  "email_label": "Электронная почта",
+  "login_label": "Логин",
+  "password_label": "Пароль",
+  "nickname_label": "Никнейм",
+  "phone_label": "Телефон",
+  "email_verification_error_label": "Ошибка верификации",
+  "email_verification_pending_label": "Мы проверяем вашу электронную почту...",
+  "email_verification_success_label": "Ваша электронная почта подтверждена",
+  "email_verification_description": "Чтобы продолжить, проверьте свою электронную почту и перейдите по ссылке для подтверждения",
+  "resend_verification_email": "Отправить письмо для подтверждения снова",
+  "verification_email_sent": "Ссылка для подтверждения отправлена на вашу электронную почту",
+  "reset_password_link": "Забыли пароль?",
+
+  "back_button": "Вернуться назад",
+  "notification_activating_back_button": "Кнопка назад станет активной через 20 секунд",
+  "send_code_success": "Код успешно отправлен!",
+  "notification_reset_success": "Сброс пароля прошел успешно!",
+  "form_email_label": "Электронная почта",
+  "form_password_label": "Новый пароль",
+  "form_code_label": "Код подтверждения",
+  "form_back_button": "Назад",
+  "form_continue_button": "Продолжить"
+}

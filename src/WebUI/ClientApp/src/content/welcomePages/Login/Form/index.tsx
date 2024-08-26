@@ -94,21 +94,21 @@ const LoginForm = (props: any) => {
           id="login"
           type="text"
           onChange={UpdateLoginRequest}
-          label={u.t("welcome_page__login_label")}
+          label={u.t("welcome:login_label")}
         />
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <TextField
             id="password"
             type="password"
             onChange={UpdateLoginRequest}
-            label={u.t("welcome_page__password_label")}
+            label={u.t("welcome:password_label")}
             fullWidth
           />
           <Link
             href="password/reset"
             sx={{ ml: "auto", mr: "4px", fontSize: "0.8em" }}
           >
-            {u.t("welcome_page__reset_password_link")}
+            {u.t("welcome:reset_password_link")}
           </Link>
         </Box>
 
@@ -117,7 +117,7 @@ const LoginForm = (props: any) => {
           variant="outlined"
           onClick={() => login()}
         >
-          {u.t("welcome_page__sign_in")}
+          {u.t("welcome:sign_in")}
         </LockedButton>
       </FormControl>
     </Box>

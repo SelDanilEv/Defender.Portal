@@ -16,11 +16,11 @@ const ResetPassword = (props: any) => {
         width_lg="45%"
         width_md="40%"
         width_xs="70%"
-        text={u.t("welcome_page__or")}
+        text={u.t("welcome:or")}
         gap="10px"
       />
       <WelcomeMenuButton
-        text={u.t("reset_password_page__back_button")}
+        text={u.t("welcome:back_button")}
         path="/welcome/login"
       />
     </>

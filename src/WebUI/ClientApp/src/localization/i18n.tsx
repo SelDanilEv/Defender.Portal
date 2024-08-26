@@ -7,11 +7,13 @@ import en from "src/localization/en/en.json";
 import en_error from "src/localization/en/error.json";
 import en_lottery from "src/localization/en/lottery.json";
 import en_sidebar_menu from "src/localization/en/sidebar_menu.json";
+import en_welcome from "src/localization/en/welcome.json";
 
 import ru from "src/localization/ru/ru.json";
 import ru_error from "src/localization/ru/error.json";
 import ru_lottery from "src/localization/ru/lottery.json";
 import ru_sidebar_menu from "src/localization/ru/sidebar_menu.json";
+import ru_welcome from "src/localization/ru/welcome.json";
 
 const resources: any = {
   en: {
@@ -20,12 +22,14 @@ const resources: any = {
     error: en_error,
     lottery: en_lottery,
     sidebar_menu: en_sidebar_menu,
+    welcome: en_welcome,
   },
   ru: {
     translation: ru,
     error: ru_error,
     lottery: ru_lottery,
     sidebar_menu: ru_sidebar_menu,
+    welcome: ru_welcome,
   },
 };
 

@@ -1,3 +1,12 @@
-const SupportedCurrencies = ["USD", "EUR", "PLN", "GEL"];
+const BankingSupportedCurrencies = ["USD", "EUR", "PLN", "GEL"];
 
-export default SupportedCurrencies;
+const BudgetTrackerSupportedCurrencies = [
+  "USD",
+  "EUR",
+  "PLN",
+  "GEL",
+  "RUB",
+  "BYN",
+];
+
+export { BankingSupportedCurrencies, BudgetTrackerSupportedCurrencies };

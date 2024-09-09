@@ -10,7 +10,7 @@ const walletReducer = (
   action: any
 ) => {
   switch (action.type) {
-    case "SET_WALLET_INFO":
+    case setWalletInfoActionName:
       state = {
         ...state,
         walletNumber: action.payload.walletNumber,
@@ -18,7 +18,7 @@ const walletReducer = (
         defaultCurrency: action.payload.defaultCurrency,
       };
       break;
-    case "CLEAN_WALLET_INFO":
+    case cleanWalletInfoActionName:
       state = {
         ...state,
         walletNumber: 0,
@@ -33,3 +33,6 @@ const walletReducer = (
 };
 
 export default walletReducer;
+
+export const setWalletInfoActionName = "SET_WALLET_INFO";
+export const cleanWalletInfoActionName = "CLEAN_WALLET_INFO";

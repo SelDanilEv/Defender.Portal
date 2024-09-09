@@ -1,17 +1,20 @@
-const loadingReducer = (state = {
-  callsCounter: 0,
-  loading: false
-}, action: any) => {
+const loadingReducer = (
+  state = {
+    callsCounter: 0,
+    loading: false,
+  },
+  action: any
+) => {
   let newValue = state.callsCounter;
   switch (action.type) {
-    case "START_LOADING":
+    case startLoadingActionName:
       state = {
         ...state,
         callsCounter: ++newValue,
         loading: true,
       };
       break;
-    case "FINISH_LOADING":
+    case finishLoadingActionName:
       state = {
         ...state,
         callsCounter: --newValue,
@@ -25,3 +28,6 @@ const loadingReducer = (state = {
 };
 
 export default loadingReducer;
+
+export const startLoadingActionName = "START_LOADING";
+export const finishLoadingActionName = "FINISH_LOADING";

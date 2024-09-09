@@ -1,24 +1,58 @@
-import { Box } from "@mui/material";
+import { useState } from "react";
 import { connect } from "react-redux";
-// import { LineChart } from "@mui/x-charts/LineChart";
-
 import useUtils from "src/appUtils";
+
+import { Box, Chip, TextField } from "@mui/material";
+
+import { Currency } from "src/models/shared/Currency";
+
+import testDataset from "./MainDiagram/testDataset";
+import DiagramConfig from "./DiagramConfig";
+import MainDiagram from "./MainDiagram";
 
 const BudgetTrackerHomePage = (props: any) => {
   const u = useUtils();
 
+  const [chipData, setChipData] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && inputValue.trim() !== "") {
+      if (!chipData.includes(inputValue.trim())) {
+        setChipData([...chipData, inputValue.trim()]);
+      }
+      setInputValue("");
+    }
+  };
+
+  const handleDelete = (chipToDelete: string) => () => {
+    setChipData((chips) => chips.filter((chip) => chip !== chipToDelete));
+  };
+
   return (
-    <></>
-    // <LineChart
-    //   xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
-    //   series={[
-    //     {
-    //       data: [2, 5.5, 2, 8.5, 1.5, 5],
-    //     },
-    //   ]}
-    //   width={500}
-    //   height={300}
-    // />
+    <Box sx={{ width: "100%" }}>
+      <DiagramConfig />
+
+      {/* <Box display={"flex"} flexDirection={"row"} flexWrap={"wrap"} width={400}>
+        <TextField
+          label="Enter text and press Enter"
+          variant="outlined"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+        {chipData.map((chip, index) => (
+          <Chip
+            key={index}
+            label={chip}
+            onDelete={handleDelete(chip)}
+            sx={{ m: 0.5 }}
+          />
+        ))}
+      </Box> */}
+
+      <MainDiagram  />
+    </Box>
   );
 };
 

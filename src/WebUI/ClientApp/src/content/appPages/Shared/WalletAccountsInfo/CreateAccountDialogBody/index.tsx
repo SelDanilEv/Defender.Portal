@@ -7,7 +7,7 @@ import apiUrls from "src/api/apiUrls";
 
 import useUtils from "src/appUtils";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
-import SupportedCurrencies from "src/consts/SupportedCurrencies";
+import { BankingSupportedCurrencies } from "src/consts/SupportedCurrencies";
 import { WalletInfo } from "src/models/banking/WalletInfo";
 
 const CreateAccountDialogBody = (props: any) => {
@@ -42,7 +42,7 @@ const CreateAccountDialogBody = (props: any) => {
     }
   };
 
-  const availableCurrencies = SupportedCurrencies.filter(
+  const availableCurrencies = BankingSupportedCurrencies.filter(
     (currency) =>
       !props?.wallet?.currencyAccounts?.some(
         (account) => account.currency === currency

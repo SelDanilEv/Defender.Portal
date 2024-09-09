@@ -13,12 +13,11 @@ class StateLoader {
 
       let stateJson = JSON.parse(serializedState);
 
-      stateJson.loading = {
-        callsCounter: 0,
-        loading: false,
+      const state = {
+        session: stateJson,
       };
 
-      return stateJson;
+      return state;
     } catch (err) {
       return this.initializeState();
     }

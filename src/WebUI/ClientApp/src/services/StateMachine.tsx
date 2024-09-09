@@ -15,7 +15,7 @@ export class StateModel {
 }
 
 export class StateMachine {
-  private frezed: boolean = false;
+  private freezed: boolean = false;
   private stateMachine: StateMachineModel;
   private initState: string = "-1";
 
@@ -33,7 +33,7 @@ export class StateMachine {
     this.updateState(states[0].name);
   }
 
-  updateState(newStateName: string) {
+  updateState(newStateName: string, enableLog: boolean = false) {
     if (newStateName === this.stateMachine.currentState) return;
 
     if (!this.stateMachine.states.some((x) => x.name === newStateName)) {
@@ -41,12 +41,15 @@ export class StateMachine {
     }
 
     let oldState = this.stateMachine.currentState;
-    if (this.frezed) {
-      console.log("State machine is frezed");
+    if (this.freezed) {
+      enableLog && console.log("State machine is frezed");
       return;
     }
-    console.log("State changed from: ", this.stateMachine?.currentState);
-    console.log("State changed to: ", newStateName);
+    enableLog &&
+      console.log("State changed from: ", this.stateMachine?.currentState);
+
+    enableLog && console.log("State changed to: ", newStateName);
+
     this.stateMachine.currentState = newStateName;
     this.stateMachine.states.find((x) => x.name === newStateName)?.onState();
 
@@ -64,7 +67,7 @@ export class StateMachine {
   }
 
   freeze() {
-    this.frezed = true;
+    this.freezed = true;
   }
 }
 

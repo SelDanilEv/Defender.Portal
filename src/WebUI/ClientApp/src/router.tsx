@@ -198,6 +198,10 @@ const routes: RouteObject[] = [
         element: <BudgetTrackerHomePage />,
       },
       {
+        path: "test",
+        element: <BudgetTrackerHomePage />,
+      },
+      {
         path: "*",
         element: <Status404 />,
       },

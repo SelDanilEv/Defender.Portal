@@ -3,6 +3,8 @@ const CurrencySymbolsMap = {
   EUR: "€",
   PLN: "zł",
   GEL: "₾",
+  RUB: "₽",
+  BYN: "Br",
 };
 
 export default CurrencySymbolsMap;

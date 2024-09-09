@@ -1,9 +1,16 @@
 import { UserAccountInfo } from "src/models/UserAccountInfo";
+import {
+  loginActionName,
+  logoutActionName,
+  updateLanguageActionName,
+  updateUserInfoActionName,
+} from "src/reducers/sessionReducer";
+import { cleanWalletInfoActionName } from "src/reducers/walletReducer";
 
 export function login(payload) {
   return (dispath) => {
     dispath({
-      type: "LOGIN",
+      type: loginActionName,
       payload: payload,
     });
   };
@@ -12,11 +19,11 @@ export function login(payload) {
 export function logout() {
   return (dispath) => {
     dispath({
-      type: "LOGOUT",
+      type: logoutActionName,
       payload: "",
     });
     dispath({
-      type: "CLEAN_WALLET_INFO",
+      type: cleanWalletInfoActionName,
       payload: "",
     });
   };
@@ -25,7 +32,7 @@ export function logout() {
 export function updateLanguage(language) {
   return (dispath) => {
     dispath({
-      type: "UPDATE_LANGUAGE",
+      type: updateLanguageActionName,
       payload: language,
     });
   };
@@ -34,7 +41,7 @@ export function updateLanguage(language) {
 export function updateUserInfo(updatedUser: UserAccountInfo) {
   return (dispath) => {
     dispath({
-      type: "UPDATE_USER_INFO",
+      type: updateUserInfoActionName,
       payload: updatedUser,
     });
   };

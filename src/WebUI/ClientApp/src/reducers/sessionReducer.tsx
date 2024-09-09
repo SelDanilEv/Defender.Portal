@@ -22,7 +22,7 @@ const sessionReducer = (
   action: any
 ) => {
   switch (action.type) {
-    case "LOGIN":
+    case loginActionName:
       state = {
         ...state,
         user: action.payload.user,
@@ -30,16 +30,26 @@ const sessionReducer = (
         isAuthenticated: true,
       };
       break;
-    case "LOGOUT":
-      stateLoader.cleanState();
+    case logoutActionName:
       if (state.isAuthenticated) {
-        const session: Session = {} as Session;
-        session.isAuthenticated = false;
-        session.language = state.language;
-        state = session;
+        state = {
+          ...state,
+          isAuthenticated: false,
+          user: {
+            id: "",
+            nickname: "",
+            email: "",
+            phone: "",
+            isEmailVerified: false,
+            isPhoneVerified: false,
+            isBlocked: false,
+            roles: [],
+            createdDate: undefined,
+          },
+        };
       }
       break;
-    case "UPDATE_LANGUAGE":
+    case updateLanguageActionName:
       if (state.language) {
         state = {
           ...state,
@@ -47,7 +57,7 @@ const sessionReducer = (
         };
       }
       break;
-    case "UPDATE_USER_INFO":
+    case updateUserInfoActionName:
       let updatedUser = action.payload as UserAccountInfo;
       state = {
         ...state,
@@ -58,9 +68,17 @@ const sessionReducer = (
       };
       break;
     default:
-      break;
+      return state;
   }
+
+  stateLoader.saveState(state);
+
   return state;
 };
 
 export default sessionReducer;
+
+export const loginActionName = "LOGIN";
+export const logoutActionName = "LOGOUT";
+export const updateLanguageActionName = "UPDATE_LANGUAGE";
+export const updateUserInfoActionName = "UPDATE_USER_INFO";

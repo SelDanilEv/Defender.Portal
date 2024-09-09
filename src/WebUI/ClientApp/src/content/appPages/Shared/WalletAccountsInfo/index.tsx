@@ -25,7 +25,7 @@ import {
 } from "./styledComponents";
 import CustomDialog from "src/components/Dialog";
 import CreateAccountDialogBody from "./CreateAccountDialogBody";
-import SupportedCurrencies from "src/consts/SupportedCurrencies";
+import { BankingSupportedCurrencies } from "src/consts/SupportedCurrencies";
 import RechargeOrRefundDialogBody from "./RechargeOrRefundDialogBody";
 import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
 
@@ -126,7 +126,7 @@ const WalletAccountsInfo = (props: any) => {
         );
       }
 
-      if (result.length < SupportedCurrencies.length)
+      if (result.length < BankingSupportedCurrencies.length)
         result.push(
           <Grid item xs={12} sm={6} md={4} key={-1}>
             <CardAddAction>

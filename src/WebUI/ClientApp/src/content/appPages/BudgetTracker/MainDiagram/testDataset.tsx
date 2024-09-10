@@ -1,4 +1,5 @@
 import { Dictionary } from "src/customTypes";
+import { BudgetDiagramGroups } from "src/models/budgetTracker/BudgetDiagramGroups";
 import {
   BudgetHistory,
   BudgetHistoryReview,
@@ -23,19 +24,19 @@ const generateRecords = (
   };
 
   var records = [
-    {
-      name: "Bank",
-      tags: ["pln", "saving"],
-      amount:
-        getPreviousAmount("Bank", Currency.PLN) + getRandomNumber(-100, 150),
-      currency: Currency.PLN,
-    },
+    // {
+    //   name: "Bank",
+    //   tags: ["pln", "saving"],
+    //   amount:
+    //     getPreviousAmount("Bank", Currency.PLN) + getRandomNumber(-100, 150),
+    //   currency: Currency.PLN,
+    // },
     {
       name: "Bank 2",
-      tags: ["usd", "test tag"],
+      tags: ["pln", "test tag"],
       amount:
-        getPreviousAmount("Bank 2", Currency.USD) + getRandomNumber(-50, 80),
-      currency: Currency.USD,
+        getPreviousAmount("Bank 2", Currency.PLN) + getRandomNumber(-50, 80),
+      currency: Currency.PLN,
     },
     // {
     //   name: "Wallet",
@@ -44,24 +45,24 @@ const generateRecords = (
     //     getPreviousAmount("Wallet", Currency.PLN) + getRandomNumber(-100, 100),
     //   currency: Currency.PLN,
     // },
-    {
-      name: "Cash",
-      tags: ["eur", "saving"],
-      amount:
-        getPreviousAmount("Cash", Currency.EUR) + getRandomNumber(-100, 110),
-      currency: Currency.EUR,
-    },
+    // {
+    //   name: "Cash",
+    //   tags: ["eur", "saving"],
+    //   amount:
+    //     getPreviousAmount("Cash", Currency.EUR) + getRandomNumber(-100, 110),
+    //   currency: Currency.EUR,
+    // },
   ];
 
-  // if (getRandomNumber(0, 100) > 90) {
-  //   records.push({
-  //     name: "Bank 3",
-  //     tags: ["usd", "saving"],
-  //     amount:
-  //       getPreviousAmount("Bank 2", Currency.USD) + getRandomNumber(-100, 140),
-  //     currency: Currency.USD,
-  //   });
-  // }
+  if (getRandomNumber(0, 100) > 70) {
+    records.push({
+      name: "Bank 3",
+      tags: ["usd", "saving"],
+      amount:
+        getPreviousAmount("Bank 3", Currency.USD) + getRandomNumber(-140, 140),
+      currency: Currency.USD,
+    });
+  }
 
   return records;
 };
@@ -104,6 +105,27 @@ const generateLargeDataset = (numEntries: number): BudgetHistoryReview[] => {
 };
 
 // Test dataset as BudgetHistory object
-const testDataset: BudgetHistory = new BudgetHistory(generateLargeDataset(50));
+const testDataset: BudgetHistory = new BudgetHistory(generateLargeDataset(100));
 
 export default testDataset;
+
+export const groups: BudgetDiagramGroups = new BudgetDiagramGroups([
+  {
+    id: "group_1",
+    name: "All",
+    tags: [],
+    color: "#008ae5",
+    showTrendline: true,
+    translineColor: "#ff8a13",
+    isActive: true,
+  },
+  {
+    id: "group_2",
+    name: "Test",
+    tags: ["test tag"],
+    color: "#33cc00",
+    showTrendline: true,
+    translineColor: "#FF0000",
+    isActive: true,
+  },
+]);

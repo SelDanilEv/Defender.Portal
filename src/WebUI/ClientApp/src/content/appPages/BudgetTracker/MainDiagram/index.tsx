@@ -275,7 +275,7 @@ const MainDiagram = (props: MainDiagramProps) => {
             label: getTrendLineName(currency, group.name),
             type: "line",
             data: trendLineData.slice(0, dataset.length),
-            color: colors[index],
+            color: chroma(colors[index]).alpha(0.4).css(),
             connectNulls: true,
             showMark: false,
           });

@@ -1,11 +1,8 @@
 import { memo, useEffect, useState } from "react";
 import useUtils from "src/appUtils";
-
 import { LineChart } from "@mui/x-charts/LineChart";
 import { Box } from "@mui/material";
-
 import { Currency } from "src/models/shared/Currency";
-
 import testDataset, { groups } from "./testDataset";
 import {
   BudgetHistoryReview,
@@ -29,72 +26,41 @@ const MainDiagram = (props: MainDiagramProps) => {
   const u = useUtils();
 
   const [dataset, setDataset] = useState<DatasetItem[]>([]);
-
   const [extendedPeriods, setExtendedPeriods] = useState<number>(0);
 
   useEffect(() => {
-    if (
-      !props.diagramConfig ||
-      props.diagramConfig.startDate >= props.diagramConfig.endDate
-    ) {
+    if (!isValidDiagramConfig(props.diagramConfig)) {
       return;
     }
 
-    const filteredDataset = { ...testDataset };
+    let filteredDataset = filterDatasetByDate(
+      { ...testDataset },
+      props.diagramConfig.startDate,
+      props.diagramConfig.endDate
+    );
 
     const { startDate, endDate, mainCurrency } = props.diagramConfig;
 
-    filteredDataset.history = testDataset.history.filter(
-      (record: BudgetHistoryReview) =>
-        record.date >= startDate && record.date <= endDate
+    const { dataset: updatedDataset, periods } = addFutureRecords(
+      filteredDataset,
+      endDate
     );
-
-    // add future records (for trendline)
-    let periods = 0;
-
-    if (filteredDataset.history.length) {
-      const averageDaysDiff = Math.ceil(
-        dayjs(
-          filteredDataset.history[filteredDataset.history.length - 1].date
-        ).diff(filteredDataset.history[0].date, "day") /
-          filteredDataset.history.length
-      );
-
-      let tempDate = new Date();
-
-      const lastRecord =
-        filteredDataset.history[filteredDataset.history.length - 1];
-
-      while (tempDate < endDate) {
-        periods++;
-        filteredDataset.history.push({
-          date: new Date(tempDate),
-          records: lastRecord.records.map(
-            (r) => ({ ...r, amount: null } as BudgetHistoryReviewRecord)
-          ),
-          baseCurrency: lastRecord.baseCurrency,
-          rates: lastRecord.rates,
-        } as BudgetHistoryReview);
-
-        tempDate.setDate(tempDate.getDate() + averageDaysDiff);
-      }
-    }
 
     setExtendedPeriods(periods);
 
     const activeGroups = groups.getActiveGroups();
 
     if (mainCurrency !== defaultMainCurrency) {
-      filteredDataset.history = recalculateHistoryWithMainCurrency(
-        filteredDataset.history,
+      updatedDataset.history = recalculateHistoryWithMainCurrency(
+        updatedDataset.history,
         mainCurrency as Currency,
         activeGroups
       );
 
-      filteredDataset.allowedCurrencies = [mainCurrency as Currency];
+      updatedDataset.allowedCurrencies = [mainCurrency as Currency];
     }
 
-    var dataset = mapToDataset(filteredDataset, activeGroups);
+    const dataset = mapToDataset(updatedDataset, activeGroups);
 
     setDataset(dataset);
   }, [props.diagramConfig]);
@@ -121,6 +87,59 @@ const MainDiagram = (props: MainDiagramProps) => {
       />
     </Box>
   );
+};
+
+const isValidDiagramConfig = (config: MainDiagramSetup): boolean => {
+  return config && config.startDate < config.endDate;
+};
+
+const filterDatasetByDate = (
+  dataset: typeof testDataset,
+  startDate: Date,
+  endDate: Date
+): typeof testDataset => {
+  return {
+    ...dataset,
+    history: dataset.history.filter(
+      (record: BudgetHistoryReview) =>
+        record.date >= startDate && record.date <= endDate
+    ),
+  };
+};
+
+const addFutureRecords = (
+  dataset: typeof testDataset,
+  endDate: Date
+): { dataset: typeof testDataset; periods: number } => {
+  let periods = 0;
+
+  if (dataset.history.length) {
+    const averageDaysDiff = Math.ceil(
+      dayjs(dataset.history[dataset.history.length - 1].date).diff(
+        dataset.history[0].date,
+        "day"
+      ) / dataset.history.length
+    );
+
+    let tempDate = new Date();
+    const lastRecord = dataset.history[dataset.history.length - 1];
+
+    while (tempDate < endDate) {
+      periods++;
+      dataset.history.push({
+        date: new Date(tempDate),
+        records: lastRecord.records.map(
+          (r) => ({ ...r, amount: null } as BudgetHistoryReviewRecord)
+        ),
+        baseCurrency: lastRecord.baseCurrency,
+        rates: lastRecord.rates,
+      } as BudgetHistoryReview);
+
+      tempDate.setDate(tempDate.getDate() + averageDaysDiff);
+    }
+  }
+
+  return { dataset, periods };
 };
 
 const recalculateHistoryWithMainCurrency = (

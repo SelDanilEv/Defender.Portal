@@ -31,20 +31,20 @@ const generateRecords = (
     //     getPreviousAmount("Bank", Currency.PLN) + getRandomNumber(-100, 150),
     //   currency: Currency.PLN,
     // },
-    {
-      name: "Bank 2",
-      tags: ["pln", "test tag"],
-      amount:
-        getPreviousAmount("Bank 2", Currency.PLN) + getRandomNumber(-50, 80),
-      currency: Currency.PLN,
-    },
     // {
-    //   name: "Wallet",
-    //   tags: ["pln"],
+    //   name: "Bank 2",
+    //   tags: ["pln", "test tag"],
     //   amount:
-    //     getPreviousAmount("Wallet", Currency.PLN) + getRandomNumber(-100, 100),
+    //     getPreviousAmount("Bank 2", Currency.PLN) + getRandomNumber(-50, 80),
     //   currency: Currency.PLN,
     // },
+    {
+      name: "Wallet",
+      tags: ["pln"],
+      amount:
+        getPreviousAmount("Wallet", Currency.PLN) + getRandomNumber(-100, 100),
+      currency: Currency.PLN,
+    },
     // {
     //   name: "Cash",
     //   tags: ["eur", "saving"],
@@ -54,12 +54,12 @@ const generateRecords = (
     // },
   ];
 
-  if (getRandomNumber(0, 100) > 70) {
+  if (getRandomNumber(0, 100) > 95) {
     records.push({
       name: "Bank 3",
       tags: ["usd", "saving"],
       amount:
-        getPreviousAmount("Bank 3", Currency.USD) + getRandomNumber(-140, 140),
+        getPreviousAmount("Bank 3", Currency.USD) + getRandomNumber(-10, 140),
       currency: Currency.USD,
     });
   }

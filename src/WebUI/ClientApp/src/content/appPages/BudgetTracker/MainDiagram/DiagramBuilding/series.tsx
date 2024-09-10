@@ -48,21 +48,18 @@ export const generateSeries = (
           dayjs(record.date).isBefore(dayjs().startOf("day"))
         );
 
-        const dataPoints = historicalOnlyDataset
+        let dataPoints = historicalOnlyDataset
           .filter((record) => record[dataKey])
           .map((record) => {
             return record[dataKey] as number;
           });
 
-        let trendLineData = calculateTrendLine(dataPoints, extendedPeriods);
+        dataPoints = expandPartialData(
+          dataPoints,
+          historicalOnlyDataset.length
+        );
 
-        if (trendLineData.length < dataset.length) {
-          const coefficients = Math.floor(
-            dataset.length / trendLineData.length
-          );
-
-          trendLineData = expandTrendLineData(trendLineData, coefficients);
-        }
+        const trendLineData = calculateTrendLine(dataPoints, extendedPeriods);
 
         series.push({
           label: getTrendLineName(currency, group.name),
@@ -110,18 +107,33 @@ const calculateTrendLine = (data: number[], extendBy: number = 0): number[] => {
   return trendLineData;
 };
 
-const expandTrendLineData = (
+const expandPartialData = (
   trendLineData: number[],
-  nullInterval: number
-): (number | null)[] => {
-  const expandedData: (number | null)[] = [];
+  desiredSize: number
+): number[] => {
+  const expandedData: number[] = [];
+  const nullInterval = Math.floor(
+    (desiredSize - trendLineData.length) / (trendLineData.length - 1)
+  );
 
-  trendLineData.forEach((value) => {
-    expandedData.push(value);
-    for (let i = 0; i < nullInterval; i++) {
-      expandedData.push(null);
+  for (let i = 0; i < trendLineData.length - 1; i++) {
+    const currentValue = trendLineData[i];
+    const nextValue = trendLineData[i + 1];
+    expandedData.push(currentValue);
+
+    const step = (nextValue - currentValue) / (nullInterval + 1);
+    for (let j = 1; j <= nullInterval; j++) {
+      expandedData.push(currentValue + step * j);
     }
-  });
+  }
+
+  // Push the last value
+  expandedData.push(trendLineData[trendLineData.length - 1]);
+
+  // If the expandedData size is less than desiredSize, add the last value repeatedly
+  while (expandedData.length < desiredSize) {
+    expandedData.push(trendLineData[trendLineData.length - 1]);
+  }
 
   return expandedData;
 };

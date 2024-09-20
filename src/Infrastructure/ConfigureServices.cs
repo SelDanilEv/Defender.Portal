@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Defender.Common.Clients.BudgetTracker;
 using Defender.Common.Clients.Identity;
 using Defender.Common.Clients.RiskGames;
 using Defender.Common.Clients.UserManagement;
@@ -7,6 +8,7 @@ using Defender.Portal.Application.Common.Interfaces.Repositories;
 using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using Defender.Portal.Application.Configuration.Options;
 using Defender.Portal.Application.Services.Background;
+using Defender.Portal.Infrastructure.Clients.BudgetTracker;
 using Defender.Portal.Infrastructure.Clients.Identity;
 using Defender.Portal.Infrastructure.Clients.UserManagement;
 using Defender.Portal.Infrastructure.Clients.Wallet;
@@ -37,6 +39,7 @@ public static class ConfigureServices
         services.AddTransient<IUserManagementWrapper, UserManagementWrapper>();
         services.AddTransient<IWalletWrapper, WalletWrapper>();
         services.AddTransient<IRiskGamesWrapper, RiskGamesWrapper>();
+        services.AddTransient<IBudgetTrackerWrapper, BudgetTrackerWrapper>();
 
         services.AddHostedService<KeepAliveHostedService>();
 
@@ -75,6 +78,12 @@ public static class ConfigureServices
             (serviceProvider, client) =>
             {
                 client.BaseAddress = new Uri(serviceProvider.GetRequiredService<IOptions<RiskGamesOptions>>().Value.Url);
+            });
+
+        services.RegisterBudgetTrackerClient(
+            (serviceProvider, client) =>
+            {
+                client.BaseAddress = new Uri(serviceProvider.GetRequiredService<IOptions<BudgetTrackerOptions>>().Value.Url);
             });
 
         return services;

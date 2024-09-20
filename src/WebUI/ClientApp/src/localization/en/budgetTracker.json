@@ -1,0 +1,8 @@
+{ 
+  "positions_table_title": "Positions",
+  "positions_table_name_column": "Name",
+  "positions_table_tags_column": "Tags",
+  "positions_table_currency_column": "Currency",
+
+  "_" : "_"
+}

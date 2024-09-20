@@ -1,10 +1,32 @@
 ﻿namespace Defender.Portal.Application.Enums;
 
-public enum Currency
+public enum BaseCurrency
 {
-    Unknown,
-    USD,
+    USD = 1,
     EUR,
     GEL,
-    PLN
+    PLN,
+    RUB,
+    BYN,
 }
+
+public enum Currency
+{
+    Unknown = 0,
+    USD = BaseCurrency.USD,
+    EUR = BaseCurrency.EUR,
+    GEL = BaseCurrency.GEL,
+    PLN = BaseCurrency.PLN,
+}
+
+public enum BudgetTrackerSupportedCurrency
+{
+    ALL = 0,
+    USD = BaseCurrency.USD,
+    EUR = BaseCurrency.EUR,
+    GEL = BaseCurrency.GEL,
+    PLN = BaseCurrency.PLN,
+    RUB = BaseCurrency.RUB,
+    BYN = BaseCurrency.BYN,
+}
+

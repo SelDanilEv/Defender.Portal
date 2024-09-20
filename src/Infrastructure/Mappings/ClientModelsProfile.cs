@@ -1,3 +1,4 @@
+using Defender.Common.Clients.BudgetTracker;
 using Defender.Common.Clients.Identity;
 using Defender.Common.Clients.RiskGames;
 using Defender.Common.Clients.UserManagement;
@@ -7,6 +8,8 @@ using Defender.Common.Helpers;
 using Defender.Common.Mapping;
 using Defender.Portal.Application.DTOs.Auth;
 using Defender.Portal.Application.DTOs.Banking;
+using Defender.Portal.Application.DTOs.BudgetTracking.DiagramSetup;
+using Defender.Portal.Application.DTOs.BudgetTracking.Positions;
 
 namespace Defender.Portal.Infrastructure.Mappings;
 
@@ -21,6 +24,10 @@ public class ClientModelsProfile : BaseMappingProfile
         RegisterWalletMappings();
 
         RegisterRiskGamesMappings();
+
+        RegisterRiskGamesMappings();
+
+        RegisterBudgetTrackerMappings();
     }
 
     private void RegisterUserManagementMappings()
@@ -29,6 +36,7 @@ public class ClientModelsProfile : BaseMappingProfile
         CreateMap<Common.Clients.UserManagement.PublicUserInfoDto,
             Application.DTOs.Accounts.PublicUserInfoDto>();
     }
+
     private void RegisterRiskGamesMappings()
     {
         CreateMap<UserTicketDto, Application.DTOs.RiskGames.Lottery.UserTicketDto>();
@@ -85,7 +93,6 @@ public class ClientModelsProfile : BaseMappingProfile
                         })));
     }
 
-
     private void RegisterIdentityMappings()
     {
         CreateMap<LoginResponse, SessionDto>()
@@ -130,4 +137,13 @@ public class ClientModelsProfile : BaseMappingProfile
                 opt => opt.MapFrom(
                     src => src.UserInfo.CreatedDate));
     }
+
+    private void RegisterBudgetTrackerMappings()
+    {
+        CreateMap<DiagramSetup, PortalMainDiagramSetup>();
+
+        CreateMap<PositionPagedResult, PagedResult<PortalPosition>>();
+        CreateMap<Position, PortalPosition>();
+    }
+
 }

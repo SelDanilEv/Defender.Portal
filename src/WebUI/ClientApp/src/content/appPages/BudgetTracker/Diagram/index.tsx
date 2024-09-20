@@ -2,11 +2,8 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import useUtils from "src/appUtils";
 
-import { Box, Chip, TextField } from "@mui/material";
+import { Box } from "@mui/material";
 
-import { Currency } from "src/models/shared/Currency";
-
-import testDataset from "./MainDiagram/testDataset";
 import DiagramConfig from "./DiagramConfig";
 import MainDiagram from "./MainDiagram";
 
@@ -51,7 +48,7 @@ const BudgetTrackerHomePage = (props: any) => {
         ))}
       </Box> */}
 
-      <MainDiagram  />
+      <MainDiagram />
     </Box>
   );
 };

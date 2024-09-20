@@ -47,6 +47,10 @@ const APIEndpoints = {
     getActiveDraws: "draw/active",
     purchaseTickets: "tickets/purchase",
   },
+  budgetTracker: {
+    getPositions: "positions",
+    position: "position",
+  },
 };
 
 const APIUrls = () => {

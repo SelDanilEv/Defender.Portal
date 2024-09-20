@@ -5,6 +5,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
+import AllInboxIcon from "@mui/icons-material/AllInbox";
+import StackedLineChartIcon from "@mui/icons-material/StackedLineChart";
 
 import MenuItem from "./MenuItem";
 import useUtils from "src/appUtils";
@@ -260,9 +262,18 @@ const RoleBasedMenu = (props: any) => {
             <SubMenuWrapper>
               <List component="div">
                 <MenuItem
-                  to="/budget-tracker"
-                  icon={<LocalActivityIcon style={{ fontSize: "1.5em" }} />}
-                  text={u.t("sidebar_menu:page_budget_tracker")}
+                  to="/budget-tracker/positions"
+                  icon={<AllInboxIcon style={{ fontSize: "1.5em" }} />}
+                  text={u.t("sidebar_menu:page_budget_tracker_positions")}
+                />
+              </List>
+            </SubMenuWrapper>
+            <SubMenuWrapper>
+              <List component="div">
+                <MenuItem
+                  to="/budget-tracker/diagram"
+                  icon={<StackedLineChartIcon style={{ fontSize: "1.5em" }} />}
+                  text={u.t("sidebar_menu:page_budget_tracker_diagram")}
                 />
               </List>
             </SubMenuWrapper>

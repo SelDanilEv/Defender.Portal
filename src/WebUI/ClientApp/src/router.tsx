@@ -57,8 +57,12 @@ const PurchaseLotteryTickets = Loader(
 
 // Budget Tracker
 
-const BudgetTrackerHomePage = Loader(
-  lazy(() => import("src/content/appPages/BudgetTracker"))
+const BudgetTrackerDiagramPage = Loader(
+  lazy(() => import("src/content/appPages/BudgetTracker/Diagram"))
+);
+
+const BudgetTrackerPositionsPage = Loader(
+  lazy(() => import("src/content/appPages/BudgetTracker/Positions"))
 );
 
 // Home
@@ -194,12 +198,12 @@ const routes: RouteObject[] = [
     element: <SidebarLayout />,
     children: [
       {
-        path: "",
-        element: <BudgetTrackerHomePage />,
+        path: "diagram",
+        element: <BudgetTrackerDiagramPage />,
       },
       {
-        path: "test",
-        element: <BudgetTrackerHomePage />,
+        path: "positions",
+        element: <BudgetTrackerPositionsPage />,
       },
       {
         path: "*",

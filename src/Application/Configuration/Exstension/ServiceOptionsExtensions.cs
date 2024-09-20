@@ -12,6 +12,7 @@ public static class ServiceOptionsExtensions
         services.Configure<UserManagementOptions>(configuration.GetSection(nameof(UserManagementOptions)));
         services.Configure<WalletOptions>(configuration.GetSection(nameof(WalletOptions)));
         services.Configure<RiskGamesOptions>(configuration.GetSection(nameof(RiskGamesOptions)));
+        services.Configure<BudgetTrackerOptions>(configuration.GetSection(nameof(BudgetTrackerOptions)));
 
         return services;
     }

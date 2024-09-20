@@ -8,6 +8,7 @@ import en_error from "src/localization/en/error.json";
 import en_lottery from "src/localization/en/lottery.json";
 import en_sidebar_menu from "src/localization/en/sidebar_menu.json";
 import en_welcome from "src/localization/en/welcome.json";
+import en_budgetTracker from "src/localization/en/budgetTracker.json";
 
 import ru from "src/localization/ru/ru.json";
 import ru_error from "src/localization/ru/error.json";
@@ -23,6 +24,7 @@ const resources: any = {
     lottery: en_lottery,
     sidebar_menu: en_sidebar_menu,
     welcome: en_welcome,
+    budgetTracker: en_budgetTracker,
   },
   ru: {
     translation: ru,

@@ -1,11 +1,6 @@
 import { Dictionary } from "src/customTypes";
 import { Currency } from "src/models/shared/Currency";
 
-export interface BudgetHistoryResponse {
-  history: BudgetHistoryReview[];
-  allowedCurrencies: Currency[];
-}
-
 export class BudgetHistory {
   history: BudgetHistoryReview[];
   allowedCurrencies: Currency[];

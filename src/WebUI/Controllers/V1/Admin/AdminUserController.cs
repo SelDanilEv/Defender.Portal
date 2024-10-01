@@ -8,10 +8,11 @@ using Defender.Portal.Application.DTOs.Admin;
 using Defender.Portal.Application.DTOs.Auth;
 using Defender.Portal.Application.Modules.Admin.Users.Commands;
 using Defender.Portal.Application.Modules.Admin.Users.Queries;
+using Defender.Portal.WebUI.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Defender.Portal.WebUI.Controllers.V1;
+namespace Defender.Portal.WebUI.Controllers.V1.Admin;
 
 [Route("api/admin/user")]
 public class AdminUserController(IMediator mediator, IMapper mapper)
@@ -83,7 +84,7 @@ public class AdminUserController(IMediator mediator, IMapper mapper)
     public async Task<ActionResult> UpdateAccountInfoAsAdminAsync(
         [FromBody] UpdateAccountPasswordAsAdminCommand command)
     {
-        return await ProcessApiCallAsync<UpdateAccountPasswordAsAdminCommand>
+        return await ProcessApiCallAsync
             (command);
     }
 

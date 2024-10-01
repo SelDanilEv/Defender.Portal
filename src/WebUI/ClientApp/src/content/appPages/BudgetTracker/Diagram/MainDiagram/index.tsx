@@ -3,20 +3,30 @@ import useUtils from "src/appUtils";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { Box } from "@mui/material";
 import { Currency } from "src/models/shared/Currency";
-import testDataset, { groups } from "./testDataset";
-import {
-  BudgetHistoryReview,
-  BudgetHistoryReviewRecord,
-} from "src/models/budgetTracker/BudgetHistory";
 import { connect } from "react-redux";
 import MainDiagramSetup from "src/models/budgetTracker/setup/MainDiagramSetup";
 import { defaultMainCurrency } from "src/reducers/budgetTrackerSetupReducer";
 import { BudgetDiagramGroup } from "src/models/budgetTracker/BudgetDiagramGroups";
 import dayjs from "dayjs";
 import { DatasetItem } from "src/models/budgetTracker/diagramData/DatasetItem";
+
 import { mapToDataset } from "./DiagramBuilding/dataset";
 import { generateSeries } from "./DiagramBuilding/series";
 import { buildDatasetItemId } from "./DiagramBuilding/convention";
+import {
+  // testDataset,
+  groups,
+} from "./testDataset";
+import {
+  BudgetReview,
+  BudgetReviewedPosition,
+} from "src/models/budgetTracker/BudgetReview";
+import { BudgetHistory } from "src/models/budgetTracker/BudgetHistory";
+import apiUrls from "src/api/apiUrls";
+import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
+import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
+import BudgetReviewsResponse from "src/models/responses/budgetTracker/budgetReview/BudgetReviewsResponse";
+import { PaginationRequest } from "src/models/base/PaginationRequest";
 
 interface MainDiagramProps {
   diagramConfig: MainDiagramSetup;
@@ -25,24 +35,16 @@ interface MainDiagramProps {
 const MainDiagram = (props: MainDiagramProps) => {
   const u = useUtils();
 
+  const { diagramConfig } = props;
+
   const [dataset, setDataset] = useState<DatasetItem[]>([]);
   const [extendedPeriods, setExtendedPeriods] = useState<number>(0);
 
-  useEffect(() => {
-    if (!isValidDiagramConfig(props.diagramConfig)) {
-      return;
-    }
-
-    let filteredDataset = filterDatasetByDate(
-      { ...testDataset },
-      props.diagramConfig.startDate,
-      props.diagramConfig.endDate
-    );
-
-    const { startDate, endDate, mainCurrency } = props.diagramConfig;
+  const reloadHistory = (budgetHistory: BudgetHistory) => {
+    const { startDate, endDate, mainCurrency } = diagramConfig;
 
     const { dataset: updatedDataset, periods } = addFutureRecords(
-      filteredDataset,
+      budgetHistory,
       endDate
     );
 
@@ -63,7 +65,46 @@ const MainDiagram = (props: MainDiagramProps) => {
     const dataset = mapToDataset(updatedDataset, activeGroups);
 
     setDataset(dataset);
-  }, [props.diagramConfig]);
+  };
+
+  const startRefresh = () => {
+    const paginationRequest = {
+      page: 0,
+      pageSize: 1000,
+    } as PaginationRequest;
+
+    const url =
+      `${apiUrls.budgetTracker.getReviews}` +
+      `${RequestParamsBuilder.BuildQuery(paginationRequest)}`;
+
+    APICallWrapper({
+      url: url,
+      options: {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      utils: u,
+      onSuccess: async (response) => {
+        const pagedItems: BudgetReviewsResponse = await response.json();
+
+        const history = new BudgetHistory(pagedItems.items);
+
+        reloadHistory(history);
+      },
+      onFailure: async (response) => {},
+      showError: true,
+    });
+  };
+
+  useEffect(() => {
+    if (!isValidDiagramConfig(diagramConfig)) {
+      return;
+    }
+
+    startRefresh();
+  }, [diagramConfig]);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -94,23 +135,23 @@ const isValidDiagramConfig = (config: MainDiagramSetup): boolean => {
 };
 
 const filterDatasetByDate = (
-  dataset: typeof testDataset,
+  dataset: BudgetHistory,
   startDate: Date,
   endDate: Date
-): typeof testDataset => {
+): BudgetHistory => {
   return {
     ...dataset,
     history: dataset.history.filter(
-      (record: BudgetHistoryReview) =>
+      (record: BudgetReview) =>
         record.date >= startDate && record.date <= endDate
     ),
   };
 };
 
 const addFutureRecords = (
-  dataset: typeof testDataset,
+  dataset: BudgetHistory,
   endDate: Date
-): { dataset: typeof testDataset; periods: number } => {
+): { dataset: BudgetHistory; periods: number } => {
   let periods = 0;
 
   if (dataset.history.length) {
@@ -118,24 +159,28 @@ const addFutureRecords = (
       dayjs(dataset.history[dataset.history.length - 1].date).diff(
         dataset.history[0].date,
         "day"
-      ) / dataset.history.length
+      ) /
+        (dataset.history.length - 1)
     );
 
-    let tempDate = new Date();
+    let latestDate = new Date(dataset.history[dataset.history.length - 1].date);
+
     const lastRecord = dataset.history[dataset.history.length - 1];
 
-    while (tempDate < endDate) {
+    latestDate.setDate(latestDate.getDate() + averageDaysDiff);
+
+    while (latestDate < endDate) {
       periods++;
       dataset.history.push({
-        date: new Date(tempDate),
-        records: lastRecord.records.map(
-          (r) => ({ ...r, amount: null } as BudgetHistoryReviewRecord)
+        date: new Date(latestDate),
+        positions: lastRecord.positions.map(
+          (r) => ({ ...r, amount: null } as BudgetReviewedPosition)
         ),
         baseCurrency: lastRecord.baseCurrency,
         rates: lastRecord.rates,
-      } as BudgetHistoryReview);
+      } as BudgetReview);
 
-      tempDate.setDate(tempDate.getDate() + averageDaysDiff);
+      latestDate.setDate(latestDate.getDate() + averageDaysDiff);
     }
   }
 
@@ -143,19 +188,19 @@ const addFutureRecords = (
 };
 
 const recalculateHistoryWithMainCurrency = (
-  history: BudgetHistoryReview[],
+  history: BudgetReview[],
   mainCurrency: Currency,
   groups: BudgetDiagramGroup[]
-): BudgetHistoryReview[] => {
-  return history.map((record: BudgetHistoryReview) => {
-    const recalculatedRecords: BudgetHistoryReviewRecord[] = [];
+): BudgetReview[] => {
+  return history.map((record: BudgetReview) => {
+    const recalculatedRecords: BudgetReviewedPosition[] = [];
 
     groups.forEach((group) => {
       let sum = 0;
 
-      record.records
+      record.positions
         .filter((r) => group.tags.every((t) => r.tags.includes(t)))
-        .forEach((r: BudgetHistoryReviewRecord) => {
+        .forEach((r: BudgetReviewedPosition) => {
           sum +=
             (r.amount / record.rates[r.currency]) * record.rates[mainCurrency];
         });
@@ -165,13 +210,13 @@ const recalculateHistoryWithMainCurrency = (
         tags: group.tags,
         amount: sum,
         currency: mainCurrency,
-      } as BudgetHistoryReviewRecord);
+      } as BudgetReviewedPosition);
     });
 
     return {
       ...record,
-      records: recalculatedRecords,
-    } as BudgetHistoryReview;
+      positions: recalculatedRecords,
+    } as BudgetReview;
   });
 };
 

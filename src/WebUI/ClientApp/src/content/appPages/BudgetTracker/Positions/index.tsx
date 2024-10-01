@@ -31,7 +31,7 @@ const PositionsPage = () => {
   const [pagination, setPagination] = useState<CurrentPagination>({
     totalItemsCount: 0,
     currentPage: 0,
-    pageSize: 5,
+    pageSize: 10,
     totalPagesCount: 1,
   } as CurrentPagination);
 

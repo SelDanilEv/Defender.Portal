@@ -63,6 +63,7 @@ const WelcomeLayout: FC = (props: any) => {
   }, []);
 
   const logout = () => {
+    localStorage.clear();
     u.e("SessionExpired");
     props.logout();
     u.react.navigate("/");

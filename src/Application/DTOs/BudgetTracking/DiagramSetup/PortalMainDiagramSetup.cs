@@ -2,7 +2,7 @@
 
 namespace Defender.Portal.Application.DTOs.BudgetTracking.DiagramSetup;
 
-public class PortalMainDiagramSetup
+public record PortalMainDiagramSetup
 {
     public Guid Id { get; set; }
     public Guid UserId { get; set; }

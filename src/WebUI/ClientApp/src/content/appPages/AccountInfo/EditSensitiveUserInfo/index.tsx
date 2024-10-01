@@ -22,7 +22,7 @@ import StateMachine, { StateModel } from "src/services/StateMachine";
 import ElementsUtils from "src/appUtils/ElementsUtils";
 import { DictionaryType } from "src/customTypes";
 import { ElementOptions } from "src/appUtils/ElementsUtils/ElementOptions";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 
 const EditSensitiveUserInfo = (props: any) => {
   const u = useUtils();

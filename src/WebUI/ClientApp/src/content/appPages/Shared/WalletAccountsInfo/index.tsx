@@ -27,14 +27,13 @@ import CustomDialog from "src/components/Dialog";
 import CreateAccountDialogBody from "./CreateAccountDialogBody";
 import { BankingSupportedCurrencies } from "src/consts/SupportedCurrencies";
 import RechargeOrRefundDialogBody from "./RechargeOrRefundDialogBody";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 
 import HomeIcon from "@mui/icons-material/Home";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import CachedIcon from "@mui/icons-material/Cached";
 import { updateWalletInfo } from "src/actions/walletActions";
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
-import CheckBoxButton from "src/components/Buttons/CheckBoxButton";
 
 const WalletAccountsInfo = (props: any) => {
   const u = useUtils();

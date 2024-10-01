@@ -12,7 +12,7 @@ import { WalletInfo } from "src/models/banking/WalletInfo";
 import { CardCc, CardLogo } from "./styledComponents";
 
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import { RechargeRequest } from "src/models/requests/admin/banking/RefundRequest";

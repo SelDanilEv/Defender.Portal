@@ -1,9 +1,7 @@
 import { Currency } from "src/models/shared/Currency";
 
-import {
-  BudgetHistory,
-  BudgetHistoryReview,
-} from "src/models/budgetTracker/BudgetHistory";
+import { BudgetReview } from "src/models/budgetTracker/BudgetReview";
+import { BudgetHistory } from "src/models/budgetTracker/BudgetHistory";
 import { BudgetDiagramGroup } from "src/models/budgetTracker/BudgetDiagramGroups";
 import { DatasetItem } from "src/models/budgetTracker/diagramData/DatasetItem";
 import { buildDatasetItemId } from "./convention";
@@ -12,12 +10,12 @@ export const mapToDataset = (
   history: BudgetHistory,
   groups: BudgetDiagramGroup[]
 ): DatasetItem[] => {
-  return history.history.map((record: BudgetHistoryReview) => {
+  return history.history.map((record: BudgetReview) => {
     const datasetItems: any = { date: record.date };
 
     history.allowedCurrencies.forEach((currency) => {
       groups.forEach((group) => {
-        const records = record.records.filter(
+        const records = record.positions.filter(
           (r) =>
             r.currency === currency &&
             group.tags.every((t) => r.tags.includes(t))

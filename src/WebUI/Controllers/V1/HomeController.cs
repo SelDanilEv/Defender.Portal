@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Defender.Common.Attributes;
 using Defender.Common.Consts;
 using Defender.Common.Enums;
-using Defender.Portal.WebUI.Controllers;
 using Defender.Common.DTOs;
 using Defender.Common.Modules.Home.Queries;
+using Defender.Portal.WebUI.Controllers;
 
-namespace WebUI.Controllers.V1;
+namespace Defender.Portal.WebUI.Controllers.V1;
 
 public partial class HomeController(
         IMediator mediator,

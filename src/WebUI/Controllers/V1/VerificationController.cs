@@ -4,6 +4,7 @@ using Defender.Common.Consts;
 using Defender.Portal.Application.DTOs.Accounts;
 using Defender.Portal.Application.Modules.Verification.Commands;
 using Defender.Portal.Application.Modules.Verification.Queries;
+using Defender.Portal.WebUI.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,7 +42,7 @@ public class VerificationController : BaseApiController
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> SendUpdateAccountCodeAsync()
     {
-        return await ProcessApiCallAsync<SendUpdateAccountAccessCodeCommand>
+        return await ProcessApiCallAsync
             (new SendUpdateAccountAccessCodeCommand());
     }
 
@@ -67,7 +68,7 @@ public class VerificationController : BaseApiController
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> ResendEmailVerificationAsync()
     {
-        return await ProcessApiCallAsync<SendEmailVerificationCodeCommand>
+        return await ProcessApiCallAsync
             (new SendEmailVerificationCodeCommand());
     }
 }

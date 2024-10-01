@@ -1,6 +1,6 @@
 ﻿using Defender.Common.Errors;
 
-namespace WebUI.ErrorMapping;
+namespace Defender.Portal.WebUI.ErrorMapping;
 
 public class ErrorMappingHelper
 {

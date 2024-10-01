@@ -20,7 +20,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { CurrentPagination } from "src/models/base/CurrentPagination";
 import { connect } from "react-redux";
 import useUtils from "src/appUtils";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import CachedIcon from "@mui/icons-material/Cached";
 import { UserOnlyInfo } from "src/models/UserOnlyInfo";
 import CustomDialog from "src/components/Dialog";

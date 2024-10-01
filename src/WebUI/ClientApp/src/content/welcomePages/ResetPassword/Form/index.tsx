@@ -1,6 +1,6 @@
 import { Box, FormControl } from "@mui/material";
 
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import useUtils from "src/appUtils";
 import { useEffect, useState } from "react";
 import StateMachine, { StateModel } from "src/services/StateMachine";

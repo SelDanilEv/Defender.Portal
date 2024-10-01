@@ -16,3 +16,12 @@ export const AllAvailableCurrencies = [
   Currency.RUB,
   Currency.BYN,
 ];
+
+export const BudgetTrackerAvailableCurrencies = [
+  Currency.USD,
+  Currency.EUR,
+  Currency.GEL,
+  Currency.PLN,
+  Currency.RUB,
+  Currency.BYN,
+];

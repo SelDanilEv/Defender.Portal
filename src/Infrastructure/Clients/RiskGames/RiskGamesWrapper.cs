@@ -8,7 +8,7 @@ using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using LotteryDraw = Defender.Portal.Application.DTOs.RiskGames.Lottery.LotteryDrawDto;
 using UserTicket = Defender.Portal.Application.DTOs.RiskGames.Lottery.UserTicketDto;
 
-namespace Defender.Portal.Infrastructure.Clients.Wallet;
+namespace Defender.Portal.Infrastructure.Clients.RiskGames;
 
 using Currency = Application.Enums.Currency;
 

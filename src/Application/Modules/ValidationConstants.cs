@@ -1,4 +1,4 @@
-﻿namespace Defender.ServiceTemplate.Application.Modules;
+﻿namespace Defender.Portal.Application.Modules;
 
 public class ValidationConstants
 {

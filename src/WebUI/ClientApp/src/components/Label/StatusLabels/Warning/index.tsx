@@ -1,5 +1,3 @@
-import SyncIcon from "@mui/icons-material/Sync";
-
 import Label from "src/components/Label";
 import useUtils from "src/appUtils";
 
@@ -8,8 +6,7 @@ const WarningStatusLabel = (props: any) => {
 
   return (
     <Label color="warning">
-      <SyncIcon fontSize={props.size || "small"} />
-      <b>{props.text || u.t("Warning")}</b>
+      <b>{props.children || props.text || u.t("Warning")}</b>
     </Label>
   );
 };

@@ -1,10 +1,10 @@
 import chroma from "chroma-js";
+import dayjs from "dayjs";
 
 import { AllAvailableCurrencies } from "src/models/shared/Currency";
-
 import { BudgetDiagramGroup } from "src/models/budgetTracker/BudgetDiagramGroups";
-import dayjs from "dayjs";
 import { DatasetItem } from "src/models/budgetTracker/diagramData/DatasetItem";
+
 import {
   buildDatasetItemId,
   getLabelName,

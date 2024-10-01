@@ -2,7 +2,7 @@ import { Box, Avatar } from "@mui/material";
 import { connect } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import LoadingStateService from "src/services/LoadingStateService";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import { login } from "src/actions/sessionActions";

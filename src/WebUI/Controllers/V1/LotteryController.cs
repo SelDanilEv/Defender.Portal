@@ -5,6 +5,7 @@ using Defender.Common.DB.Pagination;
 using Defender.Portal.Application.DTOs.RiskGames.Lottery;
 using Defender.Portal.Application.Modules.RiskGames.Lottery.Commands;
 using Defender.Portal.Application.Modules.RiskGames.Lottery.Queries;
+using Defender.Portal.WebUI.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

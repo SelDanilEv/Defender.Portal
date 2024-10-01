@@ -18,8 +18,8 @@ const useUtils = (): IUtils => {
       theme: theme,
     },
     t: (key: string) => t(key),
-    log: (value) => {
-      console.log(value);
+    log: (...values) => {
+      console.log(values);
     },
     debug: (value) => {
       console.debug(value);

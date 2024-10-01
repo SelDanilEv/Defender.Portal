@@ -11,7 +11,6 @@ using Defender.Portal.Application.Services.Accounts;
 using Defender.Portal.Application.Services.Admin;
 using Defender.Portal.Application.Services.Banking;
 using Defender.Portal.Application.Services.RiskGames.Lottery;
-using Defender.Portal.Infrastructure.Services.Accounts;
 
 namespace Defender.Portal.Application;
 

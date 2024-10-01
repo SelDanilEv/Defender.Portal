@@ -1,36 +1,23 @@
-import { Dictionary } from "src/customTypes";
 import { Currency } from "src/models/shared/Currency";
+import { BudgetReview, BudgetReviewedPosition } from "./BudgetReview";
 
 export class BudgetHistory {
-  history: BudgetHistoryReview[];
+  history: BudgetReview[];
   allowedCurrencies: Currency[];
 
-  constructor(history: BudgetHistoryReview[]) {
-    this.history = history;
-
+  constructor(history: BudgetReview[]) {
     const currencySet = new Set<Currency>();
 
-    history.forEach((record: BudgetHistoryReview) => {
-      record.records.forEach((r: BudgetHistoryReviewRecord) => {
+    history.forEach((record: BudgetReview) => {
+      record.date = new Date(record.date);
+      record.positions.forEach((r: BudgetReviewedPosition) => {
         currencySet.add(r.currency);
       });
     });
 
+    this.history = history.sort((a, b) => a.date.getTime() - b.date.getTime());
+
     const allCurrencies = Array.from(currencySet);
     this.allowedCurrencies = allCurrencies;
   }
-}
-
-export interface BudgetHistoryReview {
-  date: Date;
-  records: BudgetHistoryReviewRecord[];
-  baseCurrency: Currency;
-  rates: Dictionary<Currency, number>;
-}
-
-export interface BudgetHistoryReviewRecord {
-  name: string;
-  tags: string[];
-  amount: number;
-  currency: Currency;
 }

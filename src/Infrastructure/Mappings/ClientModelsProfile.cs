@@ -10,6 +10,8 @@ using Defender.Portal.Application.DTOs.Auth;
 using Defender.Portal.Application.DTOs.Banking;
 using Defender.Portal.Application.DTOs.BudgetTracking.DiagramSetup;
 using Defender.Portal.Application.DTOs.BudgetTracking.Positions;
+using Defender.Portal.Application.DTOs.BudgetTracking.Reviews;
+using Defender.Portal.Application.Enums;
 
 namespace Defender.Portal.Infrastructure.Mappings;
 
@@ -144,6 +146,43 @@ public class ClientModelsProfile : BaseMappingProfile
 
         CreateMap<PositionPagedResult, PagedResult<PortalPosition>>();
         CreateMap<Position, PortalPosition>();
+        CreateMap<ReviewedPosition, PortalReviewedPosition>();
+
+        CreateMap<BudgetReviewDtoPagedResult, PagedResult<PortalBudgetReview>>();
+        CreateMap<BudgetReviewDto, PortalBudgetReview>()
+            .ForMember(
+                dest => dest.BaseCurrency,
+                opt => opt.MapFrom(
+                    src => MappingHelper.MapEnum(
+                        src.RatesModel.BaseCurrency, Currency.Unknown)))
+            .ForMember(
+                dest => dest.Rates,
+                opt => opt.MapFrom(
+                    src => src.RatesModel.Rates != null
+                        ? src.RatesModel.Rates.ToDictionary()
+                        : new Dictionary<Currency, decimal>()));
+
+        CreateMap<PortalReviewedPosition, PositionToPublish>();
     }
 
+}
+
+public static class RatesExtensions
+{
+    public static Dictionary<Currency, decimal> ToDictionary(this Rates rates)
+    {
+        var dictionary = new Dictionary<Currency, decimal>();
+
+        if (rates != null)
+        {
+            if (rates.USD != 0.0) dictionary[Currency.USD] = (decimal)rates.USD;
+            if (rates.EUR != 0.0) dictionary[Currency.EUR] = (decimal)rates.EUR;
+            if (rates.GEL != 0.0) dictionary[Currency.GEL] = (decimal)rates.GEL;
+            if (rates.PLN != 0.0) dictionary[Currency.PLN] = (decimal)rates.PLN;
+            if (rates.RUB != 0.0) dictionary[Currency.RUB] = (decimal)rates.RUB;
+            if (rates.BYN != 0.0) dictionary[Currency.BYN] = (decimal)rates.BYN;
+        }
+
+        return dictionary;
+    }
 }

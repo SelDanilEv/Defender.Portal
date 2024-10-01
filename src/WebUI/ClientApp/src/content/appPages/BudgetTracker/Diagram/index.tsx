@@ -10,22 +10,6 @@ import MainDiagram from "./MainDiagram";
 const BudgetTrackerHomePage = (props: any) => {
   const u = useUtils();
 
-  const [chipData, setChipData] = useState<string[]>([]);
-  const [inputValue, setInputValue] = useState<string>("");
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && inputValue.trim() !== "") {
-      if (!chipData.includes(inputValue.trim())) {
-        setChipData([...chipData, inputValue.trim()]);
-      }
-      setInputValue("");
-    }
-  };
-
-  const handleDelete = (chipToDelete: string) => () => {
-    setChipData((chips) => chips.filter((chip) => chip !== chipToDelete));
-  };
-
   return (
     <Box sx={{ width: "100%" }}>
       <DiagramConfig />

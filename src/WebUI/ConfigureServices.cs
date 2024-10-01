@@ -5,14 +5,14 @@ using Defender.Common.Errors;
 using Defender.Common.Exceptions;
 using Defender.Common.Extension;
 using Defender.Common.Helpers;
-using Defender.Portal.Application.Configuration.Extension;
+using Defender.Portal.Application.Configuration.Exstension;
+using Defender.Portal.WebUI.ErrorMapping;
 using FluentValidation.AspNetCore;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using WebUI.ErrorMapping;
 using ProblemDetailsOptions = Hellang.Middleware.ProblemDetails.ProblemDetailsOptions;
 
 namespace Defender.Portal.WebUI;

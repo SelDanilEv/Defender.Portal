@@ -6,7 +6,7 @@ import APICallProps from "src/api/APIWrapper/interfaces/APICallProps";
 import apiUrls from "src/api/apiUrls";
 
 import useUtils from "src/appUtils";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import { BankingSupportedCurrencies } from "src/consts/SupportedCurrencies";
 import { WalletInfo } from "src/models/banking/WalletInfo";
 

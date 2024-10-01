@@ -7,7 +7,7 @@ import { FullUserInfoForAdmin } from "src/models/admin/FullUserInfoForAdmin";
 import UserTab from "./UserTab";
 import CachedIcon from "@mui/icons-material/Cached";
 import LoginIcon from "@mui/icons-material/Login";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import WalletTab from "./WalletTab";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";

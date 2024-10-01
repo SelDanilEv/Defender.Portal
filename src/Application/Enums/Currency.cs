@@ -17,6 +17,8 @@ public enum Currency
     EUR = BaseCurrency.EUR,
     GEL = BaseCurrency.GEL,
     PLN = BaseCurrency.PLN,
+    RUB = BaseCurrency.RUB,
+    BYN = BaseCurrency.BYN,
 }
 
 public enum BudgetTrackerSupportedCurrency

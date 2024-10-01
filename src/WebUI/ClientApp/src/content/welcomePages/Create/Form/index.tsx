@@ -10,7 +10,7 @@ import {
 import { connect } from "react-redux";
 import { styled } from "@mui/material/styles";
 
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import LoadingStateService from "src/services/LoadingStateService";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import { login } from "src/actions/sessionActions";

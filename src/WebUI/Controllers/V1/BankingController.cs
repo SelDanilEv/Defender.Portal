@@ -13,8 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Defender.Portal.WebUI.Controllers.V1;
 
 public class BankingController(
-        IMediator mediator, 
-        IMapper mapper) 
+        IMediator mediator,
+        IMapper mapper)
     : BaseApiController(mediator, mapper)
 {
 

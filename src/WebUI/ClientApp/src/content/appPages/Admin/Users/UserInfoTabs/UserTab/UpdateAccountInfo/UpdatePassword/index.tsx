@@ -9,7 +9,7 @@ import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import apiUrls from "src/api/apiUrls";
 import { AdminUpdatePasswordRequest } from "src/models/requests/admin/updateUser/AdminUpdatePasswordRequest";
 import { PasswordMaskRegex, PasswordRegex } from "src/consts/Regexes";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 
 interface UpdatePasswordProps {
   userId: string;

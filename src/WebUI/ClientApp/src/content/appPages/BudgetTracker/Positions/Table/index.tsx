@@ -3,7 +3,6 @@ import {
   Divider,
   Box,
   Card,
-  IconButton,
   Table,
   TableBody,
   TableCell,
@@ -17,17 +16,23 @@ import {
   Chip,
 } from "@mui/material";
 
-import InfoIcon from "@mui/icons-material/Info";
 import { CurrentPagination } from "src/models/base/CurrentPagination";
 import { connect } from "react-redux";
 import useUtils from "src/appUtils";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
-import CachedIcon from "@mui/icons-material/Cached";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
+
 import CustomDialog from "src/components/Dialog";
 import { PaginationRequest } from "src/models/base/PaginationRequest";
 import { BudgetPosition } from "src/models/budgetTracker/BudgetPositions";
 import { DialogMode, OpenDialog } from "src/models/shared/DialogMode";
 import PositionDialogBody from "./PositionDialogBody";
+
+import AddIcon from "@mui/icons-material/Add";
+import CachedIcon from "@mui/icons-material/Cached";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import LockedIconButton from "src/components/LockedComponents/LockedIconButtons/LockedIconButton";
+import { BudgetTrackerAvailableCurrencies } from "src/models/shared/Currency";
 
 interface PositionsTableProps {
   positions: BudgetPosition[];
@@ -35,6 +40,14 @@ interface PositionsTableProps {
   pagination: CurrentPagination;
   refresh: () => void;
 }
+
+const DefaultPosition: BudgetPosition = {
+  id: "",
+  name: "",
+  tags: [],
+  currency: BudgetTrackerAvailableCurrencies[0],
+  orderPriority: 0,
+} as BudgetPosition;
 
 const PositionsTable = (props: PositionsTableProps) => {
   const u = useUtils();
@@ -49,10 +62,10 @@ const PositionsTable = (props: PositionsTableProps) => {
 
   const [tablePagination, setTablePagination] = useState<PaginationRequest>({
     page: 0,
-    pageSize: 5,
+    pageSize: 10,
   });
 
-  const [positionToUpdate, setPositionToUpdate] = useState<BudgetPosition>();
+  const [positionToUpdate, setModelToUpdate] = useState<BudgetPosition>();
   const [dialogMode, setDialogMode] = useState<DialogMode>(DialogMode.Hide);
 
   useEffect(() => {
@@ -77,10 +90,10 @@ const PositionsTable = (props: PositionsTableProps) => {
     );
   };
 
-  const renderPositionRowInfo = (position: BudgetPosition): JSX.Element => {
+  const renderRowInfo = (model: BudgetPosition): JSX.Element => {
     {
       return (
-        <TableRow hover key={position.id}>
+        <TableRow hover key={model.id}>
           <TableCell align="center">
             <Typography
               variant="body1"
@@ -89,19 +102,21 @@ const PositionsTable = (props: PositionsTableProps) => {
               gutterBottom
               noWrap
             >
-              {position.name}
+              {model.name}
             </Typography>
           </TableCell>
-          <TableCell align="center">
-            <Typography
-              variant="body1"
-              fontWeight="bold"
-              color="text.primary"
-              gutterBottom
-            >
-              {generateTags(position.tags)}
-            </Typography>
-          </TableCell>
+          {u.isMobile ? null : (
+            <TableCell align="center">
+              <Typography
+                variant="body1"
+                fontWeight="bold"
+                color="text.primary"
+                gutterBottom
+              >
+                {generateTags(model.tags)}
+              </Typography>
+            </TableCell>
+          )}
           <TableCell align="center">
             <Typography
               variant="body1"
@@ -110,25 +125,40 @@ const PositionsTable = (props: PositionsTableProps) => {
               gutterBottom
               noWrap
             >
-              {position.currency}
+              {model.currency}
             </Typography>
           </TableCell>
           <TableCell align="center">
-            <IconButton
+            <LockedIconButton
               sx={{
-                "&:hover": { background: theme.colors.info.lighter },
-                color: theme.palette.info.dark,
+                "&:hover": { background: theme.colors.warning.lighter },
+                color: theme.palette.warning.dark,
               }}
               onClick={(event) => {
                 event.stopPropagation();
-                setPositionToUpdate(position);
-                setDialogMode(DialogMode.Info);
+                setModelToUpdate(model);
+                setDialogMode(DialogMode.Update);
               }}
               color="inherit"
               size="small"
             >
-              <InfoIcon fontSize="small" />
-            </IconButton>
+              <EditNoteIcon fontSize="small" />
+            </LockedIconButton>
+            <LockedIconButton
+              sx={{
+                "&:hover": { background: theme.colors.error.lighter },
+                color: theme.palette.error.dark,
+              }}
+              onClick={(event) => {
+                event.stopPropagation();
+                setModelToUpdate(model);
+                setDialogMode(DialogMode.Delete);
+              }}
+              color="inherit"
+              size="small"
+            >
+              <DeleteIcon fontSize="small" />
+            </LockedIconButton>
           </TableCell>
         </TableRow>
       );
@@ -139,9 +169,26 @@ const PositionsTable = (props: PositionsTableProps) => {
     <Card>
       <CardHeader
         action={
-          <LockedButton sx={{ mr: "1em" }} variant="outlined" onClick={refresh}>
-            <CachedIcon />
-          </LockedButton>
+          <>
+            <LockedButton
+              sx={{ mr: "1em" }}
+              variant="outlined"
+              color="success"
+              onClick={() => {
+                setModelToUpdate(DefaultPosition);
+                setDialogMode(DialogMode.Create);
+              }}
+            >
+              <AddIcon />
+            </LockedButton>
+            <LockedButton
+              sx={{ mr: "1em" }}
+              variant="outlined"
+              onClick={refresh}
+            >
+              <CachedIcon />
+            </LockedButton>
+          </>
         }
         title={
           <Typography fontSize={"1.7em"} fontWeight="bold">
@@ -167,9 +214,11 @@ const PositionsTable = (props: PositionsTableProps) => {
               <TableCell align="center">
                 {u.t("budgetTracker:positions_table_name_column")}
               </TableCell>
-              <TableCell align="center">
-                {u.t("budgetTracker:positions_table_tags_column")}
-              </TableCell>
+              {u.isMobile ? null : (
+                <TableCell align="center">
+                  {u.t("budgetTracker:positions_table_tags_column")}
+                </TableCell>
+              )}
               <TableCell align="center">
                 {u.t("budgetTracker:positions_table_currency_column")}
               </TableCell>
@@ -178,7 +227,7 @@ const PositionsTable = (props: PositionsTableProps) => {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>{positions.map(renderPositionRowInfo)}</TableBody>
+          <TableBody>{positions.map(renderRowInfo)}</TableBody>
         </Table>
       </TableContainer>
       <Box
@@ -205,18 +254,24 @@ const PositionsTable = (props: PositionsTableProps) => {
           onRowsPerPageChange={handleLimitChange}
           page={tablePagination.page}
           rowsPerPage={tablePagination.pageSize}
-          rowsPerPageOptions={[5, 20, 50, 100]}
+          rowsPerPageOptions={[10, 25, 50, 100]}
           labelRowsPerPage=""
         />
       </Box>
       <CustomDialog
         title={u.t("budgetTracker:positions_dialog_title")}
         open={OpenDialog(dialogMode)}
-        onClose={() => setDialogMode(DialogMode.Hide)}
+        onClose={() => {
+          setDialogMode(DialogMode.Hide);
+          setModelToUpdate(DefaultPosition);
+        }}
         children={
           <PositionDialogBody
-            closeDialog={() => setDialogMode(DialogMode.Hide)}
-            position={positionToUpdate}
+            closeDialog={() => {
+              setDialogMode(DialogMode.Hide);
+              refresh();
+            }}
+            inputModel={positionToUpdate}
             dialogMode={dialogMode}
           />
         }

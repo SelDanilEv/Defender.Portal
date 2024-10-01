@@ -1,10 +1,11 @@
 import { Dictionary } from "src/customTypes";
 import { BudgetDiagramGroups } from "src/models/budgetTracker/BudgetDiagramGroups";
+import { BudgetHistory } from "src/models/budgetTracker/BudgetHistory";
 import {
-  BudgetHistory,
-  BudgetHistoryReview,
-  BudgetHistoryReviewRecord,
-} from "src/models/budgetTracker/BudgetHistory";
+  BudgetReview,
+  BudgetReviewedPosition,
+} from "src/models/budgetTracker/BudgetReview";
+
 import { Currency } from "src/models/shared/Currency";
 
 // Function to generate random number within a range
@@ -13,8 +14,8 @@ const getRandomNumber = (min: number, max: number) =>
 
 // Function to generate random records
 const generateRecords = (
-  previousRecords: BudgetHistoryReviewRecord[]
-): BudgetHistoryReviewRecord[] => {
+  previousRecords: BudgetReviewedPosition[]
+): BudgetReviewedPosition[] => {
   const getPreviousAmount = (name: string, currency: Currency): number => {
     const record = previousRecords.find(
       (record) => record.name === name && record.currency === currency
@@ -23,7 +24,7 @@ const generateRecords = (
     return record ? record.amount : getRandomNumber(1000, 2000);
   };
 
-  var records = [
+  var records: BudgetReviewedPosition[] = [
     // {
     //   name: "Bank",
     //   tags: ["pln", "saving"],
@@ -44,7 +45,7 @@ const generateRecords = (
       amount:
         getPreviousAmount("Wallet", Currency.PLN) + getRandomNumber(-100, 100),
       currency: Currency.PLN,
-    },
+    } as BudgetReviewedPosition,
     // {
     //   name: "Cash",
     //   tags: ["eur", "saving"],
@@ -61,7 +62,7 @@ const generateRecords = (
       amount:
         getPreviousAmount("Bank 3", Currency.USD) + getRandomNumber(-10, 140),
       currency: Currency.USD,
-    });
+    } as BudgetReviewedPosition);
   }
 
   return records;
@@ -78,8 +79,8 @@ const generateRates = (): Dictionary<Currency, number> => ({
 });
 
 // Generate a large dataset
-const generateLargeDataset = (numEntries: number): BudgetHistoryReview[] => {
-  const dataset: BudgetHistoryReview[] = [];
+const generateLargeDataset = (numEntries: number): BudgetReview[] => {
+  const dataset: BudgetReview[] = [];
   let currentDate = new Date();
 
   currentDate.setDate(currentDate.getDate() - 7 * numEntries);
@@ -89,11 +90,11 @@ const generateLargeDataset = (numEntries: number): BudgetHistoryReview[] => {
   for (let i = 0; i < numEntries; i++) {
     dataset.push({
       date: new Date(currentDate), // Use the current date
-      records: records,
+      positions: records,
       // balances: generateBalances(records),
       baseCurrency: Currency.EUR,
       rates: generateRates(),
-    });
+    } as BudgetReview);
 
     records = generateRecords(records);
 
@@ -105,9 +106,9 @@ const generateLargeDataset = (numEntries: number): BudgetHistoryReview[] => {
 };
 
 // Test dataset as BudgetHistory object
-const testDataset: BudgetHistory = new BudgetHistory(generateLargeDataset(100));
+// const testDataset: BudgetHistory = new BudgetHistory(generateLargeDataset(100));
 
-export default testDataset;
+// export default testDataset;
 
 export const groups: BudgetDiagramGroups = new BudgetDiagramGroups([
   {
@@ -115,7 +116,7 @@ export const groups: BudgetDiagramGroups = new BudgetDiagramGroups([
     name: "All",
     tags: [],
     color: "#008ae5",
-    showTrendline: true,
+    showTrendline: false,
     translineColor: "#ff8a13",
     isActive: true,
   },
@@ -126,6 +127,6 @@ export const groups: BudgetDiagramGroups = new BudgetDiagramGroups([
     color: "#33cc00",
     showTrendline: true,
     translineColor: "#FF0000",
-    isActive: true,
+    isActive: false,
   },
 ]);

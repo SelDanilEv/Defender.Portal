@@ -24,7 +24,7 @@ import { connect } from "react-redux";
 import useUtils from "src/appUtils";
 import TicketInfoDialogBody from "./TicketInfoDialogBody";
 import CustomDialog from "src/components/Dialog";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import CachedIcon from "@mui/icons-material/Cached";
 import LotteryTicket from "src/models/games/lottery/LotteryTicket";
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
@@ -80,10 +80,7 @@ const HistoricalTicketsTable = (props: HistoricalTicketsTableProps) => {
             {mapTicketStatusLabel(u, ticket.status)}
           </TableCell>
           <TableCell align="center">
-            <Tooltip
-              title={u.t("lottery:ticket_info_table_action_info")}
-              arrow
-            >
+            <Tooltip title={u.t("lottery:ticket_info_table_action_info")} arrow>
               <IconButton
                 sx={{
                   "&:hover": { background: theme.colors.info.lighter },
@@ -138,9 +135,7 @@ const HistoricalTicketsTable = (props: HistoricalTicketsTableProps) => {
                 {u.t("lottery:ticket_info_table_draw_column")}
               </TableCell>
               <TableCell align="center">
-                {u.t(
-                  "lottery:ticket_info_table_ticket_number_column"
-                )}
+                {u.t("lottery:ticket_info_table_ticket_number_column")}
               </TableCell>
               {!u.isMobile && (
                 <TableCell align="center">

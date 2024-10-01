@@ -2,7 +2,7 @@ using Defender.Common.DTOs;
 using Defender.Common.Mapping;
 using Defender.Portal.Application.DTOs.Accounts;
 
-namespace Defender.Portal.Application.Common.Mappings;
+namespace Defender.Portal.Application.Mappings;
 
 public class MappingProfile : BaseMappingProfile
 {

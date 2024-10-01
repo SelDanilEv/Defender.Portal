@@ -14,5 +14,10 @@
   "header_games": "Games",
   "page_lottery": "Lottery",
 
+  "header_budget_tracker" : "Budget tracker",
+  "page_budget_tracker_positions" : "Positions",
+  "page_budget_tracker_reviews" : "Reviews",
+  "page_budget_tracker_diagram" : "Diagram",
+
   "_" : "_"
 }

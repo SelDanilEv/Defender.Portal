@@ -6,7 +6,7 @@ import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
 
 import WelcomeMenuButton from "../Components/WelcomeMenuButton";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import SuccessToast from "src/components/Toast/DefaultSuccessToast";
 import { logout } from "src/actions/sessionActions";
 import { connect } from "react-redux";

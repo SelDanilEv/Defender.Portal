@@ -65,6 +65,10 @@ const BudgetTrackerPositionsPage = Loader(
   lazy(() => import("src/content/appPages/BudgetTracker/Positions"))
 );
 
+const BudgetTrackerReviewsPage = Loader(
+  lazy(() => import("src/content/appPages/BudgetTracker/Review"))
+);
+
 // Home
 
 const HomePage = Loader(lazy(() => import("src/content/appPages/HomePage")));
@@ -204,6 +208,10 @@ const routes: RouteObject[] = [
       {
         path: "positions",
         element: <BudgetTrackerPositionsPage />,
+      },
+      {
+        path: "reviews",
+        element: <BudgetTrackerReviewsPage />,
       },
       {
         path: "*",

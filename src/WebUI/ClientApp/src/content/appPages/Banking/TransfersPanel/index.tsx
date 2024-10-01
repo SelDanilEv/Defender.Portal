@@ -21,7 +21,7 @@ import {
   WalletNumberMaskRegex,
   WalletNumberRegex,
 } from "src/consts/Regexes";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import ParamsObjectBuilder from "src/helpers/ParamsObjectBuilder";
 import LockedSelect from "src/components/LockedComponents/LockedSelect/LockedSelect";
 

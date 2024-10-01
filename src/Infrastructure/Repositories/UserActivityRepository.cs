@@ -5,7 +5,7 @@ using Defender.Portal.Application.Common.Interfaces.Repositories;
 using Defender.Portal.Domain.Entities;
 using Microsoft.Extensions.Options;
 
-namespace Defender.Portal.Infrastructure.Repositories.Sample;
+namespace Defender.Portal.Infrastructure.Repositories;
 
 public class UserActivityRepository : BaseMongoRepository<PortalUserActivity>, IUserActivityRepository
 {

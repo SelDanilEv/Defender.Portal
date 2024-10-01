@@ -1,5 +1,5 @@
 import useUtils from "src/appUtils";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 
 const WelcomeMenuButton = (props: any) => {
   const u = useUtils();

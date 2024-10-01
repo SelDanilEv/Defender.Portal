@@ -50,6 +50,10 @@ const APIEndpoints = {
   budgetTracker: {
     getPositions: "positions",
     position: "position",
+
+    getReviews: "budget-reviews",
+    getReviewTemplate: "budget-review/template",
+    review: "budget-review",
   },
 };
 

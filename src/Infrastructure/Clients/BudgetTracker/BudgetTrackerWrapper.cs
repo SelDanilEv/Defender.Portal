@@ -7,6 +7,8 @@ using Defender.Common.Wrapper.Internal;
 using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using Defender.Portal.Application.DTOs.BudgetTracking.DiagramSetup;
 using Defender.Portal.Application.DTOs.BudgetTracking.Positions;
+using Defender.Portal.Application.DTOs.BudgetTracking.Reviews;
+using Defender.Portal.Application.Models.ApiRequests.BugetTracker.BudgetReviews;
 using Defender.Portal.Application.Models.ApiRequests.BugetTracker.Positions;
 
 namespace Defender.Portal.Infrastructure.Clients.BudgetTracker;
@@ -53,6 +55,7 @@ public class BudgetTrackerWrapper(
     }
 
     #endregion
+
 
     #region Positions
 
@@ -119,6 +122,63 @@ public class BudgetTrackerWrapper(
         return await ExecuteSafelyAsync(async () =>
         {
             return await serviceClient.PositionDELETEAsync(id);
+        }, AuthorizationType.User);
+    }
+
+    #endregion
+
+
+    #region BudgetReview
+
+    public async Task<PagedResult<PortalBudgetReview>> GetBudgetReviewsAsync(
+        PaginationRequest paginationRequest)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var response = await serviceClient.BudgetReviewGETAsync(
+                paginationRequest.Page,
+                paginationRequest.PageSize);
+
+            return mapper.Map<PagedResult<PortalBudgetReview>>(response);
+        }, AuthorizationType.User);
+    }
+
+    public async Task<PortalBudgetReview> GetBudgetReviewTemplateAsync(
+        DateOnly? date)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var response = await serviceClient.TemplateAsync(date);
+
+            return mapper.Map<PortalBudgetReview>(response);
+        }, AuthorizationType.User);
+    }
+
+    public async Task<PortalBudgetReview> PublishBudgetReviewAsync(
+        PublishBudgetRequestRequest request)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var command = new PublishBudgetReviewCommand()
+            {
+                Id = request.Id,
+                Date = request.Date,
+                ReviewedPositions = mapper
+                    .Map<List<PositionToPublish>>(request.Positions)
+            };
+
+            var response = await serviceClient.BudgetReviewPOSTAsync(command);
+
+            return mapper.Map<PortalBudgetReview>(response);
+        }, AuthorizationType.User);
+    }
+
+    public async Task<Guid> DeleteBudgetReviewAsync(
+        Guid id)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            return await serviceClient.BudgetReviewDELETEAsync(id);
         }, AuthorizationType.User);
     }
 

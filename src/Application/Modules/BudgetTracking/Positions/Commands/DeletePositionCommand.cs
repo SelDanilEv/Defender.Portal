@@ -1,11 +1,13 @@
 ﻿using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Defender.Portal.Application.Modules.BudgetTracking.Positions.Commands;
 
 public record DeletePositionCommand : IRequest<Guid>
 {
+    [FromRoute]
     public Guid Id { get; init; }
 };
 

@@ -10,9 +10,10 @@ using Defender.Portal.Application.Configuration.Options;
 using Defender.Portal.Application.Services.Background;
 using Defender.Portal.Infrastructure.Clients.BudgetTracker;
 using Defender.Portal.Infrastructure.Clients.Identity;
+using Defender.Portal.Infrastructure.Clients.RiskGames;
 using Defender.Portal.Infrastructure.Clients.UserManagement;
 using Defender.Portal.Infrastructure.Clients.Wallet;
-using Defender.Portal.Infrastructure.Repositories.Sample;
+using Defender.Portal.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 

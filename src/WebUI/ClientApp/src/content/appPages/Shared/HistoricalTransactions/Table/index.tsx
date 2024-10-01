@@ -26,7 +26,7 @@ import useUtils from "src/appUtils";
 import DateLocales from "src/consts/DateLocales";
 import TransactionInfoDialogBody from "./TransactionInfoDialogBody";
 import CustomDialog from "src/components/Dialog";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import CachedIcon from "@mui/icons-material/Cached";
 import { mapTransactionStatusLabel } from "src/mappers/banking/mapTransactionStatus";
 import mapTransactionType from "src/mappers/banking/mapTransactionType";

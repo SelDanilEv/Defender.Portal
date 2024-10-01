@@ -6,7 +6,7 @@ using Defender.Portal.Domain.Enums;
 using Defender.Common.DB.Model;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 
-namespace Defender.Portal.Infrastructure.Services.Accounts;
+namespace Defender.Portal.Application.Services.Accounts;
 
 public class UserActivityService(
         IUserActivityRepository userActivityRepository,
@@ -14,14 +14,14 @@ public class UserActivityService(
     : IUserActivityService
 {
     public async Task<PortalUserActivity> CreateUserActivity(
-        ActivityCode code, 
+        ActivityCode code,
         string? message)
     {
         var currentUserId = currentAccountAccessor.GetAccountId();
 
         var userActivity = PortalUserActivity.Create(
             currentUserId,
-            code, 
+            code,
             message);
 
         return await userActivityRepository

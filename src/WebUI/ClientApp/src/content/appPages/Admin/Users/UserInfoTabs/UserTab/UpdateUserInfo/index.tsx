@@ -4,7 +4,7 @@ import useUtils from "src/appUtils";
 import { useEffect, useState } from "react";
 
 import { UserAccountInfo } from "src/models/UserAccountInfo";
-import LockedButton from "src/components/LockedComponents/Buttons/LockedButton";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import { AdminUpdateUserInfoRequest } from "src/models/requests/admin/updateUser/AdminUpdateUserInfoRequest";
 import ParamsObjectBuilder from "src/helpers/ParamsObjectBuilder";
 import {

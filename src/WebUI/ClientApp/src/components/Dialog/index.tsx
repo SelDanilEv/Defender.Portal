@@ -7,7 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { Box, DialogActions } from "@mui/material";
-import LockedIconButton from "../LockedComponents/IconButtons/LockedIconButton";
+import LockedIconButton from "../LockedComponents/LockedIconButtons/LockedIconButton";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -66,7 +66,7 @@ export default function CustomDialog({
           justifyContent: "center",
           alignItems: "center",
           py: { xs: "0.5em", sm: "1em", md: "1.2em" },
-          px: { xs: "3em", sm: "5em", md: "7em" },
+          px: { xs: "1.5em", sm: "3em", md: "5em" },
         }}
       >
         {children}

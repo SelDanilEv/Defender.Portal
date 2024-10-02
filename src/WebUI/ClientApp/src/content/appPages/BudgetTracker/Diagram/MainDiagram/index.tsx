@@ -38,6 +38,8 @@ const MainDiagram = (props: MainDiagramProps) => {
   const [dataset, setDataset] = useState<DatasetItem[]>([]);
   const [extendedPeriods, setExtendedPeriods] = useState<number>(0);
 
+  const [additionalMargin, setAdditionalMargin] = useState<number>(0);
+
   const reloadHistory = (budgetHistory: BudgetHistory) => {
     const { startDate, endDate, mainCurrency } = diagramConfig;
 
@@ -62,7 +64,21 @@ const MainDiagram = (props: MainDiagramProps) => {
 
     const dataset = mapToDataset(updatedDataset, activeGroups);
 
+    setLegendMargin(updatedDataset, activeGroups.length);
+
     setDataset(dataset);
+  };
+
+  const setLegendMargin = (
+    updatedDataset: BudgetHistory,
+    groupsAmount: number
+  ) => {
+    const coef = u.isMobile ? 50 : 5;
+
+    const addMargin =
+      (updatedDataset.allowedCurrencies.length / 3) * groupsAmount * coef;
+
+    setAdditionalMargin(addMargin);
   };
 
   const startRefresh = () => {
@@ -104,11 +120,24 @@ const MainDiagram = (props: MainDiagramProps) => {
     startRefresh();
   }, [diagramConfig]);
 
+  const recalculateHeight = () => {
+    let height = u.isLargeScreen ? 700 : u.isMobile ? 400 : 450;
+
+    height += additionalMargin;
+
+    return height;
+  };
+
   return (
     <Box sx={{ width: "100%" }}>
       <LineChart
-        margin={{ left: 68, right: 40 }}
-        height={u.isLargeScreen ? 700 : u.isMobile ? 400 : 500}
+        margin={{
+          top: 10,
+          bottom: 65 + additionalMargin,
+          left: 68,
+          right: 40,
+        }}
+        height={recalculateHeight()}
         dataset={dataset}
         series={generateSeries(
           dataset,
@@ -123,6 +152,12 @@ const MainDiagram = (props: MainDiagramProps) => {
           },
         ]}
         grid={{ horizontal: true }}
+        slotProps={{
+          legend: {
+            direction: "row",
+            position: { vertical: "bottom", horizontal: "middle" },
+          },
+        }}
       />
     </Box>
   );

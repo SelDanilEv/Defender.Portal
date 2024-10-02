@@ -61,8 +61,6 @@ export const generateSeries = (
 
         const trendLineData = calculateTrendLine(dataPoints, extendedPeriods);
 
-        console.log("trendLineData", trendLineData);
-
         series.push({
           label: getTrendLineName(currency, group.name),
           type: "line",
@@ -95,8 +93,6 @@ const calculateTrendLine = (data: number[], extendBy: number = 0): number[] => {
   const sumY = data.reduce((sum, value) => sum + value, 0);
   const sumXY = data.reduce((sum, value, index) => sum + index * value, 0);
   const sumX2 = data.reduce((sum, _, index) => sum + index * index, 0);
-
-  console.log(n, sumX, sumY, sumXY, sumX2);
 
   if (n === 0 || n * sumX2 - sumX * sumX === 0) {
     return [];

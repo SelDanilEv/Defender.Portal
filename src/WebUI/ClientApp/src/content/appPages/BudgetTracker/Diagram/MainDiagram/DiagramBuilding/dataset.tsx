@@ -28,7 +28,7 @@ export const mapToDataset = (
         const currencySum = records.reduce((sum, r) => sum + r.amount, 0);
 
         datasetItems[buildDatasetItemId(currency, group.id)] =
-          currencySum === 0 ? null : currencySum;
+          currencySum === 0 ? null : Math.round(currencySum) / 100;
       });
     });
 

@@ -42,7 +42,7 @@ public static class ConfigureServices
         services.AddTransient<IRiskGamesWrapper, RiskGamesWrapper>();
         services.AddTransient<IBudgetTrackerWrapper, BudgetTrackerWrapper>();
 
-        services.AddHostedService<KeepAliveHostedService>();
+        //services.AddHostedService<KeepAliveHostedService>();
 
         return services;
     }

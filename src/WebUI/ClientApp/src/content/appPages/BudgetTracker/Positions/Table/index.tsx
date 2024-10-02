@@ -15,24 +15,23 @@ import {
   CardHeader,
   Chip,
 } from "@mui/material";
-
-import { CurrentPagination } from "src/models/base/CurrentPagination";
-import { connect } from "react-redux";
-import useUtils from "src/appUtils";
-import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
-
-import CustomDialog from "src/components/Dialog";
-import { PaginationRequest } from "src/models/base/PaginationRequest";
-import { BudgetPosition } from "src/models/budgetTracker/BudgetPositions";
-import { DialogMode, OpenDialog } from "src/models/shared/DialogMode";
-import PositionDialogBody from "./PositionDialogBody";
-
 import AddIcon from "@mui/icons-material/Add";
 import CachedIcon from "@mui/icons-material/Cached";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditNoteIcon from "@mui/icons-material/EditNote";
+import { connect } from "react-redux";
+
+import { CurrentPagination } from "src/models/base/CurrentPagination";
+import useUtils from "src/appUtils";
+import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
+import CustomDialog from "src/components/Dialog";
+import { PaginationRequest } from "src/models/base/PaginationRequest";
+import { BudgetPosition } from "src/models/budgetTracker/BudgetPositions";
+import { DialogMode, OpenDialog } from "src/models/shared/DialogMode";
 import LockedIconButton from "src/components/LockedComponents/LockedIconButtons/LockedIconButton";
 import { BudgetTrackerAvailableCurrencies } from "src/models/shared/Currency";
+
+import PositionDialogBody from "./PositionDialogBody";
 
 interface PositionsTableProps {
   positions: BudgetPosition[];

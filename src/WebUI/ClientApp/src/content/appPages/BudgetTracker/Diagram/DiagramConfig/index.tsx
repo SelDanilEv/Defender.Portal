@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import useUtils from "src/appUtils";
-
+import { connect } from "react-redux";
 import { Grid, MenuItem } from "@mui/material";
 
+import useUtils from "src/appUtils";
+import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
+import apiUrls from "src/api/apiUrls";
+import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import LockedDatePicker from "src/components/LockedComponents/LockedDatePicker/LockedDatePicker";
 import { setMainDiagramSetup } from "src/actions/budgetTrackerSetupActions";
 import MainDiagramSetup from "src/models/budgetTracker/setup/MainDiagramSetup";
-import { connect } from "react-redux";
 import LockedTextField from "src/components/LockedComponents/LockedTextField/LockedTextField";
 import ParamsObjectBuilder from "src/helpers/ParamsObjectBuilder";
 import { BudgetTrackerSupportedCurrencies } from "src/consts/SupportedCurrencies";
@@ -31,12 +33,52 @@ const DiagramConfig = (props: DiagramConfigProps) => {
   const [updateSetupRequest, setUpdateSetupRequest] =
     useState<MainDiagramSetup>(props.diagramConfig);
 
-  const [mainCurrency, setMainCurrency] = useState<string>(
-    updateSetupRequest.mainCurrency
-  );
+  useEffect(() => {
+    APICallWrapper({
+      url: apiUrls.budgetTracker.mainDiagramSetup,
+      options: {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      utils: u,
+      onSuccess: async (response) => {
+        const setup: MainDiagramSetup = await response.json();
+
+        setup.startDate = dayjs(setup.endDate)
+          .subtract(setup.lastMonths, "month")
+          .toDate();
+
+        setup.endDate = new Date(setup.endDate);
+
+        setUpdateSetupRequest(setup);
+      },
+      onFailure: async (response) => {},
+      showError: true,
+    });
+  }, []);
 
   const updateSetup = (setup: MainDiagramSetup) => {
     props.setDiagramConfig(setup);
+
+    APICallWrapper({
+      url: apiUrls.budgetTracker.mainDiagramSetup,
+      options: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: RequestParamsBuilder.BuildBody({
+          endDate: setup.endDate.toDateOnlyString(),
+          lastMonths: setup.lastMonths,
+          mainCurrency: setup.mainCurrency,
+        }),
+      },
+      utils: u,
+      showSuccess: false,
+      showError: false,
+    });
 
     setUpdateSetupRequest(setup);
   };
@@ -45,11 +87,11 @@ const DiagramConfig = (props: DiagramConfigProps) => {
 
   const handleUpdateRequest = (event) => {
     const { name, type } = event.target;
-    const value =
-      type === "checkbox" ? event.target.checked : event.target.value;
+    let value = type === "checkbox" ? event.target.checked : event.target.value;
 
-    if (name === updateSetupParams.lastMonths && value < 0) {
-      return;
+    if (name === updateSetupParams.lastMonths) {
+      if (value < 0) return;
+      else value = +value;
     }
 
     const newState = { ...updateSetupRequest, [name]: value };
@@ -59,7 +101,7 @@ const DiagramConfig = (props: DiagramConfigProps) => {
     }
 
     if (name === updateSetupParams.mainCurrency) {
-      setMainCurrency(value);
+      newState.mainCurrency = value;
     }
 
     updateSetup(newState);
@@ -126,7 +168,7 @@ const DiagramConfig = (props: DiagramConfigProps) => {
         <LockedSelect
           variant="outlined"
           name={updateSetupParams.mainCurrency}
-          value={mainCurrency}
+          value={updateSetupRequest.mainCurrency}
           onChange={handleUpdateRequest}
           fullWidth
         >

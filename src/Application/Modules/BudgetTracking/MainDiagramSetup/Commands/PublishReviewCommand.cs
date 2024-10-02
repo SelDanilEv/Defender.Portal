@@ -2,11 +2,26 @@
 using MediatR;
 using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using Defender.Portal.Application.DTOs.BudgetTracking.DiagramSetup;
+using Defender.Portal.Application.Enums;
 
 namespace Defender.Portal.Application.Modules.BudgetTracking.BudgetMainDiagramSetups.Commands;
 
-public record PublishMainDiagramSetupCommand : PortalMainDiagramSetup, IRequest<PortalMainDiagramSetup>
+public record PublishMainDiagramSetupCommand : IRequest<PortalMainDiagramSetup>
 {
+    public DateOnly EndDate { get; set; }
+    public int LastMonths { get; set; }
+    public BudgetTrackerSupportedCurrency MainCurrency { get; set; }
+
+    public PortalMainDiagramSetup ToMainDiagramSetup()
+    {
+        return new PortalMainDiagramSetup
+        {
+            EndDate = EndDate,
+            LastMonths = LastMonths,
+            MainCurrency = MainCurrency
+        };
+    }
+
 };
 
 public sealed class PublishMainDiagramSetupCommandValidator : AbstractValidator<PublishMainDiagramSetupCommand>
@@ -25,6 +40,6 @@ public sealed class PublishMainDiagramSetupCommandHandler(
         PublishMainDiagramSetupCommand request,
         CancellationToken cancellationToken)
     {
-        return budgetTrackerWrapper.UpdateMainDiagramSetupAsync(request);
+        return budgetTrackerWrapper.UpdateMainDiagramSetupAsync(request.ToMainDiagramSetup());
     }
 }

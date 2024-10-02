@@ -1,5 +1,7 @@
 import {
+  Checkbox,
   Divider,
+  FormControlLabel,
   Grid,
   MenuItem,
   Paper,
@@ -8,25 +10,27 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { format } from "date-fns";
+import dayjs from "dayjs";
 
 import useUtils from "src/appUtils";
 import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import LockedChipList from "src/components/LockedComponents/LockedChipList/LockedChipList";
 import LockedSelect from "src/components/LockedComponents/LockedSelect/LockedSelect";
 import LockedTextField from "src/components/LockedComponents/LockedTextField/LockedTextField";
-import ParamsObjectBuilder from "src/helpers/ParamsObjectBuilder";
 import { BudgetTrackerAvailableCurrencies } from "src/models/shared/Currency";
 import { DialogMode } from "src/models/shared/DialogMode";
-import { PublishReview, DeleteReview } from "./actions";
 import {
   BudgetReview,
   BudgetReviewedPosition,
 } from "src/models/budgetTracker/BudgetReview";
-import dayjs from "dayjs";
+import "src/helpers/dateExtensions";
 import LockedDatePicker from "src/components/LockedComponents/LockedDatePicker/LockedDatePicker";
 import { GetEntities } from "src/customTypes";
-import { format } from "date-fns";
 import WarningStatusLabel from "src/components/Label/StatusLabels/Warning";
+import { CurrencyAmountMaskRegex } from "src/consts/Regexes";
+
+import { PublishReview, DeleteReview } from "./actions";
 
 const HorizontalDivider = () => {
   return (
@@ -66,22 +70,13 @@ const ReviewDialogBody = (props: ReviewDialogBodyProps) => {
     setModel(inputModel);
   }, [inputModel]);
 
+  const [isAdvancedMode, setIsAdvancedMode] = useState(false);
+
   if (dialogMode === DialogMode.Hide || !inputModel) return <></>;
-
-  const modelParams = ParamsObjectBuilder.Build(u, model);
-
-  const handleUpdateModel = (event) => {
-    const { name, type } = event.target;
-    let value = type === "checkbox" ? event.target.checked : event.target.value;
-
-    setModel((prevState) => {
-      return { ...prevState, [name]: value };
-    });
-  };
 
   const updateDate = (date: Date) => {
     setModel((prevState) => {
-      const formattedDate = date.toISOString().split("T")[0];
+      const formattedDate = date.toDateOnlyString();
 
       return { ...prevState, date: formattedDate as any };
     });
@@ -109,7 +104,7 @@ const ReviewDialogBody = (props: ReviewDialogBodyProps) => {
         <Grid item xs={12} sm={12}>
           <LockedTextField
             fullWidth
-            disabled={dialogMode === DialogMode.Delete}
+            disabled={dialogMode === DialogMode.Delete || !isAdvancedMode}
             label={u.t("budgetTracker:positions_table_name_column")}
             onChange={(e) =>
               handleUpdatePosition(index, "name", e.target.value)
@@ -125,10 +120,16 @@ const ReviewDialogBody = (props: ReviewDialogBodyProps) => {
           <LockedTextField
             disabled={dialogMode === DialogMode.Delete}
             label={u.t("budgetTracker:review_dialog_position_amount_label")}
-            value={position.amount}
-            onChange={(e) =>
-              handleUpdatePosition(index, "amount", e.target.value)
-            }
+            value={position.amount / 100}
+            onChange={(e) => {
+              if (CurrencyAmountMaskRegex.test(e.target.value)) {
+                handleUpdatePosition(
+                  index,
+                  "amount",
+                  Math.round(+e.target.value * 100)
+                );
+              }
+            }}
             variant="standard"
             type="number"
           />
@@ -136,7 +137,7 @@ const ReviewDialogBody = (props: ReviewDialogBodyProps) => {
 
         <Grid item xs={3} sm={3} style={gridItem}>
           <LockedSelect
-            disabled={dialogMode === DialogMode.Delete}
+            disabled={dialogMode === DialogMode.Delete || !isAdvancedMode}
             value={position.currency}
             onChange={(e) =>
               handleUpdatePosition(index, "currency", e.target.value)
@@ -150,33 +151,37 @@ const ReviewDialogBody = (props: ReviewDialogBodyProps) => {
           </LockedSelect>
         </Grid>
 
-        <GapGrid />
+        {isAdvancedMode && (
+          <>
+            <GapGrid />
 
-        <Grid item xs={10} sm={10}>
-          <LockedChipList
-            disabled={dialogMode === DialogMode.Delete}
-            sx={{ minWidth: "100px", width: "25%" }}
-            label={u.t("budgetTracker:positions_dialog_tags_label")}
-            variant="standard"
-            initialChips={position.tags}
-            onChange={(tags) => onChipsChange(index, tags)}
-          />
-        </Grid>
+            <Grid item xs={10} sm={10}>
+              <LockedChipList
+                disabled={dialogMode === DialogMode.Delete}
+                sx={{ minWidth: "100px", width: "25%" }}
+                label={u.t("budgetTracker:positions_dialog_tags_label")}
+                variant="standard"
+                initialChips={position.tags}
+                onChange={(tags) => onChipsChange(index, tags)}
+              />
+            </Grid>
 
-        <Grid item xs={2} sm={2} style={gridItem}>
-          <Tooltip title={u.t("double_click_tooltip")}>
-            <LockedButton
-              color="error"
-              disabled={dialogMode === DialogMode.Delete}
-              onDoubleClick={() => {
-                handleDeletePosition(index);
-              }}
-              variant="outlined"
-            >
-              {u.t("X")}
-            </LockedButton>
-          </Tooltip>
-        </Grid>
+            <Grid item xs={2} sm={2} style={gridItem}>
+              <Tooltip title={u.t("double_click_tooltip")}>
+                <LockedButton
+                  color="error"
+                  disabled={dialogMode === DialogMode.Delete}
+                  onDoubleClick={() => {
+                    handleDeletePosition(index);
+                  }}
+                  variant="outlined"
+                >
+                  {u.t("X")}
+                </LockedButton>
+              </Tooltip>
+            </Grid>
+          </>
+        )}
 
         {HorizontalDivider()}
       </Grid>
@@ -227,7 +232,7 @@ const ReviewDialogBody = (props: ReviewDialogBodyProps) => {
     >
       {model && (
         <>
-          <Grid item xs={12} sm={12} style={gridItem}>
+          <Grid item xs={7} sm={7} style={gridItem}>
             <LockedDatePicker
               disabled={dialogMode === DialogMode.Delete}
               label={u.t("budgetTracker:reviews_table_date_column")}
@@ -237,44 +242,60 @@ const ReviewDialogBody = (props: ReviewDialogBodyProps) => {
             />
           </Grid>
 
+          <Grid item xs={5} sm={5} style={gridItem}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={isAdvancedMode}
+                  onChange={(e) => setIsAdvancedMode(e.target.checked)}
+                />
+              }
+              labelPlacement="end"
+              label={u.t("budgetTracker:reviews_dialog_advanced_mode_label")}
+            />
+          </Grid>
+
           <Grid item xs={12}>
             {HorizontalDivider()}
           </Grid>
 
           <Grid item container xs={12}>
             {renderPositions()}
+            {isAdvancedMode && (
+              <>
+                <Grid item xs={12} style={gridItem}>
+                  <LockedButton
+                    disabled={dialogMode === DialogMode.Delete}
+                    color="success"
+                    fullWidth={u.isMobile}
+                    onClick={() => {
+                      setModel((prevState) => {
+                        return {
+                          ...prevState,
+                          positions: [
+                            ...prevState.positions,
+                            {
+                              name: "",
+                              amount: 0,
+                              currency: model.baseCurrency,
+                              tags: [],
+                              orderPriority: 0,
+                            } as BudgetReviewedPosition,
+                          ],
+                        };
+                      });
+                    }}
+                    variant="outlined"
+                  >
+                    {u.t("budgetTracker:reviews_dialog_add_position_button")}
+                  </LockedButton>
+                </Grid>
 
-            <Grid item xs={12} style={gridItem}>
-              <LockedButton
-                disabled={dialogMode === DialogMode.Delete}
-                color="success"
-                fullWidth={u.isMobile}
-                onClick={() => {
-                  setModel((prevState) => {
-                    return {
-                      ...prevState,
-                      positions: [
-                        ...prevState.positions,
-                        {
-                          name: "",
-                          amount: 0,
-                          currency: model.baseCurrency,
-                          tags: [],
-                          orderPriority: 0,
-                        } as BudgetReviewedPosition,
-                      ],
-                    };
-                  });
-                }}
-                variant="outlined"
-              >
-                {u.t("budgetTracker:reviews_dialog_add_position_button")}
-              </LockedButton>
-            </Grid>
-          </Grid>
-
-          <Grid item xs={12}>
-            {HorizontalDivider()}
+                <Grid item xs={12}>
+                  {HorizontalDivider()}
+                </Grid>
+              </>
+            )}
           </Grid>
 
           <Grid item container spacing={1}>

@@ -15,12 +15,17 @@ import {
   CardHeader,
   Chip,
 } from "@mui/material";
+import { connect } from "react-redux";
+import AddIcon from "@mui/icons-material/Add";
+import CachedIcon from "@mui/icons-material/Cached";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import { format } from "date-fns";
 
 import { CurrentPagination } from "src/models/base/CurrentPagination";
-import { connect } from "react-redux";
 import useUtils from "src/appUtils";
 import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
-
+import LockedIconButton from "src/components/LockedComponents/LockedIconButtons/LockedIconButton";
 import CustomDialog from "src/components/Dialog";
 import { PaginationRequest } from "src/models/base/PaginationRequest";
 import {
@@ -28,17 +33,11 @@ import {
   BudgetReviewedPosition,
 } from "src/models/budgetTracker/BudgetReview";
 import { DialogMode, OpenDialog } from "src/models/shared/DialogMode";
-
-import AddIcon from "@mui/icons-material/Add";
-import CachedIcon from "@mui/icons-material/Cached";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditNoteIcon from "@mui/icons-material/EditNote";
-import LockedIconButton from "src/components/LockedComponents/LockedIconButtons/LockedIconButton";
 import apiUrls from "src/api/apiUrls";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import { Dictionary, GetEntities } from "src/customTypes";
-import { format } from "date-fns";
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
+
 import ReviewDialogBody from "./ReviewDialogBody";
 
 interface ReviewsTableProps {
@@ -70,7 +69,7 @@ const renderCurrencyChips = (positions: BudgetReviewedPosition[]) => {
   return GetEntities(totals).map(([currency, sum]) => (
     <Chip
       key={currency}
-      label={`${sum} ${CurrencySymbolsMap[currency]}`}
+      label={`${sum / 100} ${CurrencySymbolsMap[currency]}`}
       style={{ margin: "0 4px" }}
     />
   ));

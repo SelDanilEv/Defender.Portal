@@ -71,6 +71,15 @@ public class BudgetTrackerController(IMediator mediator, IMapper mapper)
         return await ProcessApiCallAsync<GetBudgetReviewsQuery, PagedResult<PortalBudgetReview>>(query);
     }
 
+    [HttpGet("budget-reviews/by-date-range")]
+    [Auth(Roles.User)]
+    [ProducesResponseType(typeof(List<PortalBudgetReview>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult> GetBudgetReviewsByDateRanges([FromQuery] GetBudgetReviewsByDateRangeQuery query)
+    {
+        return await ProcessApiCallAsync<GetBudgetReviewsByDateRangeQuery, List<PortalBudgetReview>>(query);
+    }
+
     [HttpGet("budget-review/template")]
     [Auth(Roles.User)]
     [ProducesResponseType(typeof(PortalBudgetReview), StatusCodes.Status200OK)]
@@ -122,6 +131,5 @@ public class BudgetTrackerController(IMediator mediator, IMapper mapper)
     }
 
     #endregion
-
 
 }

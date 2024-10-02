@@ -52,8 +52,11 @@ const APIEndpoints = {
     position: "position",
 
     getReviews: "budget-reviews",
+    getReviewsByDateRange: "budget-reviews/by-date-range",
     getReviewTemplate: "budget-review/template",
     review: "budget-review",
+
+    mainDiagramSetup: "diagram-setup/main",
   },
 };
 

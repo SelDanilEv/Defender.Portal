@@ -12,4 +12,5 @@ export default interface IUtils {
   debug: (value: any) => void;
   e: (errorCode: string) => void;
   isMobile: boolean;
+  isLargeScreen: boolean;
 }

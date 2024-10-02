@@ -130,6 +130,19 @@ public class BudgetTrackerWrapper(
 
     #region BudgetReview
 
+    public async Task<List<PortalBudgetReview>> GetBudgetReviewsByDateRangeAsync(
+        DateOnly startDate, DateOnly endDate)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var response = await serviceClient.ByDateRangeAsync(
+                startDate,
+                endDate);
+
+            return mapper.Map<List<PortalBudgetReview>>(response);
+        }, AuthorizationType.User);
+    }
+
     public async Task<PagedResult<PortalBudgetReview>> GetBudgetReviewsAsync(
         PaginationRequest paginationRequest)
     {

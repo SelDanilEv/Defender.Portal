@@ -17,6 +17,7 @@ public interface IBudgetTrackerWrapper
     Task<PortalPosition> UpdatePositionAsync(UpdatePositionRequest request);
     Task<Guid> DeletePositionAsync(Guid id);
 
+    Task<List<PortalBudgetReview>> GetBudgetReviewsByDateRangeAsync(DateOnly startDate, DateOnly endDate);
     Task<PagedResult<PortalBudgetReview>> GetBudgetReviewsAsync(PaginationRequest paginationRequest);
     Task<PortalBudgetReview> GetBudgetReviewTemplateAsync(DateOnly? date);
     Task<PortalBudgetReview> PublishBudgetReviewAsync(PublishBudgetRequestRequest request);

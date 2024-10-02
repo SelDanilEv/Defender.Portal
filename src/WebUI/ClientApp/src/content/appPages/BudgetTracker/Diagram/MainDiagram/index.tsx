@@ -1,32 +1,30 @@
 import { memo, useEffect, useState } from "react";
-import useUtils from "src/appUtils";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { Box } from "@mui/material";
-import { Currency } from "src/models/shared/Currency";
 import { connect } from "react-redux";
-import MainDiagramSetup from "src/models/budgetTracker/setup/MainDiagramSetup";
-import { defaultMainCurrency } from "src/reducers/budgetTrackerSetupReducer";
-import { BudgetDiagramGroup } from "src/models/budgetTracker/BudgetDiagramGroups";
 import dayjs from "dayjs";
-import { DatasetItem } from "src/models/budgetTracker/diagramData/DatasetItem";
 
-import { mapToDataset } from "./DiagramBuilding/dataset";
-import { generateSeries } from "./DiagramBuilding/series";
-import { buildDatasetItemId } from "./DiagramBuilding/convention";
-import {
-  // testDataset,
-  groups,
-} from "./testDataset";
+import useUtils from "src/appUtils";
 import {
   BudgetReview,
   BudgetReviewedPosition,
 } from "src/models/budgetTracker/BudgetReview";
+import { Currency } from "src/models/shared/Currency";
+import MainDiagramSetup from "src/models/budgetTracker/setup/MainDiagramSetup";
+import { defaultMainCurrency } from "src/reducers/budgetTrackerSetupReducer";
+import { BudgetDiagramGroup } from "src/models/budgetTracker/BudgetDiagramGroups";
+import { DatasetItem } from "src/models/budgetTracker/diagramData/DatasetItem";
 import { BudgetHistory } from "src/models/budgetTracker/BudgetHistory";
 import apiUrls from "src/api/apiUrls";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
-import BudgetReviewsResponse from "src/models/responses/budgetTracker/budgetReview/BudgetReviewsResponse";
-import { PaginationRequest } from "src/models/base/PaginationRequest";
+
+import { mapToDataset } from "./DiagramBuilding/dataset";
+import { generateSeries } from "./DiagramBuilding/series";
+import { buildDatasetItemId } from "./DiagramBuilding/convention";
+import { groups } from "./testDataset";
+
+import "src/helpers/dateExtensions";
 
 interface MainDiagramProps {
   diagramConfig: MainDiagramSetup;
@@ -68,14 +66,14 @@ const MainDiagram = (props: MainDiagramProps) => {
   };
 
   const startRefresh = () => {
-    const paginationRequest = {
-      page: 0,
-      pageSize: 1000,
-    } as PaginationRequest;
+    const request = {
+      startDate: diagramConfig.startDate.toDateOnlyString(),
+      endDate: diagramConfig.endDate.toDateOnlyString(),
+    };
 
     const url =
-      `${apiUrls.budgetTracker.getReviews}` +
-      `${RequestParamsBuilder.BuildQuery(paginationRequest)}`;
+      `${apiUrls.budgetTracker.getReviewsByDateRange}` +
+      `${RequestParamsBuilder.BuildQuery(request)}`;
 
     APICallWrapper({
       url: url,
@@ -87,9 +85,9 @@ const MainDiagram = (props: MainDiagramProps) => {
       },
       utils: u,
       onSuccess: async (response) => {
-        const pagedItems: BudgetReviewsResponse = await response.json();
+        const items: BudgetReview[] = await response.json();
 
-        const history = new BudgetHistory(pagedItems.items);
+        const history = new BudgetHistory(items || []);
 
         reloadHistory(history);
       },
@@ -110,7 +108,7 @@ const MainDiagram = (props: MainDiagramProps) => {
     <Box sx={{ width: "100%" }}>
       <LineChart
         margin={{ left: 68, right: 40 }}
-        height={u.isMobile ? 300 : 600}
+        height={u.isLargeScreen ? 700 : u.isMobile ? 400 : 500}
         dataset={dataset}
         series={generateSeries(
           dataset,
@@ -132,20 +130,6 @@ const MainDiagram = (props: MainDiagramProps) => {
 
 const isValidDiagramConfig = (config: MainDiagramSetup): boolean => {
   return config && config.startDate < config.endDate;
-};
-
-const filterDatasetByDate = (
-  dataset: BudgetHistory,
-  startDate: Date,
-  endDate: Date
-): BudgetHistory => {
-  return {
-    ...dataset,
-    history: dataset.history.filter(
-      (record: BudgetReview) =>
-        record.date >= startDate && record.date <= endDate
-    ),
-  };
 };
 
 const addFutureRecords = (

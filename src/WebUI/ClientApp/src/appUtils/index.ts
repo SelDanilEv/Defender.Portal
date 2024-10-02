@@ -10,6 +10,7 @@ const useUtils = (): IUtils => {
   const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
 
   return {
     react: {
@@ -35,6 +36,7 @@ const useUtils = (): IUtils => {
       ErrorToast(message);
     },
     isMobile: isMobile,
+    isLargeScreen: isLargeScreen,
   };
 };
 

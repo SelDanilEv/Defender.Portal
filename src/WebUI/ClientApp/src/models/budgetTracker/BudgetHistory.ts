@@ -11,6 +11,7 @@ export class BudgetHistory {
     history.forEach((record: BudgetReview) => {
       record.date = new Date(record.date);
       record.positions.forEach((r: BudgetReviewedPosition) => {
+        r.amount = r.amount / 100;
         currencySet.add(r.currency);
       });
     });

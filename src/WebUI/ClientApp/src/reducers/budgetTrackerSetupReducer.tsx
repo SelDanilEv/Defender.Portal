@@ -40,6 +40,6 @@ const budgetTrackerSetupReducer = (
 
 export default budgetTrackerSetupReducer;
 
-export const defaultMainCurrency = "NO";
+export const defaultMainCurrency = "ALL";
 
 export const updateMainDiagramSetupActionName = "UPDATE_MAIN_DIAGRAM_SETUP";

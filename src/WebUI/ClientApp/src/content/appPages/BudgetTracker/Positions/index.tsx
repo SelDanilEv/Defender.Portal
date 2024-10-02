@@ -1,6 +1,6 @@
 import { Card } from "@mui/material";
-import PositionsTable from "./Table";
 import { useEffect, useState } from "react";
+
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
@@ -9,6 +9,8 @@ import { CurrentPagination } from "src/models/base/CurrentPagination";
 import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import { BudgetPosition } from "src/models/budgetTracker/BudgetPositions";
 import BudgetPositionsResponse from "src/models/responses/budgetTracker/budgetPosition/BudgetPositionsResponse";
+
+import PositionsTable from "./Table";
 
 const PositionsPage = () => {
   const u = useUtils();

@@ -52,6 +52,7 @@ const DiagramConfig = (props: DiagramConfigProps) => {
 
         setup.endDate = new Date(setup.endDate);
 
+        props.setDiagramConfig(setup);
         setUpdateSetupRequest(setup);
       },
       onFailure: async (response) => {},
@@ -60,8 +61,6 @@ const DiagramConfig = (props: DiagramConfigProps) => {
   }, []);
 
   const updateSetup = (setup: MainDiagramSetup) => {
-    props.setDiagramConfig(setup);
-
     APICallWrapper({
       url: apiUrls.budgetTracker.mainDiagramSetup,
       options: {
@@ -80,6 +79,7 @@ const DiagramConfig = (props: DiagramConfigProps) => {
       showError: false,
     });
 
+    props.setDiagramConfig(setup);
     setUpdateSetupRequest(setup);
   };
 

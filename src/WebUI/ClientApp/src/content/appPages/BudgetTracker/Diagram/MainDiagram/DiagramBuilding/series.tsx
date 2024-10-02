@@ -61,6 +61,8 @@ export const generateSeries = (
 
         const trendLineData = calculateTrendLine(dataPoints, extendedPeriods);
 
+        console.log("trendLineData", trendLineData);
+
         series.push({
           label: getTrendLineName(currency, group.name),
           type: "line",
@@ -94,13 +96,19 @@ const calculateTrendLine = (data: number[], extendBy: number = 0): number[] => {
   const sumXY = data.reduce((sum, value, index) => sum + index * value, 0);
   const sumX2 = data.reduce((sum, _, index) => sum + index * index, 0);
 
+  console.log(n, sumX, sumY, sumXY, sumX2);
+
+  if (n === 0 || n * sumX2 - sumX * sumX === 0) {
+    return [];
+  }
+
   const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
   const intercept = (sumY - slope * sumX) / n;
 
   const trendLineData = data.map((_, index) => slope * index + intercept);
 
   // Extend the trendline into the future
-  for (let i = n; i < n + extendBy; i++) {
+  for (let i = n; i < n + extendBy + 1; i++) {
     trendLineData.push(slope * i + intercept);
   }
 

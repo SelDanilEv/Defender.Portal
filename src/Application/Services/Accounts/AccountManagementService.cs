@@ -55,7 +55,7 @@ public class AccountManagementService(
 
         if (newPassword != null)
         {
-            await ChangeAccountPasswordAsync(
+            await identityWrapper.ChangeAccountPasswordAsAdminAsync(
                 user.Id,
                 newPassword);
         }
@@ -63,7 +63,7 @@ public class AccountManagementService(
 
     public async Task ChangeAccountPasswordAsync(
         Guid? userId,
-        string? newPassword,
+        string newPassword,
         int? code = null)
     {
         await identityWrapper.ChangeAccountPasswordAsync(

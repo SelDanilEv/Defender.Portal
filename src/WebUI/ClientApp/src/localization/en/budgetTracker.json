@@ -20,5 +20,10 @@
   "reviews_dialog_rates_to_label": "Rates to: ",
   "reviews_dialog_advanced_mode_label": "Advanced mode",
 
+  "diagram_config_start_date_label": "Start date",
+  "diagram_config_end_date_label": "End date",
+  "diagram_config_last_months_label": "Last months",
+  "diagram_config_default_main_currency_label": "ALL",
+
   "_" : "_"
 }

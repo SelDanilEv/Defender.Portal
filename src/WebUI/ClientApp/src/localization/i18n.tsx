@@ -15,10 +15,10 @@ import ru_error from "src/localization/ru/error.json";
 import ru_lottery from "src/localization/ru/lottery.json";
 import ru_sidebar_menu from "src/localization/ru/sidebar_menu.json";
 import ru_welcome from "src/localization/ru/welcome.json";
+import ru_budgetTracker from "src/localization/ru/budgetTracker.json";
 
 const resources: any = {
   en: {
-    // it's possible to split the translation files here
     translation: en,
     error: en_error,
     lottery: en_lottery,
@@ -32,6 +32,7 @@ const resources: any = {
     lottery: ru_lottery,
     sidebar_menu: ru_sidebar_menu,
     welcome: ru_welcome,
+    budgetTracker: ru_budgetTracker,
   },
 };
 

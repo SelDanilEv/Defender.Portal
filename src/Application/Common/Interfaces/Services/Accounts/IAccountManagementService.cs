@@ -11,5 +11,5 @@ public interface IAccountManagementService
     Task<PublicUserInfoDto> GetPublicUserInfoAsync(Guid userId);
     Task<UserDto> UpdateUserInfoAsCurrentUserAsync(UserDto user);
     Task UpdateUserSensitiveInfoAsync(UserDto userDto, string? newPassword = null);
-    Task ChangeAccountPasswordAsync(Guid? userId, string? newPassword, int? code = null);
+    Task ChangeAccountPasswordAsync(Guid? userId, string newPassword, int? code = null);
 }

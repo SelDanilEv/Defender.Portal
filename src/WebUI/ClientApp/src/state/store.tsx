@@ -1,5 +1,4 @@
 import { combineReducers, applyMiddleware, createStore } from "redux";
-import { createLogger } from "redux-logger";
 import thunk from "redux-thunk";
 
 import stateLoader from "./StateLoader";

@@ -136,7 +136,7 @@ const DiagramConfig = (props: DiagramConfigProps) => {
     <Grid container spacing={2} p={3}>
       <Grid item xs={6} sm={2}>
         <LockedDatePicker
-          label="Start Date"
+          label={u.t("budgetTracker:diagram_config_start_date_label")}
           value={updateSetupRequest.startDate}
           onChange={updateStartDate}
           maxDate={dayjs(updateSetupRequest.endDate)
@@ -146,7 +146,7 @@ const DiagramConfig = (props: DiagramConfigProps) => {
       </Grid>
       <Grid item xs={6} sm={2}>
         <LockedDatePicker
-          label="End Date"
+          label={u.t("budgetTracker:diagram_config_end_date_label")}
           value={updateSetupRequest.endDate}
           onChange={updateEndDate}
           minDate={dayjs(updateSetupRequest.startDate).add(1, "day").toDate()}
@@ -156,7 +156,7 @@ const DiagramConfig = (props: DiagramConfigProps) => {
       {!u.isMobile && <Grid item sm={4}></Grid>}
       <Grid item xs={6} sm={2}>
         <LockedTextField
-          label="Last Months"
+          label={u.t("budgetTracker:diagram_config_last_months_label")}
           name={updateSetupParams.lastMonths}
           value={updateSetupRequest.lastMonths || ""}
           onChange={handleUpdateRequest}
@@ -173,7 +173,7 @@ const DiagramConfig = (props: DiagramConfigProps) => {
           fullWidth
         >
           <MenuItem key={defaultMainCurrency} value={defaultMainCurrency}>
-            {"IN ALL"}
+            {u.t("budgetTracker:diagram_config_default_main_currency_label")}
           </MenuItem>
           {BudgetTrackerSupportedCurrencies.map((currency) => (
             <MenuItem key={currency} value={currency}>

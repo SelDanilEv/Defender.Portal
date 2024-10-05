@@ -12,19 +12,13 @@ const budgetTrackerSetupReducer = (
       return endDate;
     })(),
     endDate: new Date(),
+    isLoaded: false,
   },
   action: any
 ) => {
   switch (action.type) {
     case updateMainDiagramSetupActionName:
-      if (
-        action.payload.lastMonths == state.lastMonths &&
-        action.payload.mainCurrency == state.mainCurrency &&
-        action.payload.startDate == state.startDate &&
-        action.payload.endDate == state.endDate
-      ) {
-        break;
-      }
+      action.payload.isLoaded = true;
 
       if (action.payload.lastMonths < 0) {
         action.payload.lastMonths = 0;

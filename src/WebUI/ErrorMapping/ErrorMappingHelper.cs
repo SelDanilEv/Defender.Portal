@@ -69,11 +69,23 @@ public class ErrorMappingHelper
 
             ErrorCode.CM_InvalidUserJWT => UIErrorCodes.SessionExpired,
 
+            ErrorCode.BR_ACC_UserCanUpdateOnlyOwnAccount or
+            ErrorCode.BR_ACC_AdminCannotChangeAdminPassword or
+            ErrorCode.BR_ACC_SuperAdminCannotBeBlocked or
+            ErrorCode.BR_ACC_AdminCannotBlockAdmins or
             ErrorCode.CM_ForbiddenAccess => UIErrorCodes.ForbiddenAccess,
+
+            ErrorCode.BR_WLT_NotEnoughFunds => UIErrorCodes.NotEnoughFunds,
 
             ErrorCode.UnhandledError => UIErrorCodes.UnhandledError,
 
 
+            ErrorCode.BR_RGS_TicketPurchaseNotAllowed or
+            ErrorCode.VL_BTS_InvalidPositionName or
+            ErrorCode.VL_BTS_InvalidCurrency or
+            ErrorCode.VL_BTS_NumberOfPositionsMustBePositive or
+            ErrorCode.VL_BTS_NumberOfLatestMonthsMustBePositive or
+            ErrorCode.ERAPI_RatesAreNotAvailable or
             ErrorCode.BR_WLT_TransactionCanNotBeCanceled or
             ErrorCode.BR_RGS_UnsupportedTransactionType or
             ErrorCode.BR_RGS_UnsupportedGameType or
@@ -98,7 +110,6 @@ public class ErrorMappingHelper
             ErrorCode.BR_WLT_CurrencyAccountAlreadyExist or
             ErrorCode.BR_WLT_NoAvailableWalletNumbers or
             ErrorCode.BR_WLT_InvalidTransactionStatus or
-            ErrorCode.BR_WLT_NotEnoughFunds or
             ErrorCode.VL_WLT_EmptyTransactionId or
             ErrorCode.VL_WLT_EmptyUserId or
             ErrorCode.CM_NotFound or
@@ -114,10 +125,6 @@ public class ErrorMappingHelper
             ErrorCode.CM_DatabaseIssue or
             ErrorCode.CM_MappingIssue or
             ErrorCode.VL_USM_AtLeastOneFieldRequired or
-            ErrorCode.BR_ACC_AdminCannotChangeAdminPassword or
-            ErrorCode.BR_ACC_UserCanUpdateOnlyOwnAccount or
-            ErrorCode.BR_ACC_SuperAdminCannotBeBlocked or
-            ErrorCode.BR_ACC_AdminCannotBlockAdmins or
             ErrorCode.BR_ACC_CodeWasNotVerified or
             ErrorCode.BR_WHS_NotSupportedCurrencyPair or
             ErrorCode.VL_NTF_EmptyNotificationId or

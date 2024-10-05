@@ -164,6 +164,22 @@ public class IdentityWrapper(
         }, AuthorizationType.User);
     }
 
+    public async Task ChangeAccountPasswordAsAdminAsync(
+        Guid accountId,
+        string newPassword)
+    {
+        await ExecuteSafelyAsync(async () =>
+        {
+            var command = new ChangeUserPasswordCommand()
+            {
+                AccountId = accountId,
+                NewPassword = newPassword
+            };
+
+            await identityServiceClient.ChangeAsync(command);
+        }, AuthorizationType.Service);
+    }
+
     public async Task<Guid> SendResetPasswordCodeAsync(string email)
     {
         return await ExecuteSafelyAsync(async () =>

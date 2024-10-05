@@ -9,7 +9,7 @@ namespace Defender.Portal.Application.Modules.Account.Commands;
 
 public record ResetPasswordCommand(
         Guid? UserId,
-        string? NewPassword,
+        string NewPassword,
         int Code)
     : IRequest<Unit>
 {

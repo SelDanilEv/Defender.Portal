@@ -8,4 +8,6 @@ export default interface MainDiagramSetup {
 
   startDate: Date;
   endDate: Date;
+
+  isLoaded: boolean;
 }

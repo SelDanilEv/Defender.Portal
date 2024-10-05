@@ -164,7 +164,7 @@ const MainDiagram = (props: MainDiagramProps) => {
 };
 
 const isValidDiagramConfig = (config: MainDiagramSetup): boolean => {
-  return config && config.startDate < config.endDate;
+  return config && config.startDate < config.endDate && config.isLoaded;
 };
 
 const addFutureRecords = (

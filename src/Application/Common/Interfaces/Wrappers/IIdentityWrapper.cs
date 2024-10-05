@@ -16,5 +16,6 @@ public interface IIdentityWrapper
     Task<bool> VerifyAccessCodeAsync(int code, AccessCodeType accessCodeType);
     Task<Guid> SendResetPasswordCodeAsync(string email);
     Task ChangeAccountPasswordAsync(Guid? accountId, string newPassword, int? code = null);
+    Task ChangeAccountPasswordAsAdminAsync(Guid accountId, string newPassword);
     Task<Defender.Common.DTOs.AccountDto> UpdateAccountInfoAsync(UpdateAccountInfoAsAdminRequest request);
 }

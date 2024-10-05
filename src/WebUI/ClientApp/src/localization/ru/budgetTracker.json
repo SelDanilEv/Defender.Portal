@@ -1,0 +1,29 @@
+{ 
+  "positions_table_title": "Позиции",
+  "positions_dialog_title": "Позиция",	
+  "positions_table_name_column": "Название",
+  "positions_table_tags_column": "Теги",
+  "positions_table_currency_column": "Валюта",
+  "positions_dialog_priority_label" : "Приоритет",
+
+  "positions_dialog_tags_label": "Добавить теги",
+
+  "reviews_table_title": "Обзоры",
+  "reviews_table_date_column": "Дата",
+  "reviews_table_positions_count_column": "Позиции",
+  "reviews_table_total_column": "Итого",
+
+  "reviews_dialog_add_position_button": "Добавить позицию",
+  "reviews_dialog_title": "Обзор",
+  "review_dialog_position_amount_label": "Сумма",
+  "reviews_dialog_not_valid_rates_label": "Курсы действительны на: ",
+  "reviews_dialog_rates_to_label": "Курсы к: ",
+  "reviews_dialog_advanced_mode_label": "Расширенный режим",
+
+  "diagram_config_start_date_label": "Дата от",
+  "diagram_config_end_date_label": "Дата до",
+  "diagram_config_last_months_label": "Последних месяцев",
+  "diagram_config_default_main_currency_label": "ВСЕ",
+
+  "_" : "_"
+}

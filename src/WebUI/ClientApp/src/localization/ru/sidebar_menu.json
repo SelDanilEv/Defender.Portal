@@ -14,5 +14,10 @@
   "header_games": "Игры",
   "page_lottery": "Лотерея",
 
+  "header_budget_tracker" : "Контроль бюджета",
+  "page_budget_tracker_positions" : "Позиции",
+  "page_budget_tracker_reviews" : "Обзоры",
+  "page_budget_tracker_diagram" : "Диаграмма",
+
   "_" : "_"
 }

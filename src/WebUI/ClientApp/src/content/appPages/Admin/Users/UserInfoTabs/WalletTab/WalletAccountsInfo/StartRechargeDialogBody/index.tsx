@@ -8,7 +8,7 @@ import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
 import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
-import { CurrencyAmountMaskRegex } from "src/consts/Regexes";
+import { PositiveCurrencyAmountMaskRegex } from "src/consts/Regexes";
 import ParamsObjectBuilder from "src/helpers/ParamsObjectBuilder";
 import { RechargeRequest } from "src/models/requests/admin/banking/RefundRequest";
 
@@ -39,7 +39,7 @@ const StartRechargeDialogBody = (props: StartRechargeDialogBodyProps) => {
       if (
         name === requestParams.amount &&
         value !== "" &&
-        !CurrencyAmountMaskRegex.test(value)
+        !PositiveCurrencyAmountMaskRegex.test(value)
       ) {
         return prevState;
       }

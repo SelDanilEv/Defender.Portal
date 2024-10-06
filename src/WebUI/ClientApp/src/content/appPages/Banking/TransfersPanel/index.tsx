@@ -17,7 +17,7 @@ import CustomDialog from "src/components/Dialog";
 import { TransferRequest } from "src/models/requests/banking/TransferRequest";
 import StartTransferDialogBody from "./StartTransferDialogBody";
 import {
-  CurrencyAmountMaskRegex,
+  PositiveCurrencyAmountMaskRegex,
   WalletNumberMaskRegex,
   WalletNumberRegex,
 } from "src/consts/Regexes";
@@ -57,7 +57,7 @@ const TransfersPanel = (props: any) => {
       if (
         name === transferParams.amount &&
         value !== "" &&
-        !CurrencyAmountMaskRegex.test(value)
+        !PositiveCurrencyAmountMaskRegex.test(value)
       ) {
         return prevState;
       }

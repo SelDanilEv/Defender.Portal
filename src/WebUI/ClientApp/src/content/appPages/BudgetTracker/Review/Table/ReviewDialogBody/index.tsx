@@ -98,6 +98,20 @@ const ReviewDialogBody = (props: ReviewDialogBodyProps) => {
     setModel({ ...model, positions: updatedPositions });
   };
 
+  const amountToShow = (amount: any) => {
+    console.log("amount", amount);
+    if (amount === "") return "";
+    if (amount === "-") return "-";
+
+    const result = (+amount / 100).toString();
+
+    if (amount.toString().endsWith(".")) {
+      return result + ".";
+    }
+
+    return result;
+  };
+
   const renderPositions = () => {
     return model.positions?.map((position, index) => (
       <Grid item xs={12} container key={index}>
@@ -120,18 +134,28 @@ const ReviewDialogBody = (props: ReviewDialogBodyProps) => {
           <LockedTextField
             disabled={dialogMode === DialogMode.Delete}
             label={u.t("budgetTracker:review_dialog_position_amount_label")}
-            value={position.amount / 100}
+            value={amountToShow(position.amount)}
             onChange={(e) => {
+              if (e.target.value === "" || e.target.value === "-") {
+                handleUpdatePosition(index, "amount", e.target.value);
+                return;
+              }
+
+              if (e.target.value === ".") {
+                handleUpdatePosition(index, "amount", "0.");
+                return;
+              }
+
               if (CurrencyAmountMaskRegex.test(e.target.value)) {
-                handleUpdatePosition(
-                  index,
-                  "amount",
-                  Math.round(+e.target.value * 100)
-                );
+                let value = Math.round(+e.target.value * 100).toString();
+                if (e.target.value.endsWith(".")) {
+                  value = value + ".";
+                }
+
+                handleUpdatePosition(index, "amount", value);
               }
             }}
             variant="standard"
-            type="number"
           />
         </Grid>
 

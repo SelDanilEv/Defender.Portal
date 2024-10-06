@@ -12,7 +12,8 @@ export const PasswordRegex = /^\S{5,32}$/;
 export const PasswordMaskRegex = /^[A-Za-z\d@_$!%*?&]{0,32}$/;
 
 // Currency Amount
-export const CurrencyAmountMaskRegex = /^\d*(\.\d{0,2})?$/;
+export const PositiveCurrencyAmountMaskRegex = /^\d*(\.\d{0,2})?$/;
+export const CurrencyAmountMaskRegex = /^-?\d*(\.\d{0,2})?$/;
 
 // Email
 export const EmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

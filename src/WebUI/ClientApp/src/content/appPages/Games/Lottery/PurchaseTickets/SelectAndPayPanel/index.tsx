@@ -7,7 +7,7 @@ import LotteryDraw from "src/models/games/lottery/LotteryDraw";
 import LockedTextField from "src/components/LockedComponents/LockedTextField/LockedTextField";
 import ParamsObjectBuilder from "src/helpers/ParamsObjectBuilder";
 import PurchaseLotteryTicketsRequest from "src/models/requests/games/lottery/PurchaseLotteryTicketsRequest";
-import { CurrencyAmountMaskRegex } from "src/consts/Regexes";
+import { PositiveCurrencyAmountMaskRegex } from "src/consts/Regexes";
 import LockedSelect from "src/components/LockedComponents/LockedSelect/LockedSelect";
 import TicketSelection from "./TicketSelection";
 
@@ -54,7 +54,7 @@ const SelectAndPayPanel = (props: SelectAndPayPanelProps) => {
         value !== "" &&
         (value * 100 < draw.minBetValue ||
           value * 100 > draw.maxBetValue ||
-          !CurrencyAmountMaskRegex.test(value))
+          !PositiveCurrencyAmountMaskRegex.test(value))
       ) {
         return prevState;
       }

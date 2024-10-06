@@ -8,7 +8,7 @@ import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";
 import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import LockedDatePicker from "src/components/LockedComponents/LockedDatePicker/LockedDatePicker";
-import { setMainDiagramSetup } from "src/actions/budgetTrackerSetupActions";
+import { setMainDiagramSetup } from "src/actions/budgetTrackerActions";
 import MainDiagramSetup from "src/models/budgetTracker/setup/MainDiagramSetup";
 import LockedTextField from "src/components/LockedComponents/LockedTextField/LockedTextField";
 import ParamsObjectBuilder from "src/helpers/ParamsObjectBuilder";

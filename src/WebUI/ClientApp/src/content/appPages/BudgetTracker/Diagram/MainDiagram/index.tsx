@@ -12,7 +12,10 @@ import {
 import { Currency } from "src/models/shared/Currency";
 import MainDiagramSetup from "src/models/budgetTracker/setup/MainDiagramSetup";
 import { defaultMainCurrency } from "src/reducers/budgetTrackerSetupReducer";
-import { BudgetDiagramGroup } from "src/models/budgetTracker/BudgetDiagramGroups";
+import {
+  BudgetDiagramGroup,
+  BudgetDiagramGroups,
+} from "src/models/budgetTracker/BudgetDiagramGroups";
 import { DatasetItem } from "src/models/budgetTracker/diagramData/DatasetItem";
 import { BudgetHistory } from "src/models/budgetTracker/BudgetHistory";
 import apiUrls from "src/api/apiUrls";
@@ -22,26 +25,33 @@ import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import { mapToDataset } from "./DiagramBuilding/dataset";
 import { generateSeries } from "./DiagramBuilding/series";
 import { buildDatasetItemId } from "./DiagramBuilding/convention";
-import { groups } from "./testDataset";
 
 import "src/helpers/dateExtensions";
 
 interface MainDiagramProps {
   diagramConfig: MainDiagramSetup;
+  budgetDiagramGroups: BudgetDiagramGroups;
 }
 
 const MainDiagram = (props: MainDiagramProps) => {
   const u = useUtils();
 
-  const { diagramConfig } = props;
+  const { diagramConfig, budgetDiagramGroups: groups } = props;
 
   const [dataset, setDataset] = useState<DatasetItem[]>([]);
-  const [extendedPeriods, setExtendedPeriods] = useState<number>(0);
+  const [budgetHistory, setBudgetHistory] = useState<BudgetHistory>(
+    {} as BudgetHistory
+  );
 
+  const [extendedPeriods, setExtendedPeriods] = useState<number>(0);
   const [additionalMargin, setAdditionalMargin] = useState<number>(0);
 
+  useEffect(() => {
+    applyGroupsAndSetups(budgetHistory);
+  }, [groups]);
+
   const reloadHistory = (budgetHistory: BudgetHistory) => {
-    const { startDate, endDate, mainCurrency } = diagramConfig;
+    const { endDate } = diagramConfig;
 
     const { dataset: updatedDataset, periods } = addFutureRecords(
       budgetHistory,
@@ -50,21 +60,32 @@ const MainDiagram = (props: MainDiagramProps) => {
 
     setExtendedPeriods(periods);
 
+    setBudgetHistory(updatedDataset);
+
+    applyGroupsAndSetups(updatedDataset);
+  };
+
+  const applyGroupsAndSetups = (history: BudgetHistory) => {
+    if (!history.history || !groups.isValidGroups) return;
+
+    const historyToUpdate = { ...history };
+
+    const { endDate, mainCurrency } = diagramConfig;
     const activeGroups = groups.getActiveGroups();
 
     if (mainCurrency !== defaultMainCurrency) {
-      updatedDataset.history = recalculateHistoryWithMainCurrency(
-        updatedDataset.history,
+      historyToUpdate.history = recalculateHistoryWithMainCurrency(
+        history.history,
         mainCurrency as Currency,
         activeGroups
       );
 
-      updatedDataset.allowedCurrencies = [mainCurrency as Currency];
+      historyToUpdate.allowedCurrencies = [mainCurrency as Currency];
     }
 
-    const dataset = mapToDataset(updatedDataset, activeGroups);
+    const dataset = mapToDataset(historyToUpdate, activeGroups);
 
-    setLegendMargin(updatedDataset, activeGroups.length);
+    setLegendMargin(historyToUpdate, activeGroups.length);
 
     setDataset(dataset);
   };
@@ -73,7 +94,7 @@ const MainDiagram = (props: MainDiagramProps) => {
     updatedDataset: BudgetHistory,
     groupsAmount: number
   ) => {
-    const coef = u.isMobile ? 50 : 5;
+    const coef = u.isMobile ? 50 : 10;
 
     const addMargin =
       (updatedDataset.allowedCurrencies.length / 3) * groupsAmount * coef;
@@ -129,7 +150,7 @@ const MainDiagram = (props: MainDiagramProps) => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%" }} paddingBottom={3}>
       <LineChart
         margin={{
           top: 10,
@@ -142,7 +163,8 @@ const MainDiagram = (props: MainDiagramProps) => {
         series={generateSeries(
           dataset,
           groups.getActiveGroups(),
-          extendedPeriods
+          extendedPeriods,
+          u
         )}
         xAxis={[
           {
@@ -242,6 +264,7 @@ const recalculateHistoryWithMainCurrency = (
 const mapStateToProps = (state: any) => {
   return {
     diagramConfig: state.budgetTrackerSetup as MainDiagramSetup,
+    budgetDiagramGroups: state.budgetTrackerGroups as BudgetDiagramGroups,
   };
 };
 

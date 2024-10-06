@@ -5,7 +5,6 @@
   "positions_table_tags_column": "Теги",
   "positions_table_currency_column": "Валюта",
   "positions_dialog_priority_label" : "Приоритет",
-
   "positions_dialog_tags_label": "Добавить теги",
 
   "reviews_table_title": "Обзоры",
@@ -24,6 +23,18 @@
   "diagram_config_end_date_label": "Дата до",
   "diagram_config_last_months_label": "Последних месяцев",
   "diagram_config_default_main_currency_label": "ВСЕ",
+
+  "main_diagram_trend_legend": "тренд",
+
+  "groups_table_title": "Группы",
+  "groups_dialog_title": "Группа",	
+  "groups_table_name_column": "Название",
+  "groups_table_tags_column": "Теги",
+  "groups_table_color_column": "Цвет",
+  "groups_table_trend_line_column": "Линия тренда",
+  "groups_dialog_tags_label": "Добавить теги",
+  "groups_dialog_color_label": "Цвет: ",
+  "groups_dialog_trend_line_label": "Линия тренда: ",
 
   "_" : "_"
 }

@@ -6,7 +6,7 @@ using Defender.Portal.Application.Common.Interfaces.Wrappers;
 
 namespace Defender.Portal.Application.Modules.BudgetTracking.Positions.Queries;
 
-public record GetPositionsQuery : PaginationRequest, IRequest<PagedResult<PortalPosition>>
+public record GetPositionsQuery : PaginationRequest, IRequest<PagedResult<PortalBudgetPosition>>
 {
 };
 
@@ -19,10 +19,10 @@ public sealed class GetPositionsQueryValidator : AbstractValidator<GetPositionsQ
 
 public sealed class GetPositionsQueryHandler(
         IBudgetTrackerWrapper budgetTrackerWrapper)
-    : IRequestHandler<GetPositionsQuery, PagedResult<PortalPosition>>
+    : IRequestHandler<GetPositionsQuery, PagedResult<PortalBudgetPosition>>
 {
 
-    public Task<PagedResult<PortalPosition>> Handle(
+    public Task<PagedResult<PortalBudgetPosition>> Handle(
         GetPositionsQuery request,
         CancellationToken cancellationToken)
     {

@@ -5,7 +5,6 @@
   "positions_table_tags_column": "Tags",
   "positions_table_currency_column": "Currency",
   "positions_dialog_priority_label" : "Priority",
-
   "positions_dialog_tags_label": "Add tags",
 
   "reviews_table_title": "Reviews",
@@ -24,6 +23,18 @@
   "diagram_config_end_date_label": "End date",
   "diagram_config_last_months_label": "Last months",
   "diagram_config_default_main_currency_label": "ALL",
+
+  "main_diagram_trend_legend": "trend",
+
+  "groups_table_title": "Groups",
+  "groups_dialog_title": "Group",	
+  "groups_table_name_column": "Name",
+  "groups_table_tags_column": "Tags",
+  "groups_table_color_column": "Color",
+  "groups_table_trend_line_column": "Trend line",
+  "groups_dialog_tags_label": "Add tags",
+  "groups_dialog_color_label": "Color: ",
+  "groups_dialog_trend_line_label": "Trend line: ",
 
   "_" : "_"
 }

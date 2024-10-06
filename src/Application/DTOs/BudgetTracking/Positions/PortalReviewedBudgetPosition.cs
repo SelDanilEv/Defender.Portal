@@ -1,12 +1,12 @@
 ﻿namespace Defender.Portal.Application.DTOs.BudgetTracking.Positions;
 
-public class PortalReviewedPosition : BasePortalPosition
+public class PortalReviewedBudgetPosition : BasePortalPosition
 {
-    public static PortalReviewedPosition FromPosition(
+    public static PortalReviewedBudgetPosition FromPosition(
         BasePortalPosition basePosition,
         long amount = 0)
     {
-        return new PortalReviewedPosition
+        return new PortalReviewedBudgetPosition
         {
             Name = basePosition.Name,
             Currency = basePosition.Currency,

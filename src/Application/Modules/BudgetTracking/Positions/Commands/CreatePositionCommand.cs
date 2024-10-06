@@ -8,7 +8,7 @@ using Defender.Portal.Application.Common.Interfaces.Wrappers;
 
 namespace Defender.Portal.Application.Modules.BudgetTracking.Positions.Commands;
 
-public record CreatePositionCommand : CreatePositionRequest, IRequest<PortalPosition>
+public record CreatePositionCommand : CreatePositionRequest, IRequest<PortalBudgetPosition>
 {
 };
 
@@ -24,10 +24,10 @@ public sealed class CreatePositionCommandValidator : AbstractValidator<CreatePos
 
 public sealed class CreatePositionCommandHandler(
         IBudgetTrackerWrapper budgetTrackerWrapper)
-    : IRequestHandler<CreatePositionCommand, PortalPosition>
+    : IRequestHandler<CreatePositionCommand, PortalBudgetPosition>
 {
 
-    public Task<PortalPosition> Handle(
+    public Task<PortalBudgetPosition> Handle(
         CreatePositionCommand request,
         CancellationToken cancellationToken)
     {

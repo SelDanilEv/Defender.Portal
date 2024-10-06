@@ -9,6 +9,7 @@ using Defender.Common.Mapping;
 using Defender.Portal.Application.DTOs.Auth;
 using Defender.Portal.Application.DTOs.Banking;
 using Defender.Portal.Application.DTOs.BudgetTracking.DiagramSetup;
+using Defender.Portal.Application.DTOs.BudgetTracking.Groups;
 using Defender.Portal.Application.DTOs.BudgetTracking.Positions;
 using Defender.Portal.Application.DTOs.BudgetTracking.Reviews;
 using Defender.Portal.Application.Enums;
@@ -144,9 +145,9 @@ public class ClientModelsProfile : BaseMappingProfile
     {
         CreateMap<DiagramSetup, PortalMainDiagramSetup>();
 
-        CreateMap<PositionPagedResult, PagedResult<PortalPosition>>();
-        CreateMap<Position, PortalPosition>();
-        CreateMap<ReviewedPosition, PortalReviewedPosition>();
+        CreateMap<PositionPagedResult, PagedResult<PortalBudgetPosition>>();
+        CreateMap<Position, PortalBudgetPosition>();
+        CreateMap<ReviewedPosition, PortalReviewedBudgetPosition>();
 
         CreateMap<BudgetReviewDtoPagedResult, PagedResult<PortalBudgetReview>>();
         CreateMap<BudgetReviewDto, PortalBudgetReview>()
@@ -162,7 +163,10 @@ public class ClientModelsProfile : BaseMappingProfile
                         ? src.RatesModel.Rates.ToDictionary()
                         : new Dictionary<Currency, decimal>()));
 
-        CreateMap<PortalReviewedPosition, PositionToPublish>();
+        CreateMap<PortalReviewedBudgetPosition, PositionToPublish>();
+
+        CreateMap<GroupPagedResult, PagedResult<PortalBudgetGroup>>();
+        CreateMap<Group, PortalBudgetGroup>();
     }
 
 }

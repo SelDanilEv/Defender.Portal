@@ -8,5 +8,5 @@ public record PublishBudgetRequestRequest
 
     public DateOnly Date { get; set; }
 
-    public List<PortalReviewedPosition> Positions { get; set; } = [];
+    public List<PortalReviewedBudgetPosition> Positions { get; set; } = [];
 }

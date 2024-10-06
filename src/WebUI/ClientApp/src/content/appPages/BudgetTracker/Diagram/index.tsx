@@ -5,6 +5,7 @@ import useUtils from "src/appUtils";
 
 import DiagramConfig from "./DiagramConfig";
 import MainDiagram from "./MainDiagram";
+import GroupsSubPage from "./Groups";
 
 const BudgetTrackerHomePage = (props: any) => {
   const u = useUtils();
@@ -14,6 +15,8 @@ const BudgetTrackerHomePage = (props: any) => {
       <DiagramConfig />
 
       <MainDiagram />
+
+      <GroupsSubPage />
     </Box>
   );
 };

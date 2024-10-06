@@ -7,7 +7,6 @@ using Defender.Common.Clients.Wallet;
 using Defender.Portal.Application.Common.Interfaces.Repositories;
 using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using Defender.Portal.Application.Configuration.Options;
-using Defender.Portal.Application.Services.Background;
 using Defender.Portal.Infrastructure.Clients.BudgetTracker;
 using Defender.Portal.Infrastructure.Clients.Identity;
 using Defender.Portal.Infrastructure.Clients.RiskGames;

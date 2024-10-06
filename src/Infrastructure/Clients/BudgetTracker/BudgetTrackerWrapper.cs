@@ -6,8 +6,10 @@ using Defender.Common.Interfaces;
 using Defender.Common.Wrapper.Internal;
 using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using Defender.Portal.Application.DTOs.BudgetTracking.DiagramSetup;
+using Defender.Portal.Application.DTOs.BudgetTracking.Groups;
 using Defender.Portal.Application.DTOs.BudgetTracking.Positions;
 using Defender.Portal.Application.DTOs.BudgetTracking.Reviews;
+using Defender.Portal.Application.Models.ApiRequests.BugetTracker.BudgetGroups;
 using Defender.Portal.Application.Models.ApiRequests.BugetTracker.BudgetReviews;
 using Defender.Portal.Application.Models.ApiRequests.BugetTracker.Positions;
 
@@ -59,7 +61,7 @@ public class BudgetTrackerWrapper(
 
     #region Positions
 
-    public async Task<PagedResult<PortalPosition>> GetPositionsAsync(
+    public async Task<PagedResult<PortalBudgetPosition>> GetPositionsAsync(
         PaginationRequest paginationRequest)
     {
         return await ExecuteSafelyAsync(async () =>
@@ -68,11 +70,11 @@ public class BudgetTrackerWrapper(
                 paginationRequest.Page,
                 paginationRequest.PageSize);
 
-            return mapper.Map<PagedResult<PortalPosition>>(response);
+            return mapper.Map<PagedResult<PortalBudgetPosition>>(response);
         }, AuthorizationType.User);
     }
 
-    public async Task<PortalPosition> CreatePositionAsync(
+    public async Task<PortalBudgetPosition> CreatePositionAsync(
         CreatePositionRequest request)
     {
         return await ExecuteSafelyAsync(async () =>
@@ -88,11 +90,11 @@ public class BudgetTrackerWrapper(
 
             var response = await serviceClient.PositionPOSTAsync(command);
 
-            return mapper.Map<PortalPosition>(response);
+            return mapper.Map<PortalBudgetPosition>(response);
         }, AuthorizationType.User);
     }
 
-    public async Task<PortalPosition> UpdatePositionAsync(
+    public async Task<PortalBudgetPosition> UpdatePositionAsync(
         UpdatePositionRequest request)
     {
         return await ExecuteSafelyAsync(async () =>
@@ -112,7 +114,7 @@ public class BudgetTrackerWrapper(
 
             var response = await serviceClient.PositionPUTAsync(command);
 
-            return mapper.Map<PortalPosition>(response);
+            return mapper.Map<PortalBudgetPosition>(response);
         }, AuthorizationType.User);
     }
 
@@ -192,6 +194,76 @@ public class BudgetTrackerWrapper(
         return await ExecuteSafelyAsync(async () =>
         {
             return await serviceClient.BudgetReviewDELETEAsync(id);
+        }, AuthorizationType.User);
+    }
+
+    #endregion
+
+
+    #region Groups
+
+    public async Task<PagedResult<PortalBudgetGroup>> GetBudgetGroupsAsync(
+        PaginationRequest paginationRequest)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var response = await serviceClient.GroupGETAsync(
+                paginationRequest.Page,
+                paginationRequest.PageSize);
+
+            return mapper.Map<PagedResult<PortalBudgetGroup>>(response);
+        }, AuthorizationType.User);
+    }
+
+    public async Task<PortalBudgetGroup> CreateBudgetGroupAsync(
+        CreateBudgetGroupRequest request)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var command = new CreateGroupCommand()
+            {
+                Name = request.Name,
+                IsActive = request.IsActive,
+                Tags = request.Tags,
+                MainColor = request.MainColor,
+                ShowTrendLine = request.ShowTrendLine,
+                TrendLineColor = request.TrendLineColor
+            };
+
+            var response = await serviceClient.GroupPOSTAsync(command);
+
+            return mapper.Map<PortalBudgetGroup>(response);
+        }, AuthorizationType.User);
+    }
+
+    public async Task<PortalBudgetGroup> UpdateBudgetGroupAsync(
+        UpdateBudgetGroupRequest request)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            var command = new UpdateGroupCommand()
+            {
+                Id = request.Id,
+                Name = request.Name,
+                IsActive = request.IsActive,
+                Tags = request.Tags,
+                MainColor = request.MainColor,
+                ShowTrendLine = request.ShowTrendLine,
+                TrendLineColor = request.TrendLineColor
+            };
+
+            var response = await serviceClient.GroupPUTAsync(command);
+
+            return mapper.Map<PortalBudgetGroup>(response);
+        }, AuthorizationType.User);
+    }
+
+    public async Task<Guid> DeleteBudgetGroupAsync(
+        Guid id)
+    {
+        return await ExecuteSafelyAsync(async () =>
+        {
+            return await serviceClient.GroupDELETEAsync(id);
         }, AuthorizationType.User);
     }
 

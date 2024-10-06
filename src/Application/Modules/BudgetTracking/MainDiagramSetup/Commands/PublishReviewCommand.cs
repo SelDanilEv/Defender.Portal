@@ -4,7 +4,7 @@ using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using Defender.Portal.Application.DTOs.BudgetTracking.DiagramSetup;
 using Defender.Portal.Application.Enums;
 
-namespace Defender.Portal.Application.Modules.BudgetTracking.BudgetMainDiagramSetups.Commands;
+namespace Defender.Portal.Application.Modules.BudgetTracking.MainDiagramSetup.Commands;
 
 public record PublishMainDiagramSetupCommand : IRequest<PortalMainDiagramSetup>
 {

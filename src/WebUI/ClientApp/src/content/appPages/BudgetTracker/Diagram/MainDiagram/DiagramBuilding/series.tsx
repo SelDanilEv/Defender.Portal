@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import { AllAvailableCurrencies } from "src/models/shared/Currency";
 import { BudgetDiagramGroup } from "src/models/budgetTracker/BudgetDiagramGroups";
 import { DatasetItem } from "src/models/budgetTracker/diagramData/DatasetItem";
+import IUtils from "src/appUtils/interface";
 
 import {
   buildDatasetItemId,
@@ -15,7 +16,8 @@ import { hasData } from "./dataset";
 export const generateSeries = (
   dataset: DatasetItem[],
   groups: BudgetDiagramGroup[],
-  extendedPeriods: number = 0
+  extendedPeriods: number = 0,
+  u: IUtils
 ): any[] => {
   const series: any[] = [];
 
@@ -25,7 +27,7 @@ export const generateSeries = (
     );
 
     const colors = generateSimilarColors(
-      group.color,
+      group.mainColor,
       currenciesWithData.length
     );
 
@@ -40,7 +42,11 @@ export const generateSeries = (
         index % (Math.round(dataset.length / 25) || 1) === 0,
     }));
 
-    if (group.showTrendline) {
+    if (group.showTrendLine) {
+      const trendLineColors = generateSimilarColors(
+        group.trendLineColor,
+        currenciesWithData.length
+      );
       currenciesWithData.forEach((currency, index) => {
         const dataKey = buildDatasetItemId(currency, group.id);
 
@@ -62,10 +68,10 @@ export const generateSeries = (
         const trendLineData = calculateTrendLine(dataPoints, extendedPeriods);
 
         series.push({
-          label: getTrendLineName(currency, group.name),
+          label: getTrendLineName(currency, group.name, u),
           type: "line",
           data: trendLineData.slice(0, dataset.length),
-          color: chroma(colors[index]).alpha(0.4).css(),
+          color: chroma(trendLineColors[index]).alpha(0.4).css(),
           connectNulls: true,
           showMark: false,
         });

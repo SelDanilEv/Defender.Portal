@@ -9,7 +9,7 @@ public class PortalBudgetReview
 
     public DateOnly Date { get; set; }
 
-    public List<PortalReviewedPosition> Positions { get; set; } = [];
+    public List<PortalReviewedBudgetPosition> Positions { get; set; } = [];
 
     public Currency BaseCurrency { get; set; }
 

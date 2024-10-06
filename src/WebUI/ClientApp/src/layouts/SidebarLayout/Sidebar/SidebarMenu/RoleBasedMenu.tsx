@@ -211,6 +211,37 @@ const RoleBasedMenu = (props: any) => {
         );
         result.push(
           <List
+            key={"budget_tracker"}
+            component="div"
+            subheader={
+              <ListSubheader component="div" disableSticky>
+                {u.t("sidebar_menu:header_budget_tracker")}
+              </ListSubheader>
+            }
+          >
+            <SubMenuWrapper>
+              <List component="div">
+                <MenuItem
+                  to="/budget-tracker/positions"
+                  icon={<AllInboxIcon style={{ fontSize: "1.5em" }} />}
+                  text={u.t("sidebar_menu:page_budget_tracker_positions")}
+                />
+                <MenuItem
+                  to="/budget-tracker/reviews"
+                  icon={<GradingIcon style={{ fontSize: "1.5em" }} />}
+                  text={u.t("sidebar_menu:page_budget_tracker_reviews")}
+                />
+                <MenuItem
+                  to="/budget-tracker/diagram"
+                  icon={<StackedLineChartIcon style={{ fontSize: "1.5em" }} />}
+                  text={u.t("sidebar_menu:page_budget_tracker_diagram")}
+                />
+              </List>
+            </SubMenuWrapper>
+          </List>
+        );
+        result.push(
+          <List
             key={"banking"}
             component="div"
             subheader={
@@ -251,37 +282,7 @@ const RoleBasedMenu = (props: any) => {
             </SubMenuWrapper>
           </List>
         );
-        result.push(
-          <List
-            key={"budget_tracker"}
-            component="div"
-            subheader={
-              <ListSubheader component="div" disableSticky>
-                {u.t("sidebar_menu:header_budget_tracker")}
-              </ListSubheader>
-            }
-          >
-            <SubMenuWrapper>
-              <List component="div">
-                <MenuItem
-                  to="/budget-tracker/positions"
-                  icon={<AllInboxIcon style={{ fontSize: "1.5em" }} />}
-                  text={u.t("sidebar_menu:page_budget_tracker_positions")}
-                />
-                <MenuItem
-                  to="/budget-tracker/reviews"
-                  icon={<GradingIcon style={{ fontSize: "1.5em" }} />}
-                  text={u.t("sidebar_menu:page_budget_tracker_reviews")}
-                />
-                <MenuItem
-                  to="/budget-tracker/diagram"
-                  icon={<StackedLineChartIcon style={{ fontSize: "1.5em" }} />}
-                  text={u.t("sidebar_menu:page_budget_tracker_diagram")}
-                />
-              </List>
-            </SubMenuWrapper>
-          </List>
-        );
+
         break;
     }
 

@@ -22,7 +22,7 @@ const StyledButton = styled(Button)<StyledButtonProps>(
 );
 
 const CheckBoxButton = ({
-  text,
+  text = "",
   isChecked = false,
   onCheck = () => {},
   onUncheck = () => {},

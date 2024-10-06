@@ -57,6 +57,9 @@ const APIEndpoints = {
     review: "budget-review",
 
     mainDiagramSetup: "diagram-setup/main",
+
+    getGroups: "groups",
+    group: "group",
   },
 };
 

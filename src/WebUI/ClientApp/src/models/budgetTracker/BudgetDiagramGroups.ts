@@ -1,18 +1,20 @@
 export interface BudgetDiagramGroup {
   id: string;
   name: string;
-  tags: string[];
-  color: string;
-  showTrendline: boolean;
-  translineColor: string;
   isActive: boolean;
+  tags: string[];
+  mainColor: string;
+  showTrendLine: boolean;
+  trendLineColor: string;
 }
 
 export class BudgetDiagramGroups {
   groups: BudgetDiagramGroup[];
+  isValidGroups: boolean;
 
   constructor(groups: BudgetDiagramGroup[]) {
     this.groups = groups;
+    this.isValidGroups = this.groups.length > 0;
   }
 
   getActiveGroups(): BudgetDiagramGroup[] {

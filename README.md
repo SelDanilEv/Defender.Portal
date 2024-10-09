@@ -38,17 +38,18 @@ The Defender ecosystem is a collection of services and utilities designed to wor
 
 # Overview
 
-- Everything is hosted on my home server, ensuring 24/7 availability (barring any power outages). If something is broken, please let me know at my personal email: sdanilev@gmail.com.
+- Everything is hosted on my home server, ensuring 24/7 availability (barring any power outages). If something is broken, please let me know at my email: sdanilev@gmail.com.
 - Hosting is managed using Docker and Docker Compose.
 - Authorization between all services is handled via JWT tokens with role-based access control. The roles include Guest, User, Admin, and SuperAdmin.
 - The portal includes administrative pages for Admin and SuperAdmin roles to manage users, their wallets, and more.
-- HTTP calls are used for service communication, as the initial idea was to make all services open for public use. HTTP API with OpenAPI specification is the best option for this.
-- For transaction reliability, a custom message broker based on MongoDB is used.
-- The frontend is built using React with MUI components, chosen for their aesthetic appeal and comprehensive documentation.
+- HTTP calls are used for service communication, as the initial idea was to open all services for public use. HTTP API with OpenAPI specification is the best option for this.
+- A custom message broker based on MongoDB is used for transaction reliability.
+- The front-end is fully responsive, and optimized for mobile phones, laptops, and large screens.
+- The front end is built using React with MUI components, chosen for their aesthetic appeal and comprehensive documentation.
 - Google authorization is implemented for faster account creation and login.
 - This is the third version of the ecosystem, with significant architectural improvements over the first two attempts.
 - About half of the services are not used by the BFF and were created to simplify system management.
-- The frontend includes localization support, allowing users who are not proficient in English, such as my parents, to use it easily. Adding more languages is straightforward and can be done with minimal effort.
+- The front end includes localization support, allowing users who are not proficient in English, such as my parents, to use it easily. Adding more languages is straightforward and requires minimal effort.
 - The entire project was developed during my weekends and some evenings.
 - A service template has been created to streamline the process of developing new services, ensuring consistency and adherence to best practices across the ecosystem.
 - The ecosystem integrates with two third-party services: one for sending emails and another for retrieving historical exchange rates.

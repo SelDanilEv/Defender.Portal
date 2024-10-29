@@ -94,7 +94,7 @@ const MainDiagram = (props: MainDiagramProps) => {
     updatedDataset: BudgetHistory,
     groupsAmount: number
   ) => {
-    const coef = u.isMobile ? 50 : 10;
+    const coef = u.isMobile ? 50 : u.isLargeScreen ? 10 : 20;
 
     const addMargin =
       (updatedDataset.allowedCurrencies.length / 3) * groupsAmount * coef;

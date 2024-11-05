@@ -26,7 +26,7 @@
 
 # Demo
 
-https://defender-portal.duckdns.org/welcome/login
+https://defender-portal.coded-by-danil.dev
 login: demo@demo.com
 password: demo2024
 

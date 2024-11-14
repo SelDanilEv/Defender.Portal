@@ -12,7 +12,6 @@ export const CardAddAction = styled(Card)(
           border: ${theme.colors.primary.main} dashed 1px;
           color: ${theme.colors.primary.main};
           margin: ${theme.spacing(1)};
-
           
           .MuiCardActionArea-root {
             height: 100%;

@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 import store from "src/state/store";
 
 import en from "src/localization/en/en.json";
+import en_home from "src/localization/en/home.json";
 import en_error from "src/localization/en/error.json";
 import en_lottery from "src/localization/en/lottery.json";
 import en_sidebar_menu from "src/localization/en/sidebar_menu.json";
@@ -11,6 +12,7 @@ import en_welcome from "src/localization/en/welcome.json";
 import en_budgetTracker from "src/localization/en/budgetTracker.json";
 
 import ru from "src/localization/ru/ru.json";
+import ru_home from "src/localization/ru/home.json";
 import ru_error from "src/localization/ru/error.json";
 import ru_lottery from "src/localization/ru/lottery.json";
 import ru_sidebar_menu from "src/localization/ru/sidebar_menu.json";
@@ -20,6 +22,7 @@ import ru_budgetTracker from "src/localization/ru/budgetTracker.json";
 const resources: any = {
   en: {
     translation: en,
+    home: en_home,
     error: en_error,
     lottery: en_lottery,
     sidebar_menu: en_sidebar_menu,
@@ -28,6 +31,7 @@ const resources: any = {
   },
   ru: {
     translation: ru,
+    home: ru_home,
     error: ru_error,
     lottery: ru_lottery,
     sidebar_menu: ru_sidebar_menu,

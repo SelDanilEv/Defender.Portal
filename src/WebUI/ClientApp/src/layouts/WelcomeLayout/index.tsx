@@ -15,6 +15,8 @@ import apiUrls from "src/api/apiUrls";
 import { logout } from "src/actions/sessionActions";
 import { Session } from "src/models/Session";
 
+import { logoutPortal } from "../sharedActions";
+
 const OverviewWrapper = styled(Box)(
   () => `
     overflow: auto;
@@ -54,20 +56,13 @@ const WelcomeLayout: FC = (props: any) => {
         },
         onFailure: async (response) => {
           if (response.status == 401) {
-            logout();
+            logoutPortal(u, props.logout());
           }
         },
         showError: false,
       });
     }
   }, []);
-
-  const logout = () => {
-    localStorage.clear();
-    u.e("SessionExpired");
-    props.logout();
-    u.react.navigate("/");
-  };
 
   return (
     <Box

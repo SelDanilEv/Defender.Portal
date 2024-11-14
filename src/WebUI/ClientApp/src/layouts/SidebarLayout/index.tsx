@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import { logoutPortal } from "../sharedActions";
 
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import { logout } from "src/actions/sessionActions";
@@ -33,17 +34,11 @@ const SidebarLayout: FC<SidebarLayoutProps> = (props: any) => {
       utils: u,
       onFailure: async (response) => {
         if (response.status == 401) {
-          logout();
+          logoutPortal(u, props.logout());
         }
       },
     });
   }, []);
-
-  const logout = () => {
-    u.e("SessionExpired");
-    props.logout();
-    u.react.navigate("/");
-  };
 
   return (
     <>

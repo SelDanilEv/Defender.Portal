@@ -29,7 +29,7 @@ const HomePage = (props: any) => {
           <Card sx={{ height: 120 }}>
             <CardActionArea
               component="a"
-              href="https://storage.coded-by-danil.dev/"
+              href="https://cloud.coded-by-danil.dev/"
               target="_blank"
               rel="noopener noreferrer"
               sx={{ height: "100%" }}

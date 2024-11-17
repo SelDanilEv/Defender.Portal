@@ -4,7 +4,6 @@ using Defender.Common.Consts;
 using Defender.Portal.Application.DTOs.Accounts;
 using Defender.Portal.Application.Modules.Verification.Commands;
 using Defender.Portal.Application.Modules.Verification.Queries;
-using Defender.Portal.WebUI.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -48,7 +48,7 @@ i18next.use(initReactI18next).init({
     escapeValue: false,
   },
   debug: false,
-  // dissable debug for production
+  // disable debug for production
 });
 
 export default i18next;

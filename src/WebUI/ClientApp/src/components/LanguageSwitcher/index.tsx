@@ -12,7 +12,7 @@ const LanguageSwitcher = (props: any) => {
   const { currentLanguage: currentLanguage, updateLanguage: updateLanguage } =
     props;
 
-  const hangleUpdateLanguage = (selectedLanguage: string) => {
+  const handleUpdateLanguage = (selectedLanguage: string) => {
     updateLanguage(selectedLanguage);
     LocalizationService.UpdateLanguage(selectedLanguage);
   };
@@ -22,7 +22,7 @@ const LanguageSwitcher = (props: any) => {
       variant="outlined"
       value={currentLanguage}
       onChange={(event) => {
-        hangleUpdateLanguage(event.target.value as string);
+        handleUpdateLanguage(event.target.value as string);
       }}
     >
       {languages.map((language) => (

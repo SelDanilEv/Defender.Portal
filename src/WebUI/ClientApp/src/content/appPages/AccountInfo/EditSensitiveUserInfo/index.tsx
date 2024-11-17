@@ -56,7 +56,7 @@ const EditSensitiveUserInfo = (props: any) => {
       },
       utils: u,
       showSuccess: true,
-      successMesage: u.t("personal_info_page__account_updated_message"),
+      successMessage: u.t("personal_info_page__account_updated_message"),
       onSuccess: async (response) => {
         props.logout();
         u.react.navigate("/");
@@ -100,7 +100,7 @@ const EditSensitiveUserInfo = (props: any) => {
       },
       utils: u,
       showSuccess: true,
-      successMesage: u.t("personal_info_page__notification_code_send"),
+      successMessage: u.t("personal_info_page__notification_code_send"),
     } as APICallProps);
   };
 

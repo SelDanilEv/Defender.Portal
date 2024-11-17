@@ -229,7 +229,7 @@ const ResetPasswordForm = (props: any) => {
         body: RequestParamsBuilder.BuildBody(sendCodeRequest),
       },
       utils: u,
-      successMesage: u.t("welcome:send_code_success"),
+      successMessage: u.t("welcome:send_code_success"),
       showSuccess: true,
       onSuccess: async (response) => {
         setTimeout(() => {
@@ -269,7 +269,7 @@ const ResetPasswordForm = (props: any) => {
         body: RequestParamsBuilder.BuildBody(resetRequest),
       },
       utils: u,
-      successMesage: u.t("welcome:notification_reset_success"),
+      successMessage: u.t("welcome:notification_reset_success"),
       showSuccess: true,
       onSuccess: async (response) => {
         u.react.navigate("/");

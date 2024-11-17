@@ -42,7 +42,7 @@ export class StateMachine {
 
     let oldState = this.stateMachine.currentState;
     if (this.freezed) {
-      enableLog && console.log("State machine is frezed");
+      enableLog && console.log("State machine is frozen");
       return;
     }
     enableLog &&

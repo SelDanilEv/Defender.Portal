@@ -12,7 +12,7 @@ const APICallWrapper = async ({
   onFailure = async (response) => {},
   onFinal = async () => {},
   showSuccess = false,
-  successMesage = undefined,
+  successMessage = undefined,
   showError = true,
   doLock = true,
 }: APICallProps) => {
@@ -37,12 +37,12 @@ const APICallWrapper = async ({
       case 200:
         onSuccess(response);
 
-        if (showSuccess || successMesage) {
-          if (!successMesage && utils != null) {
-            successMesage = utils.t("Notification_Success");
+        if (showSuccess || successMessage) {
+          if (!successMessage && utils != null) {
+            successMessage = utils.t("Notification_Success");
           }
 
-          SuccessToast(successMesage);
+          SuccessToast(successMessage);
         }
         return;
       case 401:

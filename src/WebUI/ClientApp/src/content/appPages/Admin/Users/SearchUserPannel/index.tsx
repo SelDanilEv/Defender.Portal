@@ -22,7 +22,7 @@ interface SearchUserPannelProps {
 const SearchUserPannel = (props: SearchUserPannelProps) => {
   const u = useUtils();
 
-  const { searchFullUserInfo: searchFullUserInfo } = props;
+  const { searchFullUserInfo } = props;
 
   const [searchRequest, setSearchRequest] = useState<AdminSearchUserRequest>({
     userId: "",

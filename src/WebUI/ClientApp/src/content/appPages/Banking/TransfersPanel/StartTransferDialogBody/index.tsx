@@ -76,7 +76,7 @@ const StartTransferDialogBody = (props: any) => {
       },
       utils: u,
       showSuccess: true,
-      successMesage: u.t("banking_page__transfer_dialog_success_message"),
+      successMessage: u.t("banking_page__transfer_dialog_success_message"),
       onFinal: async () => {
         closeDialog();
       },

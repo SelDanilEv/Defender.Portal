@@ -39,6 +39,7 @@ const HorizontalDivider = () => {
     </Grid>
   );
 };
+
 const GapGrid = () => {
   return <Grid item xs={12} py={0.5}></Grid>;
 };

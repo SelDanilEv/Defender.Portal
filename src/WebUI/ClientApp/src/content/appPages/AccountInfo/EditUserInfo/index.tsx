@@ -49,7 +49,7 @@ const EditUserInfo = (props: any) => {
       },
       utils: u,
       showSuccess: true,
-      successMesage: u.t("personal_info_page__account_updated_message"),
+      successMessage: u.t("personal_info_page__account_updated_message"),
       onSuccess: async (response) => {
         props.updateUserInfo(user);
         sessionUser = user;

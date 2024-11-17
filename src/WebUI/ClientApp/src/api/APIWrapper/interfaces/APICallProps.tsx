@@ -6,7 +6,7 @@ interface APICallProps {
   onFailure?: (response: any) => Promise<void>;
   onFinal?: () => Promise<void>;
   showSuccess?: boolean;
-  successMesage?: string;
+  successMessage?: string;
   showError?: boolean;
   doLock?: boolean;
 }

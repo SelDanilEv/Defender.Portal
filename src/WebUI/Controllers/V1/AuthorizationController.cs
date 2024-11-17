@@ -15,7 +15,7 @@ public class AuthorizationController(IMediator mediator, IMapper mapper) : BaseA
     public async Task<ActionResult> LoginWithPasswordAsync(
         [FromBody] LoginWithPasswordCommand command)
     {
-        return await ProcessApiCallWithoutMappingAsync<LoginWithPasswordCommand, SessionDto>
+        return await ProcessApiCallWithoutMappingAsync
             (command);
     }
 
@@ -25,7 +25,7 @@ public class AuthorizationController(IMediator mediator, IMapper mapper) : BaseA
     public async Task<ActionResult> LoginWithGoogleTokenAsync(
         [FromBody] LoginWithGoogleTokenCommand command)
     {
-        return await ProcessApiCallWithoutMappingAsync<LoginWithGoogleTokenCommand, SessionDto>
+        return await ProcessApiCallWithoutMappingAsync
             (command);
     }
 
@@ -35,7 +35,7 @@ public class AuthorizationController(IMediator mediator, IMapper mapper) : BaseA
     public async Task<ActionResult> CreateUserAsync(
         [FromBody] CreateAccountCommand command)
     {
-        return await ProcessApiCallWithoutMappingAsync<CreateAccountCommand, SessionDto>
+        return await ProcessApiCallWithoutMappingAsync
             (command);
     }
 }

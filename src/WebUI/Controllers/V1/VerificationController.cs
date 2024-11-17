@@ -60,7 +60,7 @@ public class VerificationController : BaseApiController
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> VerifyAccessCodeAsync([FromBody] VerifyAccessCodeCommand command)
     {
-        return await ProcessApiCallWithoutMappingAsync<VerifyAccessCodeCommand, bool>(command);
+        return await ProcessApiCallWithoutMappingAsync(command);
     }
 
     [HttpPost("resend/email")]

@@ -6,7 +6,6 @@ using Defender.Common.Consts;
 using Defender.Common.Enums;
 using Defender.Common.DTOs;
 using Defender.Common.Modules.Home.Queries;
-using Defender.Portal.WebUI.Controllers;
 
 namespace Defender.Portal.WebUI.Controllers.V1;
 
@@ -23,9 +22,7 @@ public partial class HomeController(
     {
         var query = new HealthCheckQuery();
 
-        return await ProcessApiCallWithoutMappingAsync<
-            HealthCheckQuery,
-            HealthCheckDto>(query);
+        return await ProcessApiCallWithoutMappingAsync(query);
     }
 
     [HttpGet("authorization/check")]
@@ -37,9 +34,7 @@ public partial class HomeController(
     {
         var query = new AuthCheckQuery();
 
-        return await ProcessApiCallWithoutMappingAsync<
-            AuthCheckQuery,
-            AuthCheckDto>(query);
+        return await ProcessApiCallWithoutMappingAsync(query);
     }
 
     [Auth(Roles.SuperAdmin)]
@@ -54,8 +49,6 @@ public partial class HomeController(
             Level = configurationLevel
         };
 
-        return await ProcessApiCallWithoutMappingAsync<
-            GetConfigurationQuery,
-            Dictionary<string, string>>(query);
+        return await ProcessApiCallWithoutMappingAsync(query);
     }
 }

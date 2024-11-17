@@ -26,8 +26,7 @@ public class AdminUserController(IMediator mediator, IMapper mapper)
     public async Task<ActionResult> CreateUserAsync(
         [FromBody] LoginUserAsAdminCommand command)
     {
-        return await ProcessApiCallWithoutMappingAsync<LoginUserAsAdminCommand, SessionDto>
-            (command);
+        return await ProcessApiCallWithoutMappingAsync(command);
     }
 
     [HttpGet("search/full-user-info")]

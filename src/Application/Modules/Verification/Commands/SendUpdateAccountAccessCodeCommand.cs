@@ -10,11 +10,11 @@ public record SendUpdateAccountAccessCodeCommand : IRequest<Unit>
 
 public class SendUpdateAccountAccessCodeCommandHandler(
         IAccessCodeService accessCodeService,
-        ICurrentAccountAccessor currentAccountAccessor) 
+        ICurrentAccountAccessor currentAccountAccessor)
     : IRequestHandler<SendUpdateAccountAccessCodeCommand, Unit>
 {
     public async Task<Unit> Handle(
-        SendUpdateAccountAccessCodeCommand request, 
+        SendUpdateAccountAccessCodeCommand request,
         CancellationToken cancellationToken)
     {
         await accessCodeService.SendUserUpdateAccessCodeAsync(

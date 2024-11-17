@@ -1,9 +1,9 @@
 ﻿using Defender.Common.Errors;
+using Defender.Common.Extension;
 using Defender.Portal.Application.Common.Interfaces.Services.Admin;
 using Defender.Portal.Application.DTOs.Banking;
 using Defender.Portal.Application.Enums;
 using FluentValidation;
-using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Admin.Banking.Commands;

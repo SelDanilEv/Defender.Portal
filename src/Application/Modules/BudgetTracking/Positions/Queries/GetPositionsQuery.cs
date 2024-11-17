@@ -1,8 +1,8 @@
 ﻿using Defender.Common.DB.Pagination;
+using Defender.Portal.Application.Common.Interfaces.Wrappers;
+using Defender.Portal.Application.DTOs.BudgetTracking.Positions;
 using FluentValidation;
 using MediatR;
-using Defender.Portal.Application.DTOs.BudgetTracking.Positions;
-using Defender.Portal.Application.Common.Interfaces.Wrappers;
 
 namespace Defender.Portal.Application.Modules.BudgetTracking.Positions.Queries;
 

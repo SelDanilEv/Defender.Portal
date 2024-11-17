@@ -3,7 +3,6 @@ using Defender.Common.Attributes;
 using Defender.Common.Consts;
 using Defender.Portal.Application.DTOs.Banking;
 using Defender.Portal.Application.Modules.Admin.Banking.Commands;
-using Defender.Portal.WebUI.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

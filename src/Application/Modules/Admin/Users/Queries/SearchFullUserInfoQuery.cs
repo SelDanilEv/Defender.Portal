@@ -1,10 +1,10 @@
 ﻿using Defender.Common.DTOs;
 using Defender.Common.Errors;
+using Defender.Common.Extension;
 using Defender.Portal.Application.Common.Interfaces.Services.Admin;
 using Defender.Portal.Application.DTOs.Accounts;
 using Defender.Portal.Application.DTOs.Admin;
 using FluentValidation;
-using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Admin.Users.Queries;

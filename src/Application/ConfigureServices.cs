@@ -1,16 +1,16 @@
 ﻿using System.Reflection;
-using FluentValidation;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Defender.Portal.Application.Common.Interfaces.Services;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using Defender.Portal.Application.Common.Interfaces.Services.Admin;
 using Defender.Portal.Application.Common.Interfaces.Services.Banking;
 using Defender.Portal.Application.Common.Interfaces.Services.RiskGames.Lottery;
-using Defender.Portal.Application.Common.Interfaces.Services;
 using Defender.Portal.Application.Services.Accounts;
 using Defender.Portal.Application.Services.Admin;
 using Defender.Portal.Application.Services.Banking;
 using Defender.Portal.Application.Services.RiskGames.Lottery;
+using FluentValidation;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Defender.Portal.Application;
 

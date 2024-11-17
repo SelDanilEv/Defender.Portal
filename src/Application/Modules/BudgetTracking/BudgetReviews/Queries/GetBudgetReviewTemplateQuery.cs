@@ -1,13 +1,13 @@
-﻿using FluentValidation;
-using MediatR;
-using Defender.Portal.Application.Common.Interfaces.Wrappers;
+﻿using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using Defender.Portal.Application.DTOs.BudgetTracking.Reviews;
+using FluentValidation;
+using MediatR;
 
 namespace Defender.Portal.Application.Modules.BudgetTracking.BudgetReviews.Queries;
-    
+
 public record GetBudgetReviewTemplateQuery : IRequest<PortalBudgetReview>
 {
-    public DateOnly? Date {  get; set; }
+    public DateOnly? Date { get; set; }
 };
 
 public sealed class GetBudgetReviewTemplateQueryValidator : AbstractValidator<GetBudgetReviewTemplateQuery>

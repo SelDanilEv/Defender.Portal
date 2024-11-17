@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Defender.Portal.WebUI.Controllers.V1;
 
-public class BudgetTrackerController(IMediator mediator, IMapper mapper) 
+public class BudgetTrackerController(IMediator mediator, IMapper mapper)
     : BaseApiController(mediator, mapper)
 {
     #region BudgetPosition

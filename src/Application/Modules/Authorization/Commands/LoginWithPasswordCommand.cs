@@ -1,8 +1,8 @@
 ﻿using Defender.Common.Errors;
+using Defender.Common.Extension;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using Defender.Portal.Application.DTOs.Auth;
 using FluentValidation;
-using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Authorization.Commands;

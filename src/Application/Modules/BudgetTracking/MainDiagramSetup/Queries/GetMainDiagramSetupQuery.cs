@@ -1,7 +1,7 @@
-﻿using FluentValidation;
-using MediatR;
-using Defender.Portal.Application.Common.Interfaces.Wrappers;
+﻿using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using Defender.Portal.Application.DTOs.BudgetTracking.DiagramSetup;
+using FluentValidation;
+using MediatR;
 
 namespace Defender.Portal.Application.Modules.BudgetTracking.MainDiagramSetup.Queries;
 

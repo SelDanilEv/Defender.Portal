@@ -21,7 +21,7 @@ public class PortalUserActivity : IBaseModel
         ActivityDate = DateTime.UtcNow;
     }
 
-    public static PortalUserActivity Create(Guid userId,ActivityCode code, string? message)
+    public static PortalUserActivity Create(Guid userId, ActivityCode code, string? message)
     {
         return new PortalUserActivity()
         {

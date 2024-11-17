@@ -2,7 +2,6 @@
 using Defender.Portal.Application.Common.Interfaces.Services.RiskGames.Lottery;
 using Defender.Portal.Application.DTOs.RiskGames.Lottery;
 using FluentValidation;
-using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.RiskGames.Lottery.Queries;

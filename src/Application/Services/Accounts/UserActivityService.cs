@@ -1,10 +1,10 @@
-﻿using Defender.Common.Interfaces;
+﻿using Defender.Common.DB.Model;
 using Defender.Common.DB.Pagination;
+using Defender.Common.Interfaces;
 using Defender.Portal.Application.Common.Interfaces.Repositories;
+using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using Defender.Portal.Domain.Entities;
 using Defender.Portal.Domain.Enums;
-using Defender.Common.DB.Model;
-using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 
 namespace Defender.Portal.Application.Services.Accounts;
 

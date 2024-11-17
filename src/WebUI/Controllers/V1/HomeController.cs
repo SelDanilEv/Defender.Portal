@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Defender.Common.Attributes;
 using Defender.Common.Consts;
-using Defender.Common.Enums;
 using Defender.Common.DTOs;
+using Defender.Common.Enums;
 using Defender.Common.Modules.Home.Queries;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Defender.Portal.WebUI.Controllers.V1;
 

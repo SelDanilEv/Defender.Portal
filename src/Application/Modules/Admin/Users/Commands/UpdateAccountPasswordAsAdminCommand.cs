@@ -1,7 +1,7 @@
 ﻿using Defender.Common.Errors;
+using Defender.Common.Extension;
 using Defender.Portal.Application.Common.Interfaces.Services.Admin;
 using FluentValidation;
-using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Admin.Users.Commands;

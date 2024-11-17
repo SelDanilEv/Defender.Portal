@@ -10,11 +10,11 @@ public record SendEmailVerificationCodeCommand : IRequest<Unit>
 
 public class SendEmailVerificationCodeCommandHandler(
         IAccessCodeService accessCodeService,
-        ICurrentAccountAccessor currentAccountAccessor) 
+        ICurrentAccountAccessor currentAccountAccessor)
     : IRequestHandler<SendEmailVerificationCodeCommand, Unit>
 {
     public async Task<Unit> Handle(
-        SendEmailVerificationCodeCommand request, 
+        SendEmailVerificationCodeCommand request,
         CancellationToken cancellationToken)
     {
         await accessCodeService.SendEmailVerificationAccessCodeAsync(

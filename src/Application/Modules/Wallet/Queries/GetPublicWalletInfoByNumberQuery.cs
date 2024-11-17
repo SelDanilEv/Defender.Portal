@@ -1,8 +1,8 @@
 ﻿using Defender.Common.Errors;
+using Defender.Common.Extension;
 using Defender.Portal.Application.Common.Interfaces.Services.Banking;
 using Defender.Portal.Application.DTOs.Banking;
 using FluentValidation;
-using Defender.Common.Extension;
 using MediatR;
 
 namespace Defender.Portal.Application.Modules.Wallet.Queries;

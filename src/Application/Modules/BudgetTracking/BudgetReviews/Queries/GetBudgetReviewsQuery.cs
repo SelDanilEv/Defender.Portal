@@ -1,12 +1,12 @@
 ﻿using Defender.Common.DB.Pagination;
-using FluentValidation;
-using MediatR;
 using Defender.Portal.Application.Common.Interfaces.Wrappers;
 using Defender.Portal.Application.DTOs.BudgetTracking.Reviews;
+using FluentValidation;
+using MediatR;
 
 namespace Defender.Portal.Application.Modules.BudgetTracking.BudgetReviews.Queries;
 
-public record GetBudgetReviewsQuery : PaginationRequest, 
+public record GetBudgetReviewsQuery : PaginationRequest,
     IRequest<PagedResult<PortalBudgetReview>>
 {
 };

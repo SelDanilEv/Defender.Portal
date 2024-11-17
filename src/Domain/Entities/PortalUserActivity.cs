@@ -14,7 +14,7 @@ public class PortalUserActivity : IBaseModel
     [BsonRepresentation(BsonType.String)]
     public ActivityCode Code { get; private set; }
     public DateTime ActivityDate { get; private set; }
-    public string Message { get; private set; }
+    public string Message { get; private set; } = string.Empty;
 
     public PortalUserActivity()
     {
@@ -27,7 +27,7 @@ public class PortalUserActivity : IBaseModel
         {
             UserId = userId,
             Code = code,
-            Message = message,
+            Message = message ?? string.Empty,
         };
     }
 }

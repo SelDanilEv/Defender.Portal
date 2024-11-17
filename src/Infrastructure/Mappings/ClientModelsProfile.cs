@@ -173,18 +173,20 @@ public class ClientModelsProfile : BaseMappingProfile
 
 public static class RatesExtensions
 {
+    private const double Epsilon = 0.01;
+
     public static Dictionary<Currency, decimal> ToDictionary(this Rates rates)
     {
         var dictionary = new Dictionary<Currency, decimal>();
 
         if (rates != null)
         {
-            if (rates.USD != 0.0) dictionary[Currency.USD] = (decimal)rates.USD;
-            if (rates.EUR != 0.0) dictionary[Currency.EUR] = (decimal)rates.EUR;
-            if (rates.GEL != 0.0) dictionary[Currency.GEL] = (decimal)rates.GEL;
-            if (rates.PLN != 0.0) dictionary[Currency.PLN] = (decimal)rates.PLN;
-            if (rates.RUB != 0.0) dictionary[Currency.RUB] = (decimal)rates.RUB;
-            if (rates.BYN != 0.0) dictionary[Currency.BYN] = (decimal)rates.BYN;
+            if (Math.Abs(rates.USD) >= Epsilon) dictionary[Currency.USD] = (decimal)rates.USD;
+            if (Math.Abs(rates.EUR) >= Epsilon) dictionary[Currency.EUR] = (decimal)rates.EUR;
+            if (Math.Abs(rates.GEL) >= Epsilon) dictionary[Currency.GEL] = (decimal)rates.GEL;
+            if (Math.Abs(rates.PLN) >= Epsilon) dictionary[Currency.PLN] = (decimal)rates.PLN;
+            if (Math.Abs(rates.RUB) >= Epsilon) dictionary[Currency.RUB] = (decimal)rates.RUB;
+            if (Math.Abs(rates.BYN) >= Epsilon) dictionary[Currency.BYN] = (decimal)rates.BYN;
         }
 
         return dictionary;

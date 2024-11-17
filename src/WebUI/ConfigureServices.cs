@@ -136,7 +136,7 @@ public static class ConfigureServices
             problemDetails.Detail = UIErrorCodes.UnhandledError.ToString();
             problemDetails.Status = StatusCodes.Status500InternalServerError;
             return problemDetails;
-        }); ;
+        });
     }
 
 }

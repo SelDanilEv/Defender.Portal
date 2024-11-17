@@ -26,7 +26,7 @@ public class BaseApiController(IMediator mediator, IMapper mapper) : ControllerB
         return Ok();
     }
 
-    protected async Task<ActionResult> ProcessApiCallWithoutMappingAsync<TRequest, TResult>(TRequest request)
+    protected async Task<ActionResult> ProcessApiCallWithoutMappingAsync<TRequest>(TRequest request)
     {
         var response = await _mediator.Send(request);
 

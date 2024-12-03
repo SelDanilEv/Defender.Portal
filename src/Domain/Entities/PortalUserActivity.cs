@@ -8,8 +8,10 @@ namespace Defender.Portal.Domain.Entities;
 public class PortalUserActivity : IBaseModel
 {
     [BsonId]
+    [BsonRepresentation(BsonType.String)]
     public Guid Id { get; set; }
 
+    [BsonGuidRepresentation(GuidRepresentation.CSharpLegacy)]
     public Guid UserId { get; private set; }
     [BsonRepresentation(BsonType.String)]
     public ActivityCode Code { get; private set; }

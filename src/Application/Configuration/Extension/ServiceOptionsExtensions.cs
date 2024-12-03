@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Defender.Portal.Application.Configuration.Exstension;
+namespace Defender.Portal.Application.Configuration.Extension;
 
 public static class ServiceOptionsExtensions
 {

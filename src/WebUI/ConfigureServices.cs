@@ -5,7 +5,7 @@ using Defender.Common.Errors;
 using Defender.Common.Exceptions;
 using Defender.Common.Extension;
 using Defender.Common.Helpers;
-using Defender.Portal.Application.Configuration.Exstension;
+using Defender.Portal.Application.Configuration.Extension;
 using Defender.Portal.WebUI.ErrorMapping;
 using FluentValidation.AspNetCore;
 using Hellang.Middleware.ProblemDetails;

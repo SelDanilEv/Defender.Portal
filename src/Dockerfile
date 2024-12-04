@@ -1,7 +1,10 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
+
+# Install libc6-compat in the base stage
+RUN apk add --no-cache libc6-compat
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 

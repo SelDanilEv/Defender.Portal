@@ -5,7 +5,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
-RUN apk add --update nodejs npm
+RUN apt-get update && apt-get install -y nodejs npm
 
 WORKDIR /src
 

@@ -8,7 +8,7 @@ RUN apk add --no-cache libc6-compat
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 
-RUN apk add --update nodejs npm
+RUN apk add --update libc6-compat nodejs npm
 
 WORKDIR /src
 
@@ -28,6 +28,10 @@ RUN dotnet publish "WebUI.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Set up runtime environment variables
+ENV DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=true \
+    DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_DNS_CACHING=false
 
 # ENTRYPOINT ["dotnet", "WebUI.dll"]
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet WebUI.dll

@@ -1,4 +1,7 @@
-﻿using Defender.Portal.Application.Common.Interfaces.Services.Banking;
+﻿using Defender.Common.Cache;
+using Defender.Common.Interfaces;
+using Defender.DistributedCache;
+using Defender.Portal.Application.Common.Interfaces.Services.Banking;
 using Defender.Portal.Application.DTOs.Banking;
 using MediatR;
 
@@ -9,13 +12,20 @@ public record GetWalletInfoQuery : IRequest<PortalWalletInfoDto>
 };
 
 public class GetWalletInfoQueryHandler(
-        IWalletManagementService walletManagementService) :
+        ICurrentAccountAccessor currentAccountAccessor,
+        IWalletManagementService walletManagementService,
+        IDistributedCache distributedCache) :
     IRequestHandler<GetWalletInfoQuery, PortalWalletInfoDto>
 {
     public async Task<PortalWalletInfoDto> Handle(
         GetWalletInfoQuery request,
         CancellationToken cancellationToken)
     {
-        return await walletManagementService.GetCurrentWalletInfoAsync();
+        var cacheId = CacheConventionBuilder.BuildDistributedCacheKey(
+            CacheForService.Portal, CacheModel.Wallet, 
+                currentAccountAccessor.GetAccountId().ToString());
+
+        return await distributedCache.Get<PortalWalletInfoDto>(cacheId,
+            walletManagementService.GetCurrentWalletInfoAsync);
     }
 }

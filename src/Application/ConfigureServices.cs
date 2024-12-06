@@ -1,4 +1,8 @@
 ﻿using System.Reflection;
+using Defender.Common.Enums;
+using Defender.Common.Helpers;
+using Defender.DistributedCache.Configuration.Options;
+using Defender.DistributedCache.Postgres.Extensions;
 using Defender.Portal.Application.Common.Interfaces.Services;
 using Defender.Portal.Application.Common.Interfaces.Services.Accounts;
 using Defender.Portal.Application.Common.Interfaces.Services.Admin;
@@ -25,6 +29,21 @@ public static class ConfigureServices
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
         services.RegisterServices();
+
+        services.AddCache(configuration);
+
+        return services;
+    }
+
+    private static IServiceCollection AddCache(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        services.AddPostgresDistributedCache(options =>
+        {
+            options.ConnectionString = SecretsHelper.GetSecretSync(Secret.DistributedCacheConnectionString, true);
+            configuration.GetSection(nameof(DistributedCacheOptions)).Bind(options);
+        });
 
         return services;
     }

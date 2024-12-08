@@ -17,7 +17,7 @@ public class GetWalletInfoQueryHandler(
         IDistributedCache distributedCache) :
     IRequestHandler<GetWalletInfoQuery, PortalWalletInfoDto>
 {
-    public async Task<PortalWalletInfoDto> Handle(
+    public Task<PortalWalletInfoDto> Handle(
         GetWalletInfoQuery request,
         CancellationToken cancellationToken)
     {
@@ -25,7 +25,7 @@ public class GetWalletInfoQueryHandler(
             CacheForService.Portal, CacheModel.Wallet, 
                 currentAccountAccessor.GetAccountId().ToString());
 
-        return await distributedCache.Get<PortalWalletInfoDto>(cacheId,
+        return distributedCache.Get(cacheId,
             walletManagementService.GetCurrentWalletInfoAsync);
     }
 }

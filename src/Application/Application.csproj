@@ -11,7 +11,7 @@
     <ItemGroup>
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
         <PackageReference Include="Serilog" Version="4.1.0" />
-        <PackageReference Include="Defender.DistributedCache" Version="0.1.1" />
+        <PackageReference Include="Defender.DistributedCache" Version="0.1.2" />
     </ItemGroup>
 
     <ItemGroup>

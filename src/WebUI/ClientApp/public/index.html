@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta
       name="viewport"
@@ -15,7 +16,26 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400&display=swap"
       rel="stylesheet"
     />
-    <title>Defender</title>
+    <title>Defender Portal by Danil - Explore Useful and Fun Apps</title>
+    <meta
+      property="og:title"
+      content="Defender Portal by Danil - Explore Useful and Fun Apps"
+    />
+
+    <meta
+      name="description"
+      content="Defender Portal by Danil offers a collection of web-based apps, including small games, financial trackers, lottery simulations, binary options emulators, smart notes, and more."
+    />
+    <meta
+      property="og:description"
+      content="Defender Portal by Danil offers a collection of web-based apps, including small games, financial trackers, lottery simulations, binary options emulators, smart notes, and more."
+    />
+
+    <meta property="og:url" content="https://portal.coded-by-danil.dev" />
+    <meta
+      property="og:image"
+      content="https://portal.coded-by-danil.dev/static/images/logo/Logo.png"
+    />
 
     <link
       rel="icon"
@@ -69,7 +89,25 @@
   </head>
 
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Defender Portal by Danil",
+        "url": "https://portal.coded-by-danil.dev",
+        "description": "Discover a variety of apps designed by Danil, including web-based games, financial trackers, and more.",
+        "creator": {
+          "@type": "Person",
+          "name": "Danil Selitsky"
+        }
+      }
+    </script>
+    <noscript>
+      <p>
+        Welcome to Defender Portal. Please enable JavaScript for the best
+        experience.
+      </p>
+    </noscript>
     <div id="root"></div>
   </body>
 </html>

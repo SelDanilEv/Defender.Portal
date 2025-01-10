@@ -144,6 +144,90 @@ const HomePage = (props: any) => {
             </CardActionArea>
           </Card>
         </Grid>
+
+        <Grid item xs={12} sm={4}>
+          <Card sx={{ height: 120 }}>
+            <CardActionArea
+              component="a"
+              href="https://binary-option.coded-by-danil.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ height: "100%" }}
+            >
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100%",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <Typography
+                    gutterBottom
+                    variant="h3"
+                    component="div"
+                    align="center"
+                  >
+                    {u.t("home:quick_menu_binary_option")}
+                  </Typography>
+                  <CloudUpload sx={{ ml: 2 }} />
+                </Box>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} sm={4}>
+          <Card sx={{ height: 120 }}>
+            <CardActionArea
+              component="a"
+              href="https://smart-note.coded-by-danil.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ height: "100%" }}
+            >
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100%",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <Typography
+                    gutterBottom
+                    variant="h3"
+                    component="div"
+                    align="center"
+                  >
+                    {u.t("home:quick_menu_smart_note")}
+                  </Typography>
+                  <CloudUpload sx={{ ml: 2 }} />
+                </Box>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
       </Grid>
     </>
   );

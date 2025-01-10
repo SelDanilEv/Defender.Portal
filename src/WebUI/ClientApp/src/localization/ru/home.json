@@ -1,7 +1,9 @@
-{ 
+{
   "quick_menu_diagram": "Диаграмма бюджета",
   "quick_menu_cloud": "Defender облако",
   "quick_menu_lottery": "Игра лотерея",
+  "quick_menu_binary_option": "Бинарный опцион",
+  "quick_menu_smart_note": "Smart note",
 
-  "_" : "_"
+  "_": "_"
 }

@@ -12,8 +12,10 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import StackedLineChartIcon from "@mui/icons-material/StackedLineChart";
-import CloudUpload from "@mui/icons-material/CloudUpload";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
+import BookmarksIcon from "@mui/icons-material/Bookmarks";
 
 const HomePage = (props: any) => {
   const u = useUtils();
@@ -60,7 +62,7 @@ const HomePage = (props: any) => {
                   >
                     {u.t("home:quick_menu_cloud")}
                   </Typography>
-                  <CloudUpload sx={{ ml: 2 }} />
+                  <CloudUploadIcon sx={{ ml: 2 }} />
                 </Box>
               </CardContent>
             </CardActionArea>
@@ -180,7 +182,7 @@ const HomePage = (props: any) => {
                   >
                     {u.t("home:quick_menu_binary_option")}
                   </Typography>
-                  <CloudUpload sx={{ ml: 2 }} />
+                  <QueryStatsIcon sx={{ ml: 2 }} />
                 </Box>
               </CardContent>
             </CardActionArea>
@@ -222,7 +224,7 @@ const HomePage = (props: any) => {
                   >
                     {u.t("home:quick_menu_smart_note")}
                   </Typography>
-                  <CloudUpload sx={{ ml: 2 }} />
+                  <BookmarksIcon sx={{ ml: 2 }} />
                 </Box>
               </CardContent>
             </CardActionArea>

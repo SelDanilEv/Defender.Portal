@@ -14,6 +14,7 @@ import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";
 import { logout } from "src/actions/sessionActions";
 import { Session } from "src/models/Session";
+import AuthorizationService from "src/services/AuthorizationService";
 
 import { logoutPortal } from "../sharedActions";
 
@@ -46,13 +47,7 @@ const WelcomeLayout: FC = (props: any) => {
         },
         utils: u,
         onSuccess: async (response) => {
-          if (session.user.isEmailVerified) {
-            u.react.navigate("/home");
-          } else {
-            if (window.location.pathname !== "/welcome/verify-email") {
-              u.react.navigate("/welcome/verification");
-            }
-          }
+          AuthorizationService.HandleLoginAttempt(u, session);
         },
         onFailure: async (response) => {
           if (response.status == 401) {

@@ -1,10 +1,14 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+
 import ErrorToast from "src/components/Toast/DefaultErrorToast";
+
 import IUtils from "./interface";
 
 const useUtils = (): IUtils => {
+  const [searchParams, _] = useSearchParams();
   const navigate = useNavigate();
   const { state } = useLocation();
   const { t } = useTranslation();
@@ -13,6 +17,7 @@ const useUtils = (): IUtils => {
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
 
   return {
+    searchParams: searchParams,
     react: {
       navigate: navigate,
       locationState: <T>(element: string): T => state[element] as T,

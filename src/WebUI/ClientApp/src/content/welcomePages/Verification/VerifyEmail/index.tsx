@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
 
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import apiUrls from "src/api/apiUrls";
@@ -24,12 +23,10 @@ const Verification = (props: any) => {
     Status.Pending
   );
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
   const checkParameters = async () => {
     const verificationRequest = {};
 
-    searchParams.forEach((value, key) => {
+    u.searchParams.forEach((value, key) => {
       verificationRequest[key] = value;
     });
 

@@ -1,5 +1,6 @@
 import { Box, FormControl, Link, TextField } from "@mui/material";
 import { connect } from "react-redux";
+import { useState } from "react";
 
 import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import LoadingStateService from "src/services/LoadingStateService";
@@ -7,8 +8,8 @@ import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import { login } from "src/actions/sessionActions";
 import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
-import { useState } from "react";
 import { Session } from "src/models/Session";
+import AuthorizationService from "src/services/AuthorizationService";
 
 const LoginForm = (props: any) => {
   const [loginRequest, setLoginRequest]: any = useState({
@@ -59,20 +60,11 @@ const LoginForm = (props: any) => {
       },
       utils: u,
       onSuccess: async (response) => {
-        const loginResponse = (await response.json()) as Session;
+        const newSession = (await response.json()) as Session;
 
-        if (!loginResponse.isAuthenticated) {
-          u.e("AuthorizationFailed");
-          return;
-        }
+        props.login(newSession);
 
-        props.login(loginResponse);
-
-        if (loginResponse.user.isEmailVerified) {
-          u.react.navigate("/home");
-        } else {
-          u.react.navigate("/welcome/verification");
-        }
+        AuthorizationService.HandleLoginAttempt(u, newSession);
       },
       showError: true,
     });

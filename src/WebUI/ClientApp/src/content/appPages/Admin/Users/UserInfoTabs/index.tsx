@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { login } from "src/actions/sessionActions";
 import Role from "src/consts/Role";
 import UserService from "src/services/UserService";
+import AuthorizationService from "src/services/AuthorizationService";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -72,23 +73,11 @@ const UserInfoTabs = (props: UserInfoTabsProps) => {
       },
       utils: u,
       onSuccess: async (response) => {
-        const loginResponse = await response.json();
+        const session = await response.json();
 
-        if (!loginResponse.isAuthenticated) {
-          u.e("AuthorizationFailed");
-          return;
-        }
+        props.login(session);
 
-        props.login(loginResponse);
-
-        if (
-          loginResponse.user.isEmailVerified ||
-          loginResponse.user.isPhoneVerified
-        ) {
-          u.react.navigate("/home");
-        } else {
-          u.react.navigate("/welcome/verification");
-        }
+        AuthorizationService.HandleLoginAttempt(u, session);
       },
       showError: true,
     });

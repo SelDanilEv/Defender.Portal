@@ -8,6 +8,7 @@ import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import { login } from "src/actions/sessionActions";
 import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
+import AuthorizationService from "src/services/AuthorizationService";
 
 const LoginByGoogle = (props: any) => {
   let googleResponseTimeout;
@@ -53,23 +54,11 @@ const LoginByGoogle = (props: any) => {
       },
       utils: u,
       onSuccess: async (response) => {
-        const loginResponse = await response.json();
+        const session = await response.json();
 
-        if (!loginResponse.isAuthenticated) {
-          u.e("AuthorizationFailed");
-          return;
-        }
+        props.login(session);
 
-        props.login(loginResponse);
-
-        if (
-          loginResponse.user.isEmailVerified ||
-          loginResponse.user.isPhoneVerified
-        ) {
-          u.react.navigate("/home");
-        } else {
-          u.react.navigate("/welcome/verification");
-        }
+        AuthorizationService.HandleLoginAttempt(u, session);
       },
       showError: true,
       onFinal: async () => {

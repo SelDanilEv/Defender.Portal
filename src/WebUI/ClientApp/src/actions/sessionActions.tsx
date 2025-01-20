@@ -7,11 +7,15 @@ import {
 } from "src/reducers/sessionReducer";
 import { cleanWalletInfoActionName } from "src/reducers/walletReducer";
 
-export function login(payload) {
+export function login(session) {
+  if (!session.isAuthenticated) {
+    return;
+  }
+
   return (dispath) => {
     dispath({
       type: loginActionName,
-      payload: payload,
+      payload: session,
     });
   };
 }

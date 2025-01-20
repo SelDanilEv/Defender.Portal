@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import { connect } from "react-redux";
 import { styled } from "@mui/material/styles";
+import { useState } from "react";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import LockedButton from "src/components/LockedComponents/LockedButton/LockedButton";
 import LoadingStateService from "src/services/LoadingStateService";
@@ -16,9 +18,8 @@ import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import { login } from "src/actions/sessionActions";
 import apiUrls from "src/api/apiUrls";
 import useUtils from "src/appUtils";
-import { useState } from "react";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
 import APIRequestValidator from "src/validators/APIRequestValidator";
+import AuthorizationService from "src/services/AuthorizationService";
 
 const sizeOfLoginButtonText = 15;
 
@@ -81,20 +82,11 @@ const CreateForm = (props: any) => {
       },
       utils: u,
       onSuccess: async (response) => {
-        const createResponse = await response.json();
+        const newSession = await response.json();
 
-        if (!createResponse.isAuthenticated) {
-          u.e("AuthorizationFailed");
-          return;
-        }
+        props.login(newSession);
 
-        props.login(createResponse);
-
-        if (createResponse.isEmailVerified || createResponse.isPhoneVerified) {
-          u.react.navigate("/home");
-        } else {
-          u.react.navigate("/welcome/verification");
-        }
+        AuthorizationService.HandleLoginAttempt(u, newSession);
       },
       onFailure: async (response) => {
         if (response.status == 401) {

@@ -1,5 +1,6 @@
 import IUtils from "src/appUtils/interface";
 import { Session } from "src/models/Session";
+import LoadingStateService from "./LoadingStateService";
 
 const AuthorizationService = {
   HandleLoginAttempt: (u: IUtils, session: Session) => {
@@ -19,6 +20,8 @@ const AuthorizationService = {
 
     const ssoUrl = u.searchParams.get("SsoUrl");
     if (ssoUrl) {
+      LoadingStateService.StartLoading();
+
       const urlWithToken = `${ssoUrl}?token=${encodeURIComponent(
         session.token
       )}`;

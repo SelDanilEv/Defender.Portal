@@ -27,6 +27,7 @@ const AuthorizationService = {
       )}`;
 
       window.open(urlWithToken, "_blank");
+      window.close();
     } else {
       u.react.navigate("/home");
     }

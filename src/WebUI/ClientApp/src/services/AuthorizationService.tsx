@@ -22,12 +22,14 @@ const AuthorizationService = {
     if (ssoUrl) {
       LoadingStateService.StartLoading();
 
-      const urlWithToken = `${ssoUrl}?token=${encodeURIComponent(
-        session.token
-      )}`;
+      if (window.opener) {
+        let token = session.token;
 
-      window.open(urlWithToken, "_blank");
-      window.close();
+        window.opener.postMessage({ token }, ssoUrl);
+        window.close();
+      } else {
+        console.error("No parent window found. Cannot send token.");
+      }
     } else {
       u.react.navigate("/home");
     }

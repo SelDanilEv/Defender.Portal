@@ -47,26 +47,21 @@ const MainDiagram = (props: MainDiagramProps) => {
   const [additionalMargin, setAdditionalMargin] = useState<number>(0);
 
   useEffect(() => {
-    applyGroupsAndSetups(budgetHistory);
-  }, [groups]);
+    if (!isValidDiagramConfig(diagramConfig)) {
+      return;
+    }
 
-  const reloadHistory = (budgetHistory: BudgetHistory) => {
-    const { endDate } = diagramConfig;
+    startRefresh();
+  }, [diagramConfig]);
 
-    const { dataset: updatedDataset, periods } = addFutureRecords(
-      budgetHistory,
-      endDate
-    );
-
-    setExtendedPeriods(periods);
-
-    setBudgetHistory(updatedDataset);
-
-    applyGroupsAndSetups(updatedDataset);
-  };
+  useEffect(() => {
+    if (groups.areGroupsValid && budgetHistory.history) {
+      applyGroupsAndSetups(budgetHistory);
+    }
+  }, [groups, budgetHistory]);
 
   const applyGroupsAndSetups = (history: BudgetHistory) => {
-    if (!history.history || !groups.isValidGroups) return;
+    if (!history.history || !groups.areGroupsValid) return;
 
     const historyToUpdate = { ...history };
 
@@ -90,19 +85,7 @@ const MainDiagram = (props: MainDiagramProps) => {
     setDataset(dataset);
   };
 
-  const setLegendMargin = (
-    updatedDataset: BudgetHistory,
-    groupsAmount: number
-  ) => {
-    const coef = u.isMobile ? 50 : u.isLargeScreen ? 10 : 20;
-
-    const addMargin =
-      (updatedDataset.allowedCurrencies.length / 3) * groupsAmount * coef;
-
-    setAdditionalMargin(addMargin);
-  };
-
-  const startRefresh = () => {
+  const startRefresh = async () => {
     const request = {
       startDate: diagramConfig.startDate.toDateOnlyString(),
       endDate: diagramConfig.endDate.toDateOnlyString(),
@@ -112,7 +95,7 @@ const MainDiagram = (props: MainDiagramProps) => {
       `${apiUrls.budgetTracker.getReviewsByDateRange}` +
       `${RequestParamsBuilder.BuildQuery(request)}`;
 
-    APICallWrapper({
+    await APICallWrapper({
       url: url,
       options: {
         method: "GET",
@@ -133,13 +116,33 @@ const MainDiagram = (props: MainDiagramProps) => {
     });
   };
 
-  useEffect(() => {
-    if (!isValidDiagramConfig(diagramConfig)) {
-      return;
-    }
+  const reloadHistory = (budgetHistory: BudgetHistory) => {
+    const { endDate } = diagramConfig;
 
-    startRefresh();
-  }, [diagramConfig]);
+    const { dataset: updatedDataset, periods } = addFutureRecords(
+      budgetHistory,
+      endDate
+    );
+
+    setExtendedPeriods(periods);
+
+    setBudgetHistory(updatedDataset);
+
+    applyGroupsAndSetups(updatedDataset);
+  };
+
+  // view adjusted for readability
+  const setLegendMargin = (
+    updatedDataset: BudgetHistory,
+    groupsAmount: number
+  ) => {
+    const coef = u.isMobile ? 50 : u.isLargeScreen ? 10 : 20;
+
+    const addMargin =
+      (updatedDataset.allowedCurrencies.length / 3) * groupsAmount * coef;
+
+    setAdditionalMargin(addMargin);
+  };
 
   const recalculateHeight = () => {
     let height = u.isLargeScreen ? 700 : u.isMobile ? 400 : 450;

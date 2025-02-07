@@ -35,6 +35,7 @@ import { BudgetDiagramGroup } from "src/models/budgetTracker/BudgetDiagramGroups
 
 import GroupDialogBody from "./GroupDialogBody";
 import { UpdateGroup } from "./GroupDialogBody/actions";
+import DefaultTableConsts from "src/consts/DefaultTableConsts";
 
 interface GroupsTableProps {
   groups: BudgetDiagramGroup[];
@@ -65,8 +66,8 @@ const GroupsTable = (props: GroupsTableProps) => {
   } = props;
 
   const [tablePagination, setTablePagination] = useState<PaginationRequest>({
-    page: 0,
-    pageSize: 10,
+    page: DefaultTableConsts.DefaultPage,
+    pageSize: DefaultTableConsts.DefaultPageSize,
   });
 
   const [groupToUpdate, setModelToUpdate] = useState<BudgetDiagramGroup>();
@@ -81,7 +82,10 @@ const GroupsTable = (props: GroupsTableProps) => {
   };
 
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setTablePagination({ page: 0, pageSize: parseInt(event.target.value) });
+    setTablePagination({
+      page: DefaultTableConsts.DefaultPage,
+      pageSize: parseInt(event.target.value),
+    });
   };
 
   const generateTags = (tags: string[]): JSX.Element => {

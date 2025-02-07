@@ -11,6 +11,7 @@ import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import BudgetGroupsResponse from "src/models/responses/budgetTracker/budgetGroup/BudgetGroupsResponse";
 import { BudgetDiagramGroup } from "src/models/budgetTracker/BudgetDiagramGroups";
 import { setMainDiagramGroups } from "src/actions/budgetTrackerActions";
+import DefaultTableConsts from "src/consts/DefaultTableConsts";
 
 import GroupsTable from "./Table";
 
@@ -25,8 +26,8 @@ const GroupsSubPage = (props: GroupsSubPageProps) => {
 
   const [paginationRequest, setPaginationRequest] = useState<PaginationRequest>(
     {
-      page: 0,
-      pageSize: 5,
+      page: DefaultTableConsts.DefaultPage,
+      pageSize: DefaultTableConsts.DefaultPageSize,
     } as PaginationRequest
   );
 
@@ -38,8 +39,8 @@ const GroupsSubPage = (props: GroupsSubPageProps) => {
 
   const [pagination, setPagination] = useState<CurrentPagination>({
     totalItemsCount: 0,
-    currentPage: 0,
-    pageSize: 10,
+    currentPage: DefaultTableConsts.DefaultPage,
+    pageSize: DefaultTableConsts.DefaultPageSize,
     totalPagesCount: 1,
   } as CurrentPagination);
 

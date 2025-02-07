@@ -10,11 +10,11 @@ export interface BudgetDiagramGroup {
 
 export class BudgetDiagramGroups {
   groups: BudgetDiagramGroup[];
-  isValidGroups: boolean;
+  areGroupsValid: boolean;
 
   constructor(groups: BudgetDiagramGroup[]) {
     this.groups = groups;
-    this.isValidGroups = this.groups.length > 0;
+    this.areGroupsValid = this.groups.length > 0;
   }
 
   getActiveGroups(): BudgetDiagramGroup[] {

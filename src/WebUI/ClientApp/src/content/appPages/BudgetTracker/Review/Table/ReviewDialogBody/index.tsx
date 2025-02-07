@@ -100,7 +100,6 @@ const ReviewDialogBody = (props: ReviewDialogBodyProps) => {
   };
 
   const amountToShow = (amount: any) => {
-    console.log("amount", amount);
     if (amount === "") return "";
     if (amount === "-") return "-";
 

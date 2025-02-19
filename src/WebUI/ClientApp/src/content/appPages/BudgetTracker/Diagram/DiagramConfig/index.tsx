@@ -77,6 +77,7 @@ const DiagramConfig = (props: DiagramConfigProps) => {
       utils: u,
       showSuccess: false,
       showError: false,
+      doLock: false,
     });
 
     props.setDiagramConfig(setup);

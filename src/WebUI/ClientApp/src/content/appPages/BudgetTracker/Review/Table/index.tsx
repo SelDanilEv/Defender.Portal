@@ -303,6 +303,7 @@ const ReviewsTable = (props: ReviewsTableProps) => {
           setDialogMode(DialogMode.Hide);
           setModelToUpdate({} as BudgetReview);
         }}
+        disableBackdropClick={true}
         children={
           <ReviewDialogBody
             closeDialog={() => {

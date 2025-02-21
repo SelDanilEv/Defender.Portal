@@ -23,6 +23,7 @@ interface DialogProps {
   open: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  disableBackdropClick?: boolean;
 }
 
 export default function CustomDialog({
@@ -30,12 +31,13 @@ export default function CustomDialog({
   open,
   onClose,
   children,
+  disableBackdropClick = false,
 }: DialogProps) {
   return (
     <Dialog
       open={open}
       keepMounted
-      onClose={onClose}
+      onClose={disableBackdropClick ? undefined : onClose}
       TransitionComponent={Transition}
     >
       <AppBar sx={{ position: "relative", px: "1em", py: "0.5em" }}>

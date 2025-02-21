@@ -113,6 +113,7 @@ const MainDiagram = (props: MainDiagramProps) => {
       },
       onFailure: async (response) => {},
       showError: true,
+      doLock: false,
     });
   };
 

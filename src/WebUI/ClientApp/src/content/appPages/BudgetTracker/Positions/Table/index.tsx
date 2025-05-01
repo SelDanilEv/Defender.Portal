@@ -30,6 +30,7 @@ import { BudgetPosition } from "src/models/budgetTracker/BudgetPositions";
 import { DialogMode, OpenDialog } from "src/models/shared/DialogMode";
 import LockedIconButton from "src/components/LockedComponents/LockedIconButtons/LockedIconButton";
 import { BudgetTrackerAvailableCurrencies } from "src/models/shared/Currency";
+import DefaultTableConsts from "src/consts/DefaultTableConsts";
 
 import PositionDialogBody from "./PositionDialogBody";
 
@@ -60,8 +61,8 @@ const PositionsTable = (props: PositionsTableProps) => {
   } = props;
 
   const [tablePagination, setTablePagination] = useState<PaginationRequest>({
-    page: 0,
-    pageSize: 10,
+    page: DefaultTableConsts.DefaultPage,
+    pageSize: DefaultTableConsts.DefaultPageSize,
   });
 
   const [positionToUpdate, setModelToUpdate] = useState<BudgetPosition>();

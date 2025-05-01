@@ -37,6 +37,7 @@ import apiUrls from "src/api/apiUrls";
 import APICallWrapper from "src/api/APIWrapper/APICallWrapper";
 import { Dictionary, GetEntities } from "src/customTypes";
 import CurrencySymbolsMap from "src/consts/CurrencySymbolsMap";
+import DefaultTableConsts from "src/consts/DefaultTableConsts";
 
 import ReviewDialogBody from "./ReviewDialogBody";
 
@@ -87,8 +88,8 @@ const ReviewsTable = (props: ReviewsTableProps) => {
   } = props;
 
   const [tablePagination, setTablePagination] = useState<PaginationRequest>({
-    page: 0,
-    pageSize: 10,
+    page: DefaultTableConsts.DefaultPage,
+    pageSize: DefaultTableConsts.DefaultPageSize,
   });
 
   const [reviewToUpdate, setModelToUpdate] = useState<BudgetReview>();

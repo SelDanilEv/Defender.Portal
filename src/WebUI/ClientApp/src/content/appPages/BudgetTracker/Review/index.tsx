@@ -9,6 +9,7 @@ import { CurrentPagination } from "src/models/base/CurrentPagination";
 import RequestParamsBuilder from "src/api/APIWrapper/RequestParamsBuilder";
 import BudgetReviewsResponse from "src/models/responses/budgetTracker/budgetReview/BudgetReviewsResponse";
 import { BudgetReview } from "src/models/budgetTracker/BudgetReview";
+import DefaultTableConsts from "src/consts/DefaultTableConsts";
 
 import ReviewsTable from "./Table";
 
@@ -19,8 +20,8 @@ const ReviewsPage = () => {
 
   const [paginationRequest, setPaginationRequest] = useState<PaginationRequest>(
     {
-      page: 0,
-      pageSize: 10,
+      page: DefaultTableConsts.DefaultPage,
+      pageSize: DefaultTableConsts.DefaultPageSize,
     } as PaginationRequest
   );
 
@@ -32,8 +33,8 @@ const ReviewsPage = () => {
 
   const [pagination, setPagination] = useState<CurrentPagination>({
     totalItemsCount: 0,
-    currentPage: 0,
-    pageSize: 10,
+    currentPage: DefaultTableConsts.DefaultPage,
+    pageSize: DefaultTableConsts.DefaultPageSize,
     totalPagesCount: 1,
   } as CurrentPagination);
 
